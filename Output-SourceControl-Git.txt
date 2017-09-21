@@ -1,0 +1,5 @@
+﻿Opening repositories:
+F:\Magistry files\Wyszukiwarka_publikacji_v0.2
+Commit 4c43cd55 created locally in repository F:\Magistry files\Wyszukiwarka_publikacji_v0.2
+The following errors were reported during push:
+	refs/heads/master, pre-receive hook declined

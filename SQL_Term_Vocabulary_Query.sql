@@ -1,0 +1,1 @@
+﻿SELECT PG_Articles_article_Id,terms_Id,term_value FROM Terms_Vocabulary t1 INNER JOIN Terms_VocabularyPG_Articles as t2 ON t1.terms_Id = t2.Terms_Vocabulary_terms_Id;

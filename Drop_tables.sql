@@ -1,0 +1,1 @@
+﻿DROP TABLE BibtexArticles, PPArticles, UGArticles, UMKArticles, WSBArticles, Authors, __MigrationHistory;

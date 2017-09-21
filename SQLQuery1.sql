@@ -1,0 +1,1 @@
+﻿SELECT * FROM [ArticlesDatabase].[dbo].[UMK_ArticlesSet] WHERE [article_Id]=15;
