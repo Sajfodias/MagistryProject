@@ -19,18 +19,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 var resul_PG = dbContext.PG_ArticlesSet.SqlQuery("SELECT * FROM dbo.PG_ArticlesSet").ToList();
                 if (resul_PG != null)
                 {
-                    //foreach (var item in resul_PG)
-                    Parallel.ForEach(resul_PG, (item) =>
-                    {
-                        if (item.title != null || item.title != String.Empty || item.abstractText != null || item.abstractText != String.Empty || item.keywords != null || item.keywords != String.Empty)
-                            DocumentCollection.Add(item.title.ToLower() + item.abstractText.ToLower() + item.keywords.ToLower());
-                    });
-                    /*
+                    foreach (var item in resul_PG)
                     {
                         if (item.title != null || item.title!= String.Empty || item.abstractText != null || item.abstractText != String.Empty || item.keywords != null || item.keywords != String.Empty)
                             DocumentCollection.Add(item.title.ToLower() + item.abstractText.ToLower() + item.keywords.ToLower());
                     }
-                    */
                 }
 
                 var result_PP = dbContext.PP_ArticlesSet.SqlQuery("SELECT * FROM dbo.PP_ArticlesSet").ToList();

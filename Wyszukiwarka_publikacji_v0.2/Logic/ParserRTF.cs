@@ -63,6 +63,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
             file.Close();
             
 
+
             //string[] newcontent = new string[hapDoc.DocumentNode.InnerText.Length];
             //string[] separatedContent = new string[hapDoc.DocumentNode.InnerText.Length];
             /*

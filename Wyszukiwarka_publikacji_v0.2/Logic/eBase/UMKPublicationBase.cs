@@ -38,7 +38,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
         public static string UMK_Opis_wydawn;
         public static string UMK_Tytul_Wydawn_Zbior;
 
-
         public static void get_UMK_Document_content()
         {
             string[] UMK_newcontent = new string[hapDoc.DocumentNode.InnerText.Length];

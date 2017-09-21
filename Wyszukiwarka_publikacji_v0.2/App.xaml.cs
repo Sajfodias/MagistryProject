@@ -13,5 +13,6 @@ namespace Wyszukiwarka_publikacji_v0._2
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

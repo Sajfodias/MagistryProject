@@ -33,7 +33,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
         public static string newbibtexPath = @"F:\\Magistry files\new_Magistry_test_data\";
         static int countOfArticles = 141022;//141022; //tu potrzebnie zaimplementowac algorytm znajdowania ostatniego id
         public static Queue<Task> tasks = new Queue<Task>();
-
+    
         public static async Task<HtmlDocument> getContent(string url)
         {
             contentHtmlDoc = new HtmlDocument();

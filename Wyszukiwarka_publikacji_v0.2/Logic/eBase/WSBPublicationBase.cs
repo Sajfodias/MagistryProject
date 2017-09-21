@@ -39,7 +39,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
 
         //potrzebnie zaimplementowac divide and conquer dla duzych plikow
 
-
         public static void get_WSB_Document_content()
         {
             string[] WSB_newcontent = new string[hapDoc.DocumentNode.InnerText.Length];

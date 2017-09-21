@@ -39,6 +39,7 @@ namespace Wyszukiwarka_publikacji_v0._2
                     return sb.ToString();
                 }
 
+            
                 return base.Message;
             }
         }

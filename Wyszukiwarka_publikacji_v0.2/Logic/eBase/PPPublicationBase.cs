@@ -35,6 +35,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
         public static string PP_Uwagi;
         public static string PP_DOI;
 
+
         public static void get_PP_Document_content()
         {
             string[] PP_newcontent = new string[hapDoc.DocumentNode.InnerText.Length];

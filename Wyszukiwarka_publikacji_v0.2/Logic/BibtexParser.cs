@@ -25,6 +25,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
         public static char[] separators = { '=' };
         public static char[] authorSeparator = { ' ', ',', ';' };
 
+
         public static string _title;
         public static string _abstract;
         public static string _keywords;

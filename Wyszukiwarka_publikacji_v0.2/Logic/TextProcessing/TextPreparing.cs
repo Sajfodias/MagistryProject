@@ -44,6 +44,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
                     splittedTitle[z].Replace(numericalValues[z], String.Empty);
             }
             */
+        
 
             var stemmingString = string.Join(" ", splittedTitle.Except(removableWords).Distinct());
             var stemmingString1 = regular_expression.Replace(stemmingString, String.Empty);

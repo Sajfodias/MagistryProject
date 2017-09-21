@@ -69,7 +69,6 @@ namespace Wyszukiwarka_publikacji_v0._2
             dlg.DefaultExt = ".rtf";
             dlg.Filter = "rtf Files (*.rtf)|*.rtf|TXT Files (*.txt)|*.txt";
 
-
             // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)

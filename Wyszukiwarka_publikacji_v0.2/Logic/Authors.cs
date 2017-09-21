@@ -24,6 +24,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
             */
         #endregion
 
+
         #region Articles_Lists
         /*
             public virtual List<BibtexArticle> PG_Articles { get; set; }

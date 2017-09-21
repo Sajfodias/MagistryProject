@@ -39,7 +39,7 @@ namespace Wyszukiwarka_publikacji_v0._2
             form.Show();
         }
 
-        private async void ClusterizationProcessingBtn(object sender, RoutedEventArgs e)
+        private void ClusterizationProcessingBtn(object sender, RoutedEventArgs e)
         {
             var clusterization_stopwatch = Stopwatch.StartNew();
             List<string> docCollection = CreateDocumentCollection.GenerateCollection();
@@ -47,9 +47,9 @@ namespace Wyszukiwarka_publikacji_v0._2
             int totalIteration = 0;
             int clusterNumber = 3; // here change the number of clusters;
 
-            var resultSet =  await Task<List<Centroid>>.Run(()=>KMeansClustering.DocumentClusterPreparation(clusterNumber, vSpace, ref totalIteration));
+            //var resultSet =  await Task<List<Centroid>>.Run(()=>KMeansClustering.DocumentClusterPreparation(clusterNumber, vSpace, ref totalIteration));
 
-            //List<Centroid> resultSet = KMeansClustering.DocumentClusterPreparation(clusterNumber, vSpace, ref totalIteration);
+            List<Centroid> resultSet = KMeansClustering.DocumentClusterPreparation(clusterNumber, vSpace, ref totalIteration);
 
 
             clusterization_stopwatch.Stop();
@@ -86,6 +86,7 @@ namespace Wyszukiwarka_publikacji_v0._2
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("This functionality is not awailable now - in development!", "Informational message", MessageBoxButton.OK);
+
         }
     }
 }

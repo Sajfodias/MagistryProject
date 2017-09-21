@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Wyszukiwarka_publikacji_v0._2"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

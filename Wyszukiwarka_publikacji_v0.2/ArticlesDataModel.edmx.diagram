@@ -23,7 +23,7 @@
         <AssociationConnector Association="ArticlesDataModel.VocabularyUG_Articles" />
         <AssociationConnector Association="ArticlesDataModel.VocabularyUMK_Articles" />
         <AssociationConnector Association="ArticlesDataModel.VocabularyWSB_Articles" />
-        <EntityTypeShape EntityType="ArticlesDataModel.Terms_Vocabulary" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ArticlesDataModel.Terms_Vocabulary" Width="1.5" PointX="13.375" PointY="0.875" />
         <AssociationConnector Association="ArticlesDataModel.Terms_VocabularyWSB_Articles" />
         <AssociationConnector Association="ArticlesDataModel.Terms_VocabularyUMK_Articles" />
         <AssociationConnector Association="ArticlesDataModel.Terms_VocabularyUG_Articles" />

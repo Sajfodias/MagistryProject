@@ -156,14 +156,15 @@
     </Compile>
     <Compile Include="FormattedDbEntityValidationException.cs" />
     <Compile Include="Logic\Authors.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\CalculateTFIDF.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\Centroid.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\CreateDocumentCollection.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\DocumentVector.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\KMeansClustering.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\KMeansPlus.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\SimilarityMatrixCalculations.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\VectorSpaceModel.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\CalculateTFIDF.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\Centroid.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\CreateDocumentCollection.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\Document.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVector.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansClustering.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPlus.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\SimilarityMatrixCalculations.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\VectorSpaceModel.cs" />
     <Compile Include="Logic\eBase\PPPublicationBase.cs" />
     <Compile Include="Logic\eBase\UGPublicationBase.cs" />
     <Compile Include="Logic\eBase\UMKPublicationBase.cs" />
@@ -203,8 +204,6 @@
     <Compile Include="Logic\BibtexParser.cs" />
     <Compile Include="Logic\Downloader.cs" />
     <Compile Include="Logic\ParserRTF.cs" />
-    <Compile Include="Logic\Webcomunications\HttpWebRequest_BeginGetResponse.cs" />
-    <Compile Include="Logic\Webcomunications\RequestState.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
