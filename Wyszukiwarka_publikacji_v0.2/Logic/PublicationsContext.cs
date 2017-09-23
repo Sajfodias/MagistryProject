@@ -9,6 +9,10 @@ using System.Data.Objects;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic
 {
+    ///<summary>
+    /// We don't need this code. This is the old code from Entity Framework Code First Model. Now I am use Model First.
+    /// </summary>
+    #region publications_context_old
     /*
     public class PublicationsContext: DbContext
     {
@@ -21,5 +25,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
         
     }
     */
+    #endregion
 
 }

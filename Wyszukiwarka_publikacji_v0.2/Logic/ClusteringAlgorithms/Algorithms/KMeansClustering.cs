@@ -19,6 +19,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
         private static int counter1 = 0;
         private static int counter2 = 0;
         private static ParallelOptions MaxDegree = new ParallelOptions { MaxDegreeOfParallelism = 10 };
+        
 
         public static List<Centroid> DocumentClusterPreparation(int k, List<DocumentVector> documentCollection, ref int _counter2)
         {
@@ -33,14 +34,16 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 
             GenerateRandomNumber(ref uniqRand, k, documentCollection.Count);
 
-            //foreach(var position in uniqRand)
-            Parallel.ForEach(uniqRand, MaxDegree,(position) =>
+
+            //Parallel.ForEach(uniqRand, MaxDegree,(position) =>
+            foreach (var position in uniqRand)
             {
                 c = new Centroid();
                 c.GroupedDocument = new List<DocumentVector>();
                 c.GroupedDocument.Add(documentCollection[position]);
                 centroidCollection.Add(c);
-            });
+            }
+            //);
             
 
             InitializeClusterCentroid(out result, centroidCollection.Count);

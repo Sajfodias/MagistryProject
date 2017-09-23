@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Wyszukiwarka_publikacji_v0._2.Logic;
 using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms;
-using System.Threading;
+using System.ComponentModel;
 
 namespace Wyszukiwarka_publikacji_v0._2
 {
@@ -17,7 +17,7 @@ namespace Wyszukiwarka_publikacji_v0._2
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
@@ -33,19 +33,27 @@ namespace Wyszukiwarka_publikacji_v0._2
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {   
             RTFReader form = new RTFReader();
             form.Show();
         }
 
+        /*
+        public string NumberOfClusters
+        {
+            get { return txtboxClusterNumber.Text; }
+            set { txtboxClusterNumber.Text = value; }
+        }
+        */
+
         private void ClusterizationProcessingBtn(object sender, RoutedEventArgs e)
         {
+            clustResultTxtBox.Document.Blocks.Clear();
             var clusterization_stopwatch = Stopwatch.StartNew();
             List<string> docCollection = CreateDocumentCollection.GenerateCollection();
             List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
             int totalIteration = 0;
-            int clusterNumber = 3; // here change the number of clusters;
+            int clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);// here change the number of clusters;
 
             //var resultSet =  await Task<List<Centroid>>.Run(()=>KMeansClustering.DocumentClusterPreparation(clusterNumber, vSpace, ref totalIteration));
 
@@ -80,7 +88,13 @@ namespace Wyszukiwarka_publikacji_v0._2
                 "Clusterization time: " + clusterization_stopwatch.Elapsed.TotalMinutes.ToString() + ":" + clusterization_stopwatch.ElapsedMilliseconds.ToString() + '\n' +
                 "Clusterization result: " + '\n' + Message.ToString());
 
-            System.Windows.MessageBox.Show(Message+'\n'+"Iterations: " + totalIteration, "Clusterization Effect", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            clustResultTxtBox.AppendText("Clusterization report: " + '\n' +
+                "Number of clusters: " + clusterNumber + '\n' +
+                "Iteration count: " + totalIteration + '\n' +
+                "Clusterization time: " + clusterization_stopwatch.Elapsed.TotalMinutes.ToString() + ":" + clusterization_stopwatch.ElapsedMilliseconds.ToString() + '\n' +
+                "Clusterization result: " + '\n' + Message.ToString());
+            //System.Windows.MessageBox.Show(Message+'\n'+"Iterations: " + totalIteration, "Clusterization Effect", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

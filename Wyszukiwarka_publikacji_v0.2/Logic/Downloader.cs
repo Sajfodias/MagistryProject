@@ -12,7 +12,6 @@ using System.Diagnostics;
 using System.Threading;
 using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
-using Wyszukiwarka_publikacji_v0._2.Logic.Webcomunications;
 using System.ComponentModel;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic

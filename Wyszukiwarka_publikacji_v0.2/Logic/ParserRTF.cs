@@ -61,9 +61,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
             file.Write(endText);
             file.Flush();
             file.Close();
-            
 
-
+            #region old_part_code
             //string[] newcontent = new string[hapDoc.DocumentNode.InnerText.Length];
             //string[] separatedContent = new string[hapDoc.DocumentNode.InnerText.Length];
             /*
@@ -96,6 +95,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                 }
             }
             */
+            #endregion
+
             return endText;
         }
             

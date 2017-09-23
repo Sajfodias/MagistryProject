@@ -170,7 +170,6 @@
     <Compile Include="Logic\eBase\UMKPublicationBase.cs" />
     <Compile Include="Logic\eBase\WSBPublicationBase.cs" />
     <Compile Include="Logic\PublicationsContext.cs" />
-    <Compile Include="Logic\TextProcessing\FrequencyDist.cs" />
     <Compile Include="Logic\TextProcessing\TextPreparing.cs" />
     <Compile Include="PG_Articles.cs">
       <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
