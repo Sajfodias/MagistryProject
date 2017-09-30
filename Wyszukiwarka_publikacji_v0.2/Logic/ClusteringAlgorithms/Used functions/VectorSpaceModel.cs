@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Data.Entity;
+using Wyszukiwarka_publikacji_v0._2.Logic;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 {
@@ -20,6 +21,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             dTerms = new HashSet<string>();
             documentCollection = CreateDocumentCollection.GenerateCollection();
 
+            #region old_parts_of_code
             /*foreach (string documentContent in documentCollection)
             {
                 foreach (string term in r.Split(documentContent))
@@ -35,10 +37,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             {
                 dTerms.Remove(s);
             }*/
+            #endregion
 
-            
 
-            using(var dbContext = new ArticlesDataContainer())
+            using (var dbContext = new ArticlesDataContainer())
             {
                 var termQuerty = dbContext.Terms_Vocabulary.SqlQuery(@"SELECT * FROM Terms_Vocabulary").ToList();
 
@@ -66,6 +68,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 _documentVector.Content = document;
                 _documentVector.VectorSpace = space;
                 documentVectorSpace.Add(_documentVector);
+                ClusteringAlgorithms.Used_functions.Normalization.Normilize_Term_Frequency(documentVectorSpace); // are that the correct place to perform normalization?
 
             }
 

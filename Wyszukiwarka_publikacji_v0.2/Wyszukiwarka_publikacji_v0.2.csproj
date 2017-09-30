@@ -159,10 +159,12 @@
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\CalculateTFIDF.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Centroid.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\CreateDocumentCollection.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\CreateTermCollection.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Document.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVector.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansClustering.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPlus.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\Normalization.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\SimilarityMatrixCalculations.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\VectorSpaceModel.cs" />
     <Compile Include="Logic\eBase\PPPublicationBase.cs" />

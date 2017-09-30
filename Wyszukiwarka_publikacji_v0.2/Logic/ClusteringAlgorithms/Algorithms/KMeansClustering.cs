@@ -59,7 +59,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 }
 
                 InitializeClusterCentroid(out centroidCollection, centroidCollection.Count());
-                centroidCollection = CalculateMeanPoints(result);
+                centroidCollection = CalculateMeanPoints(result); //here in k-means++ we must recomputate new position according to quadratic formula
                 stoppingCriteria = CheckStoppingCriteria(prevClusterCenter, centroidCollection);
 
                 if (!stoppingCriteria)
@@ -73,7 +73,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             return result;
         }
 
-        private static bool CheckStoppingCriteria(List<Centroid> prevClusterCenter, List<Centroid> newClusterCenter)
+        public static bool CheckStoppingCriteria(List<Centroid> prevClusterCenter, List<Centroid> newClusterCenter)
         {
             counter1++;
             counter2 = counter1;
@@ -115,7 +115,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             }
         }
 
-        private static int FindClosestClusterCenter(List<Centroid> clusterCenter, DocumentVector docVector)
+        public static int FindClosestClusterCenter(List<Centroid> clusterCenter, DocumentVector docVector)
         {
             float[] similarityMeasure = new float[clusterCenter.Count()];
 
@@ -137,7 +137,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             return index;
         }
 
-        private static List<Centroid> CalculateMeanPoints(List<Centroid> clusterCenter)
+        public static List<Centroid> CalculateMeanPoints(List<Centroid> clusterCenter)
         {
             for(int i =0; i<clusterCenter.Count(); i++)
             {
@@ -158,7 +158,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             return clusterCenter;
         }
 
-        private static void InitializeClusterCentroid(out List<Centroid> result, int count)
+        public static void InitializeClusterCentroid(out List<Centroid> result, int count)
         {
             Centroid c;
             result = new List<Centroid>();
@@ -170,7 +170,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             }
         }
 
-        private static void GenerateRandomNumber(ref HashSet<int> uniqRand, int k, int count)
+        public static void GenerateRandomNumber(ref HashSet<int> uniqRand, int k, int count)
         {
             Random r = new Random();
 
