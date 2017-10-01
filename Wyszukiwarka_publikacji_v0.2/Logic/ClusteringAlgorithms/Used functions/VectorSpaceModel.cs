@@ -68,7 +68,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 _documentVector.Content = document;
                 _documentVector.VectorSpace = space;
                 documentVectorSpace.Add(_documentVector);
-                ClusteringAlgorithms.Used_functions.Normalization.Normilize_Term_Frequency(documentVectorSpace); // are that the correct place to perform normalization?
+                //ClusteringAlgorithms.Used_functions.Normalization.Normilize_Term_Frequency(documentVectorSpace); // are that the correct place to perform normalization?
 
             }
 

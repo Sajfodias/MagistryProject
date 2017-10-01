@@ -119,7 +119,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
         {
             float[] similarityMeasure = new float[clusterCenter.Count()];
 
-            //error here! OutOfRangeException
             for (int i = 0; i <= clusterCenter.Count - 1; i++)
                 similarityMeasure[i] = SimilarityMatrixCalculations.CalculateCosineSimilarity(clusterCenter[i].GroupedDocument[0].VectorSpace, docVector.VectorSpace);
 
