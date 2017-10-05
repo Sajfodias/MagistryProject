@@ -81,15 +81,28 @@ namespace Wyszukiwarka_publikacji_v0._2
                 count++;
             }
 
+            Random rnd = new Random();
+            int index = rnd.Next(1, 5000);
 
             string K_means_clusterization_result = @"F:\Magistry files\KMeans_result.txt";
-            File.WriteAllText(K_means_clusterization_result, 
+
+            using(StreamWriter sw = File.AppendText(K_means_clusterization_result))
+            {
+                sw.WriteLine(@"Clusterization report nr: " + "00"+ index.ToString() + '\n' +
+                "Number of clusters: " + clusterNumber + '\n' +
+                "Iteration count: " + totalIteration + '\n' +
+                "Clusterization time: " + clusterization_stopwatch.Elapsed.TotalMinutes.ToString() + ":" + clusterization_stopwatch.ElapsedMilliseconds.ToString() + '\n' +
+                "Clusterization result: " + '\n' + Message.ToString()
+                + System.Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------"
+                );
+            }
+            /*File.WriteAllText(K_means_clusterization_result, 
                 "Clusterization report: " + '\n' + 
                 "Number of clusters: " + clusterNumber + '\n' + 
                 "Iteration count: " + totalIteration + '\n' + 
                 "Clusterization time: " + clusterization_stopwatch.Elapsed.TotalMinutes.ToString() + ":" + clusterization_stopwatch.ElapsedMilliseconds.ToString() + '\n' +
                 "Clusterization result: " + '\n' + Message.ToString());
-
+                */
 
             clustResultTxtBox.AppendText("Clusterization report: " + '\n' +
                 "Number of clusters: " + clusterNumber + '\n' +
