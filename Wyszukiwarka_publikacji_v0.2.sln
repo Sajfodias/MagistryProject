@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D9A64E4-47D1-4C92-A5D8-1F341727B2F2}"
 	ProjectSection(SolutionItems) = preProject
 		Clean database.sql = Clean database.sql
+		..\KMeans_result.txt = ..\KMeans_result.txt
+		..\KMeans_result_time.txt = ..\KMeans_result_time.txt
+		..\Processing_log.txt = ..\Processing_log.txt
 		SQL_Term_Vocabulary_Query.sql = SQL_Term_Vocabulary_Query.sql
 		SQLQuery1.sql = SQLQuery1.sql
 		Truncate_AuthorTable.sql = Truncate_AuthorTable.sql
