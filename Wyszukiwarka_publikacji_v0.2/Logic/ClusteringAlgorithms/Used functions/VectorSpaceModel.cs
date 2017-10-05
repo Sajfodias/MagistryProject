@@ -6,20 +6,23 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Data.Entity;
 using Wyszukiwarka_publikacji_v0._2.Logic;
+using System.Diagnostics;
+using System.IO;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 {
     class VectorSpaceModel
     {
         public static HashSet<string> dTerms;
-        public static List<String> documentCollection;
+        //public static List<String> documentCollection;
         private static Regex r = new Regex("([ \\t{}()\",:;. \n])");
-        public static string[] removableWords = { "and", "or", "it", "at", "all", "in", "on", "under", "between", "a", "an", "the", "to", "pod", "nad", "tam", "tutaj", "między", "pomiędzy", "w", "przed", "się", "z", "na", "od", "jest", "iż", "co", "we", "ich", "ciebie", "ja", "ty", "ona", "ono", "oni", "owych", "of", "cz", "do", "s", "n", "r", "nr", "rys", "i", "by", "from", "o", "//", "**", "po", "jej", "przy", "rzecz", "jak", "tymi", "są", "czy", "oraz", "ze", "m", "p", "off", "for", "/", "is", "as", "be", "will", "go", "za", "też", "lub", "t", "poz", "wiad", "set", "use", "etc", "also", "are", "tzw", "out", "other", "its", "has", "<", ">", "pre", "its", "has", "are", "with", "[et", "]", "vol", "leszek", "j", "al" };
+        public static string[] removableWords = { "and", "or", "it", "at", "all", "in", "on", "under", "between", "a", "an", "the", "to", "pod", "nad", "tam", "tutaj", "między", "pomiędzy", "w", "przed", "się", "z", "na", "od", "jest", "iż", "co", "we", "ich", "ciebie", "ja", "ty", "ona", "ono", "oni", "owych", "of", "cz", "do", "s", "n", "r", "nr", "rys", "i", "by", "from", "o", "//", "**", "po", "jej", "przy", "rzecz", "jak", "tymi", "są", "czy", "oraz", "ze", "m", "p", "off", "for", "/", "is", "as", "be", "will", "go", "za", "też", "lub", "t", "poz", "wiad", "set", "use", "etc", "also", "are", "tzw", "out", "other", "its", "has", "<", ">", "pre", "its", "has", "are", "with", "[et", "]", "vol", "leszek", "j", "al", "może", "być","wy","apis","zb" };
 
         public static List<DocumentVector> DocumentCollectionProcessing(List<String> collection)
         {
+            var vector_space_model_calculation = Stopwatch.StartNew();
             dTerms = new HashSet<string>();
-            documentCollection = CreateDocumentCollection.GenerateCollection();
+            //documentCollection = CreateDocumentCollection.GenerateCollection();
 
             #region old_parts_of_code
             /*foreach (string documentContent in documentCollection)
@@ -40,6 +43,31 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             #endregion
 
 
+            HashSet<string> termHashset = new HashSet<string>();
+
+            using (var dbContext = new ArticlesDataContainer())
+            {
+                dbContext.Terms_Vocabulary.Load();
+
+                foreach(var terms in dbContext.Terms_Vocabulary.Local)
+                {
+                    termHashset.Add(terms.term_value.ToLower());
+                }
+   
+                
+            }
+
+            foreach(var items in termHashset)
+            {
+                dTerms.Add(items.ToLower());
+            }
+            /*
+            Parallel.ForEach(termHashset, items => {
+                dTerms.Add(items.ToLower());
+            });
+           */
+
+            /*
             using (var dbContext = new ArticlesDataContainer())
             {
                 var termQuerty = dbContext.Terms_Vocabulary.SqlQuery(@"SELECT * FROM Terms_Vocabulary").ToList();
@@ -52,10 +80,14 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 }
             }
 
+    */
             List<DocumentVector> documentVectorSpace = new List<DocumentVector>();
             DocumentVector _documentVector;
             float[] space;
-            foreach (string document in documentCollection)
+
+            // trying to optimize execution time 04.10.2017
+            //foreach (string document in documentCollection)
+            foreach(string document in collection)
             {
                 int count = 0;
                 space = new float[dTerms.Count];
@@ -70,6 +102,15 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 documentVectorSpace.Add(_documentVector);
                 //ClusteringAlgorithms.Used_functions.Normalization.Normilize_Term_Frequency(documentVectorSpace); // are that the correct place to perform normalization?
 
+            }
+
+            vector_space_model_calculation.Stop();
+
+            string processing_log = @"F:\Magistry files\Processing_log.txt";
+
+            using (StreamWriter sw = File.AppendText(processing_log))
+            {
+                sw.WriteLine(DateTime.Now.ToString() + " The vector space model calculation time is: " + vector_space_model_calculation.Elapsed.Minutes.ToString() + ":" + vector_space_model_calculation.Elapsed.TotalMilliseconds.ToString());
             }
 
             return documentVectorSpace;

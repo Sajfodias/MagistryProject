@@ -12,6 +12,7 @@ using SF.Snowball.Ext;
 using Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
 {
@@ -19,6 +20,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
     {
         public static string TermsPrepataions(string _text)
         {
+            var text_preparation = Stopwatch.StartNew();
             string text = _text;
             char[] splitChars = { ' ', ',', '.', ';', '-', ':' };
             string[] removableWords = { "and", "or", "it", "at", "all", "in", "on", "under", "between", "a", "an", "the", "to", "pod", "nad", "tam", "tutaj", "między", "pomiędzy", "w", "przed", "się", "z", "na", "od", "jest", "iż", "co", "we", "ich", "ciebie", "ja", "ty", "ona", "ono", "oni", "owych", "of", "cz", "do", "s", "n", "r", "nr", "rys", "i", "by", "from", "o", "//", "**", "po", "jej", "przy", "rzecz", "jak", "tymi", "są", "czy", "oraz", "ze", "m", "p", "off", "for", "/", "is", "as", "be", "will", "go", "za", "też", "lub", "t", "poz", "wiad", "set", "use", "etc", "also", "are", "tzw", "out", "other", "its", "has", "<", ">", "pre", "its", "has", "are", "with", "[et", "]", "vol", "leszek", "j", "al"};
@@ -48,8 +50,17 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
 
             var stemmingString = string.Join(" ", splittedTitle.Except(removableWords).Distinct());
             var stemmingString1 = regular_expression.Replace(stemmingString, String.Empty);
-            
+
+            text_preparation.Stop();
+
+            System.Windows.MessageBox.Show("The text processing time is: "+ text_preparation.Elapsed.Minutes.ToString() + ":" + text_preparation.Elapsed.TotalMilliseconds, "Text processing time" ,System.Windows.MessageBoxButton.OK);
             //System.Windows.MessageBox.Show(stemmingString, "Splitted String", System.Windows.MessageBoxButton.OK);
+            string processing_log = @"F:\Magistry files\Processing_log.txt";
+            using(StreamWriter sw = File.AppendText(processing_log))
+            {
+                sw.WriteLine(DateTime.Now.ToString() + "The text processing time is: " + text_preparation.Elapsed.Minutes.ToString() + ":" + text_preparation.Elapsed.TotalMilliseconds.ToString());
+            }
+           
             return stemmingString;
         }
     }
