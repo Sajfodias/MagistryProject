@@ -46,7 +46,15 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
                     splittedTitle[z].Replace(numericalValues[z], String.Empty);
             }
             */
-        
+
+            //prepare csv with allowed word and check the word in text
+            //reading from csv: string dictionary-text = System.IO.File.ReadAllText(file_location);
+            //split string by ',' and read as string[] dictionary
+
+            //string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+            //string[] allowed_dictionary = dictionary_text.Split(',', '\n');
+
+
 
             var stemmingString = string.Join(" ", splittedTitle.Except(removableWords).Distinct());
             var stemmingString1 = regular_expression.Replace(stemmingString, String.Empty);

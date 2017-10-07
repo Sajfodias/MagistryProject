@@ -50,8 +50,8 @@ namespace Wyszukiwarka_publikacji_v0._2
         {
             clustResultTxtBox.Document.Blocks.Clear();
             var clusterization_stopwatch = Stopwatch.StartNew();
-            //List<string> docCollection = CreateDocumentCollection.GenerateCollection();
-            List<string> docCollection = Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
+            List<string> docCollection = CreateDocumentCollection.GenerateCollection();
+            //List<string> docCollection = Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
             //the line above is add to verify the speed of calculations.
             List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
             int totalIteration = 0;
