@@ -33,28 +33,26 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
             
             splittedTitle = stemmingList.ToArray();
 
-            //added 12.08 18:35
             /*
-            string[] numericalValues = new string[9999999];
-            for(int i=0; i<=numericalValues.Length-1; i++)
+            string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+            string[] allowed_dictionary = dictionary_text.Split(',', '\n');
+
+            for(int i=0; i<=splittedTitle.Length-1; i++)
             {
-                numericalValues[i] = i.ToString() + ")";
-            }
-            for(int z=0; z<=numericalValues.Length-1; z++)
-            {
-                if (splittedTitle.Contains(numericalValues[z]))
-                    splittedTitle[z].Replace(numericalValues[z], String.Empty);
+                for(int j=0; j<=allowed_dictionary.Length-1; j++)
+                {
+                    if (splittedTitle[i].Length > 3 && splittedTitle[i].Contains(allowed_dictionary[j]))
+                    {
+                        continue;
+                    }
+                    else if(splittedTitle[i].Length <= 3 && !(splittedTitle[i].Contains(allowed_dictionary[j])))
+                        {
+                        splittedTitle.ToList().RemoveAt(i);
+                    }
+                        
+                }
             }
             */
-
-            //prepare csv with allowed word and check the word in text
-            //reading from csv: string dictionary-text = System.IO.File.ReadAllText(file_location);
-            //split string by ',' and read as string[] dictionary
-
-            //string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
-            //string[] allowed_dictionary = dictionary_text.Split(',', '\n');
-
-
 
             var stemmingString = string.Join(" ", splittedTitle.Except(removableWords).Distinct());
             var stemmingString1 = regular_expression.Replace(stemmingString, String.Empty);
@@ -62,7 +60,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
             text_preparation.Stop();
 
             System.Windows.MessageBox.Show("The text processing time is: "+ text_preparation.Elapsed.Minutes.ToString() + ":" + text_preparation.Elapsed.TotalMilliseconds, "Text processing time" ,System.Windows.MessageBoxButton.OK);
-            //System.Windows.MessageBox.Show(stemmingString, "Splitted String", System.Windows.MessageBoxButton.OK);
+           
             string processing_log = @"F:\Magistry files\Processing_log.txt";
             using(StreamWriter sw = File.AppendText(processing_log))
             {

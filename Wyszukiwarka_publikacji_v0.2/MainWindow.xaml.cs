@@ -163,5 +163,21 @@ namespace Wyszukiwarka_publikacji_v0._2
             //MessageBox.Show("This functionality is not awailable now - in development!", "Informational message", MessageBoxButton.OK);
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string path = @"F:\Magistry files\csv_files\Allowed_term_dictionary.csv";
+            string dictionary_text = File.ReadAllText(path);
+            string[] allowed_dictionary = dictionary_text.Trim(' ').Split(',','\n','\r');
+            List<string> result = new List<string>();
+
+            for (int i = 0; i <= allowed_dictionary.Length - 1; i++)
+                if (allowed_dictionary[i] != "")
+                    result.Add(allowed_dictionary[i].TrimStart());
+            
+
+            string result_text = String.Join(",", result);
+            File.WriteAllText(path, result_text);
+        }
     }
 }

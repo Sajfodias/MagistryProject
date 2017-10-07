@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,27 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 }
             }
 
+            /*
+            string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+            string[] allowed_dictionary = dictionary_text.Split(',', '\n');
+
+            for (int i = 0; i <= TermCollection.Count; i++)
+            {
+                for (int j = 0; j <= allowed_dictionary.Length - 1; j++)
+                {
+                    /*
+                    if (TermCollection[i].Length > 3 && TermCollection[i].Contains(allowed_dictionary[j]))
+                    {
+                        continue;
+                    }
+                    if (TermCollection[i].Length <= 3 && !TermCollection[i].Contains(allowed_dictionary[j]) && TermCollection[i].Contains(")") || TermCollection[i].Contains("(") || TermCollection[i].Contains("]") || TermCollection[i].Contains("["));
+                    {
+                        TermCollection.RemoveAt(i);
+                    }
+            
+                }
+            }
+            */
             return TermCollection; 
         }
     }

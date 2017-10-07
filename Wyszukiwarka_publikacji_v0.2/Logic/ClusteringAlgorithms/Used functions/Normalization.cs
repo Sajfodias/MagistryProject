@@ -13,10 +13,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             List<string> Term_Collection = CreateTermCollection.GenerateTermCollection();
             List<DocumentVector> docCollection = documentCollection;
 
-            for(int i=0; i<=Term_Collection.Count-1; i++)
+            for(int i=0; i<=docCollection.Count-1; i++)
             {
                 float max = 0;
-                for(int j=0; j<=docCollection.Count-1; j++)
+                for(int j=0; j<=docCollection[i].VectorSpace.Length-1; j++)
                 {
                     try
                     {
@@ -30,7 +30,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
 
                 }
 
-                for(int k=0; k <=docCollection.Count-1; k++)
+                for(int k=0; k <=docCollection[i].VectorSpace.Length-1 ; k++)
                 {
                     if (max > 0)
                         docCollection[i].VectorSpace[k] = docCollection[i].VectorSpace[k] / max;
