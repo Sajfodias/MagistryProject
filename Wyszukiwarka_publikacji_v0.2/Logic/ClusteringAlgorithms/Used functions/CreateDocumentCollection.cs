@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.IO;
+using System.Diagnostics;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 {
@@ -14,6 +16,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
         {
             List<string> DocumentCollection = new List<string>();
 
+            Stopwatch database_processing = Stopwatch.StartNew();
+
+            database_processing.Start();
             using (var dbContext = new ArticlesDataContainer())
             {
                 var resul_PG = dbContext.PG_ArticlesSet.SqlQuery("SELECT * FROM dbo.PG_ArticlesSet").ToList();
@@ -82,6 +87,15 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                     }
                 }
             }
+            /*
+            database_processing.Stop();
+            string processing_log = @"F:\Magistry files\Processing_log.txt";
+
+            using (StreamWriter sw = File.AppendText(processing_log))
+            {
+                sw.WriteLine(DateTime.Now.ToString() + " The database processing time is: " + database_processing.Elapsed.Minutes.ToString() + ":" + database_processing.Elapsed.TotalMilliseconds.ToString() + ", database context counter: " + counter2.ToString() + ", selection counter in one dbContext: " + counter1.ToString() + ", method executing counter: " + counter3.ToString());
+            }
+            */
             return DocumentCollection;
         }
 

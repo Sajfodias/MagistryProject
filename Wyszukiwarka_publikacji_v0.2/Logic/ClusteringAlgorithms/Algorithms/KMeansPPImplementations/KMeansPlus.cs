@@ -1,8 +1,8 @@
-﻿// This code is the adaptation from the free code developed by  James McCaffrey (jamccaff@microsoft.com, https://jamesmccaffrey.wordpress.com/)
-// Projects of James McCaffrey you can find here https://msdn.microsoft.com/en-us/magazine/mt185575.aspx
+﻿// This code is the adaptation from the free code posted on https://en.wikibooks.org/wiki/C_Sharp_Programming/K-Means%2B%2B
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -15,14 +15,12 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 {
     class KMeansPlus
     {
-        private static int counter1 = 0;
         private static int counter2 = 0;
         private static ParallelOptions MaxDegree = new ParallelOptions { MaxDegreeOfParallelism = 10 };
+        private static int firstIndex =0;
 
         public static List<Centroid> KMeansPlusClusterization(int k, List<DocumentVector> documentCollection, ref int _counter2)
         {
-            counter1 = 0;
-
             List<Centroid> centroidCollection = new List<Centroid>();
             List<Centroid> result = new List<Centroid>();
             List<Centroid> prevClusterCenter;
@@ -73,13 +71,34 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             List<DocumentVector> documentCollection = new List<DocumentVector>(docCollection.Count);
             documentCollection = docCollection;
             List<Centroid> seedPoints = new List<Centroid>(count);
-            Document documentDetails;
+            Document documentDetails = new Document();
             List<Document> detailedDocumentCollection = new List<Document>();
             int index = 0;
 
-            int firstIndex = GenerateRandomNumber(0, count);
+            firstIndex = GenerateRandomNumber(0, count);
             Centroid first_Centroid = new Centroid();
-            first_Centroid.GroupedDocument.Add(documentCollection[firstIndex]);
+            first_Centroid.GroupedDocument = new List<DocumentVector>();
+            DocumentVector docVect = new DocumentVector();
+            docVect = documentCollection[firstIndex];
+            //here we have the error!!! with null reference exception
+            try
+            {
+                first_Centroid.GroupedDocument.Add(docVect);
+            }
+            catch(Exception ex)
+            {
+
+                string processing_log = @"F:\Magistry files\Initialization_cluser_K-means_pp_log.txt";
+
+                using (StreamWriter sw = File.AppendText(processing_log))
+                {
+                    sw.WriteLine(DateTime.Now.ToString() + " The error occured: " + ex.ToString() + '\n');
+                }
+
+                System.Windows.MessageBox.Show("Error occured: " + ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK);
+            }
+            
+
             seedPoints.Add(first_Centroid); //here we have list with 1 document getting using random index
 
             for(int i=0; i<=count; i++)
@@ -87,14 +106,33 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 if(seedPoints.Count >= 2)
                 {
                     Document minDocumentDetails = GetMinDocumenDetailsDistance(detailedDocumentCollection);
+                    minDocumentDetails.VectorSpace = minDocumentDetails.SeedDocument.VectorSpace;
+                    minDocumentDetails.document_Content = minDocumentDetails.SeedDocument.Content;
+                    /*
+                    using(var dbContext = new ArticlesDataContainer())
+                    {
+                        var PP_article_Id = dbContext.PP_ArticlesSet.SqlQuery(@"SELECT article_Id FROM dbo.PP_ArticlesSet WHERE dbo.PP_ArticlesSet.article_title LIKE " + "%" + minDocumentDetails.document_Content + "%");
+                        minDocumentDetails.document_ID = Convert.ToInt32(PP_article_Id.ToArray()[0]);
+                        var PP_author_Id = dbContext.PP_ArticlesSet.SqlQuery(@"SELECT Author_author_Id FROM dbo.PP_ArticlesAuthor WHERE dbo.PP_ArticlesAuthor.PP_Articles_article_Id="+PP_article_Id.ToArray()[0]);
+                        foreach(var authors_id in PP_author_Id)
+                        {
+                            for(int j=0; j<=minDocumentDetails.author_ID.Length-1; j++)
+                            {
+                                minDocumentDetails.author_ID[j] = Convert.ToInt32(authors_id);
+                            }
+                        }
+                        
+                    }
+                    */
                     index = GetWeightedProbDist(minDocumentDetails.Weights, minDocumentDetails.Sum);
-                    DocumentVector SubsequentDocument = documentCollection[index];
+                    DocumentVector SubsequentDocument = new DocumentVector();
+                    SubsequentDocument = documentCollection[index];
                     Centroid subsequentCentroid = new Centroid();
                     subsequentCentroid.GroupedDocument.Add(SubsequentDocument);
                     seedPoints.Add(subsequentCentroid);
 
                     documentDetails = new Document();
-                    documentDetails = GetAllDetails(documentCollection, subsequentCentroid, documentDetails);
+                    documentDetails = GetAllDetails(documentCollection, subsequentCentroid, documentDetails); //the re is no objects in subsequent document - problem
                     detailedDocumentCollection.Add(documentDetails);
                 }
                 else
@@ -103,9 +141,26 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                     documentDetails = GetAllDetails(documentCollection, first_Centroid, documentDetails);
                     detailedDocumentCollection.Add(documentDetails);
                     index = GetWeightedProbDist(documentDetails.Weights, documentDetails.Sum);
-                    DocumentVector SecondDocumentVector = documentCollection[index];
+                    DocumentVector SecondDocumentVector = new DocumentVector(); 
+                    SecondDocumentVector= documentCollection[index];
                     Centroid second_Centroid = new Centroid();
-                    second_Centroid.GroupedDocument.Add(SecondDocumentVector);
+                    second_Centroid.GroupedDocument = new List<DocumentVector>();
+                    try
+                    {
+                        second_Centroid.GroupedDocument.Add(SecondDocumentVector);
+                    }
+                    catch(Exception ex)
+                    {
+                        string processing_log = @"F:\Magistry files\Initialization_cluser_K-means_pp_log.txt";
+
+                        using (StreamWriter sw = File.AppendText(processing_log))
+                        {
+                            sw.WriteLine(DateTime.Now.ToString() + " The error occured: " + ex.ToString() + '\n');
+                        }
+
+                        System.Windows.MessageBox.Show("Error occured: " + ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK);
+                    }
+                    
                     seedPoints.Add(second_Centroid);
 
                     documentDetails = new Document();
@@ -158,7 +213,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             return documentDetails;
         }
 
-        private static float GetEucliedeanDistance(DocumentVector docVector1, DocumentVector docVector2)
+        public static float GetEucliedeanDistance(DocumentVector docVector1, DocumentVector docVector2)
         {
             float euclideanDistance = 0;
 
@@ -200,7 +255,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             return i;
         }
 
-        private static float GetRandNumCrypto()
+        public static float GetRandNumCrypto()
         {
             byte[] salt = new byte[8];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -209,7 +264,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             return result;
         }
 
-        private static int GetRandNumCrypto(int min, int max)
+        public static int GetRandNumCrypto(int min, int max)
         {
             byte[] salt = new byte[8];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -218,7 +273,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             return result;
         }
 
-        private static Document GetMinDocumenDetailsDistance(List<Document> detailedDocumentCollection)
+        public static Document GetMinDocumenDetailsDistance(List<Document> detailedDocumentCollection)
         {
             float minValue = float.MaxValue;
             List<Document> sameDistValues = new List<Document>();

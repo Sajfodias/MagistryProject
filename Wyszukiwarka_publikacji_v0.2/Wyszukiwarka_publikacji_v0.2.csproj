@@ -176,6 +176,8 @@
     </Compile>
     <Compile Include="FormattedDbEntityValidationException.cs" />
     <Compile Include="Logic\Authors.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\AdditionalFunctionalityForSecondKMeansppimplementation.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\KMeanspp.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\CalculateTFIDF.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Centroid.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\CreateDocumentCollection.cs" />
@@ -184,7 +186,7 @@
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Document.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVector.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansClustering.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPlus.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\KMeansPlus.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Normalization.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\SimilarityMatrixCalculations.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\VectorSpaceModel.cs" />

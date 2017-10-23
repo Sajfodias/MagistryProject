@@ -92,7 +92,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 int count = 0;
                 space = new float[dTerms.Count];
                 foreach (string term in dTerms){
-                    space[count] = CalculateTFIDF.FindTFIDF(document, term);
+                    space[count] = CalculateTFIDF.FindTFIDF(collection,document, term);
                     count++;
                 }
                

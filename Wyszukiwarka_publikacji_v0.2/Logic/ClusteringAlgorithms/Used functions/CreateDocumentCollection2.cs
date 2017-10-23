@@ -26,12 +26,49 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             {
                 dbContext.PG_ArticlesSet.Load();
 
-                foreach(var articles in dbContext.PG_ArticlesSet.Local)
+                foreach(var PG_articles in dbContext.PG_ArticlesSet.Local)
                 {
-                    string record = articles.title + articles.abstractText + articles.keywords;
-                    DocumentCollection.Add(record);
+                    string PG_record = PG_articles.title + PG_articles.abstractText + PG_articles.keywords;
+                    DocumentCollection.Add(PG_record);
                     counter1++;
                 }
+
+                dbContext.PP_ArticlesSet.Load();
+
+                foreach(var PP_articles in dbContext.PP_ArticlesSet.Local)
+                {
+                    string PP_record = PP_articles.article_title + PP_articles.article_source;
+                    DocumentCollection.Add(PP_record);
+                    counter1++;
+                }
+
+                dbContext.UG_ArticlesSet.Load();
+
+                foreach (var UG_articles in dbContext.UG_ArticlesSet.Local)
+                {
+                    string UG_record = UG_articles.article_title + UG_articles.article_source + UG_articles.article_keywords;
+                    DocumentCollection.Add(UG_record);
+                    counter1++;
+                }
+
+                dbContext.UMK_ArticlesSet.Load();
+
+                foreach (var UMK_articles in dbContext.UMK_ArticlesSet.Local)
+                {
+                    string UMK_record = UMK_articles.article_title + UMK_articles.article_Full_title + UMK_articles.article_eng_keywords + UMK_articles.article_pl_keywords+ UMK_articles.article_translated_title;
+                    DocumentCollection.Add(UMK_record);
+                    counter1++;
+                }
+
+                dbContext.WSB_ArticlesSet.Load();
+
+                foreach (var WSB_articles in dbContext.WSB_ArticlesSet.Local)
+                {
+                    string WSB_record = WSB_articles.article_title + WSB_articles.article_common_title + WSB_articles.article_title_other_lang + WSB_articles.article_eng_keywords + WSB_articles.article_pl_keywords + WSB_articles.article_details;
+                    DocumentCollection.Add(WSB_record);
+                    counter1++;
+                }
+
                 counter2++;
             }
 

@@ -19,14 +19,14 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             term = _term;
         }
 
-        public static float FindTFIDF(string doc, string term)
+        public static float FindTFIDF(List<string> documents,string doc, string term)
         {
             float tf = FindTermFrequency(doc, term);
             if (float.IsNaN(tf))
             {
                 tf = 0;
             }
-            float idf = CalculateInverseDocumentFrequency(term);
+            float idf = CalculateInverseDocumentFrequency(documents, term);
             if (float.IsNaN(idf))
             {
                 idf = 0;
@@ -42,10 +42,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             }
         }
 
-        private static float CalculateInverseDocumentFrequency(string term)
+        private static float CalculateInverseDocumentFrequency(List<string> documents ,string term)
         {
-            ///var documents = CreateDocumentCollection.GenerateCollection();
-            var documents = Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
+            //var documents = CreateDocumentCollection.GenerateCollection();
+            //var documents = Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
             int count = documents.ToArray().Where(s => r.Split(s.ToLower()).ToArray().Contains(term.ToLower())).Count();
             float idf_result = (float)Math.Log((float)documents.Count() / (float)count);
             if (float.IsNaN(idf_result) || count == 0)
