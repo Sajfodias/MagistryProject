@@ -10,6 +10,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
     {
         public static void Normilize_Term_Frequency(List<DocumentVector> documentCollection)
         {
+            //tu sie nie wiaze bo mamy 1118 termow
             List<string> Term_Collection = CreateTermCollection.GenerateTermCollection();
             List<DocumentVector> docCollection = documentCollection;
 

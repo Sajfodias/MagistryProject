@@ -33,7 +33,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
             
             splittedTitle = stemmingList.ToArray();
 
-            /*
             string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
             string[] allowed_dictionary = dictionary_text.Split(',', '\n');
 
@@ -52,7 +51,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
                         
                 }
             }
-            */
 
             var stemmingString = string.Join(" ", splittedTitle.Except(removableWords).Distinct());
             var stemmingString1 = regular_expression.Replace(stemmingString, String.Empty);

@@ -7,6 +7,7 @@ using System.Windows;
 using Wyszukiwarka_publikacji_v0._2.Logic;
 using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms;
 using System.ComponentModel;
+using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KMeansPPImplementations;
 
 namespace Wyszukiwarka_publikacji_v0._2
 {
@@ -180,6 +181,28 @@ namespace Wyszukiwarka_publikacji_v0._2
 
             string result_text = String.Join(",", result);
             File.WriteAllText(path, result_text);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //where list of document enters to k-means algorytm?????
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            List<string> docCollection = Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
+            List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
+            var lastElementInList = vSpace[vSpace.Count - 1];
+            int dimensions = lastElementInList.VectorSpace.Length;
+            int totalIteration = 100;
+            int clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);
+            kmeanskpbtn.IsEnabled = false;
+            KPImplementationsKMeans kmm = new KPImplementationsKMeans(clusterNumber, totalIteration, dimensions);
+            kmm.SetDocumentData(vSpace);
+            //AddRandomDocs(Int32.Parse(pTB.Text), kmm, Int32.Parse(dTB.Text));
+            kmm.RunAlgorithm(totalIteration);
+            var result = kmm.clusters;
+            kmeanskpbtn.IsEnabled = true;
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            MessageBox.Show(elapsedMs.ToString());
         }
     }
 }

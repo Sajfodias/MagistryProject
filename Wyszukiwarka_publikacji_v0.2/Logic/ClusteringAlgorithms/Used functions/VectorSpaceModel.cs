@@ -16,13 +16,17 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
         public static HashSet<string> dTerms;
         //public static List<String> documentCollection;
         private static Regex r = new Regex("([ \\t{}()\",:;. \n])");
-        public static string[] removableWords = { "and", "or", "it", "at", "all", "in", "on", "under", "between", "a", "an", "the", "to", "pod", "nad", "tam", "tutaj", "między", "pomiędzy", "w", "przed", "się", "z", "na", "od", "jest", "iż", "co", "we", "ich", "ciebie", "ja", "ty", "ona", "ono", "oni", "owych", "of", "cz", "do", "s", "n", "r", "nr", "rys", "i", "by", "from", "o", "//", "**", "po", "jej", "przy", "rzecz", "jak", "tymi", "są", "czy", "oraz", "ze", "m", "p", "off", "for", "/", "is", "as", "be", "will", "go", "za", "też", "lub", "t", "poz", "wiad", "set", "use", "etc", "also", "are", "tzw", "out", "other", "its", "has", "<", ">", "pre", "its", "has", "are", "with", "[et", "]", "vol", "leszek", "j", "al", "może", "być","wy","apis","zb" };
+        public static string[] removableWords = { "and", "or", "it", "at", "all", "in", "on", "under", "between", "a", "an", "the", "to", "pod", "nad", "tam", "tutaj", "między", "pomiędzy", "w", "przed", "się", "z", "na", "od", "jest", "iż", "co", "we", "ich", "ciebie", "ja", "ty", "ona", "ono", "oni", "owych", "of", "cz", "do", "s", "n", "r", "nr", "rys", "i", "by", "from", "o", "//", "**", "po", "jej", "przy", "rzecz", "jak", "tymi", "są", "czy", "oraz", "ze", "m", "p", "off", "for", "/", "is", "as", "be", "will", "go", "za", "też", "lub", "t", "poz", "wiad", "set", "use", "etc", "also", "are", "tzw", "out", "other", "its", "has", "<", ">", "pre", "its", "has", "are", "with", "[et", "]", "vol", "leszek", "j", "al", "może", "być", "wy", "apis", "zb" };
+        public static ParallelOptions parallelOption = new ParallelOptions();
+        
 
         public static List<DocumentVector> DocumentCollectionProcessing(List<String> collection)
         {
+            parallelOption.MaxDegreeOfParallelism = 20;
             var vector_space_model_calculation = Stopwatch.StartNew();
             dTerms = new HashSet<string>();
             //documentCollection = CreateDocumentCollection.GenerateCollection();
+
 
             #region old_parts_of_code
             /*foreach (string documentContent in documentCollection)
@@ -87,6 +91,22 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 
             // trying to optimize execution time 04.10.2017
             //foreach (string document in documentCollection)
+            Parallel.ForEach(collection, parallelOption,document => {
+                int count = 0;
+                space = new float[dTerms.Count];
+                foreach (string term in dTerms)
+                {
+                    space[count] = CalculateTFIDF.FindTFIDF(collection, document, term);
+                    count++;
+                }
+
+                _documentVector = new DocumentVector();
+                _documentVector.Content = document;
+                _documentVector.VectorSpace = space;
+                documentVectorSpace.Add(_documentVector);
+            });
+
+            /*
             foreach(string document in collection)
             {
                 int count = 0;
@@ -100,10 +120,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 _documentVector.Content = document;
                 _documentVector.VectorSpace = space;
                 documentVectorSpace.Add(_documentVector);
-                ClusteringAlgorithms.Used_functions.Normalization.Normilize_Term_Frequency(documentVectorSpace); // are that the correct place to perform normalization?
+                //tu mamy 2296 termow
+                //ClusteringAlgorithms.Used_functions.Normalization.Normilize_Term_Frequency(documentVectorSpace); // are that the correct place to perform normalization?
 
             }
-
+            */
             vector_space_model_calculation.Stop();
 
             string processing_log = @"F:\Magistry files\Processing_log.txt";

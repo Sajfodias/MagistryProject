@@ -17,8 +17,9 @@
             <Button x:Name="btnSearch" Content="Bibtex download" HorizontalAlignment="Left" Margin="0,66,0,0" VerticalAlignment="Top" Width="92" Height="43" Click="btnSearch_Click"/>
             <Button x:Name="btnClear" Content="Rtf download" HorizontalAlignment="Left" Margin="97,66,0,0" VerticalAlignment="Top" Width="92" Height="43" Click="btnClear_Click"/>
             <Button Content="K-means" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="ClusterizationProcessingBtn"/>
-            <Button Content="K-means++" HorizontalAlignment="Left" Margin="97,114,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="Button_Click"/>
-            <Button Content="Dictionary prepare" HorizontalAlignment="Left" Margin="0,154,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_1"/>
+            <Button Content="K-means++" HorizontalAlignment="Left" Margin="0,154,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="Button_Click"/>
+            <Button Content="Dictionary prepare" HorizontalAlignment="Left" Margin="0,194,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_1"/>
+            <Button x:Name="kmeanskpbtn" Content="KPKmeansRealise" HorizontalAlignment="Left" Margin="97,114,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="Button_Click_2"/>
         </Grid>
         
         <RichTextBox x:Name="clustResultTxtBox" Margin="211,10,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible">
