@@ -128,6 +128,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                     DocumentVector SubsequentDocument = new DocumentVector();
                     SubsequentDocument = documentCollection[index];
                     Centroid subsequentCentroid = new Centroid();
+                    subsequentCentroid.GroupedDocument = new List<DocumentVector>();
                     subsequentCentroid.GroupedDocument.Add(SubsequentDocument);
                     seedPoints.Add(subsequentCentroid);
 

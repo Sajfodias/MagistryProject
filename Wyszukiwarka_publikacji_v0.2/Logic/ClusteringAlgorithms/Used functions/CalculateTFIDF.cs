@@ -44,8 +44,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 
         private static float CalculateInverseDocumentFrequency(List<string> documents ,string term)
         {
-            //var documents = CreateDocumentCollection.GenerateCollection();
-            //var documents = Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
+            
+
             int count = documents.ToArray().Where(s => r.Split(s.ToLower()).ToArray().Contains(term.ToLower())).Count();
             float idf_result = (float)Math.Log((float)documents.Count() / (float)count);
             if (float.IsNaN(idf_result) || count == 0)

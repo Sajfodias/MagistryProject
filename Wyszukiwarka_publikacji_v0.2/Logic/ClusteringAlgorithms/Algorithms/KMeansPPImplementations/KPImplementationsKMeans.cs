@@ -37,6 +37,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
             this.dimensions = dimensions;
             CentroidsKMeansPPKP cl = new CentroidsKMeansPPKP(dimensions);
             Random random = new Random();
+            //tutaj chodzi nie o randomowych liczbach w TFIDF a o randomowych dokumentach w kolekcji.
             for (var i = 0; i < dimensions; i++)
             {
                 cl.TFIDF[i] = (float)random.Next(0, Int32.MaxValue) / (float)Int32.MaxValue;
@@ -60,20 +61,22 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
             return bestClusterCenter;
         }
 
-
+        //changes provided 29.10.2017
         protected void Iteration(int current, int max)
         {
             documentMoved = false;
+            CentroidsKMeansPPKP cluster = null;
             foreach (var doc in DocCollection)
             {
-                CentroidsKMeansPPKP cluster = FindNearestClusterCenter(doc);
+                cluster = FindNearestClusterCenter(doc);
                 cluster.AssignedDocuments.Add(doc);
             }
             if (current == max - 1)
-                foreach (var cluster in clusters)
+                foreach (var clusterr in clusters)
                 {
-                    cluster.Update(true);
+                    clusterr.Update(true);
                 }
+            cluster.AssignedDocuments.Clear();
         }
 
         public void RunAlgorithm(int maxIterations)

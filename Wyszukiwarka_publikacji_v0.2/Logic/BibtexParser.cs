@@ -208,13 +208,34 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                         for(int k=0; k<=_document.Length-1; k++)
                         {
                             var terms = dbContext.Terms_Vocabulary.Create();
+
+                            //
+                            string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+                            string[] allowed_dictionary = dictionary_text.Split(',', '\n');
+
+                            for (int i = 0; i <= _document.Length - 1; i++)
+                            {
+                                for (int j = 0; j <= allowed_dictionary.Length - 1; j++)
+                                {
+                                    if (_document[i].Length > 3 && _document[i].Contains(allowed_dictionary[j]))
+                                    {
+                                        continue;
+                                    }
+                                    else if (_document[i].Length < 3 && !(_document[i].Contains(allowed_dictionary[j])))
+                                    {
+                                        _document.ToList().RemoveAt(i);
+                                    }
+
+                                }
+                            }
+
                             //tutaj potrzebnie przepisac id dokumenta w ktorym wystepuje dane slowo
-                            if(_document[k]!=String.Empty || _document[k]!= " " || _document[k] != null || _document[k]!= Char.IsDigit(' ').ToString())
+                            if (_document[k] != String.Empty || _document[k] != " " || _document[k] != null || _document[k] != Char.IsDigit(' ').ToString())
                             {
                                 //dbContext.Terms_Vocabulary.Where(u)
                                 var termVocabularyTable = dbContext.Terms_Vocabulary;
                                 terms.term_value = _document[k];
-                                
+
                             }
                             bibtexArticle.Terms_Vocabulary.Add(terms);
                         }

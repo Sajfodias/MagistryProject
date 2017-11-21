@@ -13,8 +13,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 {
     class VectorSpaceModel
     {
-        public static HashSet<string> dTerms;
+        //public static HashSet<string> dTerms;
         //public static List<String> documentCollection;
+        public static HashSet<string> termHashset;
         private static Regex r = new Regex("([ \\t{}()\",:;. \n])");
         public static string[] removableWords = { "and", "or", "it", "at", "all", "in", "on", "under", "between", "a", "an", "the", "to", "pod", "nad", "tam", "tutaj", "między", "pomiędzy", "w", "przed", "się", "z", "na", "od", "jest", "iż", "co", "we", "ich", "ciebie", "ja", "ty", "ona", "ono", "oni", "owych", "of", "cz", "do", "s", "n", "r", "nr", "rys", "i", "by", "from", "o", "//", "**", "po", "jej", "przy", "rzecz", "jak", "tymi", "są", "czy", "oraz", "ze", "m", "p", "off", "for", "/", "is", "as", "be", "will", "go", "za", "też", "lub", "t", "poz", "wiad", "set", "use", "etc", "also", "are", "tzw", "out", "other", "its", "has", "<", ">", "pre", "its", "has", "are", "with", "[et", "]", "vol", "leszek", "j", "al", "może", "być", "wy", "apis", "zb" };
         public static ParallelOptions parallelOption = new ParallelOptions();
@@ -24,9 +25,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
         {
             parallelOption.MaxDegreeOfParallelism = 20;
             var vector_space_model_calculation = Stopwatch.StartNew();
-            dTerms = new HashSet<string>();
+            //dTerms = new HashSet<string>();
             //documentCollection = CreateDocumentCollection.GenerateCollection();
-
 
             #region old_parts_of_code
             /*foreach (string documentContent in documentCollection)
@@ -46,8 +46,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             }*/
             #endregion
 
-
-            HashSet<string> termHashset = new HashSet<string>();
+            termHashset = new HashSet<string>();
 
             using (var dbContext = new ArticlesDataContainer())
             {
@@ -57,34 +56,15 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 {
                     termHashset.Add(terms.term_value.ToLower());
                 }
-   
-                
             }
 
+            /*
             foreach(var items in termHashset)
             {
                 dTerms.Add(items.ToLower());
             }
-            /*
-            Parallel.ForEach(termHashset, items => {
-                dTerms.Add(items.ToLower());
-            });
-           */
+            */
 
-            /*
-            using (var dbContext = new ArticlesDataContainer())
-            {
-                var termQuerty = dbContext.Terms_Vocabulary.SqlQuery(@"SELECT * FROM Terms_Vocabulary").ToList();
-
-
-                foreach (var terms in termQuerty)
-                {
-                    if (terms.term_value != null || terms.term_value != String.Empty)
-                        dTerms.Add(terms.term_value.ToLower());
-                }
-            }
-
-    */
             List<DocumentVector> documentVectorSpace = new List<DocumentVector>();
             DocumentVector _documentVector;
             float[] space;
@@ -93,10 +73,13 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             //foreach (string document in documentCollection)
             Parallel.ForEach(collection, parallelOption,document => {
                 int count = 0;
-                space = new float[dTerms.Count];
-                foreach (string term in dTerms)
+                space = new float[termHashset.Count];
+                //space = new float[dTerms.Count];
+                //foreach (string term in dTerms)
+                foreach(string term in termHashset)
                 {
-                    space[count] = CalculateTFIDF.FindTFIDF(collection, document, term);
+                    //space[count] = CalculateTFIDF.FindTFIDF(collection, document, term);
+                    space[count] = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.FindTFIDF(collection,document,term);
                     count++;
                 }
 

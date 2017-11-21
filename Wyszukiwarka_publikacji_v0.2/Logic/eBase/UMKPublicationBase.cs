@@ -199,6 +199,26 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                     for (int k = 0; k <= _document.Length - 1; k++)
                                     {
                                         var terms = dbContext.Terms_Vocabulary.Create();
+                                        //
+                                        string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+                                        string[] allowed_dictionary = dictionary_text.Split(',', '\n');
+
+                                        for (int p = 0; p <= _document.Length - 1; p++)
+                                        {
+                                            for (int j = 0; j <= allowed_dictionary.Length - 1; j++)
+                                            {
+                                                if (_document[p].Length > 3 && _document[p].Contains(allowed_dictionary[j]))
+                                                {
+                                                    continue;
+                                                }
+                                                else if (_document[p].Length <= 3 && !(_document[p].Contains(allowed_dictionary[j])))
+                                                {
+                                                    _document.ToList().RemoveAt(p);
+                                                }
+
+                                            }
+                                        }
+
                                         //tutaj potrzebnie przepisac id dokumenta w ktorym wystepuje dane slowo
                                         if (_document[k] != String.Empty || _document[k] != " " || _document[k] != null || _document[k] != Char.IsDigit(' ').ToString())
                                         {

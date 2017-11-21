@@ -34,7 +34,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 
             GenerateRandomNumber(ref uniqRand, k, documentCollection.Count);
 
-
             //Parallel.ForEach(uniqRand, MaxDegree,(position) =>
             foreach (var position in uniqRand)
             {
@@ -45,7 +44,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             }
             //);
             
-
             InitializeClusterCentroid(out result, centroidCollection.Count);
 
             do
@@ -119,12 +117,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
         {
             float[] similarityMeasure = new float[clusterCenter.Count()];
 
-            for (int i = 0; i <= clusterCenter.Count - 1; i++)
+            for (int i = 0; i < clusterCenter.Count - 1; i++)
                 similarityMeasure[i] = SimilarityMatrixCalculations.CalculateCosineSimilarity(clusterCenter[i].GroupedDocument[0].VectorSpace, docVector.VectorSpace);
-
             int index = 0;
             float maxValue = similarityMeasure[0];
-
             for(int j=0; j< similarityMeasure.Count(); j++)
             {
                 if (similarityMeasure[j] > maxValue)
