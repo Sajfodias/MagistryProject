@@ -34,18 +34,21 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
             List<Centroid> result = new List<Centroid>();
             List<Centroid> centroidCollection = generate_random_Centroids(number_of_Clusters,vSpace);
             List<Centroid> oldRecomputedResult = new List<Centroid>();
+            List<DocumentVector> newVSpace = new List<DocumentVector>(vSpace);
 
             for(int i=0; i< iteration_Count; i++)
             {
                 if (i < 2)
                 {
-                    List<Centroid> fillCentroidCollection = AssignDocumentToCluster(centroidCollection, vSpace);
+                    List<Centroid> fillCentroidCollection = AssignDocumentToCluster(centroidCollection, newVSpace);
                     oldRecomputedResult = AverageMeansAssigned(fillCentroidCollection, vSpace);
                 }
                 else
                 {
                     List<Centroid> fillCentroidCollection = AssignDocumentToCluster(centroidCollection, vSpace);
-                    List<Centroid> recomputedCollection = AverageMeansAssigned(fillCentroidCollection, vSpace);
+                    List<Centroid> fillCentroidCollectionCopy = new List<Centroid>(fillCentroidCollection);
+                    //tutaj wywala - newVspace = null
+                    List<Centroid> recomputedCollection = AverageMeansAssigned(fillCentroidCollectionCopy, newVSpace);
                     clusteringChanged = CheckClustering(oldRecomputedResult, recomputedCollection);
                     recomputedCollection = oldRecomputedResult;
                     if (clusteringChanged == false)
@@ -80,16 +83,78 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
             return flag;
         }
 
+
+
         private static List<Centroid> AverageMeansAssigned(List<Centroid> fillCentroidCollection, List<DocumentVector> vectorSpace)
         {
-            var result = new List<Centroid>();
-            foreach(var cluster in fillCentroidCollection)
+            List<Centroid>result;
+            int length = vectorSpace[0].VectorSpace.Length;
+            float[] newVectorSpace = new float[length];
+            float[] minDistancesToCluster = new float[0];
+
+            for(int i=0; i<length; i++)
             {
-                //for i=0 to c.vectorSpace.length
-                //for i=0 to  p1,p2,p3,p4,p5 length
-                //c[i]=(p1[i]+p2[i]+p3[i]+p4[i]+p5[i])/5
-                //return c[i]
+                newVectorSpace[i] = 0.0F;
             }
+
+            //for i=0 to c.vectorSpace.length
+            //for i=0 to  p1,p2,p3,p4,p5 length
+            //c[i]=(p1[i]+p2[i]+p3[i]+p4[i]+p5[i])/5
+            //return c[i]
+
+            for (int c=0; c<fillCentroidCollection.Count; c++)
+            {
+                for(int gd=0; gd<fillCentroidCollection[c].GroupedDocument.Count; gd++)
+                {
+                    for(int k=0; k<fillCentroidCollection[c].GroupedDocument[gd].VectorSpace.Length; k++)
+                    {
+                        newVectorSpace[k] += fillCentroidCollection[c].GroupedDocument[gd].VectorSpace[k];
+                    }
+                }
+            }
+
+            for (int c1 = 0; c1 < fillCentroidCollection.Count; c1++)
+            {
+                for (int gd1 = 0; gd1 < fillCentroidCollection[c1].GroupedDocument.Count; gd1++)
+                {
+                    for (int k1 = 0; k1 < fillCentroidCollection[c1].GroupedDocument[gd1].VectorSpace.Length; k1++)
+                    {
+                        newVectorSpace[k1] = newVectorSpace[k1]/fillCentroidCollection[c1].GroupedDocument.Count;
+                    }
+                }
+            }
+
+            float minDist = 0.1F;
+            float currentValue = 0.1F;
+            int index = 0;
+
+            for (int i=0; i<fillCentroidCollection.Count; i++)
+            {
+                for(int j=0; j<fillCentroidCollection[i].GroupedDocument.Count; j++)
+                {
+                    minDistancesToCluster = new float[fillCentroidCollection[i].GroupedDocument.Count];
+                    minDistancesToCluster[j] = SimilarityMatrixCalculations.FindEuclideanDistance(fillCentroidCollection[i].GroupedDocument.First().VectorSpace, fillCentroidCollection[i].GroupedDocument[j].VectorSpace);
+                }
+
+                for (int z = 0; z < minDistancesToCluster.Length; z++)
+                {
+                    currentValue = minDistancesToCluster[z];
+                    if (currentValue <= minDist || currentValue != 0)
+                    {
+                        minDist = currentValue;
+                        index = z;
+                    }
+                    //here we must to find the closest document to new vectorSpace;
+                    //for all docs in cluster create the vectorSpace 
+                }
+                DocumentVector newClusterCenter = fillCentroidCollection[i].GroupedDocument[index];
+                fillCentroidCollection[i].GroupedDocument.Clear();
+                fillCentroidCollection[i].GroupedDocument.Add(newClusterCenter);
+            }
+
+            minDistancesToCluster = new float[0];
+            result = new List<Centroid>(fillCentroidCollection);
+
             //throw new NotImplementedException();
             return result;
         }
