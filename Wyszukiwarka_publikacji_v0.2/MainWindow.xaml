@@ -23,6 +23,8 @@
             <Button x:Name="button" Content="Old K-Means++" HorizontalAlignment="Left" Margin="97,154,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="OldKMeansPPClustering"/>
             <Button x:Name="button1" Content="Fuzzy KMeans" HorizontalAlignment="Left" Margin="97,194,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="button1_Click"/>
             <Button x:Name="MyKmeansPP" Content="MyKmeansPP" HorizontalAlignment="Left" Margin="0,231,0,0" VerticalAlignment="Top" Width="92" Height="31" Click="MyKmeansPP_Click"/>
+            <Button Content="AHC" HorizontalAlignment="Left" Margin="97,231,0,0" VerticalAlignment="Top" Width="92" Height="31" Click="AHC_Click"/>
+            <Button Content="Gravitational" HorizontalAlignment="Left" Margin="0,267,0,0" VerticalAlignment="Top" Width="92" Height="29" Click="Gravitational_Click"/>
         </Grid>
         
         <RichTextBox x:Name="clustResultTxtBox" Margin="211,10,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible">

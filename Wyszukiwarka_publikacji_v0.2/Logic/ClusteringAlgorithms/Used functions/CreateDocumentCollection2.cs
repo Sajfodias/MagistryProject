@@ -22,7 +22,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             int counter3 = 0;
 
             var database_processing = Stopwatch.StartNew();
-            using (var dbContext = new ArticlesDataContainer())
+            using (var dbContext = new ArticleDBDataModelContainer())
             {
                 dbContext.PG_ArticlesSet.Load();
 

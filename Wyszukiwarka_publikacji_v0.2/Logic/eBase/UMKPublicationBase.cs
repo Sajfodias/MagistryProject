@@ -82,7 +82,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         {
                             if (UMK_author_line != null && UMK_Tytul != null)
                             {
-                                using(var dbContext = new ArticlesDataContainer())
+                                using(var dbContext = new ArticleDBDataModelContainer())
                                 {
                                     var document = new StringBuilder();
                                     var umk_article = dbContext.UMK_ArticlesSet.Create();
@@ -232,7 +232,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
 
                                     try
                                     {
-
                                         dbContext.SaveChanges();
                                     }
                                     catch(Exception ex)
@@ -240,54 +239,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         File.WriteAllText(@"F:\\Magistry files\UMK_crawler_Log.txt", ex.ToString());
                                     }
                                 }
-
-                                ///<summary>
-                                ///UMKArticle_Entity_Object_Creation
-                                /// </summary>
-                                #region UMKArticle_Entity_Object_Creation
-                                /*
-                                using (var db = new PublicationsContext())
-                                {
-                                    var umk_article = new c();
-                                    umk_article.article_authors_line = UMK_author_line;
-                                    UMK_author_line = null;
-                                    umk_article.article_title = UMK_Tytul;
-                                    UMK_Tytul = null;
-                                    umk_article.article_Full_title = UMK_Pelny_tytul_czasop;
-                                    UMK_Pelny_tytul_czasop = null;
-                                    umk_article.article_language= UMK_Jezyk_Publikacji;
-                                    UMK_Jezyk_Publikacji = null;
-                                    umk_article.article_translated_title = UMK_Tytul_rownolegly;
-                                    UMK_Tytul_rownolegly = null;
-                                    umk_article.article_eng_keywords = UMK_en_keywords_line;
-                                    UMK_en_keywords_line = null;
-                                    umk_article.article_pl_keywords = UMK_pl_keywords_line;
-                                    UMK_pl_keywords_line = null;
-                                    umk_article.article_url = UMK_Adres_URL;
-                                    UMK_Adres_URL = null;
-                                    umk_article.article_publisher_title = UMK_Tytul_Wydawn_Zbior;
-                                    UMK_Tytul_Wydawn_Zbior = null;
-                                    umk_article.article_publisher_desc = UMK_Opis_wydawn;
-                                    UMK_Opis_wydawn = null;
-
-                                    var authors_of_the_article = new Authors();
-                                    for (int k = 0; k <= UMK_autors.Length - 2; k++)
-                                    {
-                                        authors_of_the_article.author_name = UMK_autors[k];
-                                        authors_of_the_article.author_surename = UMK_autors[k + 1];
-                                        db.Authors.Add(authors_of_the_article);
-                                    }
-
-                                    db.UMK_Articles.Add(umk_article);
-                                    db.SaveChanges();
-                                }
-                                */
-                                #endregion
                             }
                             else
                             {
-                                
-                                System.Windows.MessageBox.Show("brak danych!");
+                                //System.Windows.MessageBox.Show("brak danych!");
+                                continue;
                             }
 
                         }
@@ -349,32 +305,4 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
             }
         }
     }
-
-    /// <summary>
-    /// UMKArticle_Entity_Creation
-    /// </summary>
-    #region UMKArticle
-    /*
-    public class UMKArticle
-    {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public int article_Id { get; set; }
-
-        public string article_authors_line { get; set; }
-        public string article_title { get; set; }
-        public string article_language { get; set; }
-        public string article_Full_title { get; set; }
-        public string article_pl_keywords { get; set; }
-        public string article_eng_keywords { get; set; }
-        public string article_translated_title { get; set; }
-        public string article_url { get; set; }
-        public string article_publisher_desc { get; set; }
-        public string article_publisher_title { get; set; }
-
-        public int author_Id { get; set; }
-        public virtual Authors Authors { get; set; }
-    }
-    */
-    #endregion
 }

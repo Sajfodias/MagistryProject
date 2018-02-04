@@ -36,7 +36,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
         public static string _organization;
         public static string _url;
 
-        public static void loadBibtexFile()
+        public static void LoadBibtexFile()
         {
             string[] fileEntries = Directory.GetFiles(filePathBibtex);
 
@@ -152,7 +152,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                 {
                     #region Bibtex_Entity_Object_Creation_Model_First
                     //
-                    using(var dbContext = new ArticlesDataContainer())
+                    using(var dbContext = new ArticleDBDataModelContainer())
                     {
                         var document = new StringBuilder();
 

@@ -9,6 +9,7 @@ using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms;
 using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms;
 using System.ComponentModel;
 using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KMeansPPImplementations;
+using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_functions;
 
 namespace Wyszukiwarka_publikacji_v0._2
 {
@@ -28,7 +29,7 @@ namespace Wyszukiwarka_publikacji_v0._2
             var stopwatch = Stopwatch.StartNew();
             //Downloader.bruteForce();
             //ParserRTF.parseRTF();
-            BibtexParser.loadBibtexFile();
+            BibtexParser.LoadBibtexFile();
             stopwatch.Stop();
             Console.WriteLine("Processing time " + stopwatch.Elapsed.Minutes + ":" + stopwatch.Elapsed.Milliseconds);
             //Console.ReadKey();
@@ -120,10 +121,15 @@ namespace Wyszukiwarka_publikacji_v0._2
             HashSet<string> termCollection = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
             Dictionary<string, int> wordIndex = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.DocumentsContainsTerm(docCollection, termCollection);
             List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
-            int totalIteration = 0;
-            int clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);// here change the number of clusters;
+            int totalIteration = 100;
+            int clusterNumber = 5;
+            clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);// here change the number of clusters;
             //var resultSet =  await Task<List<Centroid>>.Run(()=>KMeansClustering.DocumentClusterPreparation(clusterNumber, vSpace, ref totalIteration));
-            List<Centroid> resultSet = KMeansPlus.KMeansPlusClusterization(clusterNumber, vSpace, ref totalIteration);
+            List<Centroid> firstCentroidList = new List<Centroid>();
+            firstCentroidList = CentroidCalculationClass.CentroidCalculationsForKMeansPP(vSpace, clusterNumber);
+            List<DocumentVectorWrapper> wrappedList = Logic.ClusteringAlgorithms.Algorithms.KMeansPPImplementations.MyKmeansPPInterpritationcs.WrappedCollections(vSpace);
+            List<Centroid> resultSet = Logic.ClusteringAlgorithms.Algorithms.KMeansPPImplementations.MyKmeansPPInterpritationcs.newKMeansClusterization(clusterNumber, docCollection, totalIteration, vSpace, wordIndex, firstCentroidList);
+            //List<Centroid> resultSet = KMeansPlus.KMeansPlusClusterization(clusterNumber, vSpace, ref totalIteration);
             clusterization_stopwatch.Stop();
 
             string Message = String.Empty;
@@ -235,8 +241,36 @@ namespace Wyszukiwarka_publikacji_v0._2
             List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
             int clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);
             int iterationCount = 100;
-            var results = MyKmeansPPInterpritationcs.KMeansClusterization(clusterNumber, docCollection, iterationCount, vSpace, wordIndex);
-            var results1 = MyKmeansPPInterpritationcs.Showresults();
+            int docCollectionLength = docCollection.Count;
+            //var results = MyKmeansPPInterpritationcs.KMeansClusterization(clusterNumber, docCollection, iterationCount, vSpace, wordIndex);
+            var results1 = MyKmeansPPInterpritationcs.Showresults(docCollection, iterationCount, vSpace, docCollectionLength, clusterNumber, wordIndex, termCollection);
+        }
+
+        private void AHC_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> docCollection = Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
+            HashSet<string> termCollection = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
+            Dictionary<string, int> wordIndex = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.DocumentsContainsTerm(docCollection, termCollection);
+            List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
+            int iterationCount = 100;
+            var result = Primitive_Clustering_Hierarhical_Alg.Hierarchical_Clusterization(vSpace, iterationCount);
+        }
+
+        private void Gravitational_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> docCollection = Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
+            HashSet<string> termCollection = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
+            Dictionary<string, int> wordIndex = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.DocumentsContainsTerm(docCollection, termCollection);
+            List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
+            int M = 100;
+            float G = -1.28171817154F; //G=1*e-4 according to 3.2.2  in article
+            float deltaG = 0.01F;
+            //float epsilon = -3.28171817154F;//epsilon=1*e-6 according to 3.2.2 in article or 10^(-4)= 0.0001F;
+            float epsilon = 0.6F;
+            float alpha = 0.06F; 
+            var result1 = GravitationalClusteringAlgorithm.Gravitational(vSpace, G, deltaG, M, epsilon);
+            var result2 = GravitationalClusteringAlgorithm.GetClusters(result1, alpha, vSpace);
+           
         }
     }
 }

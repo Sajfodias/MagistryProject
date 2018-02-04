@@ -19,7 +19,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             Stopwatch database_processing = Stopwatch.StartNew();
 
             database_processing.Start();
-            using (var dbContext = new ArticlesDataContainer())
+            using (var dbContext = new ArticleDBDataModelContainer())
             {
                 var resul_PG = dbContext.PG_ArticlesSet.SqlQuery("SELECT * FROM dbo.PG_ArticlesSet").ToList();
                 if (resul_PG != null)

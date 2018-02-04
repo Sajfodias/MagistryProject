@@ -9,5 +9,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
     public class Centroid
     {
         public List<DocumentVector> GroupedDocument { get; set; }
+
+        public float[] Center { get; set; }
+        public void SetCenter(float[] center)
+        {
+            Center = center;
+        }
     }
 }

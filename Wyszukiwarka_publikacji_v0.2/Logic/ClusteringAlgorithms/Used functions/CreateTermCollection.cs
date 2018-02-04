@@ -13,7 +13,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
         {
             List<string> TermCollection = new List<string>();
 
-            using (var dbContext = new ArticlesDataContainer())
+            using (var dbContext = new ArticleDBDataModelContainer())
             {
                 var resul_PG = dbContext.Terms_Vocabulary.SqlQuery("SELECT * FROM dbo.Terms_Vocabulary").ToList();
                 if (resul_PG != null)

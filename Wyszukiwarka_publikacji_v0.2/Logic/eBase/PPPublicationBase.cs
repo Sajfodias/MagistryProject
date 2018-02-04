@@ -86,7 +86,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                 try
                                 {
                                     #region PP_Article_Object_creation_Model_First
-                                    using (var PPdbContext = new ArticlesDataContainer())
+                                    using (var PPdbContext = new ArticleDBDataModelContainer())
                                     {
                                         var document = new StringBuilder();
                                         var pp_article = PPdbContext.PP_ArticlesSet.Create();

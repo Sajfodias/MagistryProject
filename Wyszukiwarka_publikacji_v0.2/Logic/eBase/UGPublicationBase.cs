@@ -54,7 +54,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
 
                         if (UG_separatedContent.Length == 2 && UG_separatedContent[0].ToLower().Contains("autorzy"))
                         {
-                            System.Windows.MessageBox.Show(UG_separatedContent[1]);
+                            //System.Windows.MessageBox.Show(UG_separatedContent[1]);
                             UG_author_line = UG_separatedContent[1];
                             UG_autors = UG_separatedContent[1].Split(autor_separators, StringSplitOptions.RemoveEmptyEntries);
 
@@ -72,7 +72,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         {
                             if (UG_author_line != null && UG_Tytul != null)
                             {
-                                using(var dbContext = new ArticlesDataContainer())
+                                using(var dbContext = new ArticleDBDataModelContainer())
                                 {
                                     var document = new StringBuilder();
 
@@ -206,11 +206,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         else if (UG_separatedContent.Length == 2 && (UG_separatedContent[0].ToLower().Contains("tytu") || UG_separatedContent[0].ToLower().Contains("tytul") || UG_separatedContent[0].Contains("TYTUL") || UG_separatedContent[0]=="TYTUL[ROZDZIALU, FRAGMENTU]" || UG_separatedContent[0].Contains("TYTUL[ROZDZIALU, FRAGMENTU]") || UG_separatedContent[0].ToLower().Contains("TYTUL[ROZDZIALU, FRAGMENTU]")))
                         {
                             UG_Tytul = UG_separatedContent[1];
-                            System.Windows.MessageBox.Show(UG_Tytul);
+                            //System.Windows.MessageBox.Show(UG_Tytul);
                         }
                         else if (UG_separatedContent.Length == 2 && UG_separatedContent[0].ToLower().Contains("zrodlo")){
                             UG_Zrodlo = UG_separatedContent[1];
-                            System.Windows.MessageBox.Show(UG_Zrodlo);
+                            //System.Windows.MessageBox.Show(UG_Zrodlo);
                         }
 
                         else if (UG_separatedContent.Length == 2 && UG_separatedContent[0].Contains("Slowa kluczowe w j. ang."))
@@ -221,7 +221,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         else if (UG_separatedContent.Length == 2 && (UG_separatedContent[0] == "DOI" || UG_separatedContent.Contains("DOI") || UG_separatedContent[0].ToLower().Contains("doi")))
                         {
                             UG_DOI = UG_separatedContent[1];
-                            System.Windows.MessageBox.Show(UG_DOI);
+                            //System.Windows.MessageBox.Show(UG_DOI);
                         }
                         //else if(UG_separatedContent.Length == 1 && UG_separatedContent[0] == String.Empty) System.Windows.MessageBox.Show("The empty line detected", "Empty line", System.Windows.MessageBoxButton.OK);
                         //else System.Windows.MessageBox.Show("Error! Content not found!", "Error!", System.Windows.MessageBoxButton.OK);
@@ -231,27 +231,4 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
             }
         }
     }
-
-    /// <summary>
-    /// UGArticle_Entity_Creation
-    /// </summary>
-    #region UGArticle_Entity_Creation
-    /*
-    public class UGArticle
-    {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public int article_Id { get; set; }
-
-        public string article_author_line { get; set; }
-        public string article_title { get; set; }
-        public string article_source { get; set; }
-        public string article_keywords { get; set; }
-        public string article_DOI { get; set; }
-
-        public int author_Id { get; set; }
-        public virtual Authors Authors { get; set; }
-    }
-    */
-    #endregion
 }

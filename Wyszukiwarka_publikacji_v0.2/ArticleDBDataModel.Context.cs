@@ -13,10 +13,10 @@ namespace Wyszukiwarka_publikacji_v0._2
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ArticlesDataContainer : DbContext
+    public partial class ArticleDBDataModelContainer : DbContext
     {
-        public ArticlesDataContainer()
-            : base("name=ArticlesDataContainer")
+        public ArticleDBDataModelContainer()
+            : base("name=ArticleDBDataModelContainer")
         {
         }
     

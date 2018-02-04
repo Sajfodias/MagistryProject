@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/11/2017 18:56:02
--- Generated from EDMX file: F:\Magistry files\Wyszukiwarka_publikacji_v0.2\Wyszukiwarka_publikacji_v0.2\ArticlesDataModel.edmx
+-- Date Created: 01/20/2018 11:28:56
+-- Generated from EDMX file: F:\Magistry files\Wyszukiwarka_publikacji_v0.2\Wyszukiwarka_publikacji_v0.2\ArticleDBDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ArticleDatabase];
+USE [ArticleProjDB];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,122 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_PG_ArticlesAuthor_PG_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PG_ArticlesAuthor] DROP CONSTRAINT [FK_PG_ArticlesAuthor_PG_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PG_ArticlesAuthor_Author]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PG_ArticlesAuthor] DROP CONSTRAINT [FK_PG_ArticlesAuthor_Author];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PP_ArticlesAuthor_PP_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PP_ArticlesAuthor] DROP CONSTRAINT [FK_PP_ArticlesAuthor_PP_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PP_ArticlesAuthor_Author]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PP_ArticlesAuthor] DROP CONSTRAINT [FK_PP_ArticlesAuthor_Author];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UG_ArticlesAuthor_UG_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UG_ArticlesAuthor] DROP CONSTRAINT [FK_UG_ArticlesAuthor_UG_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UG_ArticlesAuthor_Author]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UG_ArticlesAuthor] DROP CONSTRAINT [FK_UG_ArticlesAuthor_Author];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UMK_ArticlesAuthor_UMK_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UMK_ArticlesAuthor] DROP CONSTRAINT [FK_UMK_ArticlesAuthor_UMK_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UMK_ArticlesAuthor_Author]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UMK_ArticlesAuthor] DROP CONSTRAINT [FK_UMK_ArticlesAuthor_Author];
-GO
-IF OBJECT_ID(N'[dbo].[FK_WSB_ArticlesAuthor_WSB_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WSB_ArticlesAuthor] DROP CONSTRAINT [FK_WSB_ArticlesAuthor_WSB_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_WSB_ArticlesAuthor_Author]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WSB_ArticlesAuthor] DROP CONSTRAINT [FK_WSB_ArticlesAuthor_Author];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles] DROP CONSTRAINT [FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyWSB_Articles_WSB_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles] DROP CONSTRAINT [FK_Terms_VocabularyWSB_Articles_WSB_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUMK_Articles_UMK_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUMK_Articles_UMK_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUG_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyUG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUG_Articles_Terms_Vocabulary];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUG_Articles_UG_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyUG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUG_Articles_UG_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPP_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyPP_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPP_Articles_Terms_Vocabulary];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPP_Articles_PP_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyPP_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPP_Articles_PP_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPG_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyPG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPG_Articles_Terms_Vocabulary];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPG_Articles_PG_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyPG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPG_Articles_PG_Articles];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[AuthorSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AuthorSet];
-GO
-IF OBJECT_ID(N'[dbo].[PG_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PG_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[PP_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PP_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[UG_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UG_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[UMK_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UMK_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[WSB_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[WSB_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_Vocabulary]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_Vocabulary];
-GO
-IF OBJECT_ID(N'[dbo].[PG_ArticlesAuthor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PG_ArticlesAuthor];
-GO
-IF OBJECT_ID(N'[dbo].[PP_ArticlesAuthor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PP_ArticlesAuthor];
-GO
-IF OBJECT_ID(N'[dbo].[UG_ArticlesAuthor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UG_ArticlesAuthor];
-GO
-IF OBJECT_ID(N'[dbo].[UMK_ArticlesAuthor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UMK_ArticlesAuthor];
-GO
-IF OBJECT_ID(N'[dbo].[WSB_ArticlesAuthor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[WSB_ArticlesAuthor];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyWSB_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyWSB_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyUMK_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyUMK_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyUG_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyUG_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyPP_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyPP_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyPG_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyPG_Articles];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables

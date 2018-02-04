@@ -16,6 +16,21 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -108,6 +123,7 @@
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Net.NameResolution, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.NameResolution.4.3.0\lib\net46\System.Net.NameResolution.dll</HintPath>
       <Private>True</Private>
@@ -156,74 +172,79 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ArticleBaseGenerator.Context.cs">
+    <Compile Include="ArticleDBDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ArticleBaseGenerator.Context.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ArticleBaseGenerator.cs">
+    <Compile Include="ArticleDBDataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ArticlesDataModel1.Designer.cs">
+    <Compile Include="ArticleDBDataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ArticlesDataModel.edmx</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Author.cs">
-      <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormattedDbEntityValidationException.cs" />
-    <Compile Include="Logic\Authors.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\DetailedDocumentVector.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\FuzzyKMeans.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Algorithms\GravitationalClusteringAlgorithm.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\AdditionalFunctionalityForSecondKMeansppimplementation.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\CentroidsKMeansPPKP.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\KMeanspp.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\KMeansPP2Implementation.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\KPImplementationsKMeans.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\MyKmeansPPInterpritationcs.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Algorithms\Primitive_Clustering_Hierarhical_Alg.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\CalculateTFIDF.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Centroid.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\CentroidCalculationClass.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\ClusterWrapper.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\CreateDocumentCollection.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\CreateDocumentCollection2.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\CreateTermCollection.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\DisjointSet.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Document.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVector.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansClustering.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\KMeansPlus.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVectorFuzzyKMeans.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVectorWrapper.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Normalization.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\SimilarityMatrixCalculations.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\TFIDF2ndrealization.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\VectorSpaceModel.cs" />
+    <Compile Include="Logic\eBase\newWSBPublication.cs" />
     <Compile Include="Logic\eBase\PPPublicationBase.cs" />
     <Compile Include="Logic\eBase\UGPublicationBase.cs" />
     <Compile Include="Logic\eBase\UMKPublicationBase.cs" />
     <Compile Include="Logic\eBase\WSBPublicationBase.cs" />
-    <Compile Include="Logic\PublicationsContext.cs" />
     <Compile Include="Logic\TextProcessing\TextPreparing.cs" />
     <Compile Include="PG_Articles.cs">
-      <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PP_Articles.cs">
-      <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RTFReader.xaml.cs">
       <DependentUpon>RTFReader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Terms_Vocabulary.cs">
-      <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UG_Articles.cs">
-      <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UMK_Articles.cs">
-      <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="WSB_Articles.cs">
-      <DependentUpon>ArticleBaseGenerator.tt</DependentUpon>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -263,10 +284,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ArticlesDataModel.edmx">
+    <EntityDeploy Include="ArticleDBDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ArticlesDataModel1.Designer.cs</LastGenOutput>
+      <LastGenOutput>ArticleDBDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ArticleDBDataModel.edmx.diagram">
+      <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -281,17 +305,29 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ArticleBaseGenerator.Context.tt">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ArticleDBDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ArticleBaseGenerator.Context.cs</LastGenOutput>
-      <DependentUpon>ArticlesDataModel.edmx</DependentUpon>
+      <LastGenOutput>ArticleDBDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
     </Content>
-    <Content Include="ArticleBaseGenerator.tt">
+    <Content Include="ArticleDBDataModel.edmx.sql" />
+    <Content Include="ArticleDBDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ArticleBaseGenerator.cs</LastGenOutput>
-      <DependentUpon>ArticlesDataModel.edmx</DependentUpon>
+      <LastGenOutput>ArticleDBDataModel.cs</LastGenOutput>
+      <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
     </Content>
-    <Content Include="ArticlesDataModel.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

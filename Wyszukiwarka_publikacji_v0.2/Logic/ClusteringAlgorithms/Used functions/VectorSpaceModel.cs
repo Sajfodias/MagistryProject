@@ -48,7 +48,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 
             termHashset = new HashSet<string>();
 
-            using (var dbContext = new ArticlesDataContainer())
+            using (var dbContext = new ArticleDBDataModelContainer())
             {
                 dbContext.Terms_Vocabulary.Load();
 

@@ -80,7 +80,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         {
                             if (WSB_author_line != null && WSB_Tytul_pracy != null)
                             {
-                                using(var dbContext = new ArticlesDataContainer())
+                                using(var dbContext = new ArticleDBDataModelContainer())
                                 {
                                     var document = new StringBuilder();
                                     var wsb_article = dbContext.WSB_ArticlesSet.Create();
@@ -226,60 +226,24 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         }
                                         wsb_article.Terms_Vocabulary.Add(terms);
                                     }
-
-                                    dbContext.SaveChanges();
-                                }
-
-                                ///<summary>
-                                /// Entity Code-first object creation WSBArticle
-                                /// </summary>
-                                #region WSB_Article_Entity_Object_Creation
-                                /*
-                                using (var db = new PublicationsContext())
-                                {
-                                    var wsb_article = new WSBArticle();
-                                    wsb_article.article_authors = WSB_author_line;
-                                    WSB_author_line = null;
-                                    wsb_article.article_title = WSB_Tytul_pracy;
-                                    WSB_Tytul_pracy = null;
-                                    wsb_article.article_publisher_adres = WSB_Adres_wydawniczy;
-                                    WSB_Adres_wydawniczy = null;
-                                    wsb_article.article_common_title = WSB_Tytul_calosci;
-                                    WSB_Tytul_calosci = null;
-                                    wsb_article.article_pl_keywords = WSB_Slowa_kluczowe_j_pl_line;
-                                    WSB_Slowa_kluczowe_j_pl_line = null;
-                                    wsb_article.article_eng_keywords = WSB_Slowa_kluczowe_j_ang_line;
-                                    WSB_Slowa_kluczowe_j_ang_line = null;
-                                    wsb_article.article_title_other_lang = WSB_Tytul_pracy_w_innym_j;
-                                    WSB_Tytul_pracy_w_innym_j = null;
-                                    wsb_article.article_details = WSB_Szczegoly;
-                                    WSB_Szczegoly = null;
-                                    wsb_article.article_URL = WSB_URL;
-                                    WSB_URL = null;
-                                    wsb_article.article_DOI = WSB_DOI;
-                                    WSB_DOI = null;
-
-                                    var authors_of_the_article = new Authors();
-                                    for (int k = 0; k <= WSB_autors.Length - 2; k++)
+                                    try
                                     {
-                                        authors_of_the_article.author_name = WSB_autors[k];
-                                        authors_of_the_article.author_surename = WSB_autors[k + 1];
-                                        db.Authors.Add(authors_of_the_article);
+                                        dbContext.SaveChanges();
                                     }
-
-
-                                    db.WSB_Articles.Add(wsb_article);
-                                    db.SaveChanges();
+                                    catch (Exception ex)
+                                    {
+                                        File.WriteAllText(@"F:\\Magistry files\WSB_crawler_Log.txt", ex.ToString());
+                                    }
+                                
                                 }
-                                */
-                                #endregion
                             }
 
                             else
                             {
                                 //return;
                                 //System.Windows.MessageBox.Show("brak danych!");
-                                File.WriteAllText(@"F:\\Magistry files\WSB_emptyLines.txt", "empty_line");
+                                //File.WriteAllText(@"F:\\Magistry files\WSB_emptyLines.txt", "empty_line");
+                                continue;
                             }
                             
                         }
@@ -348,31 +312,4 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
             }
         }
     }
-
-
-    /// <summary>
-    /// Entity Code-first class WSBArticle
-    /// </summary>
-    /*
-    public class WSBArticle
-    {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public int article_Id { get; set; }
-
-        public string article_authors { get; set; }
-        public string article_title { get; set; }
-        public string article_publisher_adres { get; set; }
-        public string article_common_title { get; set; }
-        public string article_eng_keywords { get; set; }
-        public string article_pl_keywords { get; set; }
-        public string article_title_other_lang { get; set; }
-        public string article_DOI { get; set; }
-        public string article_details { get; set; }
-        public string article_URL { get; set; }
-
-        public int author_Id { get; set; }
-        public virtual Authors Authors { get; set; }
-    }
-    */
 }

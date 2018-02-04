@@ -78,7 +78,7 @@ namespace Wyszukiwarka_publikacji_v0._2
                 string content = ParserRTF.parseRTF(filename);
                 RTFContent.AcceptsReturn = true;
                 RTFContent.AcceptsTab = true;
-                LoadRTF(content, RTFContent);
+                LoadRTF(content, RTFContent); // here we have the delay in calculations
                 if (filename.Contains("UG"))
                 {
                     Logic.eBase.UGPublicationBase.get_UG_Document_content();
@@ -93,7 +93,8 @@ namespace Wyszukiwarka_publikacji_v0._2
                 }
                 else if (filename.Contains("WSB"))
                 {
-                    Logic.eBase.WSBPublicationBase.get_WSB_Document_content();
+                    //Logic.eBase.WSBPublicationBase.get_WSB_Document_content();
+                    Logic.eBase.newWSBPublication.get_WSB_Document_content();
                 }
             }
         }

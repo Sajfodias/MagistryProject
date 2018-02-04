@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\Magistry files\Wyszukiwarka_publikacji_v0.2\Wyszukiwarka_publikacji_v0.2\ArticlesDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'F:\Magistry files\Wyszukiwarka_publikacji_v0.2\Wyszukiwarka_publikacji_v0.2\ArticleDBDataModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
