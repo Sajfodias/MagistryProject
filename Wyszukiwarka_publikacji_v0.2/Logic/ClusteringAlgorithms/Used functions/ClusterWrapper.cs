@@ -8,7 +8,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
 {
     class ClusterWrapper
     {
-        public List<DocumentVectorWrapper> documentVectorWrappersList;
+        public List<DocumentVectorWrapper> documentVectorWrappersList { get; set; }
 
         public ClusterWrapper()
         {

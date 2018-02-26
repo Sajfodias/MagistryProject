@@ -24,6 +24,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
         public static string[] separatedContext;
         public static char[] separators = { '=' };
         public static char[] authorSeparator = { ' ', ',', ';' };
+        
 
 
         public static string _title;
@@ -39,6 +40,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
         public static void LoadBibtexFile()
         {
             string[] fileEntries = Directory.GetFiles(filePathBibtex);
+            char[] not_allowedCharsforArticle = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '<', '>', 'x', '!', '#', '$', '%', '^', '&', '*', '(', ')', '/', '\'' };
+            string[] new_document = new string[0];
 
             foreach (string file in fileEntries)
             {
@@ -48,7 +51,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                     {
                         context = new string[14];
                         separatedContext = new string[2];
-                        
+
 
                         for (int i = 0; i <= context.Count() - 1; i++)
                         {
@@ -64,19 +67,47 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                                     #region getVariables
                                     if (separatedContext[0].Contains("title"))
                                     {
-                                        _title = separatedContext[1];
+                                        #region little_modification_for_title_clearing
+                                        /*
+                                        for (int a = 0; a < separatedContext[1].Length; a++)
+                                        {
+                                            for (int b = 0; b < not_allowedCharsforArticle.Length; b++)
+                                            {
+                                                if (separatedContext[1].ElementAt(a) == not_allowedCharsforArticle[b])
+                                                    separatedContext[1].Remove(a, 1);
+                                            }
+                                        }
+                                        */
+                                        #endregion
+                                        if (separatedContext[1].Length >= 2)
+                                            _title = separatedContext[1];
                                     }
                                     else if (separatedContext[0].Contains("abstract"))
                                     {
-                                        _abstract = separatedContext[1];
+                                        #region little_modification_for_abstract_clearing
+                                        for (int a = 0; a < separatedContext[1].Length; a++)
+                                        {
+                                            for (int b = 0; b < not_allowedCharsforArticle.Length; b++)
+                                            {
+                                                if (separatedContext[1].ElementAt(a) == not_allowedCharsforArticle[b])
+                                                    separatedContext[1].Remove(a, 1);
+                                            }
+                                        }
+                                        #endregion
+                                        if (separatedContext[1].Length >= 5)
+                                            _abstract = separatedContext[1];
                                     }
                                     else if (separatedContext[0].Contains("keywords"))
                                     {
-                                        _keywords = separatedContext[1];
+                                        if (separatedContext[1] != String.Empty || separatedContext[1] != " ")
+                                            _keywords = separatedContext[1];
+                                        else continue;
                                     }
                                     else if (separatedContext[0].Contains("year"))
                                     {
-                                        _year = Convert.ToInt32(separatedContext[1]);
+                                        if (Convert.ToInt32(separatedContext[1]) >= 1960)
+                                            _year = Convert.ToInt32(separatedContext[1]);
+                                        else continue;
                                     }
                                     else if (separatedContext[0].Contains("country"))
                                     {
@@ -95,19 +126,21 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                                     {
                                         _url = separatedContext[1];
                                     }
+                                    else continue;
                                     #endregion
                                 }
-                                catch(Exception ex)
+                                catch (Exception ex)
                                 {
-                                    if(ex.InnerException.GetType() == typeof(IndexOutOfRangeException))
+                                    if (ex.InnerException.GetType() == typeof(IndexOutOfRangeException))
                                     {
+                                        File.WriteAllText(@"F:\\Magistry files\PG_crawler_Log.txt", ex.ToString());
                                         return;
                                     }
                                 }
 
                             }
                         }
-                       
+
                     }
                 }
                 #region bibtexLibrary
@@ -152,7 +185,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                 {
                     #region Bibtex_Entity_Object_Creation_Model_First
                     //
-                    using(var dbContext = new ArticleDBDataModelContainer())
+                    using (var dbContext = new ArticleDBDataModelContainer())
                     {
                         var document = new StringBuilder();
 
@@ -167,7 +200,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                         _title = null;
 
                         bibtexArticle.abstractText = _abstract;
-                        if(_abstract!= String.Empty || _abstract!= " " || _abstract!= null)
+                        if (_abstract != String.Empty || _abstract != " " || _abstract != null)
                         {
                             var termAbstract = TextPreparing.TermsPrepataions(_abstract);
                             document.Append(termAbstract);
@@ -192,7 +225,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                         bibtexArticle.url = _url;
                         _url = null;
 
-                        
+
                         for (int i = 0; i <= _authors.Length - 2;)
                         {
                             var authors_of_the_article = dbContext.AuthorSet.Create();
@@ -205,92 +238,116 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                         dbContext.PG_ArticlesSet.Add(bibtexArticle);
 
                         var _document = document.ToString().Split(' ', ';', ':', ',');
-                        for(int k=0; k<=_document.Length-1; k++)
+
+                        
+                        //dodano 11.02
+                        for (int p = 0; p < _document.Length; p++)
+                        {
+                            for (int z = 0; z < not_allowedCharsforArticle.Length; z++)
+                            {
+                                if (_document[p].Contains(not_allowedCharsforArticle[z]))
+                                    _document[p].Remove(z, 1);
+                            }
+
+                            //dodano 11.02
+                            List<string> stringHashSet = new List<string>();
+                            stringHashSet = _document.ToList();
+
+                            foreach (var element in stringHashSet)
+                            {
+                                if (element == String.Empty || element == null || element == " ")
+                                    stringHashSet.Remove(element);
+                                else if (element.Length <= 3)
+                                    stringHashSet.Remove(element);
+                            }
+
+                            new_document = stringHashSet.ToArray();
+                        }
+
+                        for (int k = 0; k <= new_document.Length - 1; k++)
                         {
                             var terms = dbContext.Terms_Vocabulary.Create();
 
-                            //
                             string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
                             string[] allowed_dictionary = dictionary_text.Split(',', '\n');
-
-                            for (int i = 0; i <= _document.Length - 1; i++)
+                            #region old_cleaning_code_11.02.2018
+                            //added 10.02.2018 - cleaninig the article list
+                            /*
+                            for (int i = 0; i <= new_document.Length - 1; i++)
                             {
                                 for (int j = 0; j <= allowed_dictionary.Length - 1; j++)
                                 {
-                                    if (_document[i].Length > 3 && _document[i].Contains(allowed_dictionary[j]))
+                                    if (new_document[i].Length > 3 && new_document[i].Contains(allowed_dictionary[j]))
                                     {
                                         continue;
                                     }
-                                    else if (_document[i].Length < 3 && !(_document[i].Contains(allowed_dictionary[j])))
+                                    else if (new_document[i].Length < 3 && !(new_document[i].Contains(allowed_dictionary[j])))
                                     {
-                                        _document.ToList().RemoveAt(i);
+                                        new_document.ToList().RemoveAt(i);
                                     }
-
                                 }
                             }
-
+                            */
+                            #endregion
+                            #region old_version_11.02.2018
                             //tutaj potrzebnie przepisac id dokumenta w ktorym wystepuje dane slowo
-                            if (_document[k] != String.Empty || _document[k] != " " || _document[k] != null || _document[k] != Char.IsDigit(' ').ToString())
-                            {
-                                //dbContext.Terms_Vocabulary.Where(u)
-                                var termVocabularyTable = dbContext.Terms_Vocabulary;
-                                terms.term_value = _document[k];
-
-                            }
+                            //if (new_document[k] != String.Empty || new_document[k] != " " || new_document[k] != null || new_document[k] != Char.IsDigit(' ').ToString())
+                            //{
+                            //dbContext.Terms_Vocabulary.Where(u)
+                            #endregion
+                            var termVocabularyTable = dbContext.Terms_Vocabulary;
+                                terms.term_value = new_document[k];
+                            //}
                             bibtexArticle.Terms_Vocabulary.Add(terms);
                         }
-
-                        
                         dbContext.SaveChanges();
-                        
                     }
-                        //
-                        #endregion
+                    #endregion
 
-                        ///<summary>
-                        /// BibtexArticle_Entity_Object_Creation
-                        /// </summary>
-                        #region BibtexArticle_Entity_Object_Creation
-                        /*
-                        using (var db = new PublicationsContext())
+                    ///<summary>
+                    /// BibtexArticle_Entity_Object_Creation
+                    /// </summary>
+                    #region BibtexArticle_Entity_Object_Creation
+                    /*
+                    using (var db = new PublicationsContext())
+                    {
+                        var bibtexArticle = new BibtexArticle();
+                        bibtexArticle.title = _title;
+                        _title = null;
+                        bibtexArticle.abstractText = _abstract;
+                        _abstract = null;
+                        bibtexArticle.keywords = _keywords;
+                        _keywords = null;
+                        bibtexArticle.year = _year;
+                        bibtexArticle.country = _country;
+                        _country = null;
+                        bibtexArticle.authors = _authorsLine;
+                        _authorsLine = null;
+                        //potrzebnie dorobic dodawanie autorow po 2 wartosci z tabeli authors[] do klasy Entity Authors
+                        bibtexArticle.organizations = _organization;
+                        _organization = null;
+                        bibtexArticle.url = _url;
+                        _url = null;
+
+
+                        var authors_of_the_article = new Authors();
+                        for (int i = 0; i <= _authors.Length - 2; i++)
                         {
-                            var bibtexArticle = new BibtexArticle();
-                            bibtexArticle.title = _title;
-                            _title = null;
-                            bibtexArticle.abstractText = _abstract;
-                            _abstract = null;
-                            bibtexArticle.keywords = _keywords;
-                            _keywords = null;
-                            bibtexArticle.year = _year;
-                            bibtexArticle.country = _country;
-                            _country = null;
-                            bibtexArticle.authors = _authorsLine;
-                            _authorsLine = null;
-                            //potrzebnie dorobic dodawanie autorow po 2 wartosci z tabeli authors[] do klasy Entity Authors
-                            bibtexArticle.organizations = _organization;
-                            _organization = null;
-                            bibtexArticle.url = _url;
-                            _url = null;
-
-
-                            var authors_of_the_article = new Authors();
-                            for (int i = 0; i <= _authors.Length - 2; i++)
-                            {
-                                authors_of_the_article.author_name = _authors[i];
-                                authors_of_the_article.author_surename = _authors[i + 1];
-                                bibtexArticle.author_Id = authors_of_the_article.author_Id;
-                                db.Authors.Add(authors_of_the_article);
-                            }
-
-                            db.PG_Articles.Add(bibtexArticle);
-                            db.SaveChanges();
+                            authors_of_the_article.author_name = _authors[i];
+                            authors_of_the_article.author_surename = _authors[i + 1];
+                            bibtexArticle.author_Id = authors_of_the_article.author_Id;
+                            db.Authors.Add(authors_of_the_article);
                         }
-                        */
-                        #endregion
-                        Console.WriteLine("End of file! Go to the next ->");
+
+                        db.PG_Articles.Add(bibtexArticle);
+                        db.SaveChanges();
+                    }
+                    */
+                    #endregion
+                    Console.WriteLine("End of file! Go to the next ->");
                 }
-                catch(Exception ex)
-                { 
+                catch (Exception ex)
+                {
                     File.WriteAllText(@"F:\\Magistry files\PG_crawler_Log.txt", ex.ToString());
                 }
             }

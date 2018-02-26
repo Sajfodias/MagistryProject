@@ -30,11 +30,12 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
             //List<Centroid> complete_Centroid_List = Calculate_Centroids(firstcentroid,docCollection,termCollection,vSpace, numerOfClusters);
 
             List<Centroid> complete_Centroid_List = Logic.ClusteringAlgorithms.Used_functions.CentroidCalculationClass.CentroidCalculationsForKMeansPP(vSpace, numerOfClusters);
-            List<Centroid> result = newKMeansClusterization(number_of_Clusters, docCollection, iteration_Count, vSpace, wordIndex, complete_Centroid_List);
+            List<Centroid> result = NewKMeansClusterization(number_of_Clusters, docCollection, iteration_Count, vSpace, wordIndex, complete_Centroid_List);
             //List<Centroid> result = KMeansClusterization(number_of_Clusters, docCollection, iteration_Count, vSpace, wordIndex);
             return result;
         }
 
+        #region WrapperDocumentCollectionCreation
         public static List<DocumentVectorWrapper> WrappedCollections(List<DocumentVector> vSpace)
         {
             List<DocumentVectorWrapper> wrappedCollection = new List<DocumentVectorWrapper>();
@@ -45,22 +46,58 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
             }
             return wrappedCollection;
         }
-        
-        public static List<Centroid> newKMeansClusterization(int number_of_Clusters, List<string> docCollection, int iteration_Count, List<DocumentVector> vSpace, Dictionary<string, int> wordIndex , List<Centroid> completeCentroidList)
+        #endregion
+
+        public static List<Centroid> NewKMeansClusterization(int number_of_Clusters, List<string> docCollection, int iteration_Count, List<DocumentVector> vSpace, Dictionary<string, int> wordIndex , List<Centroid> completeCentroidList)
         {
             clusteringChanged = true;
             List<Centroid> result = new List<Centroid>();
             //List<Centroid> centroidCollection = generate_random_Centroids(number_of_Clusters,vSpace);
             List<Centroid> centroidCollection = completeCentroidList;
+            List<Centroid> oldCentroids = new List<Centroid>();
+            List<Centroid> labels = new List<Centroid>();
+            List<DocumentVector> newVSpace2 = new List<DocumentVector>();
+            int iterations = 0;
+            /*
             List<Centroid> oldRecomputedResult = new List<Centroid>();
             List<Centroid> recomputedCollection = new List<Centroid>();
             List<DocumentVector> newVSpace = new List<DocumentVector>(vSpace);
-            List<DocumentVector> newVSpace2 = new List<DocumentVector>(newVSpace);
+            
             List<Centroid> oldfilledCentroidCollection = new List<Centroid>();
+            */
 
-            for (int i=0; i< iteration_Count; i++)
+            for(;iterations<iteration_Count;)
             {
-                if (i < 2)
+                do
+                {
+                    if (iterations < 1)
+                    {
+                        labels = AssignDocumentToCluster(centroidCollection, vSpace);
+                        newVSpace2 = vSpace;
+                    }
+                    //oldCentroids = centroidCollection;
+                    else
+                    {
+                        centroidCollection = AverageMeansAssigned(labels, newVSpace2);
+                        labels = AssignDocumentToCluster(centroidCollection, vSpace);
+                        oldCentroids = labels;
+                        newVSpace2 = vSpace;
+                        //centroidCollection = AverageMeansAssigned(labels, newVSpace2);
+                        result = labels;
+                        clusteringChanged = ClusteringChanged(oldCentroids, labels);
+                    }
+                    
+                    iterations ++;
+
+                }
+                while (clusteringChanged == true & iterations <= iteration_Count);
+            }
+
+            #region old_part_ofCode
+            /*
+            for (int i=0; i<iteration_Count; i++)
+            {
+                if (i <= 2)
                 {
                     newVSpace = new List<DocumentVector>(newVSpace2);
                     List<Centroid> fillCentroidCollection = AssignDocumentToCluster(centroidCollection, newVSpace);
@@ -70,9 +107,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
                 }
                 else
                 {
-                    List<Centroid> fillCentroidCollection = AssignDocumentToCluster(oldRecomputedResult, vSpace);
-                    List<Centroid> fillCentroidCollectionCopy = new List<Centroid>(fillCentroidCollection);
-                    clusteringChanged = CheckClustering(oldfilledCentroidCollection, fillCentroidCollection);
                     if (clusteringChanged == false)
                     {
                         result = oldfilledCentroidCollection;
@@ -80,40 +114,91 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
                     }
                     else
                     {
-                        recomputedCollection = AverageMeansAssigned(fillCentroidCollectionCopy, newVSpace2);
+                        List<Centroid> oldRecomputedResultCopy = new List<Centroid>(oldRecomputedResult);
+                        List<Centroid> fillCentroidCollection = AssignDocumentToCluster(oldRecomputedResult, vSpace);
+                        //List<Centroid> fillCentroidCollectionCopy = new List<Centroid>(fillCentroidCollection);
+                        newVSpace2 = new List<DocumentVector>(vSpace);
+                        recomputedCollection = AverageMeansAssigned(fillCentroidCollection, newVSpace2);
                         fillCentroidCollection = AssignDocumentToCluster(centroidCollection, vSpace);
                         oldRecomputedResult = recomputedCollection;
                         result = fillCentroidCollectionCopy;
-                        recomputedCollection = new List<Centroid>();
+                        clusteringChanged = ClusteringChanged(oldfilledCentroidCollection, fillCentroidCollection);
+                        //recomputedCollection = new List<Centroid>();
+                        //fillCentroidCollection = new List<Centroid>();
+                        //oldfilledCentroidCollection = new List<Centroid>();
+
                     }
                     //tutaj wywala - newVspace = null
                 }
-            }             
+            }   
+            */
+            #endregion
             return result;
         }
 
-        private static  bool CheckClustering(List<Centroid> oldRecomputedResult, List<Centroid> recomputedCollection)
+        /*
+        private static  bool ClusteringChanged(List<Centroid> oldRecomputedResult, List<Centroid> recomputedCollection)
         {
-            bool flag = true;
+            //bool flag = true;
+            
             for(int i=0; i<oldRecomputedResult.Count; i++)
             {
                 for(int j=0; j<oldRecomputedResult[j].GroupedDocument.Count; j++)
                 {
                     for(int j1=0; j1<recomputedCollection[j].GroupedDocument.Count; j1++)
                     {
-                        if ((oldRecomputedResult[j].GroupedDocument.Count == recomputedCollection[j].GroupedDocument.Count) & (oldRecomputedResult[j].GroupedDocument[j1].Content == recomputedCollection[j].GroupedDocument[j1].Content))
-                            flag = true;
-                        else
-                        {
-                            flag = false;
-                        }
+                    
+                        //if(oldRecomputedResult==recomputedCollection)
+                        //(oldRecomputedResult[j].GroupedDocument.Count == recomputedCollection[j].GroupedDocument.Count) & (oldRecomputedResult[j].GroupedDocument[j1].Content == recomputedCollection[j].GroupedDocument[j1].Content))
+                        //flag = true;
+                        //else
+                        // flag = false;
+                        /*
                     }
                 }
             }
-            return flag;
+            
+            //return flag;
+            return oldRecomputedResult == recomputedCollection;
         }
+    */
 
+        /*
+        private static bool ClusteringChanged(List<Centroid> oldRecomputedResult, List<Centroid> recomputedCollection)
+        {
+            bool result = true;
+            IEnumerable<Centroid> differenceSecondFromFirst = recomputedCollection.Except(oldRecomputedResult);
+            IEnumerable<Centroid> differenceFirstFromSecond = oldRecomputedResult.Except(recomputedCollection);
+            List<Centroid> firstDifferenceList = differenceFirstFromSecond.ToList();
+            List<Centroid> secondDifferenceList = differenceSecondFromFirst.ToList();
+            if (firstDifferenceList.Count == 0 && secondDifferenceList.Count == 0)
+                result = false;
+            else
+                result = true;
+            return result;
+        }
+        */
 
+        private static bool ClusteringChanged(List<Centroid> oldRecomputedResult, List<Centroid> recomputedCollection)
+        {
+            bool result = true;
+
+            for(int i=0; i<oldRecomputedResult.Count; i++)
+            {
+                for(int j=0; j<oldRecomputedResult[i].GroupedDocument.Count; j++)
+                {
+                    foreach (var oldDoc in oldRecomputedResult[i].GroupedDocument[j].Content)
+                    {
+                        if (recomputedCollection[i].GroupedDocument[j].Content.Equals(oldDoc))
+                            result = false;
+                        else
+                            result = true;
+                    }
+                }
+               
+            }
+            return result;
+        }
 
         public static List<Centroid> AverageMeansAssigned(List<Centroid> fillCentroidCollection, List<DocumentVector> vectorSpace)
         {
@@ -156,24 +241,32 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KM
 
             for (int i=0; i<fillCentroidCollection.Count; i++)
             {
-                for(int j=0; j<fillCentroidCollection[i].GroupedDocument.Count; j++)
+                minDistancesToCluster = new float[fillCentroidCollection[i].GroupedDocument.Count];
+                for (int j = 0; j < fillCentroidCollection[i].GroupedDocument.Count; j++)
                 {
-                    minDistancesToCluster = new float[fillCentroidCollection[i].GroupedDocument.Count];
+                    //minDistancesToCluster = new float[fillCentroidCollection[i].GroupedDocument.Count];
                     minDistancesToCluster[j] = SimilarityMatrixCalculations.FindEuclideanDistance(fillCentroidCollection[i].GroupedDocument.First().VectorSpace, fillCentroidCollection[i].GroupedDocument[j].VectorSpace);
-                }
+                    //}
 
-                for (int z = 0; z < minDistancesToCluster.Length; z++)
-                {
-                    currentValue = minDistancesToCluster[z];
-                    if (currentValue <= minDist || currentValue != 0)
+                    for (int z = 0; z < minDistancesToCluster.Length; z++)
                     {
-                        minDist = currentValue;
-                        index = z;
+                        currentValue = minDistancesToCluster[z];
+                        if (currentValue <= minDist && currentValue != 0)
+                        {
+                            minDist = currentValue;
+                            index = z;
+                        }
+                        //here we must to find the closest document to new vectorSpace;
+                        //for all docs in cluster create the vectorSpace 
                     }
-                    //here we must to find the closest document to new vectorSpace;
-                    //for all docs in cluster create the vectorSpace 
+                    /*
+                    DocumentVector newClusterCenter = fillCentroidCollection[i].GroupedDocument[index];
+                    fillCentroidCollection[i].GroupedDocument.Clear();
+                    fillCentroidCollection[i].GroupedDocument.Add(newClusterCenter);
+                    */
                 }
                 DocumentVector newClusterCenter = fillCentroidCollection[i].GroupedDocument[index];
+                index = 0;
                 fillCentroidCollection[i].GroupedDocument.Clear();
                 fillCentroidCollection[i].GroupedDocument.Add(newClusterCenter);
             }

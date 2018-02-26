@@ -10,11 +10,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
     {
         public float[] DocVect { get; set; }
 
-
+        
         public DocumentVectorWrapper(DocumentVector vector)
         {
             this.DocVect = vector.VectorSpace;
         }
-
+        
     }
 }

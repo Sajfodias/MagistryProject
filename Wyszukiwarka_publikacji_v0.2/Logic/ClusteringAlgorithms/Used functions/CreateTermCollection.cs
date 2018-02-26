@@ -12,6 +12,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
         public static List<string> GenerateTermCollection()
         {
             List<string> TermCollection = new List<string>();
+            char[] not_allowedChars = {'1', '2', '3', '4', '5', '6', '7','8','9','0', '<', '>', 'x', '!', '#', '$','%','^','&','*', '(',')','/','\''};
 
             using (var dbContext = new ArticleDBDataModelContainer())
             {
@@ -32,6 +33,18 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
 
             for (int i = 0; i <= TermCollection.Count-1; i++)
             {
+                #region new_code_for_Cleaning_termVocabulary
+                for (int k =0; i<TermCollection[i].Length; k++)
+                {
+                    for(int z=0; z<not_allowedChars.Length; z++)
+                    {
+                        if (TermCollection[i].ElementAt(k) == not_allowedChars[z])
+                            TermCollection[i].Remove(k, 1);
+                    }
+                    
+                }
+                #endregion
+
                 for (int j = 0; j <= allowed_dictionary.Length - 1; j++)
                 {
                     if (TermCollection[i].Length <= 3 && (!TermCollection[i].Contains(allowed_dictionary[j])))

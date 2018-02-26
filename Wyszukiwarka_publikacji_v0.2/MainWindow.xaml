@@ -16,17 +16,17 @@
             <TextBox x:Name="txtboxClusterNumber" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
             <Button x:Name="btnSearch" Content="Bibtex download" HorizontalAlignment="Left" Margin="0,66,0,0" VerticalAlignment="Top" Width="92" Height="43" Click="btnSearch_Click"/>
             <Button x:Name="btnClear" Content="Rtf download" HorizontalAlignment="Left" Margin="97,66,0,0" VerticalAlignment="Top" Width="92" Height="43" Click="rtfReader"/>
-            <Button Content="K-means" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="ClusterizationProcessingBtn"/>
-            <Button Content="K-means++" HorizontalAlignment="Left" Margin="0,154,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="KMeansPPClustering"/>
-            <Button Content="Dictionary prepare" HorizontalAlignment="Left" Margin="0,194,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_1"/>
-            <Button x:Name="kmeanskpbtn" Content="KPKmeansRealise" HorizontalAlignment="Left" Margin="97,114,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="KPKMeansClustering"/>
-            <Button x:Name="button" Content="Old K-Means++" HorizontalAlignment="Left" Margin="97,154,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="OldKMeansPPClustering"/>
-            <Button x:Name="button1" Content="Fuzzy KMeans" HorizontalAlignment="Left" Margin="97,194,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="button1_Click"/>
-            <Button x:Name="MyKmeansPP" Content="MyKmeansPP" HorizontalAlignment="Left" Margin="0,231,0,0" VerticalAlignment="Top" Width="92" Height="31" Click="MyKmeansPP_Click"/>
-            <Button Content="AHC" HorizontalAlignment="Left" Margin="97,231,0,0" VerticalAlignment="Top" Width="92" Height="31" Click="AHC_Click"/>
-            <Button Content="Gravitational" HorizontalAlignment="Left" Margin="0,267,0,0" VerticalAlignment="Top" Width="92" Height="29" Click="Gravitational_Click"/>
+            <Button Content="K-means" HorizontalAlignment="Left" Margin="0,194,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="ClusterizationProcessingBtn"/>
+            <Button Content="K-means++" HorizontalAlignment="Left" Margin="97,194,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="KMeansPPClustering"/>
+            <Button Content="Dictionary prepare" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_1"/>
+            <Button x:Name="kmeanskpbtn" Content="KPKmeansRealise" HorizontalAlignment="Left" Margin="9,431,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="KPKMeansClustering"/>
+            <Button x:Name="button" Content="Old K-Means++" HorizontalAlignment="Left" Margin="106,431,0,0" VerticalAlignment="Top" Width="92" Height="35" Click="OldKMeansPPClustering"/>
+            <Button x:Name="button1" Content="Fuzzy KMeans" HorizontalAlignment="Left" Margin="0,231,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="button1_Click"/>
+            <Button x:Name="MyKmeansPP" Content="MyKmeansPP" HorizontalAlignment="Left" Margin="9,395,0,0" VerticalAlignment="Top" Width="92" Height="31" Click="MyKmeansPP_Click"/>
+            <Button Content="AHC" HorizontalAlignment="Left" Margin="97,231,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="AHC_Click"/>
+            <Button Content="Gravitational" HorizontalAlignment="Left" Margin="0,268,0,0" VerticalAlignment="Top" Width="92" Height="29" Click="Gravitational_Click"/>
         </Grid>
-        
+
         <RichTextBox x:Name="clustResultTxtBox" Margin="211,10,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible">
             <FlowDocument>
                 <Paragraph>

@@ -127,8 +127,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             //var resultSet =  await Task<List<Centroid>>.Run(()=>KMeansClustering.DocumentClusterPreparation(clusterNumber, vSpace, ref totalIteration));
             List<Centroid> firstCentroidList = new List<Centroid>();
             firstCentroidList = CentroidCalculationClass.CentroidCalculationsForKMeansPP(vSpace, clusterNumber);
-            List<DocumentVectorWrapper> wrappedList = Logic.ClusteringAlgorithms.Algorithms.KMeansPPImplementations.MyKmeansPPInterpritationcs.WrappedCollections(vSpace);
-            List<Centroid> resultSet = Logic.ClusteringAlgorithms.Algorithms.KMeansPPImplementations.MyKmeansPPInterpritationcs.newKMeansClusterization(clusterNumber, docCollection, totalIteration, vSpace, wordIndex, firstCentroidList);
+            //List<DocumentVectorWrapper> wrappedList = Logic.ClusteringAlgorithms.Algorithms.KMeansPPImplementations.MyKmeansPPInterpritationcs.WrappedCollections(vSpace);
+            List<Centroid> resultSet = Logic.ClusteringAlgorithms.Algorithms.KMeansPPImplementations.MyKmeansPPInterpritationcs.NewKMeansClusterization(clusterNumber, docCollection, totalIteration, vSpace, wordIndex, firstCentroidList);
             //List<Centroid> resultSet = KMeansPlus.KMeansPlusClusterization(clusterNumber, vSpace, ref totalIteration);
             clusterization_stopwatch.Stop();
 
@@ -226,11 +226,12 @@ namespace Wyszukiwarka_publikacji_v0._2
             HashSet<string> termCollection= Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
             Dictionary<string,int> wordIndex= Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.DocumentsContainsTerm(docCollection, termCollection);
             List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
-            float fuzziness = 4.0f;
-            float epsilon = 0.3f;
+            float fuzziness = 0.5f;
+            float epsilon = 0.003f;
             int clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);
-            FuzzyKMeans.fcm(vSpace, clusterNumber, epsilon, fuzziness, termCollection);
-            FuzzyKMeans.show_clusters();
+            float[,] Result_fcm;
+            Result_fcm = FuzzyKMeans.Fcm(vSpace, clusterNumber, epsilon, fuzziness, termCollection);
+            FuzzyKMeans.Show_clusters(vSpace, Result_fcm, clusterNumber);
         }
 
         public void MyKmeansPP_Click(object sender, RoutedEventArgs e)
@@ -262,7 +263,7 @@ namespace Wyszukiwarka_publikacji_v0._2
             HashSet<string> termCollection = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
             Dictionary<string, int> wordIndex = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.DocumentsContainsTerm(docCollection, termCollection);
             List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessing(docCollection);
-            int M = 100;
+            int M = 1000;
             float G = -1.28171817154F; //G=1*e-4 according to 3.2.2  in article
             float deltaG = 0.01F;
             //float epsilon = -3.28171817154F;//epsilon=1*e-6 according to 3.2.2 in article or 10^(-4)= 0.0001F;

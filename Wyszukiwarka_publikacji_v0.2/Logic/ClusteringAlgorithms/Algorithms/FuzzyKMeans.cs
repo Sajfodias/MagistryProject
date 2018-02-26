@@ -95,7 +95,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
             return cluster_center;
         }
 
-        public static float get_norm(int i, int j, int max_number_of_dimensions)
+        public static float Get_norm(int i, int j, int max_number_of_dimensions)
         {
             float sum = 0;
             for (int k = 0; k < max_number_of_dimensions; k++)
@@ -104,63 +104,87 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
             return result;
         }
 
-        //tutaj jest blad.
-        public static float get_new_value(int i, int j, float fuzziness, int number_of_clusters, int max_number_of_dimensions)
+        public static float Get_new_value(int i, int j, float fuzziness, int number_of_clusters, int max_number_of_dimensions)
         {
             float p, sum = 0;
             p = 2 / (fuzziness - 1);
             for(int k=0; k<number_of_clusters; k++)
             {
-                sum += (float)Math.Pow((get_norm(i, j, max_number_of_dimensions) - get_norm(j, k, max_number_of_dimensions)), p);
+                sum += (float)Math.Pow(
+                    (Get_norm(i, j, max_number_of_dimensions))/
+                    (Get_norm(j, k, max_number_of_dimensions)), p);
             }
             var result = 1 / sum;
             return result;
         }
 
-        public static float update_degree_of_membership(float fuzziness, int number_of_clusters, int max_number_of_dimensions)
+        public static Tuple<float, float[,]> Update_degree_of_membership(float fuzziness, int number_of_clusters, int max_number_of_dimensions)
         {
+            Tuple<float, float[,]> result;
             float new_uij, diff, max_diff = 0;
             for(int j=0; j<number_of_clusters; j++)
             {
                 for(int i=0; i<number_of_dataPoints; i++)
                 {
-                    new_uij = get_new_value(i, j, fuzziness, number_of_clusters, max_number_of_dimensions);
+                    new_uij = Get_new_value(i, j, fuzziness, number_of_clusters, max_number_of_dimensions);
                     diff = new_uij - degree_of_member[i, j];
                     if (diff > max_diff)
                         max_diff = diff;
                     degree_of_member[i, j] = new_uij;
                 }
             }
-            return max_diff;
+            result = new Tuple<float, float[,]>(max_diff, degree_of_member);
+            return result;
         }
 
-        public static void fcm(List<DocumentVector> docCollection, int number_of_clusters, float epsilon, float fuzziness, HashSet<string> termCollection)
+        public static float[,] Fcm(List<DocumentVector> docCollection, int number_of_clusters, float epsilon, float fuzziness, HashSet<string> termCollection)
         {
             max_number_of_dimensions = termCollection.Count;
-            float max_diff=0;
+            Tuple<float, float[,]> max_diff;
             float[,] clusters_centers;
             Initialization(docCollection, number_of_clusters);
             do
             {
                 clusters_centers=calculate_Center_vectors(fuzziness, number_of_clusters, max_number_of_dimensions);
-                max_diff = update_degree_of_membership(fuzziness,number_of_clusters, max_number_of_dimensions);
+                max_diff = Update_degree_of_membership(fuzziness,number_of_clusters, max_number_of_dimensions);
             }
-            while (max_diff > epsilon);
+            while (max_diff.Item1 > epsilon);
+            return max_diff.Item2;
         }
 
-        public static String show_clusters()
+        public static String Show_clusters(List<DocumentVector> docCollection, float[,] Fcm_degree_of_member, int number_of_clusters)
         {
+            List<Centroid> clusterization_result = new List<Centroid>();
+            while (clusterization_result.Count != number_of_clusters)
+            {
+                Centroid newCentroid = new Centroid
+                {
+                    GroupedDocument = new List<DocumentVector>()
+                };
+                clusterization_result.Add(newCentroid);
+            }
             String Message = String.Empty;
-            for(int i=0; i<number_of_dataPoints; i++)
+            for(int i=0; i<docCollection.Capacity; i++)
             {
                 var cluster = 0;
                 float highest = 0;
                 for(int j=0; j<number_of_clusters; j++)
                 {
-                    if (degree_of_member[i, j] > highest)
+                    if (Fcm_degree_of_member[i, j] > highest)
                     {
-                        highest = degree_of_member[i, j];
+                        //highest = Fcm_degree_of_member[i, j];
+                        highest = MaxValueOfArray(Fcm_degree_of_member, docCollection.Capacity, number_of_clusters);
                         cluster = j;
+                        if (i < docCollection.Capacity)
+                        {
+                            clusterization_result[cluster].GroupedDocument.Add(docCollection[i]);
+                            Fcm_degree_of_member[i, j] = 0;
+                            docCollection.RemoveAt(i);
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
                 }
                 string result_FuzzyK_means_ = @"F:\Magistry files\FuzzyKMeans_result.txt";
@@ -171,6 +195,25 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
                 Message += "The cluster " + cluster + " contains " + data_point[i, 0] + " " + data_point[i, 1] + '\n';
             }
             return Message;
+        }
+
+        static float MaxValueOfArray(float[,] inputArray, int ix, int jy)
+        {
+            float result = 0;
+            float maxVal = 0;
+            for (int i = 1; i < ix-1; i++)
+            {
+                for(int j = 1; j<jy-1; j++)
+                {
+                    if (inputArray[i,j] > maxVal)
+                    {
+                        maxVal = inputArray[i, j];
+
+                    }
+                }       
+            }
+            result = maxVal;
+            return result;
         }
     }
 }

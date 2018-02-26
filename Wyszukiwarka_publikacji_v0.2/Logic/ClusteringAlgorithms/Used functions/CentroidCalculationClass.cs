@@ -47,6 +47,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             firstCentroid.GroupedDocument = new List<DocumentVector>();
             firstCentroid.GroupedDocument.Add(dataPP[indexOfFirstElement]);
             centroidListPP.Add(firstCentroid);
+            HashSet<Centroid> stringHashSet = new HashSet<Centroid>();
 
             while (centroidListPP.Count != ClusterNumberPP)
             {
@@ -57,15 +58,19 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 {
                     existingCentroids.Add(newCentroid.GroupedDocument[0]);
                     centroidListPP.Add(newCentroid);
+                    //zmiana1
+                    stringHashSet.Add(newCentroid);
                     firstCentroid = newCentroid;
                     dataPPCopy.Remove(newCentroid.GroupedDocument[0]);
                 }
-                else if (existingCentroids.Contains(newCentroid.GroupedDocument[0]))
+                //zmiana2
+                else if (existingCentroids.Contains(newCentroid.GroupedDocument[0]) || stringHashSet.Contains(newCentroid))
                 {
                     continue;
                 }
+                //zmiana 3
+                centroidListPP = stringHashSet.ToList();
             }
-
             return centroidListPP;
         }
 

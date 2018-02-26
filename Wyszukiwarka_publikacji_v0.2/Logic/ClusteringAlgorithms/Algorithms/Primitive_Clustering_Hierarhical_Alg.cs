@@ -41,7 +41,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
             for (int i = 0; i < docCollection.Count; i++)
             {
                 if (!RowsRemoved.Contains(i) && !ToJoin.Contains(i))
-                { 
+                {
                     var min = (float)Double.MaxValue;
                     foreach (var x in ToJoin)
                     {
@@ -57,10 +57,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
                     }
 
                 }
-                    
             }
-                    RowsRemoved.Add(ToJoin.First());
-            
+            RowsRemoved.Add(ToJoin.First());
             return proximity_Matrix;
         }
 
@@ -104,67 +102,200 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
                 }
             }
             result = new Tuple<float, int[]>(min_element, min_ElementCoordinate);
+            //always are chosing the same points
             return result;
         }
 
-        public static List<Centroid> Merge_Closest_Clusters (List<Centroid> list_of_Centroid, Tuple<float, int[]> closestClusters, out List<int> ToJoin)
+        public static List<Centroid> Merge_Closest_Clusters (List<Centroid> list_of_Centroid, Tuple<float, int, int> closestClusters, out List<int> ToJoin)
         {
             List<Centroid> result = new List<Centroid>();
-            int index_of_first_element = closestClusters.Item2[0];
-            int index_of_second_element = closestClusters.Item2[1];
+            int index_of_first_element = closestClusters.Item2;
+            int index_of_second_element = closestClusters.Item3;
             ToJoin = new List<int>();
             ToJoin.Add(index_of_first_element);
             ToJoin.Add(index_of_second_element);
+            //here we have the problem
             foreach (var item in list_of_Centroid[index_of_first_element].GroupedDocument)
             {
                 list_of_Centroid[index_of_second_element].GroupedDocument.Add(item);
             }
 
             list_of_Centroid.RemoveAt(index_of_first_element);
-            list_of_Centroid.RemoveAt(index_of_second_element);
+            //list_of_Centroid.RemoveAt(index_of_second_element);
             result = list_of_Centroid;
             return result;
         }
 
-        /*
-        public static float[,] Update_proximity_matrix_Single_Link(Tuple<float, int[]> mergedCentroids, float[,] proximityMatrix, int length)
+        public static float[,] Update_proximity_matrix(Tuple<float, int, int> mergedCentroids, float[,] proximityMatrix, int length)
         {
-            float[,] newProximityMatrix = new float[length, length];
-            int[] indexes_to_delete = mergedCentroids.Item2;
-            while(newProximityMatrix.Length != 2)
-            {
-                for(int i=0; i<proximityMatrix.Length; i++)
-                {
-                    for(int j=0; j<proximityMatrix.Length; j++)
-                    {
+            float[,] newProximityMatrix = new float[length-1, length-1];
+            int index_to_delete1 = mergedCentroids.Item2;
+            int index_to_delete2 = mergedCentroids.Item3;
 
+
+            int r = newProximityMatrix.GetLength(0);
+            //while(r > 2)
+            //{
+               for(int i=0; i<r; i++)
+               {
+                    for(int j=0; j<r; j++)
+                    {
+                        newProximityMatrix[i, j] = 0.5F * proximityMatrix[i, index_to_delete1] + 0.5F * proximityMatrix[index_to_delete2, j] - 0.5F * proximityMatrix[index_to_delete1, index_to_delete2];
                     }
-                }
-            }
+               }
+            //}
             return newProximityMatrix;
         }
-        */
 
         public static List<Centroid> Hierarchical_Clusterization(List<DocumentVector> docCollection, int iterationCount)
         {
             List<Centroid> result = new List<Centroid>();
             float[,] proximity_Matrix = Compute_Proximity_Matrix(docCollection);
             List<Centroid> list_of_Centroid = Create_List_of_Centroids(docCollection);
-            int length = proximity_Matrix.Length;
+            int length = proximity_Matrix.GetLength(0);
             List<int> RowsRemoved = new List<int>();
             List<int> ToJoin;
             for (int i=0; i<iterationCount; i++)
             {
                 var length_of_list = list_of_Centroid.Count; ;
-                while (length_of_list - RowsRemoved.Count > 2)
-                {
-                    var minimal_Distance = find_Min_Value_in_array(proximity_Matrix);
-                    list_of_Centroid = Merge_Closest_Clusters(list_of_Centroid, minimal_Distance, out ToJoin); // don't return the new list_of_Centroid
-                   // length = length - 1;
-                   
-                    proximity_Matrix = MyUpdate_Proximity_Matrix(proximity_Matrix, RowsRemoved, out RowsRemoved, ToJoin, list_of_Centroid[0].GroupedDocument); ;// proximity_Matrix = Update_proximity_matrix_Single_Link(minimal_Distance, proximity_Matrix, length);
-                }
+                //while (length_of_list - RowsRemoved.Count > 5)
+                //{
+                    while (length >= 2)
+                    {
+                        //var minimal_Distance = find_Min_Value_in_array(proximity_Matrix);
+                        var minimal_Distance = Single_linkage(proximity_Matrix);
+                        list_of_Centroid = Merge_Closest_Clusters(list_of_Centroid, minimal_Distance, out ToJoin); // don't return the new list_of_Centroid
+                        proximity_Matrix = Update_proximity_matrix(minimal_Distance, proximity_Matrix, length);
+                        //proximity_Matrix = MyUpdate_Proximity_Matrix(proximity_Matrix, RowsRemoved, out RowsRemoved, ToJoin, list_of_Centroid[0].GroupedDocument);
+                        //proximity_Matrix = Update_proximity_matrix(minimal_Distance, proximity_Matrix, length);
+                        length = length - 1;
+                    }
+                //}
             }
+            result = list_of_Centroid;
+            return result;
+        }
+
+        private static float Euclidean_Distance(Centroid a, Centroid b)
+        {
+            return SimilarityMatrixCalculations.FindEuclideanDistance(a.GroupedDocument[0].VectorSpace, b.GroupedDocument[0].VectorSpace);
+        }
+
+        private static Tuple<float, int, int> Single_linkage(float[,]distances)
+        {
+            float min = float.MaxValue;
+            float d = 0.0F;
+            int index_a = 0;
+            int index_b = 0;
+            Tuple<float, int, int> result;
+
+            int matrix_length = distances.GetLength(0);
+            for (int i = 0; i < matrix_length; i++)
+                for (int j = 0; j < matrix_length; j++)
+                {
+                    d = distances[i, j];
+                    if (d < min)
+                    {
+                        min = d;
+                        index_a = i;
+                        index_b = j;
+                    }
+                        
+                }
+            result = new Tuple<float, int, int>(min, index_a, index_b);
+            return result;
+        }
+
+        private static Tuple<float, int, int> Complete_linkage(float[,] distances)
+        {
+            float max = 0.0F;
+            float d = 0.0F;
+            int index_a = 0;
+            int index_b = 0;
+            Tuple<float, int, int> result;
+
+            int matrix_length = distances.GetLength(0);
+            for (int i = 0; i < matrix_length; i++)
+                for (int j = 0; j < matrix_length; j++)
+                {
+                    d = distances[i, j];
+                    if (d > max)
+                    {
+                        max = d;
+                        index_a = i;
+                        index_b = j;
+                    }
+
+                }
+            result = new Tuple<float, int, int>(max, index_a, index_b);
+            index_a = 0;
+            index_b = 0;
+            return result;
+        }
+
+        private static Tuple<float, int, int> Avarage_linkage(float[,] distances)
+        {
+            float[] totalDistanceMatrix = new float[distances.GetLength(0)];
+            float min = float.MaxValue;
+            int index_a = 0;
+            int index_b = 0;
+            Dictionary<int, int[]> dictionary = new Dictionary<int, int[]>();
+            int[] indexMatrix = new int[2];
+            int label = 0;
+            Tuple<float, int, int> result;
+
+            int matrix_length = distances.GetLength(0);
+            for (int i = 0; i < matrix_length; i++)
+            {
+                for (int j = 0; j < matrix_length; j++)
+                {
+                    totalDistanceMatrix[i] += distances[i, j];
+                    indexMatrix[0] = i;
+                    indexMatrix[1] = j;
+                    label = i;
+                    dictionary.Add(label, indexMatrix);
+                }
+                totalDistanceMatrix[i] = totalDistanceMatrix[i] / matrix_length;
+            }
+            for(int j=0; j<totalDistanceMatrix.Length; j++)
+            {
+                if (totalDistanceMatrix[j] < min)
+                {
+                    min = totalDistanceMatrix[j];
+                    index_a = dictionary[j][0];
+                    index_b = dictionary[j][1];
+                }
+                    
+            }
+            result = new Tuple<float, int, int>(min, index_a, index_b);
+            return result;
+        }
+
+        /*
+         * int[,] array = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+         * var trim = TrimArray(0, 2, array);
+        */
+
+        public static float[,] TrimArray(int rowToRemove, int columnToRemove, float[,] originalArray)
+        {
+            float[,] result = new float[originalArray.GetLength(0) - 1, originalArray.GetLength(1) - 1];
+
+            for (int i = 0, j = 0; i < originalArray.GetLength(0); i++)
+            {
+                if (i == rowToRemove)
+                    continue;
+
+                for (int k = 0, u = 0; k < originalArray.GetLength(1); k++)
+                {
+                    if (k == columnToRemove)
+                        continue;
+
+                    result[j, u] = originalArray[i, k];
+                    u++;
+                }
+                j++;
+            }
+
             return result;
         }
     }
