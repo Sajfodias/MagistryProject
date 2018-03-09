@@ -220,7 +220,7 @@ namespace Wyszukiwarka_publikacji_v0._2
             MessageBox.Show(Message, "Clusterization result!", MessageBoxButton.OK);
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void FuzzyKMeans_Click(object sender, RoutedEventArgs e)
         {
             List<string> docCollection = Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
             HashSet<string> termCollection= Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
@@ -230,6 +230,7 @@ namespace Wyszukiwarka_publikacji_v0._2
             float epsilon = 0.003f;
             int clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);
             float[,] Result_fcm;
+            List<string> docs = Tests.DocClasses.SurveyAndMeasurementsClassOfDocuments_ListCreations();
             Result_fcm = FuzzyKMeans.Fcm(vSpace, clusterNumber, epsilon, fuzziness, termCollection);
             FuzzyKMeans.Show_clusters(vSpace, Result_fcm, clusterNumber);
         }
@@ -270,8 +271,10 @@ namespace Wyszukiwarka_publikacji_v0._2
             float epsilon = 0.6F;
             float alpha = 0.06F; 
             var result1 = GravitationalClusteringAlgorithm.Gravitational(vSpace, G, deltaG, M, epsilon);
-            var result2 = GravitationalClusteringAlgorithm.GetClusters(result1, alpha, vSpace);
-           
+            //var result2 = GravitationalClusteringAlgorithm.GetClusters(result1, alpha, vSpace);
+            List<string> docs = Tests.DocClasses.SurveyAndMeasurementsClassOfDocuments_ListCreations();
+            var Recall_result = Tests.Recall.Recall_Calculating(result1, docs);
+            var Precision_result = Tests.Precision.Precision_Calculating(result1, docs);
         }
     }
 }

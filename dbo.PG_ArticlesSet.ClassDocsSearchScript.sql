@@ -1,0 +1,4 @@
+﻿SELECT * FROM dbo.PG_ArticlesSet WHERE (PG_ArticlesSet.abstractText LIKE '%BADAN%' OR PG_ArticlesSet.keywords LIKE '%BADAN%') OR (PG_ArticlesSet.abstractText LIKE '%POMIAR%' OR PG_ArticlesSet.keywords LIKE '%POMIAR%');
+SELECT * FROM dbo.PG_ArticlesSet WHERE PG_ArticlesSet.abstractText LIKE '%ARCHITEKT%' OR PG_ArticlesSet.keywords LIKE '%ARCHITEKT%' OR PG_ArticlesSet.abstractText LIKE '%ARCHITEKT%';
+SELECT * FROM dbo.PG_ArticlesSet WHERE (PG_ArticlesSet.abstractText LIKE '%GEODE%' OR PG_ArticlesSet.keywords LIKE '%GEODE%') OR (PG_ArticlesSet.abstractText LIKE '%GEODE%' OR PG_ArticlesSet.keywords LIKE '%GEODE%');
+SELECT * FROM dbo.PG_ArticlesSet WHERE (PG_ArticlesSet.abstractText LIKE '%system%' OR PG_ArticlesSet.keywords LIKE '%system%') OR (PG_ArticlesSet.abstractText LIKE '%SYSTEM%' OR PG_ArticlesSet.keywords LIKE '%SYSTEM%');

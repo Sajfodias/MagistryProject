@@ -84,6 +84,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
                     }
                 }
             }
+            result = unionChanged;
             return result;
         }
         private static float GetDocumentDistance(DocumentVector doc1, DocumentVector doc2)

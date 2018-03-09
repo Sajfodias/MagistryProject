@@ -128,6 +128,38 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
 
         public static float[,] Update_proximity_matrix(Tuple<float, int, int> mergedCentroids, float[,] proximityMatrix, int length)
         {
+            float[,] fakenewProximityMatrix = new float[length, length];
+            float[,] newProximityMatrix = new float[length - 1, length - 1];
+            int index1 = mergedCentroids.Item2;
+            int index2 = mergedCentroids.Item3;
+
+            fakenewProximityMatrix[index1, index2] = 0;
+
+            for(int i=0; i<length; i++)
+            {
+                for(int j=0; j<length; j++)
+                {
+                    if (i == index1 | i == index2 | j == index1 | j == index2)
+                    {
+                        if (proximityMatrix[index1, j] < proximityMatrix[index2, j])
+                            fakenewProximityMatrix[index1, j] = proximityMatrix[index1, j];
+                        else
+                            fakenewProximityMatrix[index1, j] = proximityMatrix[index2, j];
+                    }
+                    else
+                    {
+                        fakenewProximityMatrix[i, j] = newProximityMatrix[i, j];
+                    }
+                }
+            }
+
+            newProximityMatrix = TrimArray(index2, index2, fakenewProximityMatrix);
+            return newProximityMatrix;
+        }
+
+        /*
+        public static float[,] Update_proximity_matrix(Tuple<float, int, int> mergedCentroids, float[,] proximityMatrix, int length)
+        {
             float[,] newProximityMatrix = new float[length-1, length-1];
             int index_to_delete1 = mergedCentroids.Item2;
             int index_to_delete2 = mergedCentroids.Item3;
@@ -146,6 +178,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
             //}
             return newProximityMatrix;
         }
+        */
 
         public static List<Centroid> Hierarchical_Clusterization(List<DocumentVector> docCollection, int iterationCount)
         {
@@ -163,7 +196,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
                     while (length >= 2)
                     {
                         //var minimal_Distance = find_Min_Value_in_array(proximity_Matrix);
-                        var minimal_Distance = Single_linkage(proximity_Matrix);
+                        var minimal_Distance = Avarage_linkage(proximity_Matrix);
                         list_of_Centroid = Merge_Closest_Clusters(list_of_Centroid, minimal_Distance, out ToJoin); // don't return the new list_of_Centroid
                         proximity_Matrix = Update_proximity_matrix(minimal_Distance, proximity_Matrix, length);
                         //proximity_Matrix = MyUpdate_Proximity_Matrix(proximity_Matrix, RowsRemoved, out RowsRemoved, ToJoin, list_of_Centroid[0].GroupedDocument);
@@ -181,6 +214,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
             return SimilarityMatrixCalculations.FindEuclideanDistance(a.GroupedDocument[0].VectorSpace, b.GroupedDocument[0].VectorSpace);
         }
 
+
+        //to nie działa dobrze
         private static Tuple<float, int, int> Single_linkage(float[,]distances)
         {
             float min = float.MaxValue;

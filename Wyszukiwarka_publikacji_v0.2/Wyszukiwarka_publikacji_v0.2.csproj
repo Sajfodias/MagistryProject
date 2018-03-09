@@ -237,6 +237,15 @@
     <Compile Include="Terms_Vocabulary.cs">
       <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tests\DocClasses.cs" />
+    <Compile Include="Tests\Entropy.cs" />
+    <Compile Include="Tests\F1Measure.cs" />
+    <Compile Include="Tests\InterclusterDistances.cs" />
+    <Compile Include="Tests\IntraclusterDistances.cs" />
+    <Compile Include="Tests\NormilizedMutualInformation.cs" />
+    <Compile Include="Tests\Precision.cs" />
+    <Compile Include="Tests\Purity.cs" />
+    <Compile Include="Tests\Recall.cs" />
     <Compile Include="UG_Articles.cs">
       <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
