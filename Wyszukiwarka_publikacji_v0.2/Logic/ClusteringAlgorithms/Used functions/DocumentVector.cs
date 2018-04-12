@@ -12,6 +12,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
         public float[] VectorSpace { get; set; }
         public float[] OriginalVectorSpace { get; set; }
 
+        /*
         public void SaveOriginal(DocumentVector docVect)
         {
             OriginalVectorSpace = new float[docVect.VectorSpace.Length];
@@ -33,6 +34,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             for (var i = 0; i < docVect.VectorSpace.Length; i++)
                 VectorSpace[i] = OriginalVectorSpace[i];
         }
-
+        */
     }
 }

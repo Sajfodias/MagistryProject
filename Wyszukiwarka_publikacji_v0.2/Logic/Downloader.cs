@@ -27,9 +27,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
         private readonly static HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(40.0) };
         public static HtmlDocument contentHtmlDoc;
         public static HtmlDocument downloadedContentHtmlDoc;
-        public static string path = @"F:\\Magistry files\Magistry_new_test_data\";
-        public static string bibtexPath = @"F:\\Magistry files\Magistry_files_bibtex\";
-        public static string newbibtexPath = @"F:\\Magistry files\new_Magistry_test_data\";
+        //public static string path = @"F:\\Magistry files\Magistry_new_test_data\";
+        public static string bibtexPath = @"F:\\Magistry files\html_articles_to_txt\";
+        //public static string newbibtexPath = @"F:\\Magistry files\new_Magistry_test_data\";
+        public static string newbibtexPath = @"F:\\Magistry files\1\";
         static int countOfArticles = 141022;//141022; //tu potrzebnie zaimplementowac algorytm znajdowania ostatniego id
         public static Queue<Task> tasks = new Queue<Task>();
     
@@ -124,10 +125,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                     //tu zmiany po 100 a nie po 1000
                     int beginRegion = z * 100 + 1;
                     int endRegion = (z + 1) * 100;
+                    /*
                     Parallel.For(beginRegion, endRegion, options, async l =>
                     {
                         downloadedContentHtmlDoc = await getContent($"http://pg.edu.pl/publikacje?id=" + l.ToString());
-                        using (StreamWriter outputfile = new StreamWriter(File.Create(path + l.ToString() + ".txt")))
+                        using (StreamWriter outputfile = new StreamWriter(File.Create(bibtexPath + l.ToString() + ".txt")))
                         {
                             outputfile.WriteLine(downloadedContentHtmlDoc.DocumentNode.InnerText);
                             outputfile.Flush();
@@ -137,10 +139,12 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                         Task.CompletedTask.Dispose();
                         GC.WaitForPendingFinalizers();
                         GC.Collect();
-                        */
+                        
                     });
+                    */
+
                     Parallel.For(beginRegion, endRegion, options, x => {
-                        downloadBibtexFile1("http://pg.edu.pl/publikacje?p_p_id=3_WAR_espeosciportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_3_WAR_espeosciportlet_publicationId=" + x.ToString() + "&_3_WAR_espeosciportlet_action=bib", x);
+                        downloadBibtexFile("http://pg.edu.pl/publikacje?p_p_id=3_WAR_espeosciportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_3_WAR_espeosciportlet_publicationId=" + x.ToString() + "&_3_WAR_espeosciportlet_action=bib", x);
                     });
                     //chyba wiem w czym problem na raz probuje ściągnąć zadużo plików bibtex
                     //gdzieś tu musimy czyścić pamięć i zoptymalizować kod;

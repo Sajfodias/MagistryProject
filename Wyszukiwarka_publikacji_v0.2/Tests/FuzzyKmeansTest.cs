@@ -1,14 +1,13 @@
-﻿//projected by Gagarine Yaikhom in the work Implementing the Fuzzy c-Means Algorithm
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
+namespace Wyszukiwarka_publikacji_v0._2.Tests
 {
-    public class FuzzyKMeans
+    class FuzzyKmeansTest
     {
         public static int number_of_dataPoints;
         public static int number_of_clusters;
@@ -22,7 +21,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
         public static float[,] cluster_center;      //cluster_center = new float[number_of_clusters,max_number_of_dimensions];
         //or we can use the Centroid structure
 
-        public static void Initialization(List<DocumentVector> docCollection, int number_of_clusters)
+        public static void Initialization(List<DocumentVectorTest> docCollection, int number_of_clusters)
         {
             number_of_dataPoints = docCollection.Count;
             var lastElementInList = docCollection[docCollection.Count - 1];
@@ -32,59 +31,58 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
             degree_of_member = new float[number_of_dataPoints, number_of_clusters];
             float[] row_sum = new float[number_of_dataPoints];
 
-            for (int i=0; i<docCollection.Count; i++)
+            for (int i = 0; i < docCollection.Count; i++)
             {
-                for(int j=0; j<docCollection[i].VectorSpace.Length; j++)
+                for (int j = 0; j < docCollection[i].VectorSpace.Length; j++)
                 {
                     data_point[i, j] = docCollection[i].VectorSpace[j];
                 }
             }
-
-
-            for (int k = 0; k <= number_of_dataPoints-1; k++)
+ 
+            for (int k = 0; k <= number_of_dataPoints - 1; k++)
             {
                 float sum = 0;      //probability sum
-                
+
                 //int r = 100;    //remaining probability
                 float r = 1.0f;
 
                 //tutaj żle się liczy
-                for(int j = 0; j <= number_of_clusters-1; j++)
+                for (int j = 0; j <= number_of_clusters - 1; j++)
                 {
                     float rval = (float)rand.NextDouble();
                     r -= rval;
                     degree_of_member[k, j] = rval;
                     sum += degree_of_member[k, j];
                 }
-                
+
                 row_sum[k] = sum;
 
-                for (int i=0; i<number_of_clusters; i++)
+                for (int i = 0; i < number_of_clusters; i++)
                 {
                     degree_of_member[k, i] = degree_of_member[k, i] / row_sum[k];
                 }
-               
+
                 //degree_of_member[k, 0] = 1 - sum;
             }
         }
 
-        public static float[,] calculate_Center_vectors(float fuzziness, int number_of_clusters, int max_number_of_dimensions)
+        public static float[,] Calculate_Center_vectors(float fuzziness, int number_of_clusters, int max_number_of_dimensions)
         {
             cluster_center = new float[number_of_clusters, max_number_of_dimensions];
             float numerator, denominator;
-            float[,] t = new float[number_of_dataPoints,number_of_clusters];
-            
-            for(int i=0; i<number_of_dataPoints; i++)
-                for(int j=0; j<number_of_clusters; j++)
-                    t[i, j] = (float)Math.Pow(degree_of_member[i,j],fuzziness);
+            float[,] t = new float[number_of_dataPoints, number_of_clusters];
 
-            for(int j=0; j<number_of_clusters; j++)
+            for (int i = 0; i < number_of_dataPoints; i++)
+                for (int j = 0; j < number_of_clusters; j++)
+                    t[i, j] = (float)Math.Pow(degree_of_member[i, j], fuzziness);
+
+            for (int j = 0; j < number_of_clusters; j++)
             {
-                for(int k=0; k<max_number_of_dimensions; k++)
+                for (int k = 0; k < max_number_of_dimensions; k++)
                 {
                     numerator = 0;
                     denominator = 0;
-                    for(int i=0; i<number_of_dataPoints; i++)
+                    for (int i = 0; i < number_of_dataPoints; i++)
                     {
                         numerator += t[i, j] * data_point[i, k];
                         denominator += t[i, j];
@@ -99,7 +97,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
         {
             float sum = 0;
             for (int k = 0; k < max_number_of_dimensions; k++)
-                sum += (float)Math.Pow((data_point[i, k] - cluster_center[j, k]),2);
+                sum += (float)Math.Pow((data_point[i, k] - cluster_center[j, k]), 2);
             var result = (float)Math.Sqrt(sum);
             return result;
         }
@@ -108,10 +106,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
         {
             float p, sum = 0;
             p = 2 / (fuzziness - 1);
-            for(int k=0; k<number_of_clusters; k++)
+            for (int k = 0; k < number_of_clusters; k++)
             {
                 sum += (float)Math.Pow(
-                    (Get_norm(i, j, max_number_of_dimensions))/
+                    (Get_norm(i, j, max_number_of_dimensions)) /
                     (Get_norm(j, k, max_number_of_dimensions)), p);
             }
             var result = 1 / sum;
@@ -122,9 +120,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
         {
             Tuple<float, float[,]> result;
             float new_uij, diff, max_diff = 0;
-            for(int j=0; j<number_of_clusters; j++)
+            for (int j = 0; j < number_of_clusters; j++)
             {
-                for(int i=0; i<number_of_dataPoints; i++)
+                for (int i = 0; i < number_of_dataPoints; i++)
                 {
                     new_uij = Get_new_value(i, j, fuzziness, number_of_clusters, max_number_of_dimensions);
                     diff = new_uij - degree_of_member[i, j];
@@ -137,125 +135,117 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
             return result;
         }
 
-        public static float[,] Fcm(List<DocumentVector> docCollection, int number_of_clusters, float epsilon, float fuzziness, HashSet<string> termCollection)
+        public static float[,] Fcm(List<DocumentVectorTest> docCollection, int number_of_clusters, float epsilon, float fuzziness)
         {
-            max_number_of_dimensions = termCollection.Count;
+            max_number_of_dimensions = docCollection[0].VectorSpace.Length;
             Tuple<float, float[,]> max_diff;
             float[,] clusters_centers;
             Initialization(docCollection, number_of_clusters);
             do
             {
-                clusters_centers=calculate_Center_vectors(fuzziness, number_of_clusters, max_number_of_dimensions);
-                max_diff = Update_degree_of_membership(fuzziness,number_of_clusters, max_number_of_dimensions);
+                clusters_centers = Calculate_Center_vectors(fuzziness, number_of_clusters, max_number_of_dimensions);
+                max_diff = Update_degree_of_membership(fuzziness, number_of_clusters, max_number_of_dimensions);
             }
             while (max_diff.Item1 > epsilon);
             return max_diff.Item2;
-        }
-
-        public static String Show_clusters(List<DocumentVector> docCollection, float[,] Fcm_degree_of_member, int number_of_clusters)
-        {
-            List<Centroid> clusterization_result = new List<Centroid>();
-            while (clusterization_result.Count != number_of_clusters)
-            {
-                Centroid newCentroid = new Centroid
-                {
-                    GroupedDocument = new List<DocumentVector>()
-                };
-                clusterization_result.Add(newCentroid);
-            }
-            String Message = String.Empty;
-            for(int i=0; i<docCollection.Count; i++)
-            {
-                var cluster = 0;
-                float highest = 0;
-                for(int j=0; j<number_of_clusters; j++)
-                {
-                    if (Fcm_degree_of_member[i, j] > highest)
-                    {
-                        //highest = Fcm_degree_of_member[i, j];
-                        highest = MaxValueOfArray(Fcm_degree_of_member, docCollection.Capacity, number_of_clusters);
-                        cluster = j;
-                        if (i < docCollection.Capacity)
-                        {
-                            clusterization_result[cluster].GroupedDocument.Add(docCollection[i]);
-                            Fcm_degree_of_member[i, j] = 0;
-                            docCollection.RemoveAt(i);
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                }
-                string result_FuzzyK_means_ = @"F:\Magistry files\FuzzyKMeans_result.txt";
-                using(StreamWriter sw = new StreamWriter(result_FuzzyK_means_))
-                {
-                    sw.WriteLine("The cluster " + cluster + " contains " + data_point[i, 0] + " " + data_point[i, 1]);
-                }
-                Message += "The cluster " + cluster + " contains " + data_point[i, 0] + " " + data_point[i, 1] + '\n';
-            }
-            return Message;
         }
 
         static float MaxValueOfArray(float[,] inputArray, int ix, int jy)
         {
             float result = 0;
             float maxVal = 0;
-            for (int i = 1; i < ix-1; i++)
+            for (int i = 0; i < ix - 1; i++)
             {
-                for(int j = 1; j<jy-1; j++)
+                for (int j = 0; j < jy - 1; j++)
                 {
-                    if (inputArray[i,j] > maxVal)
+                    if (inputArray[i, j] > maxVal)
                     {
                         maxVal = inputArray[i, j];
 
                     }
-                }       
+                }
             }
             result = maxVal;
             return result;
         }
 
-        internal static List<Centroid> AssignDocsToClusters(float[,] result_fcm, int clusterNumber, List<DocumentVector> docCollection)
+        /* AssignDocsToCluster - ListofCentroidsOutput
+        internal static List<TestCentroid> AssignDocsToClusters(float[,] result_fcm, int clusterNumber, List<DocumentVectorTest> docCollection)
         {
-            List<Centroid> result = new List<Centroid>(clusterNumber);
+            List<TestCentroid> result = new List<TestCentroid>(clusterNumber);
+            List<DocumentVectorTest> newCopyDocCollection = new List<DocumentVectorTest>(docCollection);
 
             //here we create the Centroid collection
             while (result.Count != clusterNumber)
             {
-                Centroid newCentroid = new Centroid
+                TestCentroid newCentroid = new TestCentroid
                 {
-                    GroupedDocument = new List<DocumentVector>()
+                    GroupedDocument = new List<DocumentVectorTest>(docCollection.Count)
                 };
                 result.Add(newCentroid);
             }
 
-            float minValue = result_fcm[0, 0];
+            //float minValue = result_fcm[0, 0];
+            float highest = result_fcm[0,0];
             int IndexOfCluster = 0;
-            int IndexOfElement = 0;
-            for(int i=0; i<result_fcm.GetLength(0); i++)
-            {
-                 minValue = (float)Double.MaxValue;
+            //int IndexOfElement = 0;
+            var IterCount = docCollection.Count;
+            int x_dimension = result_fcm.GetLength(0);
+            int y_dimension = result_fcm.GetLength(1);
 
+            for (int i = 0; i < x_dimension/2; i++)
+            {
+                highest = result_fcm[0, 0];
+                //IndexOfElement = 0;
                 IndexOfCluster = 0;
-                for (int j = 0; j < result_fcm.GetLength(1); j++)
+
+                for (int j = 0; j < y_dimension; j++)
                 {
-                    //minRowValue = Math.Min(minValue,result_fcm[i, j]);
-                    if (minValue<result_fcm[i,j])
+                    if (result_fcm[i, j] < highest)
                     {
-                        minValue = result_fcm[i,j];
-                        IndexOfElement = i;
+                        highest = result_fcm[i, j];
+                        IndexOfCluster = j;
+                        //IndexOfElement = i;
+                    }
+                    //var checkpoint = 1;
+                }
+                var collectionElement = result.ElementAt(IndexOfCluster);
+                collectionElement.GroupedDocument.Add(newCopyDocCollection[i]);
+                newCopyDocCollection.RemoveAt(i);
+            }
+            return result;
+        }
+        */
+
+
+        public static int[] AssignDocsToClusters(float[,] result_fcm, int clusterNumber, List<DocumentVectorTest> docCollection)
+        {
+            int[] result = new int[result_fcm.GetLength(0)];
+            List<DocumentVectorTest> newCopyDocCollection = new List<DocumentVectorTest>(docCollection);
+
+            float highest = result_fcm[0, 0];
+            int IndexOfCluster = 0;
+            var IterCount = docCollection.Count;
+            int x_dimension = result_fcm.GetLength(0);
+            int y_dimension = result_fcm.GetLength(1);
+
+            for (int i = 0; i < x_dimension; i++)
+            {
+                highest = result_fcm[0, 0];
+                IndexOfCluster = 0;
+
+                for (int j = 0; j < y_dimension; j++)
+                {
+                    if (result_fcm[i, j] < highest)
+                    {
+                        highest = result_fcm[i, j];
                         IndexOfCluster = j;
                     }
-                    else
-                        continue;
+                    
                 }
-                result[IndexOfCluster].GroupedDocument.Add(docCollection[IndexOfElement]);
-                minValue = 0;
-                IndexOfElement = 0;
-                IndexOfCluster = 0;
+                result[i] = IndexOfCluster;
+                //newCopyDocCollection.RemoveAt(i);
             }
-
             return result;
         }
     }

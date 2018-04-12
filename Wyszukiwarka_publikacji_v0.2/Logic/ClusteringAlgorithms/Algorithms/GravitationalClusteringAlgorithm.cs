@@ -50,8 +50,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
                     if (index != j)
                     {
                         DocumentVector document = new DocumentVector();
-                        document.SaveOriginal(docVectorCopy[j]);
-                        documentVectorOriginalFirst = document.OriginalVectorSpace;
+                        //document.SaveOriginal(docVectorCopy[j]);
+                        //documentVectorOriginalFirst = document.OriginalVectorSpace;
                         //float[,] distanceMatrix = Move(docVectorCopy[j], docVectorCopy[index], docVectorCopy_Count);
                         var distance = Move(docVectorCopy[j], docVectorCopy[index], G);
 

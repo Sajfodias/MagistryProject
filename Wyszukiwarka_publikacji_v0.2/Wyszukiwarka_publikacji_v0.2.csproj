@@ -213,7 +213,6 @@
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVector.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansClustering.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\KMeansPPImplementations\KMeansPlus.cs" />
-    <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVectorFuzzyKMeans.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\DocumentVectorWrapper.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Normalization.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\SimilarityMatrixCalculations.cs" />
@@ -237,15 +236,26 @@
     <Compile Include="Terms_Vocabulary.cs">
       <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tests\DisjointSetTest.cs" />
     <Compile Include="Tests\DocClasses.cs" />
     <Compile Include="Tests\Entropy.cs" />
     <Compile Include="Tests\F1Measure.cs" />
+    <Compile Include="Tests\FuzzyKmeansTest.cs" />
+    <Compile Include="Tests\GravitationalClusteringAlgorithm.cs" />
     <Compile Include="Tests\InterclusterDistances.cs" />
     <Compile Include="Tests\IntraclusterDistances.cs" />
+    <Compile Include="Tests\KMeansPPTest.cs" />
+    <Compile Include="Tests\Label_Matrix.cs" />
+    <Compile Include="Tests\NewTestKMeansClustering.cs" />
     <Compile Include="Tests\NormilizedMutualInformation.cs" />
     <Compile Include="Tests\Precision.cs" />
     <Compile Include="Tests\Purity.cs" />
     <Compile Include="Tests\Recall.cs" />
+    <Compile Include="Tests\TestCentroid.cs" />
+    <Compile Include="Tests\TestDisjointSet.cs" />
+    <Compile Include="Tests\TestDocVector.cs" />
+    <Compile Include="Tests\TestDocVectorCreator.cs" />
+    <Compile Include="Tests\Test_KMeans.cs" />
     <Compile Include="UG_Articles.cs">
       <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
@@ -338,6 +348,7 @@
       <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -71,17 +71,17 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
         {
             float euclideanDistance = 0;
 
-            Parallel.For(0, vector_A.Length, i => {
+          /*  Parallel.For(0, vector_A.Length, i => {
                 euclideanDistance += (float)Math.Pow((vector_A[i] - vector_B[i]), 2);
-            });
+            });*/
 
             #region sequential_Euclidean_distance
-            /*
+            
             for (var i = 0; i <= vector_A.Length-1; i++)
             {
                 euclideanDistance += (float)Math.Pow((vector_A[i] - vector_B[i]), 2);
             }
-            */
+            
             #endregion
 
             var end_result = (float)Math.Sqrt(euclideanDistance);

@@ -29,21 +29,23 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
             float min_distance = 0;
             float[,] d_min_intercluster;
             
-            
             for(int k=0; k<result.Count; k++)
             {
-                d_min_intercluster = new float[result[k].GroupedDocument.Count, result[k + 1].GroupedDocument.Count];
-                for(int i=0; i<result[k].GroupedDocument.Count; i++)
+                for (int k2 = 1; k2 < result.Count; k2++)
                 {
-                    for(int j=0; j<result[k+1].GroupedDocument.Count; i++)
+                    d_min_intercluster = new float[result[k].GroupedDocument.Count, result[k2].GroupedDocument.Count];
+                    for (int i = 0; i < result[k].GroupedDocument.Count; i++)
                     {
-                        d_min_intercluster[i, j] = SimilarityMatrixCalculations.FindEuclideanDistance(result[k].GroupedDocument[i].VectorSpace, result[k + 1].GroupedDocument[j].VectorSpace);
+                        for (int j = 0; j < result[k2].GroupedDocument.Count; j++)
+                        {
+                            d_min_intercluster[i, j] = SimilarityMatrixCalculations.FindEuclideanDistance(result[k].GroupedDocument[i].VectorSpace, result[k2].GroupedDocument[j].VectorSpace);
+                        }
                     }
+                    min_distance = Find_Min_Value_in_array(d_min_intercluster, result[k].GroupedDocument.Count, result[k2].GroupedDocument.Count);
+                    min_dist_between_cluster_elem[k] = min_distance;
                 }
-                min_distance = Find_Min_Value_in_array(d_min_intercluster,result[k].GroupedDocument.Count, result[k+1].GroupedDocument.Count);
             }
-
-
+            
             return min_dist_between_cluster_elem;
         }
 

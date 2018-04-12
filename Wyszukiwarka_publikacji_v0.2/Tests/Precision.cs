@@ -20,7 +20,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
         public static int[] Precision_Calculating(List<Centroid> clusteringResult, List<string> Class)
         {
             int number_Of_Couple_Elements_in_k = 0;
-            int[] Recall_matrix = new int[clusteringResult.Count];
+            int[] Precision_matrix = new int[clusteringResult.Count];
 
             for (int k = 0; k < clusteringResult.Count; k++)
             {
@@ -32,14 +32,14 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
                             number_Of_Couple_Elements_in_k++;
                     }
                 }
-                Recall_matrix[k] = number_Of_Couple_Elements_in_k;
+                Precision_matrix[k] = number_Of_Couple_Elements_in_k;
                 number_Of_Couple_Elements_in_k = 0;
             }
 
-            for (int j = 0; j < Recall_matrix.Length; j++)
-                    Recall_matrix[j] = Recall_matrix[j] / clusteringResult[j].GroupedDocument.Count;
+            for (int j = 0; j < Precision_matrix.Length; j++)
+                Precision_matrix[j] = Precision_matrix[j] / clusteringResult[j].GroupedDocument.Count;
                 
-            return Recall_matrix;
+            return Precision_matrix;
         }
     }
 }
