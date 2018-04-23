@@ -521,8 +521,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             List<DocumentVectorTest> normilized_vSpace = TestDocVectorCreator.NormalizationDocumentVectors(vSpace);
             int M = 500;
             //float G = 7 * (float)Math.Pow(10, (-6));
-            float G = -1.28171817154F; //G=1*e-4 according to 3.2.2  in article
-            //float G = 6.67408313131313131F * (float)Math.Pow(10, (-11));
+            //float G = -1.28171817154F; //G=1*e-4 according to 3.2.2  in article
+            float G = 6.67408313131313131F * (float)Math.Pow(10, (-6));
             float deltaG = 0.001F;
             //float epsilon = -3.28171817154F;//epsilon=1*e-6 according to 3.2.2 in article or 10^(-4)= 0.0001F;
             float epsilon = 0.1F;
@@ -535,6 +535,23 @@ namespace Wyszukiwarka_publikacji_v0._2
 
             var get_Clusters = Tests.GravitationalClusteringAlgorithm.GetClustersTest(result, alpha, normilized_vSpace);
             int[] label_matrix = Tests.Label_Matrix.Label_Matrix_Extractions(result, gravitational_label_resul_path);
+        }
+
+        private void newTestKmeans_test_Click(object sender, RoutedEventArgs e)
+        {
+            clustResultTxtBox.Document.Blocks.Clear();
+            var clusterization_stopwatch = Stopwatch.StartNew();
+            string path_data = @"F:\Magistry files\test_data\s1_data.txt";
+            int clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);
+            int iterationCount = 300;
+            List<DocumentVectorTest> vSpace = TestDocVectorCreator.CreatingTheDocVectorCollection(path_data);
+            List<DocumentVectorTest> normilized_vSpace = TestDocVectorCreator.NormalizationDocumentVectors(vSpace);
+            List<TestCentroid> firstCentroidList = new List<TestCentroid>();
+            //firstCentroidList = Tests.KMeansPPTest.CentroidCalculationsForTestKMeansPP(normilized_vSpace, clusterNumber);
+            firstCentroidList = Test_KMeans.CentroidCalculationsForKMeans(normilized_vSpace, clusterNumber);
+            string KMeansPP_label_resul_path = @"F:\Magistry files\data\KMeans_new1_label_result.txt";
+            List<TestCentroid> resultSet = Tests.NewTestKMeansClustering.Cluster(vSpace, clusterNumber, iterationCount);
+            int[] label_matrix = Tests.Label_Matrix.Label_Matrix_Extractions(resultSet, KMeansPP_label_resul_path);
         }
     }
 }

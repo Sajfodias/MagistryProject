@@ -35,6 +35,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
                     continue;
                 }
             }
+            foreach (var doc in centroidList)
+            {
+                doc.CalculateMeans();
+                doc.GroupedDocument.Clear();
+            }
             return centroidList;
         }
 

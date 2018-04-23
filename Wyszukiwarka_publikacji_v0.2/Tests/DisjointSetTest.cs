@@ -184,17 +184,17 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
             int elementY = 0;
 
             int element_X = Find(x);
-            if (element_X >= list_of_Centroid_Copy.Count)
+            /*if (element_X >= list_of_Centroid_Copy.Count)
                 element_X = Find(x);
             else
                 elementX = element_X;
-            
+            */
             int element_Y = Find(y);
-            if (element_Y >= list_of_Centroid_Copy.Count)
+            /*if (element_Y >= list_of_Centroid_Copy.Count)
                 element_Y = Find(y);
             else
                 elementY = element_Y;
-
+            */
             if (elementX != elementY)
             {
                 if (rank[elementX] == rank[elementY])

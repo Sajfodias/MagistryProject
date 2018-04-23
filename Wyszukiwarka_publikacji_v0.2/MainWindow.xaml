@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="289*"/>
             </Grid.ColumnDefinitions>
             <Label x:Name="labelClusterNumber" Content="Cluster number:" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="103"/>
-            <TextBox x:Name="txtboxClusterNumber" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+            <TextBox x:Name="txtboxClusterNumber" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Width="189"/>
             <Button x:Name="btnSearch" Content="Bibtex download" HorizontalAlignment="Left" Margin="0,66,0,0" VerticalAlignment="Top" Width="92" Height="43" Click="btnSearch_Click"/>
             <Button x:Name="btnClear" Content="Rtf download" HorizontalAlignment="Left" Margin="97,66,0,0" VerticalAlignment="Top" Width="92" Height="43" Click="rtfReader"/>
             <Button Content="K-means Codeproject" HorizontalAlignment="Left" Margin="97,268,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="ClusterizationProcessingBtn"/>
@@ -27,6 +27,7 @@
             <Button Content="KMeans++_test" HorizontalAlignment="Left" Margin="97,330,0,0" VerticalAlignment="Top" Width="92" Height="33" Click="KmeansPP_test"/>
             <Button Content="Fuzyy Kmeans test" HorizontalAlignment="Left" Margin="0,368,0,0" VerticalAlignment="Top" Width="92" Height="30" Click="FuzzyKMeansTest_Click"/>
             <Button Content="Gravitational" HorizontalAlignment="Left" Margin="97,368,0,0" VerticalAlignment="Top" Width="92" Height="30" Click="Gravitational_clustering_test_Click"/>
+            <Button Content="newTestKMeans" HorizontalAlignment="Left" Margin="0,403,0,0" VerticalAlignment="Top" Width="92" Height="28" Click="newTestKmeans_test_Click"/>
         </Grid>
 
         <RichTextBox x:Name="clustResultTxtBox" Margin="211,10,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible">
