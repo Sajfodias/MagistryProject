@@ -11,7 +11,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
         public static int[] parent;
         public static int[] rank;
 
-
+        public DisjointSetTest(int N)
+        {
+            parent = new int[N];
+            rank = new int[N];
+        }
 
         public static Tuple<int[], int[], List<TestCentroid>> Set(List<DocumentVectorTest> docCollection)
         {
@@ -45,13 +49,13 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
             return result;
         }
 
-        /* MakeSet(x) - not used
+        //MakeSet(x) - not used
         public static void MakeSet(int x)
         {
             parent[x] = x;
             rank[x] = 0;
         }
-        */
+        
 
         /* Old Find(int[] parent, int i) function
         public static int Find(int[] parent, int i)
@@ -63,13 +67,21 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
         */
 
 
-        public static int Find(int i)
+        public static int Find(int x)
         {
-            while (i != parent[i]) // If i is not root of tree we set i to his parent until we reach root (parent of all parents)
+            int px = x;
+            int i = 0;
+            while (px != parent[x]) // If i is not root of tree we set i to his parent until we reach root (parent of all parents)
             {
-                i = parent[i];
+                px = parent[px];
             }
-            return i;
+            while (x != px)
+            {
+                i = parent[x];
+                parent[x] = px;
+                x = i;
+            }
+            return px;
         }
 
         /* FindPath(i) - don't used now
@@ -97,113 +109,62 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
         }
         */
 
-        public static List<TestCentroid> Union(int x, int y, List<TestCentroid> list_of_Centroid)
+        public static void Union(int x, int y)
         {
-            //Tuple<int[], int[], List<TestCentroid>> result;
-            List<TestCentroid> result;
-            List<TestCentroid> list_of_Centroid_Copy = new List<TestCentroid>(list_of_Centroid);
-            List<int> used_index = new List<int>();
-
-            int elementX = Find(x);
-            int elementY = Find(y);
-
-            /*
-            if (elementX > list_of_Centroid.Count && !used_index.Contains(x))
+            x = Find(x);
+            y = Find(y);
+            if (x == y) return;
+            if (rank[x] > rank[y])
             {
-                used_index.Add(x);
-                elementX = Find(x);
+                parent[y] = x;
             }
-
-            if (elementY > list_of_Centroid.Count && !used_index.Contains(y))
+            else 
             {
-                used_index.Add(y);
-                elementY = Find(y);
+                if (rank[x] == rank[y])
+                    rank[y] += 1;
+                parent[x] = y;
+            }
+            #region dont use
+            /*
+            else if (rank[elementX] < rank[elementY])
+            {
+                parent[elementX] = elementY;
             }
             */
-
-            //int elementX = FindSet(x);
-            //int elementY = FindSet(y);
-            if (elementX != elementY)
-            {
-                if (rank[elementX] == rank[elementY])
-                {
-                    rank[elementY] = rank[elementY] + 1;
-                    parent[elementX] = elementY;
-                    if(elementY < list_of_Centroid_Copy.Count && elementX < list_of_Centroid_Copy.Count)
-                    {
-                        list_of_Centroid_Copy[elementX].GroupedDocument.AddRange(list_of_Centroid_Copy[elementY].GroupedDocument);
-                        list_of_Centroid_Copy.RemoveAt(elementY);
-                    }
-                    else if(elementY == list_of_Centroid_Copy.Count && elementX == list_of_Centroid_Copy.Count)
-                    {
-                        list_of_Centroid_Copy[elementX-1].GroupedDocument.AddRange(list_of_Centroid_Copy[elementY-1].GroupedDocument);
-                        list_of_Centroid_Copy.RemoveAt(elementY-1);
-                    }
-                }
-                else if (rank[elementX] > rank[elementY])
-                {
-                    parent[elementY] = elementX;
-                    if (elementX < list_of_Centroid_Copy.Count && elementY < list_of_Centroid_Copy.Count)
-                    {
-                        list_of_Centroid_Copy[elementY].GroupedDocument.AddRange(list_of_Centroid_Copy[elementX].GroupedDocument);
-                        list_of_Centroid_Copy.RemoveAt(elementX);
-                    }
-                    else if(elementX == list_of_Centroid_Copy.Count && elementY == list_of_Centroid_Copy.Count)
-                    {
-                        list_of_Centroid_Copy[elementY-1].GroupedDocument.AddRange(list_of_Centroid_Copy[elementX-1].GroupedDocument);
-                        list_of_Centroid_Copy.RemoveAt(elementX-1);
-                    }
-                }
-                else if (rank[elementX] < rank[elementY])
-                {
-                    parent[elementX] = elementY;
-                    if (elementY < list_of_Centroid_Copy.Count && elementX < list_of_Centroid_Copy.Count)
-                    {
-                        list_of_Centroid_Copy[elementX].GroupedDocument.AddRange(list_of_Centroid_Copy[elementY].GroupedDocument);
-                        list_of_Centroid_Copy.RemoveAt(elementY);
-                    }
-                    else if(elementY == list_of_Centroid_Copy.Count && elementX == list_of_Centroid_Copy.Count)
-                    {
-                        list_of_Centroid_Copy[elementX-1].GroupedDocument.AddRange(list_of_Centroid_Copy[elementY-1].GroupedDocument);
-                        list_of_Centroid_Copy.RemoveAt(elementY-1);
-                    }
-                }
-            }
-
-            //result = new Tuple<int[], int[], List<TestCentroid>>(parent, rank, list_of_Centroid_Copy);
-            result = list_of_Centroid_Copy;
-            return result;
+            #endregion
         }
 
         public static List<TestCentroid> Union1(int x, int y, List<TestCentroid> list_of_Centroid)
         {
             List<TestCentroid> result;
             List<TestCentroid> list_of_Centroid_Copy = new List<TestCentroid>(list_of_Centroid);
-            List<int> used_index = new List<int>();
-            int elementX = 0;
-            int elementY = 0;
+            //int elementX = 0;
+            //int elementY = 0;
 
-            int element_X = Find(x);
-            /*if (element_X >= list_of_Centroid_Copy.Count)
+            int elementX = Find(x);
+            /*
+            if (element_X >= list_of_Centroid_Copy.Count)
                 element_X = Find(x);
             else
                 elementX = element_X;
             */
-            int element_Y = Find(y);
-            /*if (element_Y >= list_of_Centroid_Copy.Count)
-                element_Y = Find(y);
+            int elementY = Find(y);
+            
+            /*
+            if (elementY >= list_of_Centroid_Copy.Count)
+                elementY = Find(y);
             else
-                elementY = element_Y;
+                elementY = elementY;
             */
+
             if (elementX != elementY)
             {
                 if (rank[elementX] == rank[elementY])
-                {
+                { 
                     rank[elementY] = rank[elementY] + 1;
                     parent[elementX] = elementY;
                     list_of_Centroid_Copy[elementX].GroupedDocument.AddRange(list_of_Centroid_Copy[elementY].GroupedDocument);
                     list_of_Centroid_Copy.RemoveAt(elementY);
-
                 }
                 else if (rank[elementX] > rank[elementY])
                 {

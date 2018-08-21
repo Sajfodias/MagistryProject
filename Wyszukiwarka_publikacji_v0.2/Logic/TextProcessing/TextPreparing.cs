@@ -27,6 +27,15 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
             //Regex reqular_expression = new Regex(@"(\d)\)+");
             Regex regular_expression = new Regex("[^0-9A-Za-z]+");
             string[] splittedTitle = text.ToLower().Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
+            List<string> Words = splittedTitle.ToList();
+            char[] not_allowed_chars = {'1','2','3','4','5','6','7','8','9','0','!','@','#','$','%','^','&','\'','"','[',']','{','}','(',')'};
+            //foreach(var word in Words)
+            //{
+                //foreach(var not_allow_ch in not_allowed_chars)
+                    //if (word.Contains(not_allow_ch))
+                        //Words.Remove(word);
+            //}
+
             var stemmer = new EnglishStemmer();
             
             var stemmingList = splittedTitle.ToList().Where(w => w.Any(c => !Char.IsDigit(c))).ToList();

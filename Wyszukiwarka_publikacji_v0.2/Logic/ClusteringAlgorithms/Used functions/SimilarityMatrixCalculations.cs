@@ -9,7 +9,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
     /// <summary>
     /// https://www.andrew.cmu.edu/course/15-121/labs/HW-4%20Document%20Distance/lab.html
     /// </summary>
-    class SimilarityMatrixCalculations
+   public class SimilarityMatrixCalculations
     {
         //https://en.wikipedia.org/wiki/Cosine_similarity calculate cosine similarity for tf-idf
         public static float CalculateCosineSimilarity(float[] first_vector, float[] second_vector)

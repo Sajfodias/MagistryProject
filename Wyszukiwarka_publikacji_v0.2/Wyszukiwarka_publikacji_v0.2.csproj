@@ -191,6 +191,7 @@
       <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormattedDbEntityValidationException.cs" />
+    <Compile Include="GraphData and Visualizations\CreateGraphDatabaseNeo4j.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\DetailedDocumentVector.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\FuzzyKMeans.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\GravitationalClusteringAlgorithm.cs" />
@@ -218,11 +219,16 @@
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\SimilarityMatrixCalculations.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\TFIDF2ndrealization.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\VectorSpaceModel.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\WorkedAlgorithmsFromTest\FuzzyCMeans.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\WorkedAlgorithmsFromTest\GravitationalClusteringAlgorithm.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\WorkedAlgorithmsFromTest\InitialCentroidCalculation.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\WorkedAlgorithmsFromTest\KMeans.cs" />
     <Compile Include="Logic\eBase\newWSBPublication.cs" />
     <Compile Include="Logic\eBase\PPPublicationBase.cs" />
     <Compile Include="Logic\eBase\UGPublicationBase.cs" />
     <Compile Include="Logic\eBase\UMKPublicationBase.cs" />
     <Compile Include="Logic\eBase\WSBPublicationBase.cs" />
+    <Compile Include="Logic\IterationalReport.cs" />
     <Compile Include="Logic\TextProcessing\TextPreparing.cs" />
     <Compile Include="PG_Articles.cs">
       <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
@@ -241,15 +247,18 @@
     <Compile Include="Tests\Entropy.cs" />
     <Compile Include="Tests\F1Measure.cs" />
     <Compile Include="Tests\FuzzyKmeansTest.cs" />
+    <Compile Include="Tests\Gravitational.cs" />
     <Compile Include="Tests\GravitationalClusteringAlgorithm.cs" />
     <Compile Include="Tests\InterclusterDistances.cs" />
     <Compile Include="Tests\IntraclusterDistances.cs" />
     <Compile Include="Tests\KMeansPPTest.cs" />
     <Compile Include="Tests\Label_Matrix.cs" />
+    <Compile Include="Tests\MemberShipMatrixReader.cs" />
     <Compile Include="Tests\NewTestKMeansClustering.cs" />
     <Compile Include="Tests\NormilizedMutualInformation.cs" />
     <Compile Include="Tests\Precision.cs" />
     <Compile Include="Tests\Purity.cs" />
+    <Compile Include="Tests\RaportGeneration.cs" />
     <Compile Include="Tests\Recall.cs" />
     <Compile Include="Tests\TestCentroid.cs" />
     <Compile Include="Tests\TestDisjointSet.cs" />

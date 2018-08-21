@@ -22,7 +22,7 @@ namespace Wyszukiwarka_publikacji_v0._2
         }
     
         public int article_Id { get; set; }
-        public string article_authors_line { get; set; }
+        public string article_author_line { get; set; }
         public string article_title { get; set; }
         public string article_language { get; set; }
         public string article_Full_title { get; set; }

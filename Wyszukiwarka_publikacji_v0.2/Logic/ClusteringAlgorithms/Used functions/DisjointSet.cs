@@ -43,7 +43,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             Tuple<int[], int[], List<Centroid>> result;
             parent = new int[docCollection.Count];
             rank = new int[docCollection.Count];
-            var cntroidSet = new List<Centroid>();
+            var centroidSet = new List<Centroid>();
 
             for (int i = 0; i < docCollection.Count; i++)
             {
@@ -52,8 +52,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             }
 
             Centroid newCentroid;
-
-            //here is a problem cntroidSet.Count must be 46 not 23!!!
             List<DocumentVector> docCollectionCopy = new List<DocumentVector>(docCollection);
 
             for(int j=0; j<docCollectionCopy.Count; j++)
@@ -61,11 +59,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 newCentroid = new Centroid();
                 newCentroid.GroupedDocument = new List<DocumentVector>();
                 newCentroid.GroupedDocument.Add(docCollectionCopy[j]);
-                cntroidSet.Add(newCentroid);
+                centroidSet.Add(newCentroid);
             }
             
 
-            result = new Tuple<int[], int[], List<Centroid>>(parent, rank, cntroidSet);
+            result = new Tuple<int[], int[], List<Centroid>>(parent, rank, centroidSet);
 
             return result;
         }

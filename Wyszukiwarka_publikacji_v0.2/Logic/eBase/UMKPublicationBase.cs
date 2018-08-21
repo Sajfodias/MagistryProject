@@ -91,7 +91,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                     {
                                         UMK_author_line = "Not_defined";
                                     }
-                                    umk_article.article_authors_line = UMK_author_line;
+                                    umk_article.article_author_line = UMK_author_line;
                                     UMK_author_line = null;
 
                                     if (UMK_Tytul == null)

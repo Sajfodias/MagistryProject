@@ -4,29 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wyszukiwarka_publikacji_v0._2.Tests
+namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.WorkedAlgorithmsFromTest
 {
-    class KMeansPPTest
+    class InitialCentroidCalculation
     {
-        public static List<TestCentroid> CentroidCalculationsForTestKMeansPP(List<DocumentVectorTest> dataPP, int ClusterNumberPP)
+        public static List<Centroid> CentroidCalculationsForTestKMeansPP(List<DocumentVector> dataPP, int ClusterNumberPP)
         {
-            List<TestCentroid> centroidListPP = new List<TestCentroid>();
-            List<DocumentVectorTest> dataPPCopy = new List<DocumentVectorTest>(dataPP);
-            List<DocumentVectorTest> existingCentroids = new List<DocumentVectorTest>();
+            List<Centroid> centroidListPP = new List<Centroid>();
+            List<DocumentVector> dataPPCopy = new List<DocumentVector>(dataPP);
+            List<DocumentVector> existingCentroids = new List<DocumentVector>();
             Random randomizerPP = new Random();
             float[] distances = new float[dataPP.Count];
             int indexOfFirstElement = randomizerPP.Next(0, dataPP.Count);// + 1);
-            TestCentroid firstCentroid = new TestCentroid();
-            firstCentroid.GroupedDocument = new List<DocumentVectorTest>();
+            Centroid firstCentroid = new Centroid();
+            firstCentroid.GroupedDocument = new List<DocumentVector>();
             firstCentroid.GroupedDocument.Add(dataPP[indexOfFirstElement]);
             centroidListPP.Add(firstCentroid);
-            HashSet<TestCentroid> stringHashSet = new HashSet<TestCentroid>();
+            HashSet<Centroid> stringHashSet = new HashSet<Centroid>();
 
             while (centroidListPP.Count != ClusterNumberPP)
             {
-                TestCentroid newCentroid = new TestCentroid();
-                newCentroid.GroupedDocument = new List<DocumentVectorTest>();
-                newCentroid = Calculate_Next_Centroid_Test(firstCentroid, dataPPCopy);
+                Centroid newCentroid = new Centroid();
+                newCentroid.GroupedDocument = new List<DocumentVector>();
+                newCentroid = Calculate_Next_KMeansPP_Centroid(firstCentroid, dataPPCopy);
                 if (!existingCentroids.Contains(newCentroid.GroupedDocument[0]))
                 {
                     existingCentroids.Add(newCentroid.GroupedDocument[0]);
@@ -47,12 +47,43 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
             return centroidListPP;
         }
 
-        private static TestCentroid Calculate_Next_Centroid_Test(TestCentroid firstcentroid, List<DocumentVectorTest> vSpace)
+        public static List<Centroid> CentroidCalculationsForKMeans(List<DocumentVector> data, int ClusterNumber)
         {
-            TestCentroid next_centroid = new TestCentroid();
-            next_centroid.GroupedDocument = new List<DocumentVectorTest>();
-            List<DocumentVectorTest> vSpaceCopy = new List<DocumentVectorTest>(vSpace);
-            float[] probabilitiesMatrixSimple = CalculateProbabilityArray_Test(firstcentroid, vSpaceCopy);
+            List<Centroid> centroidList = new List<Centroid>();
+            Random randomizer = new Random();
+            HashSet<int> indexSet = new HashSet<int>();
+            int index = 0;
+
+            while (centroidList.Count != ClusterNumber)
+            {
+                index = randomizer.Next(0, data.Count + 1);
+                if (!indexSet.Contains(index))
+                {
+                    indexSet.Add(index);
+                    Centroid newCentroid = new Centroid();
+                    newCentroid.GroupedDocument = new List<DocumentVector>();
+                    newCentroid.GroupedDocument.Add(data[index]);
+                    centroidList.Add(newCentroid);
+                }
+                else if (indexSet.Contains(index))
+                {
+                    continue;
+                }
+            }
+            foreach (var doc in centroidList)
+            {
+                doc.CalculateMeans();
+                doc.GroupedDocument.Clear();
+            }
+            return centroidList;
+        }
+
+        private static Centroid Calculate_Next_KMeansPP_Centroid(Centroid firstcentroid, List<DocumentVector> vSpace)
+        {
+            Centroid next_centroid = new Centroid();
+            next_centroid.GroupedDocument = new List<DocumentVector>();
+            List<DocumentVector> vSpaceCopy = new List<DocumentVector>(vSpace);
+            float[] probabilitiesMatrixSimple = CalculateProbabilityArray(firstcentroid, vSpaceCopy);
             float[] probabilitiesMatrix = new float[probabilitiesMatrixSimple.Length];
 
             for (var i = 0; i < probabilitiesMatrix.Length; i++)
@@ -89,9 +120,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
             return next_centroid;
         }
 
-        public static float[] CalculateProbabilityArray_Test(TestCentroid oldCentroid, List<DocumentVectorTest> vSpace)
+        public static float[] CalculateProbabilityArray(Centroid oldCentroid, List<DocumentVector> vSpace)
         {
-            List<DocumentVectorTest> vSpaceCopy = new List<DocumentVectorTest>(vSpace);
+            List<DocumentVector> vSpaceCopy = new List<DocumentVector>(vSpace);
             float[] vector_A = oldCentroid.GroupedDocument[0].VectorSpace;
             float[] DistanceQuad = new float[vSpaceCopy.Count];
 

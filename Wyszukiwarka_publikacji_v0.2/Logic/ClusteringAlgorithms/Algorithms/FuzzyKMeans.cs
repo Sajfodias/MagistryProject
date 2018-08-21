@@ -258,5 +258,25 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms
 
             return result;
         }
+
+        internal static void WriteSimilarityArrayToFile(float[,] result_fcm, string fuzzy_K_means_clusterization_result)
+        {
+            var message_row = String.Empty;
+            var message = String.Empty;
+            using (StreamWriter sw = File.AppendText(fuzzy_K_means_clusterization_result))
+            {
+                for (int i = 0; i < result_fcm.GetLength(0); i++)
+                {
+                    for (int j = 0; j < result_fcm.GetLength(1); j++)
+                    {
+                        message_row += result_fcm[i, j] + ' ' + '\t';
+                    }
+                    message += message_row + '\n';
+                    message_row = String.Empty;
+                    sw.WriteLine(message_row);
+                }
+                
+            }
+        }
     }
 }

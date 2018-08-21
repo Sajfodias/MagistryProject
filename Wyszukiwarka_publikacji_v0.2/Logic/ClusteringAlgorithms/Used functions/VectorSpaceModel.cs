@@ -84,8 +84,62 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                 }
 
                 _documentVector = new DocumentVector();
+
+                #region dont_usable_now
+                //last changes 21.05.2018
+                /*
+                using (var PGDbContext = new ArticleDBDataModelContainer())
+                {
+                    foreach (var article in PGDbContext.PG_ArticlesSet)
+                    {
+                        string PG_article = article.title + article.abstractText + article.keywords;
+                        if (PG_article.Contains(document))
+                            _documentVector.ArticleID = article.article_Id;
+                    } 
+                }
+                using (var PPDbContext = new ArticleDBDataModelContainer())
+                {
+                    foreach (var article in PPDbContext.PP_ArticlesSet)
+                    {
+                        string PP_record = article.article_title + article.article_source;
+                        if (PP_record.Contains(document))
+                            _documentVector.ArticleID = article.article_Id;
+                    }
+                }
+                using (var UMKDbContext = new ArticleDBDataModelContainer())
+                {
+                    foreach (var article in UMKDbContext.UMK_ArticlesSet)
+                    {
+                        string UMK_record = article.article_title + article.article_Full_title + article.article_eng_keywords + article.article_pl_keywords + article.article_translated_title;
+                        if (UMK_record.Contains(document))
+                            _documentVector.ArticleID = article.article_Id;
+                    }  
+                }
+                using (var UGDbContext = new ArticleDBDataModelContainer())
+                {
+                    foreach (var article in UGDbContext.UG_ArticlesSet)
+                    {
+                        string UG_record = article.article_title + article.article_source + article.article_keywords;
+                        if (UG_record.Contains(document))
+                            _documentVector.ArticleID = article.article_Id;
+                    }
+                        
+                }
+                using (var WSBDbContext = new ArticleDBDataModelContainer())
+                {
+                    foreach (var article in WSBDbContext.WSB_ArticlesSet)
+                    {
+                        string WSB_record = article.article_title + article.article_common_title + article.article_title_other_lang + article.article_eng_keywords + article.article_pl_keywords + article.article_details;
+                        if (WSB_record.Contains(document))
+                            _documentVector.ArticleID = article.article_Id;
+                    }
+                }
+                */
+                #endregion
+
                 _documentVector.Content = document;
                 _documentVector.VectorSpace = space;
+                _documentVector.index_Of_Doc_for_labeling = collection.IndexOf(document);
                 documentVectorSpace.Add(_documentVector);
             });
 
@@ -120,5 +174,61 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             return documentVectorSpace;
         }
 
+        internal static List<DocumentVector> DocumentCollectionProcessingDictionary(Dictionary<int, string> docCollectionDictionary)
+        {
+            parallelOption.MaxDegreeOfParallelism = 20;
+            var vector_space_model_calculation = Stopwatch.StartNew();
+
+            termHashset = new HashSet<string>();
+
+            using (var dbContext = new ArticleDBDataModelContainer())
+            {
+                dbContext.Terms_Vocabulary.Load();
+
+                foreach (var terms in dbContext.Terms_Vocabulary.Local)
+                {
+                    termHashset.Add(terms.term_value.ToLower());
+                }
+            }
+
+            List<DocumentVector> documentVectorSpace = new List<DocumentVector>();
+            DocumentVector _documentVector;
+            float[] space;
+            int index=0;
+            var arrayOfDocs = docCollectionDictionary.Keys.ToArray();
+
+            Parallel.ForEach(docCollectionDictionary, parallelOption, document => {
+                int count = 0;
+                space = new float[termHashset.Count];
+                var collectionValue = docCollectionDictionary.Values.ToList();
+
+                foreach (string term in termHashset)
+                {
+                    space[count] = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.FindTFIDF(collectionValue, document.Value, term);
+                    count++;
+                }
+                for (int i = 0; i < arrayOfDocs.Length; i++)
+                    if (arrayOfDocs[i] == document.Key)
+                        index = i;
+
+                _documentVector = new DocumentVector();
+
+                _documentVector.ArticleID = document.Key;
+                _documentVector.index_Of_Doc_for_labeling = index;
+                _documentVector.Content = document.Value;
+                _documentVector.VectorSpace = space;
+                documentVectorSpace.Add(_documentVector);
+            });
+            vector_space_model_calculation.Stop();
+
+            string processing_log = @"F:\Magistry files\Processing_log.txt";
+
+            using (StreamWriter sw = File.AppendText(processing_log))
+            {
+                sw.WriteLine(DateTime.Now.ToString() + " The vector space model calculation time is: " + vector_space_model_calculation.Elapsed.Minutes.ToString() + ":" + vector_space_model_calculation.Elapsed.TotalMilliseconds.ToString());
+            }
+
+            return documentVectorSpace;
+        }
     }
 }

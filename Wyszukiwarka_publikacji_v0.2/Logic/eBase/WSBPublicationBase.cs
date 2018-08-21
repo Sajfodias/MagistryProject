@@ -190,7 +190,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         k += 2;
                                     }
 
-                                    dbContext.WSB_ArticlesSet.Add(wsb_article);
+                                     dbContext.WSB_ArticlesSet.Add(wsb_article);
 
                                     var _document = document.ToString().Split(' ', ';', ':', ',');
                                     for (int k = 0; k <= _document.Length - 1; k++)

@@ -7,30 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="526.628" Width="525">
     <Grid>
-        <Grid Margin="10">
+        <Grid Margin="9,11,11,9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="208*"/>
                 <ColumnDefinition Width="289*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="labelClusterNumber" Content="Cluster number:" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="103"/>
-            <TextBox x:Name="txtboxClusterNumber" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Width="189"/>
-            <Button x:Name="btnSearch" Content="Bibtex download" HorizontalAlignment="Left" Margin="0,66,0,0" VerticalAlignment="Top" Width="92" Height="43" Click="btnSearch_Click"/>
-            <Button x:Name="btnClear" Content="Rtf download" HorizontalAlignment="Left" Margin="97,66,0,0" VerticalAlignment="Top" Width="92" Height="43" Click="rtfReader"/>
-            <Button Content="K-means Codeproject" HorizontalAlignment="Left" Margin="97,268,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="ClusterizationProcessingBtn"/>
-            <Button Content="K-means++" HorizontalAlignment="Left" Margin="97,194,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="KMeansPPClustering"/>
-            <Button Content="Dictionary prepare" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="DictionaryPreparation"/>
-            <Button x:Name="button1" Content="Fuzzy KMeans" HorizontalAlignment="Left" Margin="0,231,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="FuzzyKMeans_Click"/>
-            <Button Content="AHC" HorizontalAlignment="Left" Margin="97,231,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="AHC_Click"/>
-            <Button Content="Gravitational" HorizontalAlignment="Left" Margin="0,268,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Gravitational_Click"/>
-            <Button Content="K-means" HorizontalAlignment="Left" Margin="0,194,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="KmeanslastVersion"/>
-            <Button Content="KMeans_test" HorizontalAlignment="Left" Margin="0,330,0,0" VerticalAlignment="Top" Width="92" Height="33" Click="Kmeans_test"/>
-            <Button Content="KMeans++_test" HorizontalAlignment="Left" Margin="97,330,0,0" VerticalAlignment="Top" Width="92" Height="33" Click="KmeansPP_test"/>
-            <Button Content="Fuzyy Kmeans test" HorizontalAlignment="Left" Margin="0,368,0,0" VerticalAlignment="Top" Width="92" Height="30" Click="FuzzyKMeansTest_Click"/>
-            <Button Content="Gravitational" HorizontalAlignment="Left" Margin="97,368,0,0" VerticalAlignment="Top" Width="92" Height="30" Click="Gravitational_clustering_test_Click"/>
-            <Button Content="newTestKMeans" HorizontalAlignment="Left" Margin="0,403,0,0" VerticalAlignment="Top" Width="92" Height="28" Click="newTestKmeans_test_Click"/>
+            <Label x:Name="labelClusterNumber" Content="Cluster number:" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Width="103"/>
+            <TextBox x:Name="txtboxClusterNumber" HorizontalAlignment="Left" Height="23" Margin="12,26,0,0" TextWrapping="Wrap" Text="15" VerticalAlignment="Top" Width="180"/>
+            <Button x:Name="btnSearch" Content="Bibtex&#xD;&#xA;parser" HorizontalAlignment="Left" Margin="12,130,0,0" VerticalAlignment="Top" Width="79" Height="40" Click="btnSearch_Click"/>
+            <Button x:Name="btnClear" Content="Rtf download" HorizontalAlignment="Left" Margin="112,130,0,0" VerticalAlignment="Top" Width="81" Height="39" Click="rtfReader"/>
+            <!--<Button Content="K-means Codeproject" HorizontalAlignment="Left" Margin="104,287,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="ClusterizationProcessingBtn"/>-->
+            <Button Content="K-means++" HorizontalAlignment="Left" Margin="112,251,0,0" VerticalAlignment="Top" Width="79" Height="37" Click="KMeansPP"/>
+            <Button Content="Dictionary prepare" HorizontalAlignment="Left" Margin="111,190,0,0" VerticalAlignment="Top" Width="80" Height="39" Click="DictionaryPreparation"/>
+            <Button x:Name="button1" Content="Fuzzy KMeans" HorizontalAlignment="Left" Margin="12,312,0,0" VerticalAlignment="Top" Width="81" Height="35" Click="FuzzyKMeans_Click"/>
+            <!--<Button Content="AHC" HorizontalAlignment="Left" Margin="104,250,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="AHC_Click"/> -->
+            <Button Content="Gravitational" HorizontalAlignment="Left" Margin="113,311,0,0" VerticalAlignment="Top" Width="79" Height="37" Click="Gravitational_Click"/>
+            <Button Content="K-means" HorizontalAlignment="Left" Margin="13,250,0,0" VerticalAlignment="Top" Width="79" Height="38" Click="KMeans"/>
+            <Button Content="KMeans_test" HorizontalAlignment="Left" Margin="6,397,0,0" VerticalAlignment="Top" Width="92" Height="33" Click="Kmeans_test"/>
+            <Button Content="KMeans++_test" HorizontalAlignment="Left" Margin="103,397,0,0" VerticalAlignment="Top" Width="92" Height="33" Click="KmeansPP_test"/>
+            <Button Content="Fuzyy Kmeans test" HorizontalAlignment="Left" Margin="6,435,0,0" VerticalAlignment="Top" Width="92" Height="30" Click="FuzzyKMeansTest_Click"/>
+            <Button Content="Gravitational" HorizontalAlignment="Left" Margin="103,435,0,0" VerticalAlignment="Top" Width="92" Height="30" Click="Gravitational_clustering_test_Click"/>
+            <Label x:Name="iterationCount" Content="Iteration Count:" HorizontalAlignment="Left" Margin="12,52,0,0" VerticalAlignment="Top" Width="103" Height="24"/>
+            <TextBox x:Name="txtboxIterationCount" HorizontalAlignment="Left" Height="23" Margin="14,85,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="180"/>
+            <Button x:Name="btn_BruteForceDownload" Content="Download&#xD;&#xA;bibtex" HorizontalAlignment="Left" Margin="12,190,0,0" VerticalAlignment="Top" Width="80" Height="38" Click="btn_BruteForceDownload_Click"/>
         </Grid>
 
-        <RichTextBox x:Name="clustResultTxtBox" Margin="211,10,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+        <RichTextBox x:Name="clustResultTxtBox" Margin="223,20,16,14" ScrollViewer.HorizontalScrollBarVisibility="Visible">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="Clusterization result will be here..."/>

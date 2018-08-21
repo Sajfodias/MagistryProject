@@ -81,20 +81,24 @@ namespace Wyszukiwarka_publikacji_v0._2
                 LoadRTF(content, RTFContent); // here we have the delay in calculations
                 if (filename.Contains("UG"))
                 {
+                    //Task.Factory.StartNew(()=>Logic.eBase.UGPublicationBase.get_UG_Document_content());
                     Logic.eBase.UGPublicationBase.get_UG_Document_content();
                 }
                 else if (filename.Contains("PP"))
                 {
+                    //Task.Factory.StartNew(() => Logic.eBase.PPPublicationBase.get_PP_Document_content());
                     Logic.eBase.PPPublicationBase.get_PP_Document_content();
                 }
                 else if (filename.Contains("UMK"))
                 {
+                    //Task.Factory.StartNew(() => Logic.eBase.UMKPublicationBase.get_UMK_Document_content());
                     Logic.eBase.UMKPublicationBase.get_UMK_Document_content();
                 }
                 else if (filename.Contains("WSB"))
                 {
-                    //Logic.eBase.WSBPublicationBase.get_WSB_Document_content();
-                    Logic.eBase.newWSBPublication.get_WSB_Document_content();
+                    //Task.Factory.StartNew(() => Logic.eBase.WSBPublicationBase.get_WSB_Document_content());
+                    //Task.Factory.StartNew(() => Logic.eBase.WSBPublication.get_WSB_Document_content());
+                    Logic.eBase.WSBPublicationBase.get_WSB_Document_content();
                 }
             }
         }

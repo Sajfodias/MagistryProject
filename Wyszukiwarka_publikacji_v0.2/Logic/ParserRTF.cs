@@ -55,7 +55,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
             string stringFilter18 = stringFilter17.Replace("Ą", "A");
             string stringFilter19 = stringFilter18.Replace("Ę", "E");
             
-            endText = Regex.Replace(stringFilter13, "<.*?>", string.Empty);
+            endText = Regex.Replace(stringFilter19, "<.*?>", string.Empty);
 
             var file = File.CreateText(filePathRTF + @"formated_" + fileName.Substring(28) +".txt");
             file.Write(endText);

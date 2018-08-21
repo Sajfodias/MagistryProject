@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wyszukiwarka_publikacji_v0._2.Tests
+namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.WorkedAlgorithmsFromTest
 {
-    class FuzzyKmeansTest
+    class FuzzyCMeans
     {
+
         public static int number_of_dataPoints;
         //public static int number_of_clusters;
         public static int max_number_of_dimensions;
@@ -20,7 +21,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
         public static float[,] cluster_center;      //cluster_center = new float[number_of_clusters,max_number_of_dimensions];
         //or we can use the Centroid structure
 
-        public static void Initialization(List<DocumentVectorTest> docCollection, int number_of_clusters)
+        public static void Initialization(List<DocumentVector> docCollection, int number_of_clusters)
         {
             number_of_dataPoints = docCollection.Count;
             var lastElementInList = docCollection[docCollection.Count - 1];
@@ -37,7 +38,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
                     data_point[i, j] = docCollection[i].VectorSpace[j];
                 }
             }
- 
+
             for (int k = 0; k <= number_of_dataPoints - 1; k++)
             {
                 float sum = 0;      //probability sum
@@ -130,7 +131,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
         }
 
 
-        public static Tuple<float[,],int> Fcm(List<DocumentVectorTest> docCollection, int number_of_clusters, float epsilon, float fuzziness)
+        public static Tuple<float[,], int> Fcm(List<DocumentVector> docCollection, int number_of_clusters, float epsilon, float fuzziness)
         {
             Tuple<float[,], int> result;
             int iterationCount = 0;
@@ -165,28 +166,28 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
 
 
 
-        public static List<TestCentroid> CreateClusterSet(int clusterNumber)
+        public static List<Centroid> CreateClusterSet(int clusterNumber)
         {
-            List<TestCentroid> result = new List<TestCentroid>();
+            List<Centroid> result = new List<Centroid>();
 
-            for(int i=0; i<clusterNumber; i++)
+            for (int i = 0; i < clusterNumber; i++)
             {
-                TestCentroid centroid = new TestCentroid();
-                centroid.GroupedDocument = new List<DocumentVectorTest>();
+                Centroid centroid = new Centroid();
+                centroid.GroupedDocument = new List<DocumentVector>();
                 result.Add(centroid);
             }
             return result;
         }
 
 
-        public static Tuple<int[],List<TestCentroid>> AssignDocsToClusters(float[,] result_fcm, int clusterNumber, List<DocumentVectorTest> docCollection, List<TestCentroid> centroidList)
+        public static Tuple<int[], List<Centroid>> AssignDocsToClusters(float[,] result_fcm, int clusterNumber, List<DocumentVector> docCollection, List<Centroid> centroidList)
         {
-            Tuple<int[], List<TestCentroid>> result;
+            Tuple<int[], List<Centroid>> result;
             int[] Label_result = new int[result_fcm.GetLength(0)];
 
             float highest = result_fcm[0, 0];
             int IndexOfCluster = 0;
-            var IterCount = docCollection.Count;
+            var IterCount = docCollection.Count; //here is dont needed
             int x_dimension = result_fcm.GetLength(0);
             int y_dimension = result_fcm.GetLength(1);
 
@@ -202,13 +203,40 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
                         highest = result_fcm[i, j];
                         IndexOfCluster = j;
                     }
-                    
+
                 }
                 Label_result[i] = IndexOfCluster;
-                centroidList[IndexOfCluster].GroupedDocument.Add(docCollection.ElementAt(i));
             }
-            result = new Tuple<int[], List<TestCentroid>>(Label_result, centroidList);
+
+            for (int i = 0; i < Label_result.Length; i++)
+                for (int j = 0; j < clusterNumber; j++)
+                    if (Label_result[i] == j)
+                        centroidList[j].GroupedDocument.Add(docCollection.ElementAt(i));
+                    else
+                        continue;
+
+            result = new Tuple<int[], List<Centroid>>(Label_result, centroidList);
             return result;
+        }
+
+        internal static void WriteSimilarityArrayToFile(float[,] result_fcm, string fuzzy_K_means_clusterization_result)
+        {
+            var message_row = String.Empty;
+            var message = String.Empty;
+            using (StreamWriter sw = File.AppendText(fuzzy_K_means_clusterization_result))
+            {
+                for (int i = 0; i < result_fcm.GetLength(0); i++)
+                {
+                    for (int j = 0; j < result_fcm.GetLength(1); j++)
+                    {
+                        message_row += result_fcm[i, j] + ' ' + '\t';
+                    }
+                    message += message_row + '\n';
+                    message_row = String.Empty;
+                    sw.WriteLine(message_row);
+                }
+
+            }
         }
     }
 }

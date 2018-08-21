@@ -25,6 +25,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                     newCentroid.GroupedDocument = new List<DocumentVector>();
                     newCentroid.GroupedDocument.Add(data[index]);
                     newCentroid.SetCenter(data[index].OriginalVectorSpace);
+                    //last changes
+                    newCentroid.means = newCentroid.GroupedDocument.First().VectorSpace;
                     centroidList.Add(newCentroid);
                 }
                 else if (indexSet.Contains(index))

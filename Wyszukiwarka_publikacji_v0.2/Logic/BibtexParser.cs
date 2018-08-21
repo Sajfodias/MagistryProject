@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlClient;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic
 {
@@ -63,6 +64,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                                     Console.WriteLine("Processing " + i.ToString() + " line.");
                                     context[i] = context[i].TrimStart(' ').Replace('\"', ' ').Replace('\\', ' ').TrimEnd(',');
                                     separatedContext = context[i].Split(separators, 2, StringSplitOptions.RemoveEmptyEntries);
+                                    
 
                                     #region getVariables
                                     if (separatedContext[0].Contains("title"))
@@ -105,9 +107,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                                     }
                                     else if (separatedContext[0].Contains("year"))
                                     {
-                                        if (Convert.ToInt32(separatedContext[1]) >= 1960)
+                                        //year filter
+                                        //if (Convert.ToInt32(separatedContext[1]) >= 1960)
                                             _year = Convert.ToInt32(separatedContext[1]);
-                                        else continue;
+                                        //else continue;
                                     }
                                     else if (separatedContext[0].Contains("country"))
                                     {
@@ -131,11 +134,12 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                                 }
                                 catch (Exception ex)
                                 {
-                                    if (ex.InnerException.GetType() == typeof(IndexOutOfRangeException))
-                                    {
-                                        File.WriteAllText(@"F:\\Magistry files\PG_crawler_Log.txt", ex.ToString());
-                                        return;
-                                    }
+                                    //if (ex.InnerException.GetType() == typeof(IndexOutOfRangeException))
+                                    //{
+                                    //File.WriteAllText(@"F:\\Magistry files\PG_crawler_Log.txt", ex.ToString());
+                                    //return;
+                                    //}
+                                    continue;
                                 }
 
                             }
@@ -295,10 +299,36 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                             //{
                             //dbContext.Terms_Vocabulary.Where(u)
                             #endregion
-                            var termVocabularyTable = dbContext.Terms_Vocabulary;
-                                terms.term_value = new_document[k];
+                            //var termVocabularyTable = dbContext.Terms_Vocabulary;
+                            
+                            /* 21.08 dont't work properly - under fix
+                            // 21.08 If need fast but not accurate - don't use this
+                            for (int i=0; i<k; i++)
+                            {
+                                var query = GetTerms_Vocabulary(dbContext);
+                                var query_list = new List<Terms_Vocabulary>();
+                                foreach(var element in query)
+                                {
+                                    query_list = query.ToList();
+                                }
+                                //if (query_list.Count == 0)
+                                for(int j = 0; i < query_list.Count; j++)
+                                {
+                                    if (query_list[j].term_value != new_document[k] | !(query_list[j].term_value.Contains(new_document[k])))
+                                    {
+                                        terms.term_value = new_document[k];
+                                        bibtexArticle.Terms_Vocabulary.Add(terms);
+                                    }
+                                    else
+                                        continue;
+                                }
+                            }
+                            //
+                            */
+
+                            terms.term_value = new_document[k]; //-- 21.08 old and fast but not effective
                             //}
-                            bibtexArticle.Terms_Vocabulary.Add(terms);
+                            bibtexArticle.Terms_Vocabulary.Add(terms); //-- 21.08 old and fast but not effective
                         }
                         dbContext.SaveChanges();
                     }
@@ -351,6 +381,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                     File.WriteAllText(@"F:\\Magistry files\PG_crawler_Log.txt", ex.ToString());
                 }
             }
+        }
+
+        private static DbSet<Terms_Vocabulary> GetTerms_Vocabulary(ArticleDBDataModelContainer dbcon)
+        {
+            return dbcon.Terms_Vocabulary;
         }
     }
 

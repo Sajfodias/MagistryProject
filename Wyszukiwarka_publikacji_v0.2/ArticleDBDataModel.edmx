@@ -157,7 +157,7 @@
       <PropertyRef Name="article_Id" />
     </Key>
     <Property Name="article_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="article_authors_line" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="article_author_line" Type="nvarchar(max)" Nullable="false" />
     <Property Name="article_title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="article_language" Type="nvarchar(max)" Nullable="false" />
     <Property Name="article_Full_title" Type="nvarchar(max)" Nullable="false" />
@@ -630,7 +630,7 @@
             <PropertyRef Name="article_Id" />
           </Key>
           <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="article_authors_line" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="article_author_line" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="article_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="article_language" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="article_Full_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -777,7 +777,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(ArticleDBDataModel.UMK_Articles)">
         <MappingFragment StoreEntitySet="UMK_ArticlesSet">
           <ScalarProperty Name="article_Id" ColumnName="article_Id" />
-          <ScalarProperty Name="article_authors_line" ColumnName="article_authors_line" />
+          <ScalarProperty Name="article_author_line" ColumnName="article_author_line" />
           <ScalarProperty Name="article_title" ColumnName="article_title" />
           <ScalarProperty Name="article_language" ColumnName="article_language" />
           <ScalarProperty Name="article_Full_title" ColumnName="article_Full_title" />

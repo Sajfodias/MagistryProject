@@ -110,5 +110,17 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 return tf_result;
             }
         }
+
+        internal static Dictionary<string, int> DocumentsContainsTermToDictionary(Dictionary<int, string> docCollectionDictionary, HashSet<string> termCollection)
+        {
+            wordIndex = new Dictionary<string, int>();
+            foreach (var term in termCollection)
+                wordIndex.Add(term, docCollectionDictionary.Values.ToArray().Where(s => r.Split(s.ToLower()).ToArray().Contains(term.ToLower())).Count());
+            foreach (var item in wordIndex.Where(kvp => kvp.Value == 0).ToList())
+            {
+                wordIndex.Remove(item.Key);
+            }
+            return wordIndex;
+        }
     }
 }

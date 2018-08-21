@@ -3,62 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms;
 
 namespace Wyszukiwarka_publikacji_v0._2.Tests
 {
-    class GravitationalClusteringAlgorithm
+    class Gravitational
     {
-        public static List<TestCentroid> Gravitational(List<DocumentVectorTest> vSpace, float G, float deltaG, int M, float epsilon, int cluster_count)
+        public static int[] GravitationalAlg(List<DocumentVectorTest> vSpace, float G, float deltaG, int M, float epsilon)
         {
-            List<TestCentroid> result = new List<TestCentroid>();
             List<DocumentVectorTest> docVectorCopy = new List<DocumentVectorTest>(vSpace);
             int N = docVectorCopy.Count;
+            int[] disjoint_set = new int[N];
+            float[,] distance_element_table = new float[N, N];
 
-            var set_result = Tests.DisjointSetTest.Set(docVectorCopy); //Make(i) in article
-            int[] parent = set_result.Item1;
-            int[] rank = set_result.Item2;
-            List<TestCentroid> centroidSet = set_result.Item3;
-            List<TestCentroid> unionChanged = new List<TestCentroid>(centroidSet);
-            float[,] distance_element_table = new float[unionChanged.Count, unionChanged.Count];
-        
+            DisjointSetTest disjoint = new DisjointSetTest(N);
+
+            for (int i = 0; i < N; i++)
+                Tests.DisjointSetTest.MakeSet(i);
+
             for (int sp1 = 0; sp1 < distance_element_table.GetLength(0); sp1++)
                 for (int sp2 = 0; sp2 < distance_element_table.GetLength(1); sp2++)
                     distance_element_table[sp1, sp2] = 0;
 
             int k = 0;
 
-            for(int z=0; z<M; z++)
+            for (int z = 0; z < M; z++)
             {
-                for (int j = 0; j < unionChanged.Count; j++)
+                for (int j = 0; j < N; j++)
                 {
-                    k = GenerateIndex(unionChanged.Count, j);
-
+                    k = GenerateIndex(N, j);
                     var distance = Move(docVectorCopy[j], docVectorCopy[k], G);
                     distance_element_table[j, k] = distance;
-
                     if (Math.Pow(distance, 2) <= epsilon)
-                    {
-                        unionChanged = Tests.DisjointSetTest.Union1(j, k, unionChanged);
-                        //Tests.TestDisjointSet.Union(j, k);
-                    }
+                        Tests.DisjointSetTest.Union(j, k);
                     G = (1 - deltaG) * G;
 
-                    #region Find(i)- i think we don't need the views of nested cluster here
-                    /*
-                    for (int z1 = 0; z < result.Count; z++)
-                    {
-                        for (int k1 = 0; k < result[z1].GroupedDocument.Count; k1++)
-                        {
-                            TestCentroid element = unionChanged[Tests.DisjointSetTest.Find(k1)];
-                        }
-                    }
-                    */
-                    #endregion
+                    for (int i = 0; i < N; i++)
+                        disjoint_set[i] = Tests.DisjointSetTest.Find(i);
                 }
             }
-            
-            result = unionChanged;
-            return result;
+
+
+            return disjoint_set;
         }
 
         private static int GenerateIndex(int count, int j)
@@ -101,30 +87,41 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
             return distance;
         }
 
-        public static List<TestCentroid> GetClustersTest(List<TestCentroid> clusters, float alpha, List<DocumentVectorTest> data)
+        public static List<TestCentroid> GetClustersTest(int[] clusters, float alpha, List<DocumentVectorTest> data)
         {
-            List<TestCentroid> newclusters = new List<TestCentroid>();
+            List<TestCentroid> centroidSet = new List<TestCentroid>();
+            HashSet<int> clustersSet = new HashSet<int>();
             int N = data.Count;
-            int number_of_clusters = clusters.Count;
+            int number_of_clusters = clusters.Length;
             float MIN_POINTS = alpha * N;
 
-            for (int i = 0; i < number_of_clusters; i++)
+            for (int i = 0; i < N; i++)
+                clustersSet.Add(clusters[i]);
+
+            for(int i=0; i<clustersSet.Count; i++)
             {
                 TestCentroid centroid = new TestCentroid
                 {
                     GroupedDocument = new List<DocumentVectorTest>()
                 };
+                var docIndex = clustersSet.ElementAt(i);
+                centroid.GroupedDocument.Add(data[docIndex]);
+                centroidSet.Add(centroid);
+            }
 
-                if (clusters[i].GroupedDocument.Count >= MIN_POINTS)
+
+
+          
+                for(int j=0; j<clustersSet.Count; j++)
                 {
-                    foreach (var elements in clusters[i].GroupedDocument)
+                    for (int i = 0; i < N; i++)
                     {
-                        centroid.GroupedDocument.Add(elements);
-                        newclusters.Add(centroid);
+                        if (clustersSet.ElementAt(j) == clusters[i])
+                            centroidSet[j].GroupedDocument.Add(data[i]);
                     }
                 }
-            }
-            return newclusters;
+
+            return centroidSet;
         }
     }
 }

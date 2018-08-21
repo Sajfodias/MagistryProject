@@ -61,7 +61,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         }
                         else if (UG_separatedContent.Length == 2 && (UG_separatedContent[0].Contains("Liczba odnalezionych") || UG_separatedContent[0] == "Liczba odnalezionych rekordow"))
                         {
-                            UG_articles_Count = Convert.ToInt32(UG_separatedContent[1]);
+                            //UG_articles_Count = Convert.ToInt32(UG_separatedContent[1]);
+                            UG_articles_Count = 1000000;
                             UG_articles_Matrix = new string[UG_articles_Count];
                             for (int z = 0; z <= UG_articles_Count - 1; z++)
                             {
@@ -199,7 +200,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                             }
                             else
                             {
-                                System.Windows.MessageBox.Show("Brak danych!");
+                                File.WriteAllText(@"F:\\Magistry files\UG_crawler_Log.txt", "Empty line detected."+'\n');
+                                //System.Windows.MessageBox.Show("Brak danych!");
                             }
                             
                         }

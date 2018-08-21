@@ -18,11 +18,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
 {
     class Downloader
     {
-        [DllImport("Kernel32")]
-        public static extern void AllocConsole();
+        //[DllImport("Kernel32")]
+        //public static extern void AllocConsole();
 
-        [DllImport("Kernel32")]
-        public static extern void FreeConsole();
+        //[DllImport("Kernel32")]
+        //public static extern void FreeConsole();
 
         private readonly static HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(40.0) };
         public static HtmlDocument contentHtmlDoc;
@@ -52,8 +52,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"There is an exception: { ex } for query: { url } occured!");
-                Console.ReadKey();
+                //Console.WriteLine($"There is an exception: { ex } for query: { url } occured!");
+                //Console.ReadKey();
             }
             return contentHtmlDoc;
         }
@@ -155,6 +155,45 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
             {
                 Console.WriteLine("Exception {0} was occured.", ex.ToString());
                 Console.ReadKey();
+            }
+        }
+
+        public static void runPythonDownloader()
+        {
+            string filename = string.Empty;
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".py";
+            dlg.Filter = "python Scripts (*.py)|*.py";
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                filename = dlg.FileName;
+            }
+            int first_arg_int = 0;
+            int second_arg_int = 145851;
+            string first_arg = first_arg_int.ToString();
+            string second_arg = second_arg_int.ToString();
+            Task.Factory.StartNew(() => run_cmd(filename,first_arg,second_arg));
+        }
+
+        public static void run_cmd(string cmd, string first_arg, string second_arg)
+        {
+            string args = first_arg + " " + second_arg;
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe";
+            start.Arguments = string.Format("{0} {1}", cmd, args);
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    Console.Write(result);
+                }
             }
         }
     }
