@@ -37,6 +37,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
         public static string UMK_Adres_URL;
         public static string UMK_Opis_wydawn;
         public static string UMK_Tytul_Wydawn_Zbior;
+        public static string UMK_Zapytanie_Wyszukiwania;
 
         public static void get_UMK_Document_content()
         {
@@ -57,49 +58,26 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         UMK_newcontent[i] = UMK_line;
                         UMK_separatedContent = UMK_line.Split(line_separator,2);
                         //tutaj idzie funkcjonalnosc
-
-                        if (UMK_separatedContent.Length == 1 && (UMK_separatedContent[0].ToLower().Contains("http://") || UMK_separatedContent[0].ToLower().Contains("https://") || UMK_separatedContent[0].Contains("http://") || UMK_separatedContent[0].Contains("https://")))
-                        {
-                            UMK_Adres_URL = UMK_separatedContent[0];
-                            //System.Windows.MessageBox.Show(UMK_Adres_URL);
-                        }
-                        else if (UMK_separatedContent.Length == 2 && (UMK_separatedContent[0].ToLower().Contains("aut.") || UMK_separatedContent[0].Contains("Aut.") || UMK_separatedContent[0] == "Aut."))
-                        {
-                            //System.Windows.MessageBox.Show(UMK_separatedContent[1]);
-                            UMK_autors = UMK_separatedContent[1].Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                            UMK_author_line = UMK_separatedContent[1];
-                        }
-                        else if (UMK_separatedContent.Length == 2 && (UMK_separatedContent[0].Contains("Liczba odnalezionych") || UMK_separatedContent[0] == "Liczba odnalezionych rekordow"))
-                        {
-                            UMK_articles_Count = Convert.ToInt32(UMK_separatedContent[1]);
-                            PP_articles_Matrix = new string[UMK_articles_Count];
-                            for (int z = 0; z <= UMK_articles_Count - 1; z++)
-                            {
-                                PP_articles_Matrix[z] = (z + 1) + ".";
-                            }
-                        }
-                        else if (UMK_separatedContent.Length == 1 && PP_articles_Matrix.Any(x => UMK_separatedContent[0].Contains(x)))
+                        if (UMK_separatedContent.Length == 1 & UMK_separatedContent[0] == "")
+                            continue;
+                        else if (UMK_separatedContent.Length == 1 & PP_articles_Matrix.Any(x => UMK_separatedContent[0].Contains(x)))
                         {
                             if (UMK_author_line != null && UMK_Tytul != null)
                             {
-                                using(var dbContext = new ArticleDBDataModelContainer())
+                                using (var dbContext = new ArticleDBDataModelContainer())
                                 {
                                     var document = new StringBuilder();
                                     var umk_article = dbContext.UMK_ArticlesSet.Create();
 
                                     if (UMK_author_line == null)
-                                    {
                                         UMK_author_line = "Not_defined";
-                                    }
                                     umk_article.article_author_line = UMK_author_line;
                                     UMK_author_line = null;
 
                                     if (UMK_Tytul == null)
-                                    {
                                         UMK_Tytul = "Not_defined";
-                                    }
                                     umk_article.article_title = UMK_Tytul;
-                                    if (UMK_Tytul != String.Empty || UMK_Tytul != " " || UMK_Tytul != null)
+                                    if (UMK_Tytul != String.Empty | UMK_Tytul != " " | UMK_Tytul != null)
                                     {
                                         var termTitle_UMK = TextPreparing.TermsPrepataions(UMK_Tytul);
                                         document.Append(termTitle_UMK);
@@ -111,7 +89,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         UMK_Pelny_tytul_czasop = "Not_defined";
                                     }
                                     umk_article.article_Full_title = UMK_Pelny_tytul_czasop;
-                                    if (UMK_Pelny_tytul_czasop != String.Empty || UMK_Pelny_tytul_czasop != " " || UMK_Pelny_tytul_czasop != null)
+                                    if (UMK_Pelny_tytul_czasop != String.Empty | UMK_Pelny_tytul_czasop != " " | UMK_Pelny_tytul_czasop != null)
                                     {
                                         var termFullTitle_UMK = TextPreparing.TermsPrepataions(UMK_Pelny_tytul_czasop);
                                         document.Append(termFullTitle_UMK);
@@ -130,7 +108,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         UMK_Tytul_rownolegly = "Not_defined";
                                     }
                                     umk_article.article_translated_title = UMK_Tytul_rownolegly;
-                                    if (UMK_Tytul_rownolegly != String.Empty || UMK_Tytul_rownolegly != " " || UMK_Tytul_rownolegly != null)
+                                    if (UMK_Tytul_rownolegly != String.Empty | UMK_Tytul_rownolegly != " " | UMK_Tytul_rownolegly != null)
                                     {
                                         var termParallelTitle_UMK = TextPreparing.TermsPrepataions(UMK_Tytul_rownolegly);
                                         document.Append(termParallelTitle_UMK);
@@ -142,7 +120,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         UMK_en_keywords_line = "Not_defined";
                                     }
                                     umk_article.article_eng_keywords = UMK_en_keywords_line;
-                                    if (UMK_en_keywords_line != String.Empty || UMK_en_keywords_line != " " || UMK_en_keywords_line != null)
+                                    if (UMK_en_keywords_line != String.Empty | UMK_en_keywords_line != " " | UMK_en_keywords_line != null)
                                     {
                                         var term_Eng_Keywords_UMK = TextPreparing.TermsPrepataions(UMK_en_keywords_line);
                                         document.Append(term_Eng_Keywords_UMK);
@@ -154,7 +132,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         UMK_pl_keywords_line = "Not_defined";
                                     }
                                     umk_article.article_pl_keywords = UMK_pl_keywords_line;
-                                    if (UMK_pl_keywords_line != String.Empty || UMK_pl_keywords_line != " " || UMK_pl_keywords_line != null)
+                                    if (UMK_pl_keywords_line != String.Empty | UMK_pl_keywords_line != " " | UMK_pl_keywords_line != null)
                                     {
                                         var term_PL_Keywords_UMK = TextPreparing.TermsPrepataions(UMK_pl_keywords_line);
                                         document.Append(term_PL_Keywords_UMK);
@@ -199,7 +177,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                     for (int k = 0; k <= _document.Length - 1; k++)
                                     {
                                         var terms = dbContext.Terms_Vocabulary.Create();
-                                        //
                                         string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
                                         string[] allowed_dictionary = dictionary_text.Split(',', '\n');
 
@@ -208,19 +185,14 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                             for (int j = 0; j <= allowed_dictionary.Length - 1; j++)
                                             {
                                                 if (_document[p].Length > 3 && _document[p].Contains(allowed_dictionary[j]))
-                                                {
                                                     continue;
-                                                }
                                                 else if (_document[p].Length <= 3 && !(_document[p].Contains(allowed_dictionary[j])))
-                                                {
                                                     _document.ToList().RemoveAt(p);
-                                                }
-
                                             }
                                         }
 
                                         //tutaj potrzebnie przepisac id dokumenta w ktorym wystepuje dane slowo
-                                        if (_document[k] != String.Empty || _document[k] != " " || _document[k] != null || _document[k] != Char.IsDigit(' ').ToString())
+                                        if (_document[k] != String.Empty | _document[k] != " " | _document[k] != null | _document[k] != Char.IsDigit(' ').ToString())
                                         {
                                             //dbContext.Terms_Vocabulary.Where(u)
                                             var termVocabularyTable = dbContext.Terms_Vocabulary;
@@ -234,72 +206,55 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                     {
                                         dbContext.SaveChanges();
                                     }
-                                    catch(Exception ex)
+                                    catch (Exception ex)
                                     {
                                         File.WriteAllText(@"F:\\Magistry files\UMK_crawler_Log.txt", ex.ToString());
                                     }
                                 }
                             }
                             else
-                            {
-                                //System.Windows.MessageBox.Show("brak danych!");
                                 continue;
+                        }
+                        else if(UMK_separatedContent.Length == 1 & (UMK_separatedContent[0].ToLower().Contains("http://") | UMK_separatedContent[0].ToLower().Contains("https://") | UMK_separatedContent[0].Contains("http://") | UMK_separatedContent[0].Contains("https://")))
+                            UMK_Adres_URL = UMK_separatedContent[0];
+                        else if (UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].ToLower().Contains("aut.") | UMK_separatedContent[0].Contains("Aut.") | UMK_separatedContent[0] == "Aut."))
+                        {
+                            UMK_autors = UMK_separatedContent[1].Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                            UMK_author_line = UMK_separatedContent[1];
+                        }
+                        else if (UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].ToLower().Contains("Zapyt") | UMK_separatedContent[0].Contains("zapyt") | UMK_separatedContent[0] == "Zapytanie" | UMK_separatedContent[0] == "zapytanie"))
+                            UMK_Zapytanie_Wyszukiwania = "SELECT * FROM UMK_Splendor_Expertus_article_database WHERE article LIKE " + UMK_separatedContent[1];
+                        else if (UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].Contains("Liczba odnalezionych") | UMK_separatedContent[0] == "Liczba odnalezionych rekordow"))
+                        {
+                            UMK_articles_Count = Convert.ToInt32(UMK_separatedContent[1]);
+                            PP_articles_Matrix = new string[UMK_articles_Count];
+                            for (int z = 0; z <= UMK_articles_Count - 1; z++)
+                            {
+                                PP_articles_Matrix[z] = (z + 1) + ".";
                             }
-
                         }
-                        else if (UMK_separatedContent.Length >= 2 && (UMK_separatedContent[0].ToLower().Contains("tytu") || UMK_separatedContent[0].ToLower().Contains("tytuł") || UMK_separatedContent[0].ToLower().Contains("tytul") || UMK_separatedContent[0].Contains("TYTUŁ") || UMK_separatedContent[0] == "Tytuł" || UMK_separatedContent[0] == "Tytul"))
-                        {
+                        else if (UMK_separatedContent.Length >= 2 & (UMK_separatedContent[0].ToLower().Contains("tytu") | UMK_separatedContent[0].ToLower().Contains("tytuł") | UMK_separatedContent[0].ToLower().Contains("tytul") | UMK_separatedContent[0].Contains("TYTUŁ") | UMK_separatedContent[0] == "Tytuł" | UMK_separatedContent[0] == "Tytul"))
                             UMK_Tytul = UMK_separatedContent[1];
-                            //System.Windows.MessageBox.Show(UMK_Tytul);
-                        }
-                        else if (UMK_separatedContent.Length >= 2 && (UMK_separatedContent[0].ToLower().Contains("opis wydawn.") || UMK_separatedContent[0].ToLower().Contains("opis wydawn") || UMK_separatedContent[0].Contains("Opis wydawn.") || UMK_separatedContent[0].Contains("Opis wydawn") || UMK_separatedContent[0] == "Opis wydawn."))
-                        {
+                        else if (UMK_separatedContent.Length >= 2 & (UMK_separatedContent[0].ToLower().Contains("opis wydawn.") | UMK_separatedContent[0].ToLower().Contains("opis wydawn") | UMK_separatedContent[0].Contains("Opis wydawn.") | UMK_separatedContent[0].Contains("Opis wydawn") | UMK_separatedContent[0] == "Opis wydawn."))
                             UMK_Opis_wydawn = UMK_separatedContent[1];
-                            //System.Windows.MessageBox.Show(UMK_Opis_wydawn);
-                        }
-
-                        else if (UMK_separatedContent.Length == 2 && (UMK_separatedContent[0].ToLower().Contains("język") || UMK_separatedContent[0].ToLower().Contains("jezyk") || UMK_separatedContent[0].Contains("Język") || UMK_separatedContent[0].Contains("Jezyk") || UMK_separatedContent[0] == "Język" || UMK_separatedContent[0] == "Jezyk"))
-                        {
+                        else if (UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].ToLower().Contains("język") | UMK_separatedContent[0].ToLower().Contains("jezyk") | UMK_separatedContent[0].Contains("Język") | UMK_separatedContent[0].Contains("Jezyk") | UMK_separatedContent[0] == "Język" | UMK_separatedContent[0] == "Jezyk"))
                             UMK_Jezyk_Publikacji = UMK_separatedContent[1];
-                            //System.Windows.MessageBox.Show(UMK_Jezyk_Publikacji);
-                        }
-
-                        else if (UMK_separatedContent.Length == 2 && (UMK_separatedContent[0].ToLower().Contains("polskie słowa kluczowe") || UMK_separatedContent[0].ToLower().Contains("polskie slowa kluczowe") || UMK_separatedContent[0].Contains("Polskie słowa kluczowe") || UMK_separatedContent[0].Contains("Polskie slowa kluczowe") || UMK_separatedContent[0] == "Polskie słowa kluczowe" || UMK_separatedContent[0] == "Polskie slowa kluczowe"))
+                        else if (UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].ToLower().Contains("polskie słowa kluczowe") | UMK_separatedContent[0].ToLower().Contains("polskie slowa kluczowe") | UMK_separatedContent[0].Contains("Polskie słowa kluczowe") | UMK_separatedContent[0].Contains("Polskie slowa kluczowe") | UMK_separatedContent[0].Contains("Polskie slo") | UMK_separatedContent[0].Contains("polskie slo") | UMK_separatedContent[0] == "Polskie słowa kluczowe" | UMK_separatedContent[0] == "Polskie slowa kluczowe"))
                         {
-                            //System.Windows.MessageBox.Show(UMK_separatedContent[1]);
                             UMK_Slowa_kluczowe_j_pl = UMK_separatedContent[1].Split(separators);
                             UMK_pl_keywords_line = UMK_separatedContent[1];
                         }
-
-
-                        else if (UMK_separatedContent.Length == 2 && (UMK_separatedContent[0].ToLower().Contains("tytuł wydawn. zbior.") || UMK_separatedContent[0].ToLower().Contains("tytul wydawn. zbior.") || UMK_separatedContent[0].Contains("Tytuł wydawn. zbior.") || UMK_separatedContent[0].Contains("Tytul wydawn. zbior.") || UMK_separatedContent[0] == "Tytuł wydawn. zbior." || UMK_separatedContent[0] == "Tytul wydawn. zbior."))
-                        {
+                        else if (UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].ToLower().Contains("tytuł wydawn. zbior.") | UMK_separatedContent[0].ToLower().Contains("tytul wydawn. zbior.") | UMK_separatedContent[0].Contains("Tytuł wydawn. zbior.") | UMK_separatedContent[0].Contains("Tytul wydawn. zbior.") | UMK_separatedContent[0] == "Tytuł wydawn. zbior." | UMK_separatedContent[0] == "Tytul wydawn. zbior."))
                             UMK_Tytul_Wydawn_Zbior = UMK_separatedContent[1];
-                            //System.Windows.MessageBox.Show(UMK_Tytul_Wydawn_Zbior);
-                        }
-
-                        else if ((UMK_separatedContent.Length == 2 && (UMK_separatedContent[0].ToLower().Contains("pełny tytuł czasop.") || UMK_separatedContent[0].ToLower().Contains("pelny tytul czasop.") || UMK_separatedContent[0].Contains("Pełny tytuł czasop.") || UMK_separatedContent[0].Contains("Pelny tytul czasop.") || UMK_separatedContent[0] == "Pełny tytuł czasop." || UMK_separatedContent[0] == "Pelny tytul czasop.")))
-                        {
+                        else if ((UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].ToLower().Contains("pełny tytuł czasop.") | UMK_separatedContent[0].ToLower().Contains("pelny tytul czasop.") | UMK_separatedContent[0].Contains("Pełny tytuł czasop.") | UMK_separatedContent[0].Contains("Pelny tytul czasop.") | UMK_separatedContent[0] == "Pełny tytuł czasop." | UMK_separatedContent[0] == "Pelny tytul czasop.")))
                             UMK_Pelny_tytul_czasop = UMK_separatedContent[1];
-                            //System.Windows.MessageBox.Show(UMK_Pelny_tytul_czasop);
-                        }
-
-
-                        else if ((UMK_separatedContent.Length == 2 && (UMK_separatedContent[0].ToLower().Contains("tytuł równoległy") || UMK_separatedContent[0].ToLower().Contains("Tytul rownolegly")  || UMK_separatedContent[0] == "Tytuł równoległy" || UMK_separatedContent[0] == "Tytul rownolegly")))
-                        {
+                        else if ((UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].ToLower().Contains("tytuł równoległy") | UMK_separatedContent[0].ToLower().Contains("Tytul rownolegly")  | UMK_separatedContent[0] == "Tytuł równoległy" | UMK_separatedContent[0] == "Tytul rownolegly")))
                             UMK_Tytul_rownolegly = UMK_separatedContent[1];
-                            //System.Windows.MessageBox.Show(UMK_Tytul_rownolegly);
-                        }
-
-
-                        else if (UMK_separatedContent.Length == 2 && (UMK_separatedContent[0].ToLower().Contains("angielskie słowa kluczowe") || UMK_separatedContent[0].ToLower().Contains("angielskie slowa kluczowe") || UMK_separatedContent[0].Contains("Angielskie słowa kluczowe") || UMK_separatedContent[0].Contains("angielskie słowa kluczowe ") || UMK_separatedContent[0] == "Angielskie słowa kluczowe" || UMK_separatedContent[0] == "angielskie słowa kluczowe"))
+                        else if (UMK_separatedContent.Length == 2 & (UMK_separatedContent[0].ToLower().Contains("angielskie słowa kluczowe") | UMK_separatedContent[0].ToLower().Contains("angielskie slowa kluczowe") | UMK_separatedContent[0].Contains("Angielskie słowa kluczowe") | UMK_separatedContent[0].Contains("angielskie słowa kluczowe ") | UMK_separatedContent[0] == "Angielskie słowa kluczowe" | UMK_separatedContent[0] == "angielskie słowa kluczowe"))
                         {
-                            //System.Windows.MessageBox.Show(UMK_separatedContent[1]);
                             UMK_Slowa_kluczowe_j_ang = UMK_separatedContent[1].Split(separators);
                             UMK_en_keywords_line = UMK_separatedContent[1];
                         }
-                        //else if (UMK_separatedContent.Length == 1 && UMK_separatedContent[0] == String.Empty) System.Windows.MessageBox.Show("The empty line detected", "Empty line", System.Windows.MessageBoxButton.OK);
-                        //else System.Windows.MessageBox.Show("Error! Content not found!", "Error!", System.Windows.MessageBoxButton.OK);
                     }
                 }
             }
