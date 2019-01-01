@@ -33,29 +33,78 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
             web.OverrideEncoding = Encoding.GetEncoding("iso-8859-2");
             hapDoc = web.Load(fileName);
             //char[] separators = {';', ',', ' '};
-
             string ContentDocument = hapDoc.DocumentNode.InnerHtml.ToString();
-            string stringFilter1 = ContentDocument.Replace("<span class=\"querylabel\" id=\"querylabel\">", "\r");
-            string stringFilter2 = stringFilter1.Replace("<span class=\"cntfoundtxt\" id=\"cntfoundtxt\">", " ");
-            string stringFilter3 = stringFilter2.Replace("<br>", "\r");
-            string stringFilter4 = stringFilter3.Replace("ź", "z");
-            string stringFilter5 = stringFilter4.Replace("ż", "z");
-            string stringFilter6 = stringFilter5.Replace("ń", "n");
-            string stringFilter7 = stringFilter6.Replace("ł", "l");
-            string stringFilter8 = stringFilter7.Replace("ó", "o");
-            string stringFilter9 = stringFilter8.Replace("Ż", "Z");
-            string stringFilter10 = stringFilter9.Replace("Ź", "Z");
-            string stringFilter11 = stringFilter10.Replace("Ń", "N");
-            string stringFilter12 = stringFilter11.Replace("Ł", "L");
-            string stringFilter13 = stringFilter12.Replace("Ó", "O");
-            string stringFilter14 = stringFilter13.Replace("ś", "s");
-            string stringFilter15 = stringFilter14.Replace("Ś", "S");
-            string stringFilter16 = stringFilter15.Replace("ę", "e");
-            string stringFilter17 = stringFilter16.Replace("ą", "a");
-            string stringFilter18 = stringFilter17.Replace("Ą", "A");
-            string stringFilter19 = stringFilter18.Replace("Ę", "E");
-            
-            endText = Regex.Replace(stringFilter19, "<.*?>", string.Empty);
+            string filteredDocument = ContentDocument.Replace("<span class=\"querylabel\" id=\"querylabel\">", "\r");
+
+            string[] replacementArray = {
+                "<span class=\"cntfoundtxt\" id=\"cntfoundtxt\">",
+                "<br>",
+                "ź",
+                "ż",
+                "ń",
+                "ł",
+                "ó",
+                "Ż",
+                "Ź",
+                "Ń",
+                "Ł",
+                "Ó",
+                "ś",
+                "Ś",
+                "ę",
+                "ą",
+                "Ą",
+                "Ę",
+            };
+            string[] replacedCharacters = {
+                " ",
+                "\r",
+                "z",
+                "z",
+                "n",
+                "l",
+                "o",
+                "Z",
+                "Z",
+                "N",
+                "L",
+                "O",
+                "s",
+                "S",
+                "e",
+                "a",
+                "A",
+                "E"
+            };
+
+            for (int i = 0; i < replacementArray.Length; i++)
+                filteredDocument = filteredDocument.Replace(replacementArray[i], replacedCharacters[i]);
+
+            #region Old_replacement_method
+            //string stringFilter1 = ContentDocument.Replace("<span class=\"querylabel\" id=\"querylabel\">", "\r");
+            //string stringFilter2 = stringFilter1.Replace("<span class=\"cntfoundtxt\" id=\"cntfoundtxt\">", " ");
+            //string stringFilter3 = stringFilter2.Replace("<br>", "\r");
+            //string stringFilter4 = stringFilter3.Replace("ź", "z");
+            //string stringFilter5 = stringFilter4.Replace("ż", "z");
+            //string stringFilter6 = stringFilter5.Replace("ń", "n");
+            //string stringFilter7 = stringFilter6.Replace("ł", "l");
+            //string stringFilter8 = stringFilter7.Replace("ó", "o");
+            //string stringFilter9 = stringFilter8.Replace("Ż", "Z");
+            //string stringFilter10 = stringFilter9.Replace("Ź", "Z");
+            //string stringFilter11 = stringFilter10.Replace("Ń", "N");
+            //string stringFilter12 = stringFilter11.Replace("Ł", "L");
+            //string stringFilter13 = stringFilter12.Replace("Ó", "O");
+            //string stringFilter14 = stringFilter13.Replace("ś", "s");
+            //string stringFilter15 = stringFilter14.Replace("Ś", "S");
+            //string stringFilter16 = stringFilter15.Replace("ę", "e");
+            //string stringFilter17 = stringFilter16.Replace("ą", "a");
+            //string stringFilter18 = stringFilter17.Replace("Ą", "A");
+            //string stringFilter19 = stringFilter18.Replace("Ę", "E");
+
+            //endText = Regex.Replace(stringFilter3, "<.*?>", string.Empty);
+            #endregion
+
+            endText = Regex.Replace(filteredDocument, "<.*?>", string.Empty);
 
             var file = File.CreateText(filePathRTF + @"formated_" + fileName.Substring(28) +".txt");
             file.Write(endText);

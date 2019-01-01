@@ -103,7 +103,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 foreach (var PG_articles in dbContext.PG_ArticlesSet.Local)
                 {
                     string PG_record = PG_articles.title + PG_articles.abstractText + PG_articles.keywords;
-                    DocumentCollection.Add(Convert.ToInt32(PG_articles.article_Id), PG_record);
+                    if (!(DocumentCollection.ContainsKey(PG_articles.article_Id)) || !(DocumentCollection.ContainsValue(PG_record)))
+                        DocumentCollection.Add(Convert.ToInt32(PG_articles.article_Id), PG_record);
+                    else
+                        continue;
                     counter1++;
                 }
 
@@ -112,7 +115,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 foreach (var PP_articles in dbContext.PP_ArticlesSet.Local)
                 {
                     string PP_record = PP_articles.article_title + PP_articles.article_source;
-                    DocumentCollection.Add(Convert.ToInt32(PP_articles.article_Id), PP_record);
+                    if (!(DocumentCollection.ContainsKey(PP_articles.article_Id)) || !(DocumentCollection.ContainsValue(PP_record)))
+                        DocumentCollection.Add(Convert.ToInt32(PP_articles.article_Id), PP_record);
+                    else
+                        continue;
                     counter1++;
                 }
 
@@ -121,7 +127,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 foreach (var UG_articles in dbContext.UG_ArticlesSet.Local)
                 {
                     string UG_record = UG_articles.article_title + UG_articles.article_source + UG_articles.article_keywords;
-                    DocumentCollection.Add(Convert.ToInt32(UG_articles.article_Id), UG_record);
+                    if (!(DocumentCollection.ContainsKey(UG_articles.article_Id)) || !(DocumentCollection.ContainsValue(UG_record)))
+                        DocumentCollection.Add(Convert.ToInt32(UG_articles.article_Id), UG_record);
+                    else
+                        continue;
                     counter1++;
                 }
 
@@ -130,7 +139,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 foreach (var UMK_articles in dbContext.UMK_ArticlesSet.Local)
                 {
                     string UMK_record = UMK_articles.article_title + UMK_articles.article_Full_title + UMK_articles.article_eng_keywords + UMK_articles.article_pl_keywords + UMK_articles.article_translated_title;
-                    DocumentCollection.Add(Convert.ToInt32(UMK_articles.article_Id), UMK_record);
+                    if (!(DocumentCollection.ContainsKey(UMK_articles.article_Id)) || !(DocumentCollection.ContainsValue(UMK_record)))
+                        DocumentCollection.Add(Convert.ToInt32(UMK_articles.article_Id), UMK_record);
+                    else
+                        continue;
                     counter1++;
                 }
 
@@ -139,7 +151,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                 foreach (var WSB_articles in dbContext.WSB_ArticlesSet.Local)
                 {
                     string WSB_record = WSB_articles.article_title + WSB_articles.article_common_title + WSB_articles.article_title_other_lang + WSB_articles.article_eng_keywords + WSB_articles.article_pl_keywords + WSB_articles.article_details;
-                    DocumentCollection.Add(Convert.ToInt32(WSB_articles.article_Id), WSB_record);
+                    if (DocumentCollection.ContainsKey(WSB_articles.article_Id))
+                        continue;
+                    else
+                        DocumentCollection.Add(Convert.ToInt32(WSB_articles.article_Id), WSB_record);
                     counter1++;
                 }
 

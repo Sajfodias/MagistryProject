@@ -61,8 +61,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             var clusterization_stopwatch = Stopwatch.StartNew();
             string message = null;
             string algorithm = " k-means++;";
-            string PPKMeans_label_resul_path = @"F:\Magistry files\data\PPKMeans_label_result1.txt";
-            string PPK_means_report_path = @"F:\Magistry files\reports\PPKMeans_report1.txt";
+            string PPKMeans_label_resul_path = @"F:\Magistry files\data\PPKMeans_label_result4.txt";
+            string PPK_means_report_path = @"F:\Magistry files\reports\PPKMeans_report4.txt";
             List<string> docCollection = Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
             Dictionary<int, string> docCollectionDictionary = Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoadingToDictionary();
             HashSet<string> termCollection = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
@@ -78,8 +78,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             int[] PPKMeans_label_matrix = new int[vSpace1.Count];
             PPKMeans_label_matrix = Tests.Label_Matrix.ReleaseVersion_Label_Matrix_Extractions(resultSet, PPKMeans_label_resul_path);
             message = RaportGeneration.ReleaseRaportGenerationFunction(resultSet, clusterNumber, totalIteration, clusterization_stopwatch, PPK_means_report_path,algorithm);
-            clustResultTxtBox.AppendText(message);
-            invokeFilesToVisualizationGenerator(resultSet);
+            //clustResultTxtBox.AppendText(message);
+            invokeFilesToVisualizationGenerator(resultSet,algorithm);
         }
 
         private void KMeans(object sender, RoutedEventArgs e)
@@ -88,8 +88,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             var clusterization_stopwatch = Stopwatch.StartNew();
             string message = null;
             string algorithm = " k-means;";
-            string PKMeans_label_resul_path = @"F:\Magistry files\data\PKMeans_label_result1.txt";
-            string K_means_report_path = @"F:\Magistry files\reports\PKMeans_report1.txt";
+            string PKMeans_label_resul_path = @"F:\Magistry files\data\PKMeans_label_result6.txt";
+            string K_means_report_path = @"F:\Magistry files\reports\PKMeans_report6.txt";
             #region OldDataGeneration
             /*
             List<string> docCollection = Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoading();
@@ -116,14 +116,27 @@ namespace Wyszukiwarka_publikacji_v0._2
             int[] PKMeans_label_matrix = new int[vSpace.Count];
             PKMeans_label_matrix = Tests.Label_Matrix.ReleaseVersion_Label_Matrix_Extractions(resultSet, PKMeans_label_resul_path);
             #region tests_metrics
+          
+            //List<string> docs = Tests.DocClasses.SurveyAndMeasurementsClassOfDocuments_ListCreations();
+            //List<List<string>> ClassCollection = Tests.DocClasses.ListOfClasses();
             /*
-            List<string> docs = Tests.DocClasses.SurveyAndMeasurementsClassOfDocuments_ListCreations();
-            List<List<string>> ClassCollection = Tests.DocClasses.ListOfClasses();
             var distance = Tests.InterclusterDistances.d_centroids(resultSet);
             var min_centroid_distances = Tests.InterclusterDistances.d_min_centroids(resultSet);
             var max_intracluster_d = Tests.IntraclusterDistances.d_max(resultSet);
             var min_intracluster_d = Tests.IntraclusterDistances.d_min(resultSet);
+            
             var median_intracluster_d = Tests.IntraclusterDistances.d_sr(resultSet);
+            //string DistanceMetricsFilePath = @"F:\Magistry files\distanceMetrics\KmeansDistanceMetrics1.txt";
+            //for(int iK=0; iK<clusterNumber; iK++)
+            //{
+            //    for (int jK = 0; jK < clusterNumber; jK++)
+            //    {
+            //        File.WriteAllText(DistanceMetricsFilePath, distance[iK, jK].ToString());
+            //    }
+            //}
+
+
+            /*
             var Recall_result = Tests.Recall.Recall_Calculating(resultSet, docs);
             var Precision_result = Tests.Precision.Precision_Calculating(resultSet, docs);
             var Purity = Tests.Purity.Purity_Calculating(resultSet, ClassCollection, vSpace);
@@ -134,8 +147,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             */
             #endregion
             message = RaportGeneration.ReleaseRaportGenerationFunction(resultSet, clusterNumber, totalIteration, clusterization_stopwatch, K_means_report_path,algorithm);
-            clustResultTxtBox.AppendText(message);
-            invokeFilesToVisualizationGenerator(resultSet);
+            //clustResultTxtBox.AppendText(message);
+            invokeFilesToVisualizationGenerator(resultSet,algorithm);
         }
 
         private void FuzzyKMeans_Click(object sender, RoutedEventArgs e)
@@ -149,9 +162,9 @@ namespace Wyszukiwarka_publikacji_v0._2
             HashSet<string> termCollection = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
             Dictionary<string, int> wordIndex = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.DocumentsContainsTermToDictionary(docCollectionDictionary, termCollection);
             List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessingDictionary(docCollectionDictionary);
-            string Fuzzy_K_means_clusterization_result = @"F:\Magistry files\Fuzzy_KMeans_result.txt";
-            string Fuzzy_K_means_label_result = @"F:\Magistry files\FCM_label_result.txt";
-            string Fuzzy_K_means_report_path = @"F:\Magistry files\reports\FCM_report.txt";
+            string Fuzzy_K_means_clusterization_result = @"F:\Magistry files\Fuzzy_KMeans_result6.txt";
+            string Fuzzy_K_means_label_result = @"F:\Magistry files\FCM_label_result6.txt";
+            string Fuzzy_K_means_report_path = @"F:\Magistry files\reports\FCM_report6.txt";
             float fuzziness = 0.5f;
             float epsilon = 0.003f;
             int clusterNumber = 5;
@@ -176,8 +189,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             resultSet = assignedResult.Item2;
             FuzzyKMeans_label_matrix = Tests.Label_Matrix.ReleaseVersion_Label_Matrix_Extractions(resultSet, Fuzzy_K_means_label_result);
             message = RaportGeneration.ReleaseRaportGenerationFunction(resultSet, clusterNumber, totalIteration, clusterization_stopwatch, Fuzzy_K_means_report_path,algorithm);
-            clustResultTxtBox.AppendText(message);
-            invokeFilesToVisualizationGenerator(resultSet);
+            //clustResultTxtBox.AppendText(message);
+            invokeFilesToVisualizationGenerator(resultSet,algorithm);
         }
 
         private void Gravitational_Click(object sender, RoutedEventArgs e)
@@ -240,8 +253,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             int[] label_matrix = Tests.Label_Matrix.ReleaseVersion_Label_Matrix_Extractions(get_Clusters, gravitational_label_resul_path);
             clusterization_stopwatch.Stop();
             message = RaportGeneration.ReleaseRaportGenerationFunction(get_Clusters, get_Clusters.Count, M, clusterization_stopwatch, Gravitational_report_path, algorithm);
-            clustResultTxtBox.AppendText(message);
-            invokeFilesToVisualizationGenerator(resultSet);
+            //clustResultTxtBox.AppendText(message);
+            invokeFilesToVisualizationGenerator(resultSet,algorithm);
         }
 
         #region AHC
@@ -488,8 +501,8 @@ namespace Wyszukiwarka_publikacji_v0._2
             int clusterNumber = 6;
             clusterNumber = Convert.ToInt32(txtboxClusterNumber.Text);
             M = Convert.ToInt32(txtboxIterationCount.Text);
-            string gravitational_label_resul_path = @"F:\Magistry files\data\Gravitational_label_results5.txt";
-            string Gravitational_report_path = @"F:\Magistry files\reports\Gravitational_reports5.txt";
+            string gravitational_label_resul_path = @"F:\Magistry files\data\Gravitational_label_results11.txt";
+            string Gravitational_report_path = @"F:\Magistry files\reports\Gravitational_reports11.txt";
             List<TestCentroid> result = new List<TestCentroid>(normilized_vSpace.Count);
             var result1 = Tests.Gravitational.GravitationalAlg(normilized_vSpace, G, deltaG, M, epsilon);
             var get_Clusters = Tests.Gravitational.GetClustersTest(result1, alpha, normilized_vSpace);
@@ -578,8 +591,9 @@ namespace Wyszukiwarka_publikacji_v0._2
         */
         #endregion
 
-        private void invokeFilesToVisualizationGenerator(List<Centroid> resultSet)
+        private void invokeFilesToVisualizationGenerator(List<Centroid> resultSet,string  algorithm)
         {
+            string invokedAlgorithm = algorithm;
             string csvFilesPath = @"F:\Magistry files\csv_files\exported_csv\";
             string jsonFilesPath = @"F:\Magistry files\csv_files\exported_json\";
             DateTime dateTime = DateTime.Now;
@@ -594,6 +608,15 @@ namespace Wyszukiwarka_publikacji_v0._2
             GraphData_and_Visualizations.CreateGraphDatabaseNeo4j.GenerateArticlesToCSVandJsonFromDB(articlesCSV, articlesJson);
             GraphData_and_Visualizations.CreateGraphDatabaseNeo4j.GenerateAuthorsToCSVandJsonFromDB(authorsCSV, authorsJson);
             GraphData_and_Visualizations.CreateGraphDatabaseNeo4j.GenerateClusterizationResultToCSVandJsonFromDB(clusteringCSV, resultSet, clusteringJson);
+            MessageBox.Show("Clusterization process completed successfully! Algorithm used: " + algorithm +'\n'
+                +"Generated files: "+ '\n' 
+                + articlesCSV + '\n'
+                + articlesJson+ '\n'
+                + authorsCSV + '\n'
+                + authorsJson + '\n'
+                + clusteringCSV + '\n'
+                + clusteringJson + '\n'
+                ,"Clusterization proces completed!");
         }
 
         private void btn_BruteForceDownload_Click(object sender, RoutedEventArgs e)

@@ -172,24 +172,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ArticleDBDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ArticleDBDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ArticleDBDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ArticleDBDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Author.cs">
-      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="FormattedDbEntityValidationException.cs" />
     <Compile Include="GraphData and Visualizations\CreateGraphDatabaseNeo4j.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\DetailedDocumentVector.cs" />
@@ -230,17 +212,8 @@
     <Compile Include="Logic\eBase\WSBPublicationBase.cs" />
     <Compile Include="Logic\IterationalReport.cs" />
     <Compile Include="Logic\TextProcessing\TextPreparing.cs" />
-    <Compile Include="PG_Articles.cs">
-      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PP_Articles.cs">
-      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="RTFReader.xaml.cs">
       <DependentUpon>RTFReader.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Terms_Vocabulary.cs">
-      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tests\DisjointSetTest.cs" />
     <Compile Include="Tests\DocClasses.cs" />
@@ -265,15 +238,6 @@
     <Compile Include="Tests\TestDocVector.cs" />
     <Compile Include="Tests\TestDocVectorCreator.cs" />
     <Compile Include="Tests\Test_KMeans.cs" />
-    <Compile Include="UG_Articles.cs">
-      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UMK_Articles.cs">
-      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WSB_Articles.cs">
-      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -312,12 +276,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ArticleDBDataModel.edmx">
+    <EntityDeploy Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ArticleDBDataModel.Designer.cs</LastGenOutput>
+      <Link>ArticleDBDataModel.edmx</Link>
     </EntityDeploy>
-    <None Include="ArticleDBDataModel.edmx.diagram">
+    <None Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.edmx.diagram">
       <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
+      <Link>ArticleDBDataModel.edmx.diagram</Link>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -345,16 +310,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ArticleDBDataModel.Context.tt">
+    <Content Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ArticleDBDataModel.Context.cs</LastGenOutput>
       <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
+      <Link>ArticleDBDataModel.Context.tt</Link>
     </Content>
-    <Content Include="ArticleDBDataModel.edmx.sql" />
-    <Content Include="ArticleDBDataModel.tt">
+    <Content Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.edmx.sql">
+      <Link>ArticleDBDataModel.edmx.sql</Link>
+    </Content>
+    <Content Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ArticleDBDataModel.cs</LastGenOutput>
       <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
+      <Link>ArticleDBDataModel.tt</Link>
     </Content>
   </ItemGroup>
   <ItemGroup />

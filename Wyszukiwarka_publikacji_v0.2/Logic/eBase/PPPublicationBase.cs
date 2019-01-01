@@ -10,6 +10,8 @@ using System.Data;
 using System.Data.Objects;
 using System.Text.RegularExpressions;
 using Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing;
+using System.Diagnostics;
+using System.Data.SqlClient;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
 {
@@ -46,8 +48,164 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
 
             using (StringReader sr = new StringReader(endText))
             {
+                int p = 0;
                 string PP_line;
-                
+
+                while ((PP_line = sr.ReadLine()) != null)
+                {
+                    PP_newcontent[p] = PP_line;
+                    PP_separatedContent = PP_line.Split(line_separator, 2);
+
+                    if (PP_separatedContent.Length == 1 & PP_separatedContent[0] == "")
+                        continue;
+                    else if (PP_separatedContent.Length == 1 && PP_articles_Matrix.Any(x => PP_separatedContent[0].Contains(x)))
+                    {
+                        if (PP_author_line != null && PP_Tytul != null)
+                        {
+                            try
+                            {
+                                using (var PPdbContext = new ArticleDBDataModelContainer())
+                                {
+                                    var document = new StringBuilder();
+                                    var pp_article = PPdbContext.PP_ArticlesSet.Create();
+
+                                    pp_article.article_author_line = PP_author_line;
+                                    PP_author_line = null;
+
+                                    pp_article.article_title = PP_Tytul;
+                                    if (PP_Tytul != String.Empty || PP_Tytul != " " || PP_Tytul != null)
+                                    {
+                                        var termTitlePP = TextPreparing.TermsPrepataions(PP_Tytul);
+                                        document.Append(termTitlePP);
+                                    }
+                                    PP_Tytul = null;
+
+                                    pp_article.article_source = PP_Zrodlo;
+                                    if (PP_Zrodlo != String.Empty || PP_Zrodlo != " " || PP_Zrodlo != null)
+                                    {
+                                        var termSourcePP = TextPreparing.TermsPrepataions(PP_Zrodlo);
+                                        document.Append(termSourcePP);
+                                    }
+                                    else
+                                    {
+                                        PP_Zrodlo = "Not defined";
+                                        document.Append(PP_Zrodlo);
+                                    }
+                                    PP_Zrodlo =null;
+
+                                    pp_article.article_year = PP_Rok;
+                                    PP_Rok = 0;
+                                    pp_article.article_language = PP_Jezyk_Publikacji;
+                                    PP_Jezyk_Publikacji = null;
+                                    pp_article.article_DOI = PP_DOI;
+                                    PP_DOI = null;
+                                    /*
+                                    pp_article.article_details = PP_Uwagi;
+                                    PP_Uwagi = null;
+                                    pp_article.article_URL = PP_Adres_URL;
+                                    PP_Adres_URL = null;
+                                    */
+
+                                    for (int z = 0; z <= PP_autors.Length - 4;)
+                                    {
+                                        var authors_of_the_PP_article = PPdbContext.AuthorSet.Create();
+                                        if (PP_autors[z] != "IC)")
+                                        {
+                                            authors_of_the_PP_article.author_name = PP_autors[z + 1];
+                                            authors_of_the_PP_article.author_surename = PP_autors[z];
+                                            pp_article.Author.Add(authors_of_the_PP_article);
+                                        }
+                                        z += 4;
+                                    }
+                                    PPdbContext.PP_ArticlesSet.Add(pp_article);
+
+                                    var _document = document.ToString().Split(' ', ';', ':', ',');
+                                    for (int k = 0; k <= _document.Length - 1; k++)
+                                    {
+                                        var terms = PPdbContext.Terms_Vocabulary.Create();
+
+                                        string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+                                        string[] allowed_dictionary = dictionary_text.Split(',', '\n');
+
+                                        for (int d = 0; d <= _document.Length - 1; d++)
+                                        {
+                                            for (int j = 0; j <= allowed_dictionary.Length - 1; j++)
+                                            {
+                                                if (_document[d].Length > 3 && _document[d].Contains(allowed_dictionary[j]))
+                                                {
+                                                    continue;
+                                                }
+                                                else if (_document[d].Length <= 3 && !(_document[d].Contains(allowed_dictionary[j])))
+                                                {
+                                                    _document.ToList().RemoveAt(d);
+                                                }
+
+                                            }
+                                        }
+                                        //tutaj potrzebnie przepisac id dokumenta w ktorym wystepuje dane slowo
+                                        if (_document[k] != String.Empty || _document[k] != " " || _document[k] != null || _document[k] != Char.IsDigit(' ').ToString())
+                                        {
+                                            //dbContext.Terms_Vocabulary.Where(u)
+                                            var termVocabularyTable = PPdbContext.Terms_Vocabulary;
+                                            terms.term_value = _document[k];
+
+                                        }    
+                                        pp_article.Terms_Vocabulary.Add(terms);
+                                    }
+                                    PPdbContext.SaveChanges();
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                File.WriteAllText(@"F:\\Magistry files\PP_crawler_Log.txt", ex.ToString());
+                            }
+                        }
+                        else
+                            File.WriteAllText(@"F:\\Magistry files\PP_crawler_Log.txt", "Empty line detected." + '\n');
+                    }
+                    else if (PP_separatedContent.Length == 2 && (PP_separatedContent[0].Contains("Liczba odnalezionych") || PP_separatedContent[0] == "Liczba odnalezionych rekordow"))
+                    {
+                        PP_articles_Count = Convert.ToInt32(PP_separatedContent[1]);
+                        PP_articles_Matrix = new string[PP_articles_Count];
+                        for (int l = 0; l <= PP_articles_Count - 1; l++)
+                            PP_articles_Matrix[l] = (l + 1) + ".";
+                    }
+                    if (PP_separatedContent.Length == 2 && (PP_separatedContent[0].ToLower().Contains("autor") || PP_separatedContent[0].Contains("Autor") || PP_separatedContent[0] == "Autor"))
+                    {
+                        PP_author_line = PP_separatedContent[1];
+                        var PP_author_line_modified = PP_author_line.Replace("(", String.Empty);
+                        PP_autors = PP_separatedContent[1].Split(autor_separators, StringSplitOptions.RemoveEmptyEntries);
+                    }
+                    else if (PP_separatedContent.Length == 2 && (PP_separatedContent[0].ToLower().Contains("tytu") || PP_separatedContent[0].ToLower().Contains("tytul") || PP_separatedContent[0].Contains("Tytul")))
+                    {
+                        PP_Tytul = PP_separatedContent[1];
+                    }
+                    else if (PP_separatedContent.Length == 2 && (PP_separatedContent[0].Contains("Zrodlo") || PP_separatedContent[0].ToLower().Contains("zrodlo")))
+                    {
+                        PP_Zrodlo = PP_separatedContent[1];
+                    }
+                    else if (PP_separatedContent.Length == 2 && (PP_separatedContent[0].Contains("Rok") || PP_separatedContent[0].ToLower().Contains("rok")))
+                    {
+                        string rok = "";
+                        if(PP_separatedContent[1] !="" | PP_separatedContent[1] == String.Empty)
+                            rok = null;
+                        else
+                            rok = PP_separatedContent[1].Substring(0, 5);
+
+                        PP_Rok = Convert.ToInt32(rok);
+                    }
+                    else if (PP_separatedContent.Length == 2 && (PP_separatedContent[0].Contains("Jezyk publikacji") || PP_separatedContent[0].ToLower().Contains("jezyk publikacji") || PP_separatedContent[0].Contains("Język publikacji") || PP_separatedContent[0].ToLower().Contains("język publikacji")))
+                    {
+                        PP_Jezyk_Publikacji = PP_separatedContent[1];
+                    }
+                    else if (PP_separatedContent.Length == 2 && (PP_separatedContent[0].Contains("DOI") || PP_separatedContent[0].ToLower().Contains("doi") || PP_separatedContent[0] == "DOI"))
+                    {
+                        PP_DOI = PP_separatedContent[1];
+                    }
+                    p++;
+                }
+                #region Old_code
+                /* 22.08.2018 - old version
                 for (int i = 0; i <= hapDoc.DocumentNode.InnerText.Length; i++)
                 {
                     PP_line = sr.ReadLine();
@@ -116,14 +274,14 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         PP_Jezyk_Publikacji = null;
                                         pp_article.article_DOI = PP_DOI;
                                         PP_DOI = null;
-                                        /*
+                                        //
                                         pp_article.article_details = PP_Uwagi;
                                         PP_Uwagi = null;
                                         pp_article.article_URL = PP_Adres_URL;
                                         PP_Adres_URL = null;
-                                        */
+                                        //
 
-                                        for (int z = 0; z <= PP_autors.Length - 4;)
+                for (int z = 0; z <= PP_autors.Length - 4;)
                                         {
                                             var authors_of_the_PP_article = PPdbContext.AuthorSet.Create();
                                             if (PP_autors[z] != "IC)")
@@ -220,8 +378,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                     dbppcontext.SaveChanges();
                                     //dbppcontext.SaveChanges();
                                 }
-                                */
-                                #endregion
+                                //
+                                //#endregion
                             }
                             else
                             {
@@ -266,7 +424,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                             PP_Adres_URL = PP_separatedContent[1];
                             System.Windows.MessageBox.Show(PP_Adres_URL = PP_separatedContent[1]);
                         }
-                        */
+                        //
 
                         //else if (PP_separatedContent.Length == 1 && PP_separatedContent[0] == String.Empty) System.Windows.MessageBox.Show("The empty line detected", "Empty line", System.Windows.MessageBoxButton.OK);
                         else
@@ -277,10 +435,11 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         counter++;
                     }
                 }
+                */
+                #endregion
             }
         }
     }
-
     /// <summary>
     /// PPArticle_Entity_Creation
     /// </summary>

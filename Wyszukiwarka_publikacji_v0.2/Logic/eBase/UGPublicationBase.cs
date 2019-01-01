@@ -113,14 +113,21 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                     }
 
                                     //tutaj potrzebnie przepisac id dokumenta w ktorym wystepuje dane slowo
-                                    if (_document[k] != String.Empty || _document[k] != " " || _document[k] != null || _document[k] != Char.IsDigit(' ').ToString())
+                                    if (_document[k] != String.Empty || _document[k] != " " || _document[k] != null || _document[k] != Char.IsDigit(' ').ToString() || dbContext.Terms_Vocabulary.Any(o=>o.term_value != _document[k]))
                                     {
                                         //dbContext.Terms_Vocabulary.Where(u)
                                         var termVocabularyTable = dbContext.Terms_Vocabulary;
                                         terms.term_value = _document[k];
 
                                     }
-                                    ug_article.Terms_Vocabulary.Add(terms);
+                                    try
+                                    {
+                                        ug_article.Terms_Vocabulary.Add(terms);
+                                    }
+                                    catch(Exception addingTermToDB)
+                                    {
+                                        File.WriteAllText(@"F:\\Magistry files\UG_crawler_Log.txt", DateTime.Now.ToString() + addingTermToDB.ToString());
+                                    }
                                 }
                                 try
                                 {
@@ -128,7 +135,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                 }
                                 catch (Exception ex)
                                 {
-                                    File.WriteAllText(@"F:\\Magistry files\UG_crawler_Log.txt", ex.ToString());
+                                    File.WriteAllText(@"F:\\Magistry files\UG_crawler_Log.txt", DateTime.Now.ToString() + ex.ToString());
                                 }
                             }
                         }
@@ -165,6 +172,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                     {
                         UG_DOI = UG_separatedContent[1];
                     }
+                    p++;
                 }
                 #region Old_reader_code
                 // 21.08.2018 - Old version of code
