@@ -98,7 +98,9 @@ namespace Wyszukiwarka_publikacji_v0._2
                 {
                     //Task.Factory.StartNew(() => Logic.eBase.WSBPublicationBase.get_WSB_Document_content());
                     //Task.Factory.StartNew(() => Logic.eBase.WSBPublication.get_WSB_Document_content());
+
                     Logic.eBase.WSBPublicationBase.get_WSB_Document_content();
+                    //Logic.eBase.newWSBPublication.get_WSB_Document_content();
                 }
             }
         }

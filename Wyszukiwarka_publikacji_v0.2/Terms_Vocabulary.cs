@@ -17,25 +17,25 @@ namespace Wyszukiwarka_publikacji_v0._2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Terms_Vocabulary()
         {
-            this.WSB_Articles = new HashSet<WSB_Articles>();
-            this.UMK_Articles = new HashSet<UMK_Articles>();
-            this.UG_Articles = new HashSet<UG_Articles>();
-            this.PP_Articles = new HashSet<PP_Articles>();
-            this.PG_Articles = new HashSet<PG_Articles>();
+            this.PG_ArticlesSet = new HashSet<PG_ArticlesSet>();
+            this.PP_ArticlesSet = new HashSet<PP_ArticlesSet>();
+            this.UG_ArticlesSet = new HashSet<UG_ArticlesSet>();
+            this.UMK_ArticlesSet = new HashSet<UMK_ArticlesSet>();
+            this.WSB_ArticlesSet = new HashSet<WSB_ArticlesSet>();
         }
     
         public int terms_Id { get; set; }
         public string term_value { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WSB_Articles> WSB_Articles { get; set; }
+        public virtual ICollection<PG_ArticlesSet> PG_ArticlesSet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UMK_Articles> UMK_Articles { get; set; }
+        public virtual ICollection<PP_ArticlesSet> PP_ArticlesSet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UG_Articles> UG_Articles { get; set; }
+        public virtual ICollection<UG_ArticlesSet> UG_ArticlesSet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PP_Articles> PP_Articles { get; set; }
+        public virtual ICollection<UMK_ArticlesSet> UMK_ArticlesSet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PG_Articles> PG_Articles { get; set; }
+        public virtual ICollection<WSB_ArticlesSet> WSB_ArticlesSet { get; set; }
     }
 }

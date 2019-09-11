@@ -26,13 +26,15 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
         {
             termCollection = new HashSet<string>();
 
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 dbContext.Terms_Vocabulary.Load();
 
                 foreach (var terms in dbContext.Terms_Vocabulary.Local)
                 {
-                    termCollection.Add(terms.term_value.ToLower());
+                    var termExists = dbContext.Terms_Vocabulary.Any(t => t.term_value == terms.term_value);
+                    if(!termExists)
+                        termCollection.Add(terms.term_value.ToLower());
                 }
             }
             return termCollection;

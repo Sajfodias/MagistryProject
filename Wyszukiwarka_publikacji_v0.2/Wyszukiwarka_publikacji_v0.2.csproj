@@ -118,12 +118,19 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.NameResolution, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.NameResolution.4.3.0\lib\net46\System.Net.NameResolution.dll</HintPath>
       <Private>True</Private>
@@ -138,6 +145,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -154,6 +164,14 @@
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -172,6 +190,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ArticleDBDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArticleDBDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ArticleDBDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ArticleDBDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AuthorSet.cs">
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\BaseDbContext.cs" />
     <Compile Include="FormattedDbEntityValidationException.cs" />
     <Compile Include="GraphData and Visualizations\CreateGraphDatabaseNeo4j.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Algorithms\DetailedDocumentVector.cs" />
@@ -200,6 +237,7 @@
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\Normalization.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\SimilarityMatrixCalculations.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\TFIDF2ndrealization.cs" />
+    <Compile Include="Logic\ClusteringAlgorithms\Used functions\TFIDFFileGenerator.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\Used functions\VectorSpaceModel.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\WorkedAlgorithmsFromTest\FuzzyCMeans.cs" />
     <Compile Include="Logic\ClusteringAlgorithms\WorkedAlgorithmsFromTest\GravitationalClusteringAlgorithm.cs" />
@@ -212,8 +250,44 @@
     <Compile Include="Logic\eBase\WSBPublicationBase.cs" />
     <Compile Include="Logic\IterationalReport.cs" />
     <Compile Include="Logic\TextProcessing\TextPreparing.cs" />
+    <Compile Include="Migrations\201909041830049_InitialCreate.cs" />
+    <Compile Include="Migrations\201909041830049_InitialCreate.Designer.cs">
+      <DependentUpon>201909041830049_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909051927009_InitialCreate1.cs" />
+    <Compile Include="Migrations\201909051927009_InitialCreate1.Designer.cs">
+      <DependentUpon>201909051927009_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\PGArticle.cs" />
+    <Compile Include="Models\PGArticleAuthor.cs" />
+    <Compile Include="Models\PPArticle.cs" />
+    <Compile Include="Models\PPArticleAuthor.cs" />
+    <Compile Include="Models\TermVocabulary.cs" />
+    <Compile Include="Models\TermVocabularyPGArticle.cs" />
+    <Compile Include="Models\TermVocabularyPPArticle.cs" />
+    <Compile Include="Models\TermVocabularyUGArticle.cs" />
+    <Compile Include="Models\TermVocabularyUMKArticle.cs" />
+    <Compile Include="Models\TermVocabularyWSBArticle.cs" />
+    <Compile Include="Models\UGArticle.cs" />
+    <Compile Include="Models\UGArticleAuthor.cs" />
+    <Compile Include="Models\UMKArticle.cs" />
+    <Compile Include="Models\UMKArticleAuthor.cs" />
+    <Compile Include="Models\WSBArticle.cs" />
+    <Compile Include="Models\WSBArticleAuthor.cs" />
+    <Compile Include="PG_ArticlesSet.cs">
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PP_ArticlesSet.cs">
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="RTFReader.xaml.cs">
       <DependentUpon>RTFReader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Terms_Vocabulary.cs">
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tests\DisjointSetTest.cs" />
     <Compile Include="Tests\DocClasses.cs" />
@@ -238,6 +312,15 @@
     <Compile Include="Tests\TestDocVector.cs" />
     <Compile Include="Tests\TestDocVectorCreator.cs" />
     <Compile Include="Tests\Test_KMeans.cs" />
+    <Compile Include="UG_ArticlesSet.cs">
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMK_ArticlesSet.cs">
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WSB_ArticlesSet.cs">
+      <DependentUpon>ArticleDBDataModel.tt</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -272,17 +355,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201909041830049_InitialCreate.resx">
+      <DependentUpon>201909041830049_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909051927009_InitialCreate1.resx">
+      <DependentUpon>201909051927009_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.edmx">
+    <EntityDeploy Include="ArticleDBDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <Link>ArticleDBDataModel.edmx</Link>
+      <LastGenOutput>ArticleDBDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.edmx.diagram">
+    <None Include="ArticleDBDataModel.edmx.diagram">
       <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
-      <Link>ArticleDBDataModel.edmx.diagram</Link>
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -292,7 +381,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -310,18 +401,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.Context.tt">
+    <Content Include="ArticleDBDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
-      <Link>ArticleDBDataModel.Context.tt</Link>
+      <LastGenOutput>ArticleDBDataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.edmx.sql">
-      <Link>ArticleDBDataModel.edmx.sql</Link>
-    </Content>
-    <Content Include="C:\Users\Unkown\Desktop\database_backup\ArticleDBDataModel.tt">
+    <Content Include="ArticleDBDataModel.edmx.sql" />
+    <Content Include="ArticleDBDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ArticleDBDataModel.edmx</DependentUpon>
-      <Link>ArticleDBDataModel.tt</Link>
+      <LastGenOutput>ArticleDBDataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup />

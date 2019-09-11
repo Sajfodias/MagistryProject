@@ -13,10 +13,10 @@ namespace Wyszukiwarka_publikacji_v0._2
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ArticleDBDataModelContainer : DbContext
+    public partial class ArticleProjDBEntities : DbContext
     {
-        public ArticleDBDataModelContainer()
-            : base("name=ArticleDBDataModelContainer")
+        public ArticleProjDBEntities()
+            : base("name=ArticleProjDBEntities")
         {
         }
     
@@ -25,12 +25,12 @@ namespace Wyszukiwarka_publikacji_v0._2
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Author> AuthorSet { get; set; }
-        public virtual DbSet<PG_Articles> PG_ArticlesSet { get; set; }
-        public virtual DbSet<PP_Articles> PP_ArticlesSet { get; set; }
-        public virtual DbSet<UG_Articles> UG_ArticlesSet { get; set; }
-        public virtual DbSet<UMK_Articles> UMK_ArticlesSet { get; set; }
-        public virtual DbSet<WSB_Articles> WSB_ArticlesSet { get; set; }
+        public virtual DbSet<AuthorSet> AuthorSet { get; set; }
+        public virtual DbSet<PG_ArticlesSet> PG_ArticlesSet { get; set; }
+        public virtual DbSet<PP_ArticlesSet> PP_ArticlesSet { get; set; }
         public virtual DbSet<Terms_Vocabulary> Terms_Vocabulary { get; set; }
+        public virtual DbSet<UG_ArticlesSet> UG_ArticlesSet { get; set; }
+        public virtual DbSet<UMK_ArticlesSet> UMK_ArticlesSet { get; set; }
+        public virtual DbSet<WSB_ArticlesSet> WSB_ArticlesSet { get; set; }
     }
 }

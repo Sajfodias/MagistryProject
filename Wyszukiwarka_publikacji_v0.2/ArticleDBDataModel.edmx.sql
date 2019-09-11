@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/14/2018 15:42:11
--- Generated from EDMX file: F:\Magistry files\Wyszukiwarka_publikacji_v0.2\Wyszukiwarka_publikacji_v0.2\ArticleDBDataModel.edmx
+-- Date Created: 09/08/2019 19:56:45
+-- Generated from EDMX file: D:\personal_proj\oldMagistryProj\MagistryProject\Wyszukiwarka_publikacji_v0.2\ArticleDBDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,47 +17,29 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_PG_ArticlesAuthor_PG_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PG_ArticlesAuthor] DROP CONSTRAINT [FK_PG_ArticlesAuthor_PG_Articles];
-GO
 IF OBJECT_ID(N'[dbo].[FK_PG_ArticlesAuthor_Author]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PG_ArticlesAuthor] DROP CONSTRAINT [FK_PG_ArticlesAuthor_Author];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PP_ArticlesAuthor_PP_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PP_ArticlesAuthor] DROP CONSTRAINT [FK_PP_ArticlesAuthor_PP_Articles];
+IF OBJECT_ID(N'[dbo].[FK_PG_ArticlesAuthor_PG_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PG_ArticlesAuthor] DROP CONSTRAINT [FK_PG_ArticlesAuthor_PG_Articles];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PP_ArticlesAuthor_Author]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PP_ArticlesAuthor] DROP CONSTRAINT [FK_PP_ArticlesAuthor_Author];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UG_ArticlesAuthor_UG_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UG_ArticlesAuthor] DROP CONSTRAINT [FK_UG_ArticlesAuthor_UG_Articles];
+IF OBJECT_ID(N'[dbo].[FK_PP_ArticlesAuthor_PP_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PP_ArticlesAuthor] DROP CONSTRAINT [FK_PP_ArticlesAuthor_PP_Articles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UG_ArticlesAuthor_Author]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UG_ArticlesAuthor] DROP CONSTRAINT [FK_UG_ArticlesAuthor_Author];
+IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPG_Articles_PG_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Terms_VocabularyPG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPG_Articles_PG_Articles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UMK_ArticlesAuthor_UMK_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UMK_ArticlesAuthor] DROP CONSTRAINT [FK_UMK_ArticlesAuthor_UMK_Articles];
+IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPG_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Terms_VocabularyPG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPG_Articles_Terms_Vocabulary];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UMK_ArticlesAuthor_Author]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UMK_ArticlesAuthor] DROP CONSTRAINT [FK_UMK_ArticlesAuthor_Author];
+IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPP_Articles_PP_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Terms_VocabularyPP_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPP_Articles_PP_Articles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_WSB_ArticlesAuthor_WSB_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WSB_ArticlesAuthor] DROP CONSTRAINT [FK_WSB_ArticlesAuthor_WSB_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_WSB_ArticlesAuthor_Author]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WSB_ArticlesAuthor] DROP CONSTRAINT [FK_WSB_ArticlesAuthor_Author];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles] DROP CONSTRAINT [FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyWSB_Articles_WSB_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles] DROP CONSTRAINT [FK_Terms_VocabularyWSB_Articles_WSB_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUMK_Articles_UMK_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUMK_Articles_UMK_Articles];
+IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPP_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Terms_VocabularyPP_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPP_Articles_Terms_Vocabulary];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUG_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Terms_VocabularyUG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUG_Articles_Terms_Vocabulary];
@@ -65,17 +47,35 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUG_Articles_UG_Articles]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Terms_VocabularyUG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUG_Articles_UG_Articles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPP_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyPP_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPP_Articles_Terms_Vocabulary];
+IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPP_Articles_PP_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyPP_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPP_Articles_PP_Articles];
+IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyUMK_Articles_UMK_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles] DROP CONSTRAINT [FK_Terms_VocabularyUMK_Articles_UMK_Articles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPG_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyPG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPG_Articles_Terms_Vocabulary];
+IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles] DROP CONSTRAINT [FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyPG_Articles_PG_Articles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Terms_VocabularyPG_Articles] DROP CONSTRAINT [FK_Terms_VocabularyPG_Articles_PG_Articles];
+IF OBJECT_ID(N'[dbo].[FK_Terms_VocabularyWSB_Articles_WSB_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles] DROP CONSTRAINT [FK_Terms_VocabularyWSB_Articles_WSB_Articles];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UG_ArticlesAuthor_Author]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UG_ArticlesAuthor] DROP CONSTRAINT [FK_UG_ArticlesAuthor_Author];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UG_ArticlesAuthor_UG_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UG_ArticlesAuthor] DROP CONSTRAINT [FK_UG_ArticlesAuthor_UG_Articles];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UMK_ArticlesAuthor_Author]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UMK_ArticlesAuthor] DROP CONSTRAINT [FK_UMK_ArticlesAuthor_Author];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UMK_ArticlesAuthor_UMK_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UMK_ArticlesAuthor] DROP CONSTRAINT [FK_UMK_ArticlesAuthor_UMK_Articles];
+GO
+IF OBJECT_ID(N'[dbo].[FK_WSB_ArticlesAuthor_Author]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WSB_ArticlesAuthor] DROP CONSTRAINT [FK_WSB_ArticlesAuthor_Author];
+GO
+IF OBJECT_ID(N'[dbo].[FK_WSB_ArticlesAuthor_WSB_Articles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WSB_ArticlesAuthor] DROP CONSTRAINT [FK_WSB_ArticlesAuthor_WSB_Articles];
 GO
 
 -- --------------------------------------------------
@@ -85,53 +85,53 @@ GO
 IF OBJECT_ID(N'[dbo].[AuthorSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AuthorSet];
 GO
-IF OBJECT_ID(N'[dbo].[PG_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PG_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[PP_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PP_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[UG_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UG_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[UMK_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UMK_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[WSB_ArticlesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[WSB_ArticlesSet];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_Vocabulary]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_Vocabulary];
-GO
 IF OBJECT_ID(N'[dbo].[PG_ArticlesAuthor]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PG_ArticlesAuthor];
+GO
+IF OBJECT_ID(N'[dbo].[PG_ArticlesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PG_ArticlesSet];
 GO
 IF OBJECT_ID(N'[dbo].[PP_ArticlesAuthor]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PP_ArticlesAuthor];
 GO
-IF OBJECT_ID(N'[dbo].[UG_ArticlesAuthor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UG_ArticlesAuthor];
+IF OBJECT_ID(N'[dbo].[PP_ArticlesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PP_ArticlesSet];
 GO
-IF OBJECT_ID(N'[dbo].[UMK_ArticlesAuthor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UMK_ArticlesAuthor];
+IF OBJECT_ID(N'[dbo].[Terms_Vocabulary]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Terms_Vocabulary];
 GO
-IF OBJECT_ID(N'[dbo].[WSB_ArticlesAuthor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[WSB_ArticlesAuthor];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyWSB_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyWSB_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyUMK_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyUMK_Articles];
-GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyUG_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyUG_Articles];
+IF OBJECT_ID(N'[dbo].[Terms_VocabularyPG_Articles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Terms_VocabularyPG_Articles];
 GO
 IF OBJECT_ID(N'[dbo].[Terms_VocabularyPP_Articles]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Terms_VocabularyPP_Articles];
 GO
-IF OBJECT_ID(N'[dbo].[Terms_VocabularyPG_Articles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Terms_VocabularyPG_Articles];
+IF OBJECT_ID(N'[dbo].[Terms_VocabularyUG_Articles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Terms_VocabularyUG_Articles];
+GO
+IF OBJECT_ID(N'[dbo].[Terms_VocabularyUMK_Articles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Terms_VocabularyUMK_Articles];
+GO
+IF OBJECT_ID(N'[dbo].[Terms_VocabularyWSB_Articles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Terms_VocabularyWSB_Articles];
+GO
+IF OBJECT_ID(N'[dbo].[UG_ArticlesAuthor]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UG_ArticlesAuthor];
+GO
+IF OBJECT_ID(N'[dbo].[UG_ArticlesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UG_ArticlesSet];
+GO
+IF OBJECT_ID(N'[dbo].[UMK_ArticlesAuthor]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UMK_ArticlesAuthor];
+GO
+IF OBJECT_ID(N'[dbo].[UMK_ArticlesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UMK_ArticlesSet];
+GO
+IF OBJECT_ID(N'[dbo].[WSB_ArticlesAuthor]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[WSB_ArticlesAuthor];
+GO
+IF OBJECT_ID(N'[dbo].[WSB_ArticlesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[WSB_ArticlesSet];
 GO
 
 -- --------------------------------------------------
@@ -171,6 +171,13 @@ CREATE TABLE [dbo].[PP_ArticlesSet] (
     [article_language] nvarchar(max)  NOT NULL,
     [article_DOI] nvarchar(max)  NOT NULL,
     [Terms_Vocabulary_terms_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Terms_Vocabulary'
+CREATE TABLE [dbo].[Terms_Vocabulary] (
+    [terms_Id] int IDENTITY(1,1) NOT NULL,
+    [term_value] nvarchar(450)  NOT NULL
 );
 GO
 
@@ -220,80 +227,73 @@ CREATE TABLE [dbo].[WSB_ArticlesSet] (
 );
 GO
 
--- Creating table 'Terms_Vocabulary'
-CREATE TABLE [dbo].[Terms_Vocabulary] (
-    [terms_Id] int IDENTITY(1,1) NOT NULL,
-    [term_value] nvarchar(max)  NOT NULL
-);
-GO
-
 -- Creating table 'PG_ArticlesAuthor'
 CREATE TABLE [dbo].[PG_ArticlesAuthor] (
-    [PG_Articles_article_Id] int  NOT NULL,
-    [Author_author_Id] int  NOT NULL
+    [AuthorSet_author_Id] int  NOT NULL,
+    [PG_ArticlesSet_article_Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'PP_ArticlesAuthor'
 CREATE TABLE [dbo].[PP_ArticlesAuthor] (
-    [PP_Articles_article_Id] int  NOT NULL,
-    [Author_author_Id] int  NOT NULL
+    [AuthorSet_author_Id] int  NOT NULL,
+    [PP_ArticlesSet_article_Id] int  NOT NULL
 );
 GO
 
--- Creating table 'UG_ArticlesAuthor'
-CREATE TABLE [dbo].[UG_ArticlesAuthor] (
-    [UG_Articles_article_Id] int  NOT NULL,
-    [Author_author_Id] int  NOT NULL
+-- Creating table 'Terms_VocabularyPG_Articles'
+CREATE TABLE [dbo].[Terms_VocabularyPG_Articles] (
+    [PG_ArticlesSet_article_Id] int  NOT NULL,
+    [Terms_Vocabulary_terms_Id] int  NOT NULL
 );
 GO
 
--- Creating table 'UMK_ArticlesAuthor'
-CREATE TABLE [dbo].[UMK_ArticlesAuthor] (
-    [UMK_Articles_article_Id] int  NOT NULL,
-    [Author_author_Id] int  NOT NULL
-);
-GO
-
--- Creating table 'WSB_ArticlesAuthor'
-CREATE TABLE [dbo].[WSB_ArticlesAuthor] (
-    [WSB_Articles_article_Id] int  NOT NULL,
-    [Author_author_Id] int  NOT NULL
-);
-GO
-
--- Creating table 'Terms_VocabularyWSB_Articles'
-CREATE TABLE [dbo].[Terms_VocabularyWSB_Articles] (
-    [Terms_Vocabulary_terms_Id] int  NOT NULL,
-    [WSB_Articles_article_Id] int  NOT NULL
-);
-GO
-
--- Creating table 'Terms_VocabularyUMK_Articles'
-CREATE TABLE [dbo].[Terms_VocabularyUMK_Articles] (
-    [Terms_Vocabulary_terms_Id] int  NOT NULL,
-    [UMK_Articles_article_Id] int  NOT NULL
+-- Creating table 'Terms_VocabularyPP_Articles'
+CREATE TABLE [dbo].[Terms_VocabularyPP_Articles] (
+    [PP_ArticlesSet_article_Id] int  NOT NULL,
+    [Terms_Vocabulary_terms_Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'Terms_VocabularyUG_Articles'
 CREATE TABLE [dbo].[Terms_VocabularyUG_Articles] (
     [Terms_Vocabulary_terms_Id] int  NOT NULL,
-    [UG_Articles_article_Id] int  NOT NULL
+    [UG_ArticlesSet_article_Id] int  NOT NULL
 );
 GO
 
--- Creating table 'Terms_VocabularyPP_Articles'
-CREATE TABLE [dbo].[Terms_VocabularyPP_Articles] (
+-- Creating table 'Terms_VocabularyUMK_Articles'
+CREATE TABLE [dbo].[Terms_VocabularyUMK_Articles] (
     [Terms_Vocabulary_terms_Id] int  NOT NULL,
-    [PP_Articles_article_Id] int  NOT NULL
+    [UMK_ArticlesSet_article_Id] int  NOT NULL
 );
 GO
 
--- Creating table 'Terms_VocabularyPG_Articles'
-CREATE TABLE [dbo].[Terms_VocabularyPG_Articles] (
+-- Creating table 'Terms_VocabularyWSB_Articles'
+CREATE TABLE [dbo].[Terms_VocabularyWSB_Articles] (
     [Terms_Vocabulary_terms_Id] int  NOT NULL,
-    [PG_Articles_article_Id] int  NOT NULL
+    [WSB_ArticlesSet_article_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'UG_ArticlesAuthor'
+CREATE TABLE [dbo].[UG_ArticlesAuthor] (
+    [AuthorSet_author_Id] int  NOT NULL,
+    [UG_ArticlesSet_article_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'UMK_ArticlesAuthor'
+CREATE TABLE [dbo].[UMK_ArticlesAuthor] (
+    [AuthorSet_author_Id] int  NOT NULL,
+    [UMK_ArticlesSet_article_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'WSB_ArticlesAuthor'
+CREATE TABLE [dbo].[WSB_ArticlesAuthor] (
+    [AuthorSet_author_Id] int  NOT NULL,
+    [WSB_ArticlesSet_article_Id] int  NOT NULL
 );
 GO
 
@@ -319,6 +319,12 @@ ADD CONSTRAINT [PK_PP_ArticlesSet]
     PRIMARY KEY CLUSTERED ([article_Id] ASC);
 GO
 
+-- Creating primary key on [terms_Id] in table 'Terms_Vocabulary'
+ALTER TABLE [dbo].[Terms_Vocabulary]
+ADD CONSTRAINT [PK_Terms_Vocabulary]
+    PRIMARY KEY CLUSTERED ([terms_Id] ASC);
+GO
+
 -- Creating primary key on [article_Id] in table 'UG_ArticlesSet'
 ALTER TABLE [dbo].[UG_ArticlesSet]
 ADD CONSTRAINT [PK_UG_ArticlesSet]
@@ -337,290 +343,125 @@ ADD CONSTRAINT [PK_WSB_ArticlesSet]
     PRIMARY KEY CLUSTERED ([article_Id] ASC);
 GO
 
--- Creating primary key on [terms_Id] in table 'Terms_Vocabulary'
-ALTER TABLE [dbo].[Terms_Vocabulary]
-ADD CONSTRAINT [PK_Terms_Vocabulary]
-    PRIMARY KEY CLUSTERED ([terms_Id] ASC);
-GO
-
--- Creating primary key on [PG_Articles_article_Id], [Author_author_Id] in table 'PG_ArticlesAuthor'
+-- Creating primary key on [AuthorSet_author_Id], [PG_ArticlesSet_article_Id] in table 'PG_ArticlesAuthor'
 ALTER TABLE [dbo].[PG_ArticlesAuthor]
 ADD CONSTRAINT [PK_PG_ArticlesAuthor]
-    PRIMARY KEY CLUSTERED ([PG_Articles_article_Id], [Author_author_Id] ASC);
+    PRIMARY KEY CLUSTERED ([AuthorSet_author_Id], [PG_ArticlesSet_article_Id] ASC);
 GO
 
--- Creating primary key on [PP_Articles_article_Id], [Author_author_Id] in table 'PP_ArticlesAuthor'
+-- Creating primary key on [AuthorSet_author_Id], [PP_ArticlesSet_article_Id] in table 'PP_ArticlesAuthor'
 ALTER TABLE [dbo].[PP_ArticlesAuthor]
 ADD CONSTRAINT [PK_PP_ArticlesAuthor]
-    PRIMARY KEY CLUSTERED ([PP_Articles_article_Id], [Author_author_Id] ASC);
+    PRIMARY KEY CLUSTERED ([AuthorSet_author_Id], [PP_ArticlesSet_article_Id] ASC);
 GO
 
--- Creating primary key on [UG_Articles_article_Id], [Author_author_Id] in table 'UG_ArticlesAuthor'
-ALTER TABLE [dbo].[UG_ArticlesAuthor]
-ADD CONSTRAINT [PK_UG_ArticlesAuthor]
-    PRIMARY KEY CLUSTERED ([UG_Articles_article_Id], [Author_author_Id] ASC);
-GO
-
--- Creating primary key on [UMK_Articles_article_Id], [Author_author_Id] in table 'UMK_ArticlesAuthor'
-ALTER TABLE [dbo].[UMK_ArticlesAuthor]
-ADD CONSTRAINT [PK_UMK_ArticlesAuthor]
-    PRIMARY KEY CLUSTERED ([UMK_Articles_article_Id], [Author_author_Id] ASC);
-GO
-
--- Creating primary key on [WSB_Articles_article_Id], [Author_author_Id] in table 'WSB_ArticlesAuthor'
-ALTER TABLE [dbo].[WSB_ArticlesAuthor]
-ADD CONSTRAINT [PK_WSB_ArticlesAuthor]
-    PRIMARY KEY CLUSTERED ([WSB_Articles_article_Id], [Author_author_Id] ASC);
-GO
-
--- Creating primary key on [Terms_Vocabulary_terms_Id], [WSB_Articles_article_Id] in table 'Terms_VocabularyWSB_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles]
-ADD CONSTRAINT [PK_Terms_VocabularyWSB_Articles]
-    PRIMARY KEY CLUSTERED ([Terms_Vocabulary_terms_Id], [WSB_Articles_article_Id] ASC);
-GO
-
--- Creating primary key on [Terms_Vocabulary_terms_Id], [UMK_Articles_article_Id] in table 'Terms_VocabularyUMK_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles]
-ADD CONSTRAINT [PK_Terms_VocabularyUMK_Articles]
-    PRIMARY KEY CLUSTERED ([Terms_Vocabulary_terms_Id], [UMK_Articles_article_Id] ASC);
-GO
-
--- Creating primary key on [Terms_Vocabulary_terms_Id], [UG_Articles_article_Id] in table 'Terms_VocabularyUG_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyUG_Articles]
-ADD CONSTRAINT [PK_Terms_VocabularyUG_Articles]
-    PRIMARY KEY CLUSTERED ([Terms_Vocabulary_terms_Id], [UG_Articles_article_Id] ASC);
-GO
-
--- Creating primary key on [Terms_Vocabulary_terms_Id], [PP_Articles_article_Id] in table 'Terms_VocabularyPP_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyPP_Articles]
-ADD CONSTRAINT [PK_Terms_VocabularyPP_Articles]
-    PRIMARY KEY CLUSTERED ([Terms_Vocabulary_terms_Id], [PP_Articles_article_Id] ASC);
-GO
-
--- Creating primary key on [Terms_Vocabulary_terms_Id], [PG_Articles_article_Id] in table 'Terms_VocabularyPG_Articles'
+-- Creating primary key on [PG_ArticlesSet_article_Id], [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyPG_Articles'
 ALTER TABLE [dbo].[Terms_VocabularyPG_Articles]
 ADD CONSTRAINT [PK_Terms_VocabularyPG_Articles]
-    PRIMARY KEY CLUSTERED ([Terms_Vocabulary_terms_Id], [PG_Articles_article_Id] ASC);
+    PRIMARY KEY CLUSTERED ([PG_ArticlesSet_article_Id], [Terms_Vocabulary_terms_Id] ASC);
+GO
+
+-- Creating primary key on [PP_ArticlesSet_article_Id], [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyPP_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyPP_Articles]
+ADD CONSTRAINT [PK_Terms_VocabularyPP_Articles]
+    PRIMARY KEY CLUSTERED ([PP_ArticlesSet_article_Id], [Terms_Vocabulary_terms_Id] ASC);
+GO
+
+-- Creating primary key on [Terms_Vocabulary_terms_Id], [UG_ArticlesSet_article_Id] in table 'Terms_VocabularyUG_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyUG_Articles]
+ADD CONSTRAINT [PK_Terms_VocabularyUG_Articles]
+    PRIMARY KEY CLUSTERED ([Terms_Vocabulary_terms_Id], [UG_ArticlesSet_article_Id] ASC);
+GO
+
+-- Creating primary key on [Terms_Vocabulary_terms_Id], [UMK_ArticlesSet_article_Id] in table 'Terms_VocabularyUMK_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles]
+ADD CONSTRAINT [PK_Terms_VocabularyUMK_Articles]
+    PRIMARY KEY CLUSTERED ([Terms_Vocabulary_terms_Id], [UMK_ArticlesSet_article_Id] ASC);
+GO
+
+-- Creating primary key on [Terms_Vocabulary_terms_Id], [WSB_ArticlesSet_article_Id] in table 'Terms_VocabularyWSB_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles]
+ADD CONSTRAINT [PK_Terms_VocabularyWSB_Articles]
+    PRIMARY KEY CLUSTERED ([Terms_Vocabulary_terms_Id], [WSB_ArticlesSet_article_Id] ASC);
+GO
+
+-- Creating primary key on [AuthorSet_author_Id], [UG_ArticlesSet_article_Id] in table 'UG_ArticlesAuthor'
+ALTER TABLE [dbo].[UG_ArticlesAuthor]
+ADD CONSTRAINT [PK_UG_ArticlesAuthor]
+    PRIMARY KEY CLUSTERED ([AuthorSet_author_Id], [UG_ArticlesSet_article_Id] ASC);
+GO
+
+-- Creating primary key on [AuthorSet_author_Id], [UMK_ArticlesSet_article_Id] in table 'UMK_ArticlesAuthor'
+ALTER TABLE [dbo].[UMK_ArticlesAuthor]
+ADD CONSTRAINT [PK_UMK_ArticlesAuthor]
+    PRIMARY KEY CLUSTERED ([AuthorSet_author_Id], [UMK_ArticlesSet_article_Id] ASC);
+GO
+
+-- Creating primary key on [AuthorSet_author_Id], [WSB_ArticlesSet_article_Id] in table 'WSB_ArticlesAuthor'
+ALTER TABLE [dbo].[WSB_ArticlesAuthor]
+ADD CONSTRAINT [PK_WSB_ArticlesAuthor]
+    PRIMARY KEY CLUSTERED ([AuthorSet_author_Id], [WSB_ArticlesSet_article_Id] ASC);
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [PG_Articles_article_Id] in table 'PG_ArticlesAuthor'
+-- Creating foreign key on [AuthorSet_author_Id] in table 'PG_ArticlesAuthor'
 ALTER TABLE [dbo].[PG_ArticlesAuthor]
-ADD CONSTRAINT [FK_PG_ArticlesAuthor_PG_Articles]
-    FOREIGN KEY ([PG_Articles_article_Id])
+ADD CONSTRAINT [FK_PG_ArticlesAuthor_AuthorSet]
+    FOREIGN KEY ([AuthorSet_author_Id])
+    REFERENCES [dbo].[AuthorSet]
+        ([author_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [PG_ArticlesSet_article_Id] in table 'PG_ArticlesAuthor'
+ALTER TABLE [dbo].[PG_ArticlesAuthor]
+ADD CONSTRAINT [FK_PG_ArticlesAuthor_PG_ArticlesSet]
+    FOREIGN KEY ([PG_ArticlesSet_article_Id])
     REFERENCES [dbo].[PG_ArticlesSet]
         ([article_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Author_author_Id] in table 'PG_ArticlesAuthor'
-ALTER TABLE [dbo].[PG_ArticlesAuthor]
-ADD CONSTRAINT [FK_PG_ArticlesAuthor_Author]
-    FOREIGN KEY ([Author_author_Id])
-    REFERENCES [dbo].[AuthorSet]
-        ([author_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PG_ArticlesAuthor_Author'
-CREATE INDEX [IX_FK_PG_ArticlesAuthor_Author]
+-- Creating non-clustered index for FOREIGN KEY 'FK_PG_ArticlesAuthor_PG_ArticlesSet'
+CREATE INDEX [IX_FK_PG_ArticlesAuthor_PG_ArticlesSet]
 ON [dbo].[PG_ArticlesAuthor]
-    ([Author_author_Id]);
+    ([PG_ArticlesSet_article_Id]);
 GO
 
--- Creating foreign key on [PP_Articles_article_Id] in table 'PP_ArticlesAuthor'
+-- Creating foreign key on [AuthorSet_author_Id] in table 'PP_ArticlesAuthor'
 ALTER TABLE [dbo].[PP_ArticlesAuthor]
-ADD CONSTRAINT [FK_PP_ArticlesAuthor_PP_Articles]
-    FOREIGN KEY ([PP_Articles_article_Id])
-    REFERENCES [dbo].[PP_ArticlesSet]
-        ([article_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Author_author_Id] in table 'PP_ArticlesAuthor'
-ALTER TABLE [dbo].[PP_ArticlesAuthor]
-ADD CONSTRAINT [FK_PP_ArticlesAuthor_Author]
-    FOREIGN KEY ([Author_author_Id])
+ADD CONSTRAINT [FK_PP_ArticlesAuthor_AuthorSet]
+    FOREIGN KEY ([AuthorSet_author_Id])
     REFERENCES [dbo].[AuthorSet]
         ([author_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_PP_ArticlesAuthor_Author'
-CREATE INDEX [IX_FK_PP_ArticlesAuthor_Author]
+-- Creating foreign key on [PP_ArticlesSet_article_Id] in table 'PP_ArticlesAuthor'
+ALTER TABLE [dbo].[PP_ArticlesAuthor]
+ADD CONSTRAINT [FK_PP_ArticlesAuthor_PP_ArticlesSet]
+    FOREIGN KEY ([PP_ArticlesSet_article_Id])
+    REFERENCES [dbo].[PP_ArticlesSet]
+        ([article_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PP_ArticlesAuthor_PP_ArticlesSet'
+CREATE INDEX [IX_FK_PP_ArticlesAuthor_PP_ArticlesSet]
 ON [dbo].[PP_ArticlesAuthor]
-    ([Author_author_Id]);
+    ([PP_ArticlesSet_article_Id]);
 GO
 
--- Creating foreign key on [UG_Articles_article_Id] in table 'UG_ArticlesAuthor'
-ALTER TABLE [dbo].[UG_ArticlesAuthor]
-ADD CONSTRAINT [FK_UG_ArticlesAuthor_UG_Articles]
-    FOREIGN KEY ([UG_Articles_article_Id])
-    REFERENCES [dbo].[UG_ArticlesSet]
+-- Creating foreign key on [PG_ArticlesSet_article_Id] in table 'Terms_VocabularyPG_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyPG_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyPG_Articles_PG_ArticlesSet]
+    FOREIGN KEY ([PG_ArticlesSet_article_Id])
+    REFERENCES [dbo].[PG_ArticlesSet]
         ([article_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Author_author_Id] in table 'UG_ArticlesAuthor'
-ALTER TABLE [dbo].[UG_ArticlesAuthor]
-ADD CONSTRAINT [FK_UG_ArticlesAuthor_Author]
-    FOREIGN KEY ([Author_author_Id])
-    REFERENCES [dbo].[AuthorSet]
-        ([author_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_UG_ArticlesAuthor_Author'
-CREATE INDEX [IX_FK_UG_ArticlesAuthor_Author]
-ON [dbo].[UG_ArticlesAuthor]
-    ([Author_author_Id]);
-GO
-
--- Creating foreign key on [UMK_Articles_article_Id] in table 'UMK_ArticlesAuthor'
-ALTER TABLE [dbo].[UMK_ArticlesAuthor]
-ADD CONSTRAINT [FK_UMK_ArticlesAuthor_UMK_Articles]
-    FOREIGN KEY ([UMK_Articles_article_Id])
-    REFERENCES [dbo].[UMK_ArticlesSet]
-        ([article_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Author_author_Id] in table 'UMK_ArticlesAuthor'
-ALTER TABLE [dbo].[UMK_ArticlesAuthor]
-ADD CONSTRAINT [FK_UMK_ArticlesAuthor_Author]
-    FOREIGN KEY ([Author_author_Id])
-    REFERENCES [dbo].[AuthorSet]
-        ([author_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_UMK_ArticlesAuthor_Author'
-CREATE INDEX [IX_FK_UMK_ArticlesAuthor_Author]
-ON [dbo].[UMK_ArticlesAuthor]
-    ([Author_author_Id]);
-GO
-
--- Creating foreign key on [WSB_Articles_article_Id] in table 'WSB_ArticlesAuthor'
-ALTER TABLE [dbo].[WSB_ArticlesAuthor]
-ADD CONSTRAINT [FK_WSB_ArticlesAuthor_WSB_Articles]
-    FOREIGN KEY ([WSB_Articles_article_Id])
-    REFERENCES [dbo].[WSB_ArticlesSet]
-        ([article_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Author_author_Id] in table 'WSB_ArticlesAuthor'
-ALTER TABLE [dbo].[WSB_ArticlesAuthor]
-ADD CONSTRAINT [FK_WSB_ArticlesAuthor_Author]
-    FOREIGN KEY ([Author_author_Id])
-    REFERENCES [dbo].[AuthorSet]
-        ([author_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_WSB_ArticlesAuthor_Author'
-CREATE INDEX [IX_FK_WSB_ArticlesAuthor_Author]
-ON [dbo].[WSB_ArticlesAuthor]
-    ([Author_author_Id]);
-GO
-
--- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyWSB_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary]
-    FOREIGN KEY ([Terms_Vocabulary_terms_Id])
-    REFERENCES [dbo].[Terms_Vocabulary]
-        ([terms_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [WSB_Articles_article_Id] in table 'Terms_VocabularyWSB_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyWSB_Articles_WSB_Articles]
-    FOREIGN KEY ([WSB_Articles_article_Id])
-    REFERENCES [dbo].[WSB_ArticlesSet]
-        ([article_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyWSB_Articles_WSB_Articles'
-CREATE INDEX [IX_FK_Terms_VocabularyWSB_Articles_WSB_Articles]
-ON [dbo].[Terms_VocabularyWSB_Articles]
-    ([WSB_Articles_article_Id]);
-GO
-
--- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyUMK_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary]
-    FOREIGN KEY ([Terms_Vocabulary_terms_Id])
-    REFERENCES [dbo].[Terms_Vocabulary]
-        ([terms_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [UMK_Articles_article_Id] in table 'Terms_VocabularyUMK_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyUMK_Articles_UMK_Articles]
-    FOREIGN KEY ([UMK_Articles_article_Id])
-    REFERENCES [dbo].[UMK_ArticlesSet]
-        ([article_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyUMK_Articles_UMK_Articles'
-CREATE INDEX [IX_FK_Terms_VocabularyUMK_Articles_UMK_Articles]
-ON [dbo].[Terms_VocabularyUMK_Articles]
-    ([UMK_Articles_article_Id]);
-GO
-
--- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyUG_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyUG_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyUG_Articles_Terms_Vocabulary]
-    FOREIGN KEY ([Terms_Vocabulary_terms_Id])
-    REFERENCES [dbo].[Terms_Vocabulary]
-        ([terms_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [UG_Articles_article_Id] in table 'Terms_VocabularyUG_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyUG_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyUG_Articles_UG_Articles]
-    FOREIGN KEY ([UG_Articles_article_Id])
-    REFERENCES [dbo].[UG_ArticlesSet]
-        ([article_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyUG_Articles_UG_Articles'
-CREATE INDEX [IX_FK_Terms_VocabularyUG_Articles_UG_Articles]
-ON [dbo].[Terms_VocabularyUG_Articles]
-    ([UG_Articles_article_Id]);
-GO
-
--- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyPP_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyPP_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyPP_Articles_Terms_Vocabulary]
-    FOREIGN KEY ([Terms_Vocabulary_terms_Id])
-    REFERENCES [dbo].[Terms_Vocabulary]
-        ([terms_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [PP_Articles_article_Id] in table 'Terms_VocabularyPP_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyPP_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyPP_Articles_PP_Articles]
-    FOREIGN KEY ([PP_Articles_article_Id])
-    REFERENCES [dbo].[PP_ArticlesSet]
-        ([article_Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyPP_Articles_PP_Articles'
-CREATE INDEX [IX_FK_Terms_VocabularyPP_Articles_PP_Articles]
-ON [dbo].[Terms_VocabularyPP_Articles]
-    ([PP_Articles_article_Id]);
 GO
 
 -- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyPG_Articles'
@@ -632,19 +473,178 @@ ADD CONSTRAINT [FK_Terms_VocabularyPG_Articles_Terms_Vocabulary]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [PG_Articles_article_Id] in table 'Terms_VocabularyPG_Articles'
-ALTER TABLE [dbo].[Terms_VocabularyPG_Articles]
-ADD CONSTRAINT [FK_Terms_VocabularyPG_Articles_PG_Articles]
-    FOREIGN KEY ([PG_Articles_article_Id])
-    REFERENCES [dbo].[PG_ArticlesSet]
+-- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyPG_Articles_Terms_Vocabulary'
+CREATE INDEX [IX_FK_Terms_VocabularyPG_Articles_Terms_Vocabulary]
+ON [dbo].[Terms_VocabularyPG_Articles]
+    ([Terms_Vocabulary_terms_Id]);
+GO
+
+-- Creating foreign key on [PP_ArticlesSet_article_Id] in table 'Terms_VocabularyPP_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyPP_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyPP_Articles_PP_ArticlesSet]
+    FOREIGN KEY ([PP_ArticlesSet_article_Id])
+    REFERENCES [dbo].[PP_ArticlesSet]
         ([article_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyPG_Articles_PG_Articles'
-CREATE INDEX [IX_FK_Terms_VocabularyPG_Articles_PG_Articles]
-ON [dbo].[Terms_VocabularyPG_Articles]
-    ([PG_Articles_article_Id]);
+-- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyPP_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyPP_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyPP_Articles_Terms_Vocabulary]
+    FOREIGN KEY ([Terms_Vocabulary_terms_Id])
+    REFERENCES [dbo].[Terms_Vocabulary]
+        ([terms_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyPP_Articles_Terms_Vocabulary'
+CREATE INDEX [IX_FK_Terms_VocabularyPP_Articles_Terms_Vocabulary]
+ON [dbo].[Terms_VocabularyPP_Articles]
+    ([Terms_Vocabulary_terms_Id]);
+GO
+
+-- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyUG_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyUG_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyUG_Articles_Terms_Vocabulary]
+    FOREIGN KEY ([Terms_Vocabulary_terms_Id])
+    REFERENCES [dbo].[Terms_Vocabulary]
+        ([terms_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [UG_ArticlesSet_article_Id] in table 'Terms_VocabularyUG_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyUG_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyUG_Articles_UG_ArticlesSet]
+    FOREIGN KEY ([UG_ArticlesSet_article_Id])
+    REFERENCES [dbo].[UG_ArticlesSet]
+        ([article_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyUG_Articles_UG_ArticlesSet'
+CREATE INDEX [IX_FK_Terms_VocabularyUG_Articles_UG_ArticlesSet]
+ON [dbo].[Terms_VocabularyUG_Articles]
+    ([UG_ArticlesSet_article_Id]);
+GO
+
+-- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyUMK_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary]
+    FOREIGN KEY ([Terms_Vocabulary_terms_Id])
+    REFERENCES [dbo].[Terms_Vocabulary]
+        ([terms_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [UMK_ArticlesSet_article_Id] in table 'Terms_VocabularyUMK_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyUMK_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyUMK_Articles_UMK_ArticlesSet]
+    FOREIGN KEY ([UMK_ArticlesSet_article_Id])
+    REFERENCES [dbo].[UMK_ArticlesSet]
+        ([article_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyUMK_Articles_UMK_ArticlesSet'
+CREATE INDEX [IX_FK_Terms_VocabularyUMK_Articles_UMK_ArticlesSet]
+ON [dbo].[Terms_VocabularyUMK_Articles]
+    ([UMK_ArticlesSet_article_Id]);
+GO
+
+-- Creating foreign key on [Terms_Vocabulary_terms_Id] in table 'Terms_VocabularyWSB_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary]
+    FOREIGN KEY ([Terms_Vocabulary_terms_Id])
+    REFERENCES [dbo].[Terms_Vocabulary]
+        ([terms_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [WSB_ArticlesSet_article_Id] in table 'Terms_VocabularyWSB_Articles'
+ALTER TABLE [dbo].[Terms_VocabularyWSB_Articles]
+ADD CONSTRAINT [FK_Terms_VocabularyWSB_Articles_WSB_ArticlesSet]
+    FOREIGN KEY ([WSB_ArticlesSet_article_Id])
+    REFERENCES [dbo].[WSB_ArticlesSet]
+        ([article_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Terms_VocabularyWSB_Articles_WSB_ArticlesSet'
+CREATE INDEX [IX_FK_Terms_VocabularyWSB_Articles_WSB_ArticlesSet]
+ON [dbo].[Terms_VocabularyWSB_Articles]
+    ([WSB_ArticlesSet_article_Id]);
+GO
+
+-- Creating foreign key on [AuthorSet_author_Id] in table 'UG_ArticlesAuthor'
+ALTER TABLE [dbo].[UG_ArticlesAuthor]
+ADD CONSTRAINT [FK_UG_ArticlesAuthor_AuthorSet]
+    FOREIGN KEY ([AuthorSet_author_Id])
+    REFERENCES [dbo].[AuthorSet]
+        ([author_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [UG_ArticlesSet_article_Id] in table 'UG_ArticlesAuthor'
+ALTER TABLE [dbo].[UG_ArticlesAuthor]
+ADD CONSTRAINT [FK_UG_ArticlesAuthor_UG_ArticlesSet]
+    FOREIGN KEY ([UG_ArticlesSet_article_Id])
+    REFERENCES [dbo].[UG_ArticlesSet]
+        ([article_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UG_ArticlesAuthor_UG_ArticlesSet'
+CREATE INDEX [IX_FK_UG_ArticlesAuthor_UG_ArticlesSet]
+ON [dbo].[UG_ArticlesAuthor]
+    ([UG_ArticlesSet_article_Id]);
+GO
+
+-- Creating foreign key on [AuthorSet_author_Id] in table 'UMK_ArticlesAuthor'
+ALTER TABLE [dbo].[UMK_ArticlesAuthor]
+ADD CONSTRAINT [FK_UMK_ArticlesAuthor_AuthorSet]
+    FOREIGN KEY ([AuthorSet_author_Id])
+    REFERENCES [dbo].[AuthorSet]
+        ([author_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [UMK_ArticlesSet_article_Id] in table 'UMK_ArticlesAuthor'
+ALTER TABLE [dbo].[UMK_ArticlesAuthor]
+ADD CONSTRAINT [FK_UMK_ArticlesAuthor_UMK_ArticlesSet]
+    FOREIGN KEY ([UMK_ArticlesSet_article_Id])
+    REFERENCES [dbo].[UMK_ArticlesSet]
+        ([article_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UMK_ArticlesAuthor_UMK_ArticlesSet'
+CREATE INDEX [IX_FK_UMK_ArticlesAuthor_UMK_ArticlesSet]
+ON [dbo].[UMK_ArticlesAuthor]
+    ([UMK_ArticlesSet_article_Id]);
+GO
+
+-- Creating foreign key on [AuthorSet_author_Id] in table 'WSB_ArticlesAuthor'
+ALTER TABLE [dbo].[WSB_ArticlesAuthor]
+ADD CONSTRAINT [FK_WSB_ArticlesAuthor_AuthorSet]
+    FOREIGN KEY ([AuthorSet_author_Id])
+    REFERENCES [dbo].[AuthorSet]
+        ([author_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [WSB_ArticlesSet_article_Id] in table 'WSB_ArticlesAuthor'
+ALTER TABLE [dbo].[WSB_ArticlesAuthor]
+ADD CONSTRAINT [FK_WSB_ArticlesAuthor_WSB_ArticlesSet]
+    FOREIGN KEY ([WSB_ArticlesSet_article_Id])
+    REFERENCES [dbo].[WSB_ArticlesSet]
+        ([article_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_WSB_ArticlesAuthor_WSB_ArticlesSet'
+CREATE INDEX [IX_FK_WSB_ArticlesAuthor_WSB_ArticlesSet]
+ON [dbo].[WSB_ArticlesAuthor]
+    ([WSB_ArticlesSet_article_Id]);
 GO
 
 -- --------------------------------------------------

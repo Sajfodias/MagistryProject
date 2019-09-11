@@ -64,7 +64,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         {
                             if (UMK_author_line != null && UMK_Tytul != null)
                             {
-                                using (var dbContext = new ArticleDBDataModelContainer())
+                                using (var dbContext = new ArticleProjDBEntities())
                                 {
                                     var document = new StringBuilder();
                                     var umk_article = dbContext.UMK_ArticlesSet.Create();
@@ -166,7 +166,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         var authors_of_the_article = dbContext.AuthorSet.Create();
                                         authors_of_the_article.author_name = UMK_autors[k];
                                         authors_of_the_article.author_surename = UMK_autors[k + 1];
-                                        umk_article.Author.Add(authors_of_the_article);
+                                        umk_article.AuthorSet.Add(authors_of_the_article);
                                         k += 2;
                                     }
 

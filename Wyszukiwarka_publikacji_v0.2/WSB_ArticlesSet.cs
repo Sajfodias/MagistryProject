@@ -12,27 +12,31 @@ namespace Wyszukiwarka_publikacji_v0._2
     using System;
     using System.Collections.Generic;
     
-    public partial class PP_Articles
+    public partial class WSB_ArticlesSet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PP_Articles()
+        public WSB_ArticlesSet()
         {
-            this.Author = new HashSet<Author>();
             this.Terms_Vocabulary = new HashSet<Terms_Vocabulary>();
+            this.AuthorSet = new HashSet<AuthorSet>();
         }
     
         public int article_Id { get; set; }
-        public string article_author_line { get; set; }
+        public string article_authors { get; set; }
         public string article_title { get; set; }
-        public string article_source { get; set; }
-        public int article_year { get; set; }
-        public string article_language { get; set; }
+        public string article_publisher_adres { get; set; }
+        public string article_common_title { get; set; }
+        public string article_eng_keywords { get; set; }
+        public string article_pl_keywords { get; set; }
+        public string article_title_other_lang { get; set; }
         public string article_DOI { get; set; }
+        public string article_details { get; set; }
+        public string article_URL { get; set; }
         public int Terms_Vocabulary_terms_Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Author> Author { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Terms_Vocabulary> Terms_Vocabulary { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AuthorSet> AuthorSet { get; set; }
     }
 }

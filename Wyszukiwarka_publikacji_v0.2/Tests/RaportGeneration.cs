@@ -87,7 +87,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
         public static string SelectAutorsFromDB(int ArticleID)
         {
             List<string> Author_list = new List<string>();
-            using(var article = new ArticleDBDataModelContainer())
+            using(var article = new ArticleProjDBEntities())
             {
 
                 Author_list = article.Database.SqlQuery<string>("SELECT authors FROM dbo.PG_ArticlesSet WHERE article_Id=" + ArticleID.ToString()).ToList();

@@ -14,7 +14,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             List<string> TermCollection = new List<string>();
             char[] not_allowedChars = {'1', '2', '3', '4', '5', '6', '7','8','9','0', '<', '>', 'x', '!', '#', '$','%','^','&','*', '(',')','/','\''};
 
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 var resul_PG = dbContext.Terms_Vocabulary.SqlQuery("SELECT * FROM dbo.Terms_Vocabulary").ToList();
                 if (resul_PG != null)
@@ -22,7 +22,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
                     foreach (var item in resul_PG)
                     {
                         if (item.term_value != null || item.term_value != String.Empty)
+                        {
                             TermCollection.Add(item.term_value.ToLower());
+                        }
+                           
                     }
                 }
             }

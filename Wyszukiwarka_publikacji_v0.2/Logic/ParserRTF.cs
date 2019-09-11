@@ -11,13 +11,15 @@ using BibTeXLibrary;
 using System.Data;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic
 {
     
     class ParserRTF
     {
-        private static string filePathRTF = @"F:\\Magistry files\Rtf_files\";
+        private static string filePathRTF = ConfigurationManager.AppSettings["RtfDataFileDirectory"].ToString();
+        //private static string filePathRTF = @"F:\\Magistry files\Rtf_files\";
         public static HtmlDocument hapDoc = new HtmlDocument();
         /// <summary>
         /// We must return the formatted text
@@ -80,71 +82,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
             for (int i = 0; i < replacementArray.Length; i++)
                 filteredDocument = filteredDocument.Replace(replacementArray[i], replacedCharacters[i]);
 
-            #region Old_replacement_method
-            //string stringFilter1 = ContentDocument.Replace("<span class=\"querylabel\" id=\"querylabel\">", "\r");
-            //string stringFilter2 = stringFilter1.Replace("<span class=\"cntfoundtxt\" id=\"cntfoundtxt\">", " ");
-            //string stringFilter3 = stringFilter2.Replace("<br>", "\r");
-            //string stringFilter4 = stringFilter3.Replace("ź", "z");
-            //string stringFilter5 = stringFilter4.Replace("ż", "z");
-            //string stringFilter6 = stringFilter5.Replace("ń", "n");
-            //string stringFilter7 = stringFilter6.Replace("ł", "l");
-            //string stringFilter8 = stringFilter7.Replace("ó", "o");
-            //string stringFilter9 = stringFilter8.Replace("Ż", "Z");
-            //string stringFilter10 = stringFilter9.Replace("Ź", "Z");
-            //string stringFilter11 = stringFilter10.Replace("Ń", "N");
-            //string stringFilter12 = stringFilter11.Replace("Ł", "L");
-            //string stringFilter13 = stringFilter12.Replace("Ó", "O");
-            //string stringFilter14 = stringFilter13.Replace("ś", "s");
-            //string stringFilter15 = stringFilter14.Replace("Ś", "S");
-            //string stringFilter16 = stringFilter15.Replace("ę", "e");
-            //string stringFilter17 = stringFilter16.Replace("ą", "a");
-            //string stringFilter18 = stringFilter17.Replace("Ą", "A");
-            //string stringFilter19 = stringFilter18.Replace("Ę", "E");
-
-            //endText = Regex.Replace(stringFilter3, "<.*?>", string.Empty);
-            #endregion
-
             endText = Regex.Replace(filteredDocument, "<.*?>", string.Empty);
-
-            var file = File.CreateText(filePathRTF + @"formated_" + fileName.Substring(28) +".txt");
-            file.Write(endText);
-            file.Flush();
-            file.Close();
-
-            #region old_part_code
-            //string[] newcontent = new string[hapDoc.DocumentNode.InnerText.Length];
-            //string[] separatedContent = new string[hapDoc.DocumentNode.InnerText.Length];
-            /*
-            using (StringReader sr = new StringReader(endText))
-            {
-                string line;
-                for (int i = 0; i <= hapDoc.DocumentNode.InnerText.Length; i++)
-                {
-                    line = sr.ReadLine();
-                    if (line != null)
-                    {
-                        newcontent[i] = line;
-                        separatedContent = line.Split(':');
-
-                        if (separatedContent.Length == 2 && separatedContent[0].ToLower().Contains("aut"))
-                        {
-                            string[] UG_autors = separatedContent[1].Split(separators);
-
-                        }
-                        else if (separatedContent.Length == 2 && separatedContent[0].ToLower().Contains("tytu")) System.Windows.MessageBox.Show(separatedContent[1]);
-                        else if(separatedContent.Length == 2 && (separatedContent[0].ToLower().Contains("zrod") || separatedContent[0].ToLower().Contains("czasop") || separatedContent[0].ToLower().Contains("opis wyd"))) System.Windows.MessageBox.Show(separatedContent[1]);
-
-                        else System.Windows.MessageBox.Show("Error! Content not found!", "Error!", System.Windows.MessageBoxButton.OK);
-                        
-                    }
-                    else
-                    {
-                        return endText;
-                    }
-                }
-            }
-            */
-            #endregion
+         
+            var CombinedPath = Path.Combine(filePathRTF, "Formated_"+Path.GetFileNameWithoutExtension(fileName)+".txt");
+            File.AppendAllText(CombinedPath,endText);
 
             return endText;
         }

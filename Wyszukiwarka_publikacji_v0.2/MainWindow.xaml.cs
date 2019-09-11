@@ -12,6 +12,7 @@ using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Algorithms.KMeans
 using Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_functions;
 using Wyszukiwarka_publikacji_v0._2.Tests;
 using System.Globalization;
+using System.Configuration;
 
 namespace Wyszukiwarka_publikacji_v0._2
 {
@@ -43,7 +44,8 @@ namespace Wyszukiwarka_publikacji_v0._2
 
         private void DictionaryPreparation(object sender, RoutedEventArgs e)
         {
-            string path = @"F:\Magistry files\csv_files\Allowed_term_dictionary.csv";
+            string csvFilesDirectory = ConfigurationManager.AppSettings["CsvFileDirectory"].ToString();
+            string path = Path.Combine(csvFilesDirectory,"Allowed_term_dictionary.csv");
             string dictionary_text = File.ReadAllText(path);
             string[] allowed_dictionary = dictionary_text.Trim(' ').Split(',', '\n', '\r');
             List<string> result = new List<string>();
@@ -594,17 +596,19 @@ namespace Wyszukiwarka_publikacji_v0._2
         private void invokeFilesToVisualizationGenerator(List<Centroid> resultSet,string  algorithm)
         {
             string invokedAlgorithm = algorithm;
-            string csvFilesPath = @"F:\Magistry files\csv_files\exported_csv\";
-            string jsonFilesPath = @"F:\Magistry files\csv_files\exported_json\";
+            //string csvFilesPath = @"F:\Magistry files\csv_files\exported_csv\";
+            string csvFilesPath = ConfigurationManager.AppSettings["ExportedCSVFileDirectory"].ToString();
+            //string jsonFilesPath = @"F:\Magistry files\csv_files\exported_json\";
+            string jsonFilesPath = ConfigurationManager.AppSettings["ExportedJSONFileDirectory"].ToString();
             DateTime dateTime = DateTime.Now;
             Random random = new Random();
             int index = random.Next(1, 500000);
-            string articlesCSV = csvFilesPath + index.ToString() + "_articles.csv";
-            string articlesJson = jsonFilesPath + index.ToString() + "_articles.json";
-            string authorsCSV = csvFilesPath + index.ToString() + "_authors.csv";
-            string authorsJson = jsonFilesPath + index.ToString() + "_authors.json";
-            string clusteringCSV = csvFilesPath + index.ToString() + "_clustering.csv";
-            string clusteringJson = jsonFilesPath + index.ToString() + "_clustering.json";
+            string articlesCSV = Path.Combine(csvFilesPath, index.ToString() + "_articles.csv");
+            string articlesJson =   Path.Combine(jsonFilesPath,index.ToString() + "_articles.json");
+            string authorsCSV =     Path.Combine(csvFilesPath ,index.ToString() + "_authors.csv");
+            string authorsJson =    Path.Combine(jsonFilesPath,index.ToString() + "_authors.json");
+            string clusteringCSV =  Path.Combine(csvFilesPath ,index.ToString() + "_clustering.csv");
+            string clusteringJson = Path.Combine(jsonFilesPath,index.ToString() + "_clustering.json");
             GraphData_and_Visualizations.CreateGraphDatabaseNeo4j.GenerateArticlesToCSVandJsonFromDB(articlesCSV, articlesJson);
             GraphData_and_Visualizations.CreateGraphDatabaseNeo4j.GenerateAuthorsToCSVandJsonFromDB(authorsCSV, authorsJson);
             GraphData_and_Visualizations.CreateGraphDatabaseNeo4j.GenerateClusterizationResultToCSVandJsonFromDB(clusteringCSV, resultSet, clusteringJson);
@@ -623,6 +627,16 @@ namespace Wyszukiwarka_publikacji_v0._2
         {
             //Task.Factory.StartNew(() => ParserRTF.parseRTF());
             Task.Factory.StartNew(() => Downloader.bruteForce());
+        }
+
+        private void GenerateTFIDFCollection_Click(object sender, RoutedEventArgs e)
+        {
+            Dictionary<int, string> docCollectionDictionary = Logic.ClusteringAlgorithms.Used_functions.CreateDocumentCollection2.GenerateDocumentCollection_withoutLazyLoadingToDictionary();
+            HashSet<string> termCollection = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.getTermCollection();
+            Dictionary<string, int> wordIndex1 = Logic.ClusteringAlgorithms.Used_functions.TFIDF2ndrealization.DocumentsContainsTermToDictionary(docCollectionDictionary, termCollection);
+            List<DocumentVector> vSpace = VectorSpaceModel.DocumentCollectionProcessingDictionary(docCollectionDictionary);
+            TFIDFFileGenerator.GenerateTFIDFFile(vSpace);
+            TFIDFFileGenerator.DocumentListGeneration(vSpace);
         }
     }
 }

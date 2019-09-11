@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing;
 using System.Diagnostics;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
 {
@@ -64,7 +65,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                         {
                             try
                             {
-                                using (var PPdbContext = new ArticleDBDataModelContainer())
+                                using (var PPdbContext = new ArticleProjDBEntities())
                                 {
                                     var document = new StringBuilder();
                                     var pp_article = PPdbContext.PP_ArticlesSet.Create();
@@ -91,7 +92,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         PP_Zrodlo = "Not defined";
                                         document.Append(PP_Zrodlo);
                                     }
-                                    PP_Zrodlo =null;
+                                    PP_Zrodlo = null;
 
                                     pp_article.article_year = PP_Rok;
                                     PP_Rok = 0;
@@ -113,18 +114,34 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         {
                                             authors_of_the_PP_article.author_name = PP_autors[z + 1];
                                             authors_of_the_PP_article.author_surename = PP_autors[z];
-                                            pp_article.Author.Add(authors_of_the_PP_article);
+                                            //pp_article.AuthorSet.Add(authors_of_the_PP_article);
+
+                                            var ppArticleExists = pp_article.AuthorSet.Any(a => a.author_name != authors_of_the_PP_article.author_name && a.author_surename != authors_of_the_PP_article.author_surename);
+                                            if (!ppArticleExists)
+                                            {
+                                                pp_article.AuthorSet.Add(authors_of_the_PP_article);
+                                            }
                                         }
                                         z += 4;
                                     }
-                                    PPdbContext.PP_ArticlesSet.Add(pp_article);
+
+                                    //PPdbContext.PP_ArticlesSet.Add(pp_article);
+
+                                    if (PPdbContext.PP_ArticlesSet.Select(a => a.article_title != pp_article.article_title).FirstOrDefault())
+                                    {
+                                        PPdbContext.PP_ArticlesSet.Add(pp_article);
+                                    }
 
                                     var _document = document.ToString().Split(' ', ';', ':', ',');
                                     for (int k = 0; k <= _document.Length - 1; k++)
                                     {
                                         var terms = PPdbContext.Terms_Vocabulary.Create();
 
-                                        string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+                                        var termDictionaryFilePath = ConfigurationManager.AppSettings["CsvFileDirectory"].ToString();
+                                        var termDictionaryFile = ConfigurationManager.AppSettings["TermDictionaryFiles"].ToString();
+                                        var termDictionaryFullFilePath = Path.Combine(termDictionaryFilePath, termDictionaryFile);
+
+                                        string dictionary_text = File.ReadAllText(termDictionaryFullFilePath);
                                         string[] allowed_dictionary = dictionary_text.Split(',', '\n');
 
                                         for (int d = 0; d <= _document.Length - 1; d++)
@@ -149,7 +166,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                             var termVocabularyTable = PPdbContext.Terms_Vocabulary;
                                             terms.term_value = _document[k];
 
-                                        }    
+                                        }
                                         pp_article.Terms_Vocabulary.Add(terms);
                                     }
                                     PPdbContext.SaveChanges();
@@ -157,11 +174,12 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                             }
                             catch (Exception ex)
                             {
-                                File.WriteAllText(@"F:\\Magistry files\PP_crawler_Log.txt", ex.ToString());
+                                throw new Exception(ex.StackTrace.ToString());
+                                //File.WriteAllText(@"F:\\Magistry files\PP_crawler_Log.txt", ex.ToString());
                             }
                         }
                         else
-                            File.WriteAllText(@"F:\\Magistry files\PP_crawler_Log.txt", "Empty line detected." + '\n');
+                            Debug.WriteLine("Empty line detected...");
                     }
                     else if (PP_separatedContent.Length == 2 && (PP_separatedContent[0].Contains("Liczba odnalezionych") || PP_separatedContent[0] == "Liczba odnalezionych rekordow"))
                     {

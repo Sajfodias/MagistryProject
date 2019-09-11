@@ -10,16 +10,19 @@ using System.Data.Entity;
 using Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;
+using System.Configuration;
+using System.Diagnostics;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic
 {
     class BibtexParser
     {
-        private static string filePathBibtex = @"F:\\Magistry files\new_Magistry_test_data\";
-        public static DirectoryInfo rtfFilesDirectory = new DirectoryInfo(filePathBibtex);
+        public static string termDictionaryFilePath = ConfigurationManager.AppSettings["BibtexDataFileDirectory"].ToString();
+        //private static string filePathBibtex = @"F:\\Magistry files\new_Magistry_test_data\";
+        public static DirectoryInfo rtfFilesDirectory = new DirectoryInfo(termDictionaryFilePath);
         public static FileInfo[] files = rtfFilesDirectory.GetFiles();
         //public static string[] fileEntries = Directory.GetFiles(filePathBibtex);
-        public object fileBibtex = filePathBibtex;
+        public object fileBibtex = termDictionaryFilePath;
         public object nullobject = System.Reflection.Missing.Value;
         public static string[] context;
         public static string[] separatedContext;
@@ -40,7 +43,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
 
         public static void LoadBibtexFile()
         {
-            string[] fileEntries = Directory.GetFiles(filePathBibtex);
+            string[] fileEntries = Directory.GetFiles(termDictionaryFilePath);
             char[] not_allowedCharsforArticle = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '<', '>', 'x', '!', '#', '$', '%', '^', '&', '*', '(', ')', '/', '\'' };
             string[] new_document = new string[0];
 
@@ -189,7 +192,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                 {
                     #region Bibtex_Entity_Object_Creation_Model_First
                     //
-                    using (var dbContext = new ArticleDBDataModelContainer())
+                    using (var dbContext = new ArticleProjDBEntities())
                     {
                         var document = new StringBuilder();
 
@@ -198,24 +201,24 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                         bibtexArticle.title = _title;
                         if (_title != String.Empty || _title != " " || _title != null)
                         {
-                            var termTitle = TextPreparing.TermsPrepataions(_title);
-                            document.Append(termTitle);
+                            //var termTitle = TextPreparing.TermsPrepataions(_title);
+                            document.Append(_title);
                         }
                         _title = null;
 
                         bibtexArticle.abstractText = _abstract;
                         if (_abstract != String.Empty || _abstract != " " || _abstract != null)
                         {
-                            var termAbstract = TextPreparing.TermsPrepataions(_abstract);
-                            document.Append(termAbstract);
+                            //var termAbstract = TextPreparing.TermsPrepataions(_abstract);
+                            document.Append(_abstract);
                         }
                         _abstract = null;
 
                         bibtexArticle.keywords = _keywords;
                         if (_keywords != String.Empty || _keywords != " " || _keywords != null)
                         {
-                            var termKeywords = TextPreparing.TermsPrepataions(_keywords);
-                            document.Append(termKeywords);
+                            //var termKeywords = TextPreparing.TermsPrepataions(_keywords);
+                            document.Append(_keywords);
                         }
                         _keywords = null;
                         bibtexArticle.year = _year;
@@ -235,13 +238,31 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                             var authors_of_the_article = dbContext.AuthorSet.Create();
                             authors_of_the_article.author_name = _authors[i];
                             authors_of_the_article.author_surename = _authors[i + 1];
-                            bibtexArticle.Author.Add(authors_of_the_article);
+
+                            bibtexArticle.AuthorSet.Add(authors_of_the_article);
+
+                            
+                            //var AuthorExists = dbContext.AuthorSet.Any(a => ((a.author_name == authors_of_the_article.author_name) & (a.author_surename == authors_of_the_article.author_surename)));
+                            //if (!AuthorExists)
+                            //{
+                            //    bibtexArticle.AuthorSet.Add(authors_of_the_article);
+                            //}
+                            //else
+                            //{
+                            //    bibtexArticle.AuthorSet.Add(authors_of_the_article);
+                            //}
+                            
                             i += 2;
                         }
 
-                        dbContext.PG_ArticlesSet.Add(bibtexArticle);
+                        var articleExists = dbContext.PG_ArticlesSet.Any(a => a.title == bibtexArticle.title);
+                        if (!articleExists)
+                        {
+                            dbContext.PG_ArticlesSet.Add(bibtexArticle);
+                        }
 
-                        var _document = document.ToString().Split(' ', ';', ':', ',');
+                        var preparedDocument = TextPreparing.TermsPrepataions(document.ToString());
+                        var _document = preparedDocument.Split(' ', ';', ':', ',');
 
                         
                         //dodano 11.02
@@ -250,20 +271,28 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                             for (int z = 0; z < not_allowedCharsforArticle.Length; z++)
                             {
                                 if (_document[p].Contains(not_allowedCharsforArticle[z]))
-                                    _document[p].Remove(z, 1);
+                                    _document[p] = String.Empty;
                             }
 
                             //dodano 11.02
                             List<string> stringHashSet = new List<string>();
                             stringHashSet = _document.ToList();
 
-                            foreach (var element in stringHashSet)
+                            for(int i = 0; i< stringHashSet.Count; i++)
                             {
-                                if (element == String.Empty || element == null || element == " ")
-                                    stringHashSet.Remove(element);
-                                else if (element.Length <= 3)
-                                    stringHashSet.Remove(element);
+                                if (stringHashSet[i] == String.Empty || stringHashSet[i] == null || stringHashSet[i] == " ")
+                                    stringHashSet.RemoveAt(i);
+                                else if (stringHashSet[i].Length <= 3)
+                                    stringHashSet.RemoveAt(i);
                             }
+
+                            //foreach (var element in stringHashSet)
+                            //{
+                            //    if (element == String.Empty || element == null || element == " ")
+                            //        stringHashSet.Remove(element);
+                            //    else if (element.Length <= 3)
+                            //        stringHashSet.Remove(element);
+                            //}
 
                             new_document = stringHashSet.ToArray();
                         }
@@ -272,7 +301,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                         {
                             var terms = dbContext.Terms_Vocabulary.Create();
 
-                            string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+                            var csvFilePath = ConfigurationManager.AppSettings["CsvFileDirectory"].ToString();
+                            var termDictionaryFile = ConfigurationManager.AppSettings["TermDictionaryFiles"].ToString();
+                            var csvFullFilePath = Path.Combine(csvFilePath, termDictionaryFile);
+                            string dictionary_text = File.ReadAllText(csvFullFilePath);
                             string[] allowed_dictionary = dictionary_text.Split(',', '\n');
                             #region old_cleaning_code_11.02.2018
                             //added 10.02.2018 - cleaninig the article list
@@ -328,7 +360,12 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
 
                             terms.term_value = new_document[k]; //-- 21.08 old and fast but not effective
                             //}
-                            bibtexArticle.Terms_Vocabulary.Add(terms); //-- 21.08 old and fast but not effective
+                            var termExists = dbContext.Terms_Vocabulary.Any(t => t.term_value == terms.term_value);
+                            if (!termExists)
+                            {
+                                bibtexArticle.Terms_Vocabulary.Add(terms); //-- 21.08 old and fast but not effective
+                            }
+                            
                         }
                         dbContext.SaveChanges();
                     }
@@ -378,12 +415,14 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(@"F:\\Magistry files\PG_crawler_Log.txt", ex.ToString());
+                    Debug.WriteLine(ex.StackTrace.ToString());
+                    //throw new Exception(ex.StackTrace.ToString());
+                    //File.WriteAllText(@"F:\\Magistry files\PG_crawler_Log.txt", ex.ToString());
                 }
             }
         }
 
-        private static DbSet<Terms_Vocabulary> GetTerms_Vocabulary(ArticleDBDataModelContainer dbcon)
+        private static DbSet<Terms_Vocabulary> GetTerms_Vocabulary(ArticleProjDBEntities dbcon)
         {
             return dbcon.Terms_Vocabulary;
         }

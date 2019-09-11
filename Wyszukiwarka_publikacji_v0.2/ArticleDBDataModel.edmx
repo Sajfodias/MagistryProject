@@ -4,104 +4,104 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ArticleDBDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="ArticleDBDataModelStoreContainer">
-    <EntitySet Name="AuthorSet" EntityType="ArticleDBDataModel.Store.AuthorSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PG_ArticlesSet" EntityType="ArticleDBDataModel.Store.PG_ArticlesSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PP_ArticlesSet" EntityType="ArticleDBDataModel.Store.PP_ArticlesSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UG_ArticlesSet" EntityType="ArticleDBDataModel.Store.UG_ArticlesSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UMK_ArticlesSet" EntityType="ArticleDBDataModel.Store.UMK_ArticlesSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="WSB_ArticlesSet" EntityType="ArticleDBDataModel.Store.WSB_ArticlesSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Terms_Vocabulary" EntityType="ArticleDBDataModel.Store.Terms_Vocabulary" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PG_ArticlesAuthor" EntityType="ArticleDBDataModel.Store.PG_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PP_ArticlesAuthor" EntityType="ArticleDBDataModel.Store.PP_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UG_ArticlesAuthor" EntityType="ArticleDBDataModel.Store.UG_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UMK_ArticlesAuthor" EntityType="ArticleDBDataModel.Store.UMK_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="WSB_ArticlesAuthor" EntityType="ArticleDBDataModel.Store.WSB_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Terms_VocabularyWSB_Articles" EntityType="ArticleDBDataModel.Store.Terms_VocabularyWSB_Articles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Terms_VocabularyUMK_Articles" EntityType="ArticleDBDataModel.Store.Terms_VocabularyUMK_Articles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Terms_VocabularyUG_Articles" EntityType="ArticleDBDataModel.Store.Terms_VocabularyUG_Articles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Terms_VocabularyPP_Articles" EntityType="ArticleDBDataModel.Store.Terms_VocabularyPP_Articles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Terms_VocabularyPG_Articles" EntityType="ArticleDBDataModel.Store.Terms_VocabularyPG_Articles" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_PG_ArticlesAuthor_PG_Articles" Association="ArticleDBDataModel.Store.FK_PG_ArticlesAuthor_PG_Articles">
-      <End Role="PG_Articles" EntitySet="PG_ArticlesSet" />
+    <Schema Namespace="ArticleProjDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ArticleProjDBModelStoreContainer">
+    <EntitySet Name="AuthorSet" EntityType="ArticleProjDBModel.Store.AuthorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PG_ArticlesSet" EntityType="ArticleProjDBModel.Store.PG_ArticlesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PP_ArticlesSet" EntityType="ArticleProjDBModel.Store.PP_ArticlesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Terms_Vocabulary" EntityType="ArticleProjDBModel.Store.Terms_Vocabulary" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UG_ArticlesSet" EntityType="ArticleProjDBModel.Store.UG_ArticlesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UMK_ArticlesSet" EntityType="ArticleProjDBModel.Store.UMK_ArticlesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WSB_ArticlesSet" EntityType="ArticleProjDBModel.Store.WSB_ArticlesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PG_ArticlesAuthor" EntityType="ArticleProjDBModel.Store.PG_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PP_ArticlesAuthor" EntityType="ArticleProjDBModel.Store.PP_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Terms_VocabularyPG_Articles" EntityType="ArticleProjDBModel.Store.Terms_VocabularyPG_Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Terms_VocabularyPP_Articles" EntityType="ArticleProjDBModel.Store.Terms_VocabularyPP_Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Terms_VocabularyUG_Articles" EntityType="ArticleProjDBModel.Store.Terms_VocabularyUG_Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Terms_VocabularyUMK_Articles" EntityType="ArticleProjDBModel.Store.Terms_VocabularyUMK_Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Terms_VocabularyWSB_Articles" EntityType="ArticleProjDBModel.Store.Terms_VocabularyWSB_Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UG_ArticlesAuthor" EntityType="ArticleProjDBModel.Store.UG_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UMK_ArticlesAuthor" EntityType="ArticleProjDBModel.Store.UMK_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WSB_ArticlesAuthor" EntityType="ArticleProjDBModel.Store.WSB_ArticlesAuthor" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_PG_ArticlesAuthor_AuthorSet" Association="ArticleProjDBModel.Store.FK_PG_ArticlesAuthor_AuthorSet">
+      <End Role="AuthorSet" EntitySet="AuthorSet" />
       <End Role="PG_ArticlesAuthor" EntitySet="PG_ArticlesAuthor" />
     </AssociationSet>
-    <AssociationSet Name="FK_PG_ArticlesAuthor_Author" Association="ArticleDBDataModel.Store.FK_PG_ArticlesAuthor_Author">
-      <End Role="Author" EntitySet="AuthorSet" />
+    <AssociationSet Name="FK_PG_ArticlesAuthor_PG_ArticlesSet" Association="ArticleProjDBModel.Store.FK_PG_ArticlesAuthor_PG_ArticlesSet">
+      <End Role="PG_ArticlesSet" EntitySet="PG_ArticlesSet" />
       <End Role="PG_ArticlesAuthor" EntitySet="PG_ArticlesAuthor" />
     </AssociationSet>
-    <AssociationSet Name="FK_PP_ArticlesAuthor_PP_Articles" Association="ArticleDBDataModel.Store.FK_PP_ArticlesAuthor_PP_Articles">
-      <End Role="PP_Articles" EntitySet="PP_ArticlesSet" />
+    <AssociationSet Name="FK_PP_ArticlesAuthor_AuthorSet" Association="ArticleProjDBModel.Store.FK_PP_ArticlesAuthor_AuthorSet">
+      <End Role="AuthorSet" EntitySet="AuthorSet" />
       <End Role="PP_ArticlesAuthor" EntitySet="PP_ArticlesAuthor" />
     </AssociationSet>
-    <AssociationSet Name="FK_PP_ArticlesAuthor_Author" Association="ArticleDBDataModel.Store.FK_PP_ArticlesAuthor_Author">
-      <End Role="Author" EntitySet="AuthorSet" />
+    <AssociationSet Name="FK_PP_ArticlesAuthor_PP_ArticlesSet" Association="ArticleProjDBModel.Store.FK_PP_ArticlesAuthor_PP_ArticlesSet">
+      <End Role="PP_ArticlesSet" EntitySet="PP_ArticlesSet" />
       <End Role="PP_ArticlesAuthor" EntitySet="PP_ArticlesAuthor" />
     </AssociationSet>
-    <AssociationSet Name="FK_UG_ArticlesAuthor_UG_Articles" Association="ArticleDBDataModel.Store.FK_UG_ArticlesAuthor_UG_Articles">
-      <End Role="UG_Articles" EntitySet="UG_ArticlesSet" />
-      <End Role="UG_ArticlesAuthor" EntitySet="UG_ArticlesAuthor" />
+    <AssociationSet Name="FK_Terms_VocabularyPG_Articles_PG_ArticlesSet" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyPG_Articles_PG_ArticlesSet">
+      <End Role="PG_ArticlesSet" EntitySet="PG_ArticlesSet" />
+      <End Role="Terms_VocabularyPG_Articles" EntitySet="Terms_VocabularyPG_Articles" />
     </AssociationSet>
-    <AssociationSet Name="FK_UG_ArticlesAuthor_Author" Association="ArticleDBDataModel.Store.FK_UG_ArticlesAuthor_Author">
-      <End Role="Author" EntitySet="AuthorSet" />
-      <End Role="UG_ArticlesAuthor" EntitySet="UG_ArticlesAuthor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UMK_ArticlesAuthor_UMK_Articles" Association="ArticleDBDataModel.Store.FK_UMK_ArticlesAuthor_UMK_Articles">
-      <End Role="UMK_Articles" EntitySet="UMK_ArticlesSet" />
-      <End Role="UMK_ArticlesAuthor" EntitySet="UMK_ArticlesAuthor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UMK_ArticlesAuthor_Author" Association="ArticleDBDataModel.Store.FK_UMK_ArticlesAuthor_Author">
-      <End Role="Author" EntitySet="AuthorSet" />
-      <End Role="UMK_ArticlesAuthor" EntitySet="UMK_ArticlesAuthor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WSB_ArticlesAuthor_WSB_Articles" Association="ArticleDBDataModel.Store.FK_WSB_ArticlesAuthor_WSB_Articles">
-      <End Role="WSB_Articles" EntitySet="WSB_ArticlesSet" />
-      <End Role="WSB_ArticlesAuthor" EntitySet="WSB_ArticlesAuthor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WSB_ArticlesAuthor_Author" Association="ArticleDBDataModel.Store.FK_WSB_ArticlesAuthor_Author">
-      <End Role="Author" EntitySet="AuthorSet" />
-      <End Role="WSB_ArticlesAuthor" EntitySet="WSB_ArticlesAuthor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary">
-      <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-      <End Role="Terms_VocabularyWSB_Articles" EntitySet="Terms_VocabularyWSB_Articles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyWSB_Articles_WSB_Articles" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyWSB_Articles_WSB_Articles">
-      <End Role="WSB_Articles" EntitySet="WSB_ArticlesSet" />
-      <End Role="Terms_VocabularyWSB_Articles" EntitySet="Terms_VocabularyWSB_Articles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary">
-      <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-      <End Role="Terms_VocabularyUMK_Articles" EntitySet="Terms_VocabularyUMK_Articles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyUMK_Articles_UMK_Articles" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyUMK_Articles_UMK_Articles">
-      <End Role="UMK_Articles" EntitySet="UMK_ArticlesSet" />
-      <End Role="Terms_VocabularyUMK_Articles" EntitySet="Terms_VocabularyUMK_Articles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyUG_Articles_Terms_Vocabulary" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyUG_Articles_Terms_Vocabulary">
-      <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-      <End Role="Terms_VocabularyUG_Articles" EntitySet="Terms_VocabularyUG_Articles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyUG_Articles_UG_Articles" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyUG_Articles_UG_Articles">
-      <End Role="UG_Articles" EntitySet="UG_ArticlesSet" />
-      <End Role="Terms_VocabularyUG_Articles" EntitySet="Terms_VocabularyUG_Articles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyPP_Articles_Terms_Vocabulary" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyPP_Articles_Terms_Vocabulary">
-      <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-      <End Role="Terms_VocabularyPP_Articles" EntitySet="Terms_VocabularyPP_Articles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyPP_Articles_PP_Articles" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyPP_Articles_PP_Articles">
-      <End Role="PP_Articles" EntitySet="PP_ArticlesSet" />
-      <End Role="Terms_VocabularyPP_Articles" EntitySet="Terms_VocabularyPP_Articles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyPG_Articles_Terms_Vocabulary" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyPG_Articles_Terms_Vocabulary">
+    <AssociationSet Name="FK_Terms_VocabularyPG_Articles_Terms_Vocabulary" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyPG_Articles_Terms_Vocabulary">
       <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
       <End Role="Terms_VocabularyPG_Articles" EntitySet="Terms_VocabularyPG_Articles" />
     </AssociationSet>
-    <AssociationSet Name="FK_Terms_VocabularyPG_Articles_PG_Articles" Association="ArticleDBDataModel.Store.FK_Terms_VocabularyPG_Articles_PG_Articles">
-      <End Role="PG_Articles" EntitySet="PG_ArticlesSet" />
-      <End Role="Terms_VocabularyPG_Articles" EntitySet="Terms_VocabularyPG_Articles" />
+    <AssociationSet Name="FK_Terms_VocabularyPP_Articles_PP_ArticlesSet" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyPP_Articles_PP_ArticlesSet">
+      <End Role="PP_ArticlesSet" EntitySet="PP_ArticlesSet" />
+      <End Role="Terms_VocabularyPP_Articles" EntitySet="Terms_VocabularyPP_Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Terms_VocabularyPP_Articles_Terms_Vocabulary" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyPP_Articles_Terms_Vocabulary">
+      <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+      <End Role="Terms_VocabularyPP_Articles" EntitySet="Terms_VocabularyPP_Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Terms_VocabularyUG_Articles_Terms_Vocabulary" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyUG_Articles_Terms_Vocabulary">
+      <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+      <End Role="Terms_VocabularyUG_Articles" EntitySet="Terms_VocabularyUG_Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Terms_VocabularyUG_Articles_UG_ArticlesSet" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyUG_Articles_UG_ArticlesSet">
+      <End Role="UG_ArticlesSet" EntitySet="UG_ArticlesSet" />
+      <End Role="Terms_VocabularyUG_Articles" EntitySet="Terms_VocabularyUG_Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary">
+      <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+      <End Role="Terms_VocabularyUMK_Articles" EntitySet="Terms_VocabularyUMK_Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Terms_VocabularyUMK_Articles_UMK_ArticlesSet" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyUMK_Articles_UMK_ArticlesSet">
+      <End Role="UMK_ArticlesSet" EntitySet="UMK_ArticlesSet" />
+      <End Role="Terms_VocabularyUMK_Articles" EntitySet="Terms_VocabularyUMK_Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary">
+      <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+      <End Role="Terms_VocabularyWSB_Articles" EntitySet="Terms_VocabularyWSB_Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Terms_VocabularyWSB_Articles_WSB_ArticlesSet" Association="ArticleProjDBModel.Store.FK_Terms_VocabularyWSB_Articles_WSB_ArticlesSet">
+      <End Role="WSB_ArticlesSet" EntitySet="WSB_ArticlesSet" />
+      <End Role="Terms_VocabularyWSB_Articles" EntitySet="Terms_VocabularyWSB_Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UG_ArticlesAuthor_AuthorSet" Association="ArticleProjDBModel.Store.FK_UG_ArticlesAuthor_AuthorSet">
+      <End Role="AuthorSet" EntitySet="AuthorSet" />
+      <End Role="UG_ArticlesAuthor" EntitySet="UG_ArticlesAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UG_ArticlesAuthor_UG_ArticlesSet" Association="ArticleProjDBModel.Store.FK_UG_ArticlesAuthor_UG_ArticlesSet">
+      <End Role="UG_ArticlesSet" EntitySet="UG_ArticlesSet" />
+      <End Role="UG_ArticlesAuthor" EntitySet="UG_ArticlesAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UMK_ArticlesAuthor_AuthorSet" Association="ArticleProjDBModel.Store.FK_UMK_ArticlesAuthor_AuthorSet">
+      <End Role="AuthorSet" EntitySet="AuthorSet" />
+      <End Role="UMK_ArticlesAuthor" EntitySet="UMK_ArticlesAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UMK_ArticlesAuthor_UMK_ArticlesSet" Association="ArticleProjDBModel.Store.FK_UMK_ArticlesAuthor_UMK_ArticlesSet">
+      <End Role="UMK_ArticlesSet" EntitySet="UMK_ArticlesSet" />
+      <End Role="UMK_ArticlesAuthor" EntitySet="UMK_ArticlesAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WSB_ArticlesAuthor_AuthorSet" Association="ArticleProjDBModel.Store.FK_WSB_ArticlesAuthor_AuthorSet">
+      <End Role="AuthorSet" EntitySet="AuthorSet" />
+      <End Role="WSB_ArticlesAuthor" EntitySet="WSB_ArticlesAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WSB_ArticlesAuthor_WSB_ArticlesSet" Association="ArticleProjDBModel.Store.FK_WSB_ArticlesAuthor_WSB_ArticlesSet">
+      <End Role="WSB_ArticlesSet" EntitySet="WSB_ArticlesSet" />
+      <End Role="WSB_ArticlesAuthor" EntitySet="WSB_ArticlesAuthor" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="AuthorSet">
@@ -139,6 +139,13 @@
     <Property Name="article_language" Type="nvarchar(max)" Nullable="false" />
     <Property Name="article_DOI" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Terms_Vocabulary_terms_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Terms_Vocabulary">
+    <Key>
+      <PropertyRef Name="terms_Id" />
+    </Key>
+    <Property Name="terms_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="term_value" Type="nvarchar" Nullable="false" MaxLength="450" />
   </EntityType>
   <EntityType Name="UG_ArticlesSet">
     <Key>
@@ -186,312 +193,149 @@
     <Property Name="article_URL" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Terms_Vocabulary_terms_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Terms_Vocabulary">
-    <Key>
-      <PropertyRef Name="terms_Id" />
-    </Key>
-    <Property Name="terms_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="term_value" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
   <EntityType Name="PG_ArticlesAuthor">
     <Key>
-      <PropertyRef Name="PG_Articles_article_Id" />
-      <PropertyRef Name="Author_author_Id" />
+      <PropertyRef Name="AuthorSet_author_Id" />
+      <PropertyRef Name="PG_ArticlesSet_article_Id" />
     </Key>
-    <Property Name="PG_Articles_article_Id" Type="int" Nullable="false" />
-    <Property Name="Author_author_Id" Type="int" Nullable="false" />
+    <Property Name="AuthorSet_author_Id" Type="int" Nullable="false" />
+    <Property Name="PG_ArticlesSet_article_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PP_ArticlesAuthor">
     <Key>
-      <PropertyRef Name="PP_Articles_article_Id" />
-      <PropertyRef Name="Author_author_Id" />
+      <PropertyRef Name="AuthorSet_author_Id" />
+      <PropertyRef Name="PP_ArticlesSet_article_Id" />
     </Key>
-    <Property Name="PP_Articles_article_Id" Type="int" Nullable="false" />
-    <Property Name="Author_author_Id" Type="int" Nullable="false" />
+    <Property Name="AuthorSet_author_Id" Type="int" Nullable="false" />
+    <Property Name="PP_ArticlesSet_article_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="UG_ArticlesAuthor">
+  <EntityType Name="Terms_VocabularyPG_Articles">
     <Key>
-      <PropertyRef Name="UG_Articles_article_Id" />
-      <PropertyRef Name="Author_author_Id" />
-    </Key>
-    <Property Name="UG_Articles_article_Id" Type="int" Nullable="false" />
-    <Property Name="Author_author_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UMK_ArticlesAuthor">
-    <Key>
-      <PropertyRef Name="UMK_Articles_article_Id" />
-      <PropertyRef Name="Author_author_Id" />
-    </Key>
-    <Property Name="UMK_Articles_article_Id" Type="int" Nullable="false" />
-    <Property Name="Author_author_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="WSB_ArticlesAuthor">
-    <Key>
-      <PropertyRef Name="WSB_Articles_article_Id" />
-      <PropertyRef Name="Author_author_Id" />
-    </Key>
-    <Property Name="WSB_Articles_article_Id" Type="int" Nullable="false" />
-    <Property Name="Author_author_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Terms_VocabularyWSB_Articles">
-    <Key>
+      <PropertyRef Name="PG_ArticlesSet_article_Id" />
       <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      <PropertyRef Name="WSB_Articles_article_Id" />
     </Key>
+    <Property Name="PG_ArticlesSet_article_Id" Type="int" Nullable="false" />
     <Property Name="Terms_Vocabulary_terms_Id" Type="int" Nullable="false" />
-    <Property Name="WSB_Articles_article_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Terms_VocabularyUMK_Articles">
+  <EntityType Name="Terms_VocabularyPP_Articles">
     <Key>
+      <PropertyRef Name="PP_ArticlesSet_article_Id" />
       <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      <PropertyRef Name="UMK_Articles_article_Id" />
     </Key>
+    <Property Name="PP_ArticlesSet_article_Id" Type="int" Nullable="false" />
     <Property Name="Terms_Vocabulary_terms_Id" Type="int" Nullable="false" />
-    <Property Name="UMK_Articles_article_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Terms_VocabularyUG_Articles">
     <Key>
       <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      <PropertyRef Name="UG_Articles_article_Id" />
+      <PropertyRef Name="UG_ArticlesSet_article_Id" />
     </Key>
     <Property Name="Terms_Vocabulary_terms_Id" Type="int" Nullable="false" />
-    <Property Name="UG_Articles_article_Id" Type="int" Nullable="false" />
+    <Property Name="UG_ArticlesSet_article_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Terms_VocabularyPP_Articles">
+  <EntityType Name="Terms_VocabularyUMK_Articles">
     <Key>
       <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      <PropertyRef Name="PP_Articles_article_Id" />
+      <PropertyRef Name="UMK_ArticlesSet_article_Id" />
     </Key>
     <Property Name="Terms_Vocabulary_terms_Id" Type="int" Nullable="false" />
-    <Property Name="PP_Articles_article_Id" Type="int" Nullable="false" />
+    <Property Name="UMK_ArticlesSet_article_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Terms_VocabularyPG_Articles">
+  <EntityType Name="Terms_VocabularyWSB_Articles">
     <Key>
       <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      <PropertyRef Name="PG_Articles_article_Id" />
+      <PropertyRef Name="WSB_ArticlesSet_article_Id" />
     </Key>
     <Property Name="Terms_Vocabulary_terms_Id" Type="int" Nullable="false" />
-    <Property Name="PG_Articles_article_Id" Type="int" Nullable="false" />
+    <Property Name="WSB_ArticlesSet_article_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK_PG_ArticlesAuthor_PG_Articles">
-    <End Role="PG_Articles" Type="ArticleDBDataModel.Store.PG_ArticlesSet" Multiplicity="1" />
-    <End Role="PG_ArticlesAuthor" Type="ArticleDBDataModel.Store.PG_ArticlesAuthor" Multiplicity="*" />
+  <EntityType Name="UG_ArticlesAuthor">
+    <Key>
+      <PropertyRef Name="AuthorSet_author_Id" />
+      <PropertyRef Name="UG_ArticlesSet_article_Id" />
+    </Key>
+    <Property Name="AuthorSet_author_Id" Type="int" Nullable="false" />
+    <Property Name="UG_ArticlesSet_article_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UMK_ArticlesAuthor">
+    <Key>
+      <PropertyRef Name="AuthorSet_author_Id" />
+      <PropertyRef Name="UMK_ArticlesSet_article_Id" />
+    </Key>
+    <Property Name="AuthorSet_author_Id" Type="int" Nullable="false" />
+    <Property Name="UMK_ArticlesSet_article_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WSB_ArticlesAuthor">
+    <Key>
+      <PropertyRef Name="AuthorSet_author_Id" />
+      <PropertyRef Name="WSB_ArticlesSet_article_Id" />
+    </Key>
+    <Property Name="AuthorSet_author_Id" Type="int" Nullable="false" />
+    <Property Name="WSB_ArticlesSet_article_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PG_ArticlesAuthor_AuthorSet">
+    <End Role="AuthorSet" Type="ArticleProjDBModel.Store.AuthorSet" Multiplicity="1" />
+    <End Role="PG_ArticlesAuthor" Type="ArticleProjDBModel.Store.PG_ArticlesAuthor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PG_Articles">
+      <Principal Role="AuthorSet">
+        <PropertyRef Name="author_Id" />
+      </Principal>
+      <Dependent Role="PG_ArticlesAuthor">
+        <PropertyRef Name="AuthorSet_author_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PG_ArticlesAuthor_PG_ArticlesSet">
+    <End Role="PG_ArticlesAuthor" Type="ArticleProjDBModel.Store.PG_ArticlesAuthor" Multiplicity="*" />
+    <End Role="PG_ArticlesSet" Type="ArticleProjDBModel.Store.PG_ArticlesSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PG_ArticlesSet">
         <PropertyRef Name="article_Id" />
       </Principal>
       <Dependent Role="PG_ArticlesAuthor">
-        <PropertyRef Name="PG_Articles_article_Id" />
+        <PropertyRef Name="PG_ArticlesSet_article_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PG_ArticlesAuthor_Author">
-    <End Role="PG_ArticlesAuthor" Type="ArticleDBDataModel.Store.PG_ArticlesAuthor" Multiplicity="*" />
-    <End Role="Author" Type="ArticleDBDataModel.Store.AuthorSet" Multiplicity="1" />
+  <Association Name="FK_PP_ArticlesAuthor_AuthorSet">
+    <End Role="AuthorSet" Type="ArticleProjDBModel.Store.AuthorSet" Multiplicity="1" />
+    <End Role="PP_ArticlesAuthor" Type="ArticleProjDBModel.Store.PP_ArticlesAuthor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Author">
-        <PropertyRef Name="author_Id" />
-      </Principal>
-      <Dependent Role="PG_ArticlesAuthor">
-        <PropertyRef Name="Author_author_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PP_ArticlesAuthor_PP_Articles">
-    <End Role="PP_Articles" Type="ArticleDBDataModel.Store.PP_ArticlesSet" Multiplicity="1" />
-    <End Role="PP_ArticlesAuthor" Type="ArticleDBDataModel.Store.PP_ArticlesAuthor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PP_Articles">
-        <PropertyRef Name="article_Id" />
-      </Principal>
-      <Dependent Role="PP_ArticlesAuthor">
-        <PropertyRef Name="PP_Articles_article_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PP_ArticlesAuthor_Author">
-    <End Role="PP_ArticlesAuthor" Type="ArticleDBDataModel.Store.PP_ArticlesAuthor" Multiplicity="*" />
-    <End Role="Author" Type="ArticleDBDataModel.Store.AuthorSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Author">
+      <Principal Role="AuthorSet">
         <PropertyRef Name="author_Id" />
       </Principal>
       <Dependent Role="PP_ArticlesAuthor">
-        <PropertyRef Name="Author_author_Id" />
+        <PropertyRef Name="AuthorSet_author_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UG_ArticlesAuthor_UG_Articles">
-    <End Role="UG_Articles" Type="ArticleDBDataModel.Store.UG_ArticlesSet" Multiplicity="1" />
-    <End Role="UG_ArticlesAuthor" Type="ArticleDBDataModel.Store.UG_ArticlesAuthor" Multiplicity="*" />
+  <Association Name="FK_PP_ArticlesAuthor_PP_ArticlesSet">
+    <End Role="PP_ArticlesAuthor" Type="ArticleProjDBModel.Store.PP_ArticlesAuthor" Multiplicity="*" />
+    <End Role="PP_ArticlesSet" Type="ArticleProjDBModel.Store.PP_ArticlesSet" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="UG_Articles">
+      <Principal Role="PP_ArticlesSet">
         <PropertyRef Name="article_Id" />
       </Principal>
-      <Dependent Role="UG_ArticlesAuthor">
-        <PropertyRef Name="UG_Articles_article_Id" />
+      <Dependent Role="PP_ArticlesAuthor">
+        <PropertyRef Name="PP_ArticlesSet_article_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UG_ArticlesAuthor_Author">
-    <End Role="UG_ArticlesAuthor" Type="ArticleDBDataModel.Store.UG_ArticlesAuthor" Multiplicity="*" />
-    <End Role="Author" Type="ArticleDBDataModel.Store.AuthorSet" Multiplicity="1" />
+  <Association Name="FK_Terms_VocabularyPG_Articles_PG_ArticlesSet">
+    <End Role="PG_ArticlesSet" Type="ArticleProjDBModel.Store.PG_ArticlesSet" Multiplicity="1" />
+    <End Role="Terms_VocabularyPG_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyPG_Articles" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Author">
-        <PropertyRef Name="author_Id" />
-      </Principal>
-      <Dependent Role="UG_ArticlesAuthor">
-        <PropertyRef Name="Author_author_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UMK_ArticlesAuthor_UMK_Articles">
-    <End Role="UMK_Articles" Type="ArticleDBDataModel.Store.UMK_ArticlesSet" Multiplicity="1" />
-    <End Role="UMK_ArticlesAuthor" Type="ArticleDBDataModel.Store.UMK_ArticlesAuthor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UMK_Articles">
+      <Principal Role="PG_ArticlesSet">
         <PropertyRef Name="article_Id" />
       </Principal>
-      <Dependent Role="UMK_ArticlesAuthor">
-        <PropertyRef Name="UMK_Articles_article_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UMK_ArticlesAuthor_Author">
-    <End Role="UMK_ArticlesAuthor" Type="ArticleDBDataModel.Store.UMK_ArticlesAuthor" Multiplicity="*" />
-    <End Role="Author" Type="ArticleDBDataModel.Store.AuthorSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Author">
-        <PropertyRef Name="author_Id" />
-      </Principal>
-      <Dependent Role="UMK_ArticlesAuthor">
-        <PropertyRef Name="Author_author_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_WSB_ArticlesAuthor_WSB_Articles">
-    <End Role="WSB_Articles" Type="ArticleDBDataModel.Store.WSB_ArticlesSet" Multiplicity="1" />
-    <End Role="WSB_ArticlesAuthor" Type="ArticleDBDataModel.Store.WSB_ArticlesAuthor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="WSB_Articles">
-        <PropertyRef Name="article_Id" />
-      </Principal>
-      <Dependent Role="WSB_ArticlesAuthor">
-        <PropertyRef Name="WSB_Articles_article_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_WSB_ArticlesAuthor_Author">
-    <End Role="WSB_ArticlesAuthor" Type="ArticleDBDataModel.Store.WSB_ArticlesAuthor" Multiplicity="*" />
-    <End Role="Author" Type="ArticleDBDataModel.Store.AuthorSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Author">
-        <PropertyRef Name="author_Id" />
-      </Principal>
-      <Dependent Role="WSB_ArticlesAuthor">
-        <PropertyRef Name="Author_author_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary">
-    <End Role="Terms_Vocabulary" Type="ArticleDBDataModel.Store.Terms_Vocabulary" Multiplicity="1" />
-    <End Role="Terms_VocabularyWSB_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyWSB_Articles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Terms_Vocabulary">
-        <PropertyRef Name="terms_Id" />
-      </Principal>
-      <Dependent Role="Terms_VocabularyWSB_Articles">
-        <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Terms_VocabularyWSB_Articles_WSB_Articles">
-    <End Role="Terms_VocabularyWSB_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyWSB_Articles" Multiplicity="*" />
-    <End Role="WSB_Articles" Type="ArticleDBDataModel.Store.WSB_ArticlesSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="WSB_Articles">
-        <PropertyRef Name="article_Id" />
-      </Principal>
-      <Dependent Role="Terms_VocabularyWSB_Articles">
-        <PropertyRef Name="WSB_Articles_article_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary">
-    <End Role="Terms_Vocabulary" Type="ArticleDBDataModel.Store.Terms_Vocabulary" Multiplicity="1" />
-    <End Role="Terms_VocabularyUMK_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyUMK_Articles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Terms_Vocabulary">
-        <PropertyRef Name="terms_Id" />
-      </Principal>
-      <Dependent Role="Terms_VocabularyUMK_Articles">
-        <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Terms_VocabularyUMK_Articles_UMK_Articles">
-    <End Role="Terms_VocabularyUMK_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyUMK_Articles" Multiplicity="*" />
-    <End Role="UMK_Articles" Type="ArticleDBDataModel.Store.UMK_ArticlesSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="UMK_Articles">
-        <PropertyRef Name="article_Id" />
-      </Principal>
-      <Dependent Role="Terms_VocabularyUMK_Articles">
-        <PropertyRef Name="UMK_Articles_article_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Terms_VocabularyUG_Articles_Terms_Vocabulary">
-    <End Role="Terms_Vocabulary" Type="ArticleDBDataModel.Store.Terms_Vocabulary" Multiplicity="1" />
-    <End Role="Terms_VocabularyUG_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyUG_Articles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Terms_Vocabulary">
-        <PropertyRef Name="terms_Id" />
-      </Principal>
-      <Dependent Role="Terms_VocabularyUG_Articles">
-        <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Terms_VocabularyUG_Articles_UG_Articles">
-    <End Role="Terms_VocabularyUG_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyUG_Articles" Multiplicity="*" />
-    <End Role="UG_Articles" Type="ArticleDBDataModel.Store.UG_ArticlesSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="UG_Articles">
-        <PropertyRef Name="article_Id" />
-      </Principal>
-      <Dependent Role="Terms_VocabularyUG_Articles">
-        <PropertyRef Name="UG_Articles_article_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Terms_VocabularyPP_Articles_Terms_Vocabulary">
-    <End Role="Terms_Vocabulary" Type="ArticleDBDataModel.Store.Terms_Vocabulary" Multiplicity="1" />
-    <End Role="Terms_VocabularyPP_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyPP_Articles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Terms_Vocabulary">
-        <PropertyRef Name="terms_Id" />
-      </Principal>
-      <Dependent Role="Terms_VocabularyPP_Articles">
-        <PropertyRef Name="Terms_Vocabulary_terms_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Terms_VocabularyPP_Articles_PP_Articles">
-    <End Role="Terms_VocabularyPP_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyPP_Articles" Multiplicity="*" />
-    <End Role="PP_Articles" Type="ArticleDBDataModel.Store.PP_ArticlesSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="PP_Articles">
-        <PropertyRef Name="article_Id" />
-      </Principal>
-      <Dependent Role="Terms_VocabularyPP_Articles">
-        <PropertyRef Name="PP_Articles_article_Id" />
+      <Dependent Role="Terms_VocabularyPG_Articles">
+        <PropertyRef Name="PG_ArticlesSet_article_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Terms_VocabularyPG_Articles_Terms_Vocabulary">
-    <End Role="Terms_Vocabulary" Type="ArticleDBDataModel.Store.Terms_Vocabulary" Multiplicity="1" />
-    <End Role="Terms_VocabularyPG_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyPG_Articles" Multiplicity="*" />
+    <End Role="Terms_VocabularyPG_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyPG_Articles" Multiplicity="*" />
+    <End Role="Terms_Vocabulary" Type="ArticleProjDBModel.Store.Terms_Vocabulary" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Terms_Vocabulary">
         <PropertyRef Name="terms_Id" />
@@ -501,228 +345,384 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Terms_VocabularyPG_Articles_PG_Articles">
-    <End Role="Terms_VocabularyPG_Articles" Type="ArticleDBDataModel.Store.Terms_VocabularyPG_Articles" Multiplicity="*" />
-    <End Role="PG_Articles" Type="ArticleDBDataModel.Store.PG_ArticlesSet" Multiplicity="1" />
+  <Association Name="FK_Terms_VocabularyPP_Articles_PP_ArticlesSet">
+    <End Role="PP_ArticlesSet" Type="ArticleProjDBModel.Store.PP_ArticlesSet" Multiplicity="1" />
+    <End Role="Terms_VocabularyPP_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyPP_Articles" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PG_Articles">
+      <Principal Role="PP_ArticlesSet">
         <PropertyRef Name="article_Id" />
       </Principal>
-      <Dependent Role="Terms_VocabularyPG_Articles">
-        <PropertyRef Name="PG_Articles_article_Id" />
+      <Dependent Role="Terms_VocabularyPP_Articles">
+        <PropertyRef Name="PP_ArticlesSet_article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Terms_VocabularyPP_Articles_Terms_Vocabulary">
+    <End Role="Terms_VocabularyPP_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyPP_Articles" Multiplicity="*" />
+    <End Role="Terms_Vocabulary" Type="ArticleProjDBModel.Store.Terms_Vocabulary" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Terms_Vocabulary">
+        <PropertyRef Name="terms_Id" />
+      </Principal>
+      <Dependent Role="Terms_VocabularyPP_Articles">
+        <PropertyRef Name="Terms_Vocabulary_terms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Terms_VocabularyUG_Articles_Terms_Vocabulary">
+    <End Role="Terms_Vocabulary" Type="ArticleProjDBModel.Store.Terms_Vocabulary" Multiplicity="1" />
+    <End Role="Terms_VocabularyUG_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyUG_Articles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terms_Vocabulary">
+        <PropertyRef Name="terms_Id" />
+      </Principal>
+      <Dependent Role="Terms_VocabularyUG_Articles">
+        <PropertyRef Name="Terms_Vocabulary_terms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Terms_VocabularyUG_Articles_UG_ArticlesSet">
+    <End Role="Terms_VocabularyUG_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyUG_Articles" Multiplicity="*" />
+    <End Role="UG_ArticlesSet" Type="ArticleProjDBModel.Store.UG_ArticlesSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UG_ArticlesSet">
+        <PropertyRef Name="article_Id" />
+      </Principal>
+      <Dependent Role="Terms_VocabularyUG_Articles">
+        <PropertyRef Name="UG_ArticlesSet_article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Terms_VocabularyUMK_Articles_Terms_Vocabulary">
+    <End Role="Terms_Vocabulary" Type="ArticleProjDBModel.Store.Terms_Vocabulary" Multiplicity="1" />
+    <End Role="Terms_VocabularyUMK_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyUMK_Articles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terms_Vocabulary">
+        <PropertyRef Name="terms_Id" />
+      </Principal>
+      <Dependent Role="Terms_VocabularyUMK_Articles">
+        <PropertyRef Name="Terms_Vocabulary_terms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Terms_VocabularyUMK_Articles_UMK_ArticlesSet">
+    <End Role="Terms_VocabularyUMK_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyUMK_Articles" Multiplicity="*" />
+    <End Role="UMK_ArticlesSet" Type="ArticleProjDBModel.Store.UMK_ArticlesSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UMK_ArticlesSet">
+        <PropertyRef Name="article_Id" />
+      </Principal>
+      <Dependent Role="Terms_VocabularyUMK_Articles">
+        <PropertyRef Name="UMK_ArticlesSet_article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Terms_VocabularyWSB_Articles_Terms_Vocabulary">
+    <End Role="Terms_Vocabulary" Type="ArticleProjDBModel.Store.Terms_Vocabulary" Multiplicity="1" />
+    <End Role="Terms_VocabularyWSB_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyWSB_Articles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terms_Vocabulary">
+        <PropertyRef Name="terms_Id" />
+      </Principal>
+      <Dependent Role="Terms_VocabularyWSB_Articles">
+        <PropertyRef Name="Terms_Vocabulary_terms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Terms_VocabularyWSB_Articles_WSB_ArticlesSet">
+    <End Role="Terms_VocabularyWSB_Articles" Type="ArticleProjDBModel.Store.Terms_VocabularyWSB_Articles" Multiplicity="*" />
+    <End Role="WSB_ArticlesSet" Type="ArticleProjDBModel.Store.WSB_ArticlesSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WSB_ArticlesSet">
+        <PropertyRef Name="article_Id" />
+      </Principal>
+      <Dependent Role="Terms_VocabularyWSB_Articles">
+        <PropertyRef Name="WSB_ArticlesSet_article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UG_ArticlesAuthor_AuthorSet">
+    <End Role="AuthorSet" Type="ArticleProjDBModel.Store.AuthorSet" Multiplicity="1" />
+    <End Role="UG_ArticlesAuthor" Type="ArticleProjDBModel.Store.UG_ArticlesAuthor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuthorSet">
+        <PropertyRef Name="author_Id" />
+      </Principal>
+      <Dependent Role="UG_ArticlesAuthor">
+        <PropertyRef Name="AuthorSet_author_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UG_ArticlesAuthor_UG_ArticlesSet">
+    <End Role="UG_ArticlesAuthor" Type="ArticleProjDBModel.Store.UG_ArticlesAuthor" Multiplicity="*" />
+    <End Role="UG_ArticlesSet" Type="ArticleProjDBModel.Store.UG_ArticlesSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UG_ArticlesSet">
+        <PropertyRef Name="article_Id" />
+      </Principal>
+      <Dependent Role="UG_ArticlesAuthor">
+        <PropertyRef Name="UG_ArticlesSet_article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UMK_ArticlesAuthor_AuthorSet">
+    <End Role="AuthorSet" Type="ArticleProjDBModel.Store.AuthorSet" Multiplicity="1" />
+    <End Role="UMK_ArticlesAuthor" Type="ArticleProjDBModel.Store.UMK_ArticlesAuthor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuthorSet">
+        <PropertyRef Name="author_Id" />
+      </Principal>
+      <Dependent Role="UMK_ArticlesAuthor">
+        <PropertyRef Name="AuthorSet_author_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UMK_ArticlesAuthor_UMK_ArticlesSet">
+    <End Role="UMK_ArticlesAuthor" Type="ArticleProjDBModel.Store.UMK_ArticlesAuthor" Multiplicity="*" />
+    <End Role="UMK_ArticlesSet" Type="ArticleProjDBModel.Store.UMK_ArticlesSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UMK_ArticlesSet">
+        <PropertyRef Name="article_Id" />
+      </Principal>
+      <Dependent Role="UMK_ArticlesAuthor">
+        <PropertyRef Name="UMK_ArticlesSet_article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WSB_ArticlesAuthor_AuthorSet">
+    <End Role="AuthorSet" Type="ArticleProjDBModel.Store.AuthorSet" Multiplicity="1" />
+    <End Role="WSB_ArticlesAuthor" Type="ArticleProjDBModel.Store.WSB_ArticlesAuthor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuthorSet">
+        <PropertyRef Name="author_Id" />
+      </Principal>
+      <Dependent Role="WSB_ArticlesAuthor">
+        <PropertyRef Name="AuthorSet_author_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WSB_ArticlesAuthor_WSB_ArticlesSet">
+    <End Role="WSB_ArticlesAuthor" Type="ArticleProjDBModel.Store.WSB_ArticlesAuthor" Multiplicity="*" />
+    <End Role="WSB_ArticlesSet" Type="ArticleProjDBModel.Store.WSB_ArticlesSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WSB_ArticlesSet">
+        <PropertyRef Name="article_Id" />
+      </Principal>
+      <Dependent Role="WSB_ArticlesAuthor">
+        <PropertyRef Name="WSB_ArticlesSet_article_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ArticleDBDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="ArticleDBDataModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AuthorSet" EntityType="ArticleDBDataModel.Author" />
-          <EntitySet Name="PG_ArticlesSet" EntityType="ArticleDBDataModel.PG_Articles" />
-          <EntitySet Name="PP_ArticlesSet" EntityType="ArticleDBDataModel.PP_Articles" />
-          <EntitySet Name="UG_ArticlesSet" EntityType="ArticleDBDataModel.UG_Articles" />
-          <EntitySet Name="UMK_ArticlesSet" EntityType="ArticleDBDataModel.UMK_Articles" />
-          <EntitySet Name="WSB_ArticlesSet" EntityType="ArticleDBDataModel.WSB_Articles" />
-          <EntitySet Name="Terms_Vocabulary" EntityType="ArticleDBDataModel.Terms_Vocabulary" />
-          <AssociationSet Name="PG_ArticlesAuthor" Association="ArticleDBDataModel.PG_ArticlesAuthor">
-            <End Role="PG_Articles" EntitySet="PG_ArticlesSet" />
-            <End Role="Author" EntitySet="AuthorSet" />
-          </AssociationSet>
-          <AssociationSet Name="PP_ArticlesAuthor" Association="ArticleDBDataModel.PP_ArticlesAuthor">
-            <End Role="PP_Articles" EntitySet="PP_ArticlesSet" />
-            <End Role="Author" EntitySet="AuthorSet" />
-          </AssociationSet>
-          <AssociationSet Name="UG_ArticlesAuthor" Association="ArticleDBDataModel.UG_ArticlesAuthor">
-            <End Role="UG_Articles" EntitySet="UG_ArticlesSet" />
-            <End Role="Author" EntitySet="AuthorSet" />
-          </AssociationSet>
-          <AssociationSet Name="UMK_ArticlesAuthor" Association="ArticleDBDataModel.UMK_ArticlesAuthor">
-            <End Role="UMK_Articles" EntitySet="UMK_ArticlesSet" />
-            <End Role="Author" EntitySet="AuthorSet" />
-          </AssociationSet>
-          <AssociationSet Name="WSB_ArticlesAuthor" Association="ArticleDBDataModel.WSB_ArticlesAuthor">
-            <End Role="WSB_Articles" EntitySet="WSB_ArticlesSet" />
-            <End Role="Author" EntitySet="AuthorSet" />
-          </AssociationSet>
-          <AssociationSet Name="Terms_VocabularyWSB_Articles" Association="ArticleDBDataModel.Terms_VocabularyWSB_Articles">
-            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-            <End Role="WSB_Articles" EntitySet="WSB_ArticlesSet" />
-          </AssociationSet>
-          <AssociationSet Name="Terms_VocabularyUMK_Articles" Association="ArticleDBDataModel.Terms_VocabularyUMK_Articles">
-            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-            <End Role="UMK_Articles" EntitySet="UMK_ArticlesSet" />
-          </AssociationSet>
-          <AssociationSet Name="Terms_VocabularyUG_Articles" Association="ArticleDBDataModel.Terms_VocabularyUG_Articles">
-            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-            <End Role="UG_Articles" EntitySet="UG_ArticlesSet" />
-          </AssociationSet>
-          <AssociationSet Name="Terms_VocabularyPP_Articles" Association="ArticleDBDataModel.Terms_VocabularyPP_Articles">
-            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-            <End Role="PP_Articles" EntitySet="PP_ArticlesSet" />
-          </AssociationSet>
-          <AssociationSet Name="Terms_VocabularyPG_Articles" Association="ArticleDBDataModel.Terms_VocabularyPG_Articles">
-            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
-            <End Role="PG_Articles" EntitySet="PG_ArticlesSet" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Author">
+      <Schema Namespace="ArticleProjDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AuthorSet">
           <Key>
             <PropertyRef Name="author_Id" />
           </Key>
           <Property Name="author_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="author_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="author_surename" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PG_Articles" Relationship="ArticleDBDataModel.PG_ArticlesAuthor" FromRole="Author" ToRole="PG_Articles" />
-          <NavigationProperty Name="PP_Articles" Relationship="ArticleDBDataModel.PP_ArticlesAuthor" FromRole="Author" ToRole="PP_Articles" />
-          <NavigationProperty Name="UG_Articles" Relationship="ArticleDBDataModel.UG_ArticlesAuthor" FromRole="Author" ToRole="UG_Articles" />
-          <NavigationProperty Name="UMK_Articles" Relationship="ArticleDBDataModel.UMK_ArticlesAuthor" FromRole="Author" ToRole="UMK_Articles" />
-          <NavigationProperty Name="WSB_Articles" Relationship="ArticleDBDataModel.WSB_ArticlesAuthor" FromRole="Author" ToRole="WSB_Articles" />
+          <Property Name="author_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="author_surename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PG_ArticlesSet" Relationship="Self.PG_ArticlesAuthor" FromRole="AuthorSet" ToRole="PG_ArticlesSet" />
+          <NavigationProperty Name="PP_ArticlesSet" Relationship="Self.PP_ArticlesAuthor" FromRole="AuthorSet" ToRole="PP_ArticlesSet" />
+          <NavigationProperty Name="UG_ArticlesSet" Relationship="Self.UG_ArticlesAuthor" FromRole="AuthorSet" ToRole="UG_ArticlesSet" />
+          <NavigationProperty Name="UMK_ArticlesSet" Relationship="Self.UMK_ArticlesAuthor" FromRole="AuthorSet" ToRole="UMK_ArticlesSet" />
+          <NavigationProperty Name="WSB_ArticlesSet" Relationship="Self.WSB_ArticlesAuthor" FromRole="AuthorSet" ToRole="WSB_ArticlesSet" />
         </EntityType>
-        <EntityType Name="PG_Articles">
+        <EntityType Name="PG_ArticlesSet">
           <Key>
             <PropertyRef Name="article_Id" />
           </Key>
           <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="abstractText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="keywords" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="abstractText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="year" Type="Int32" Nullable="false" />
-          <Property Name="country" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="authors" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="organizations" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="authors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="organizations" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Terms_Vocabulary_terms_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Author" Relationship="ArticleDBDataModel.PG_ArticlesAuthor" FromRole="PG_Articles" ToRole="Author" />
-          <NavigationProperty Name="Terms_Vocabulary" Relationship="ArticleDBDataModel.Terms_VocabularyPG_Articles" FromRole="PG_Articles" ToRole="Terms_Vocabulary" />
+          <NavigationProperty Name="AuthorSet" Relationship="Self.PG_ArticlesAuthor" FromRole="PG_ArticlesSet" ToRole="AuthorSet" />
+          <NavigationProperty Name="Terms_Vocabulary" Relationship="Self.Terms_VocabularyPG_Articles" FromRole="PG_ArticlesSet" ToRole="Terms_Vocabulary" />
         </EntityType>
-        <EntityType Name="PP_Articles">
+        <EntityType Name="PP_ArticlesSet">
           <Key>
             <PropertyRef Name="article_Id" />
           </Key>
           <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="article_author_line" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_source" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="article_author_line" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="article_year" Type="Int32" Nullable="false" />
-          <Property Name="article_language" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_DOI" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="article_language" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_DOI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Terms_Vocabulary_terms_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Author" Relationship="ArticleDBDataModel.PP_ArticlesAuthor" FromRole="PP_Articles" ToRole="Author" />
-          <NavigationProperty Name="Terms_Vocabulary" Relationship="ArticleDBDataModel.Terms_VocabularyPP_Articles" FromRole="PP_Articles" ToRole="Terms_Vocabulary" />
-        </EntityType>
-        <EntityType Name="UG_Articles">
-          <Key>
-            <PropertyRef Name="article_Id" />
-          </Key>
-          <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="article_author_line" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_source" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_keywords" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_DOI" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Terms_Vocabulary_terms_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Author" Relationship="ArticleDBDataModel.UG_ArticlesAuthor" FromRole="UG_Articles" ToRole="Author" />
-          <NavigationProperty Name="Terms_Vocabulary" Relationship="ArticleDBDataModel.Terms_VocabularyUG_Articles" FromRole="UG_Articles" ToRole="Terms_Vocabulary" />
-        </EntityType>
-        <EntityType Name="UMK_Articles">
-          <Key>
-            <PropertyRef Name="article_Id" />
-          </Key>
-          <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="article_author_line" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_language" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_Full_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_pl_keywords" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_eng_keywords" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_translated_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_publisher_desc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_publisher_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Terms_Vocabulary_terms_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Author" Relationship="ArticleDBDataModel.UMK_ArticlesAuthor" FromRole="UMK_Articles" ToRole="Author" />
-          <NavigationProperty Name="Terms_Vocabulary" Relationship="ArticleDBDataModel.Terms_VocabularyUMK_Articles" FromRole="UMK_Articles" ToRole="Terms_Vocabulary" />
-        </EntityType>
-        <EntityType Name="WSB_Articles">
-          <Key>
-            <PropertyRef Name="article_Id" />
-          </Key>
-          <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="article_authors" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_publisher_adres" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_common_title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_eng_keywords" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_pl_keywords" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_title_other_lang" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_DOI" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="article_URL" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Terms_Vocabulary_terms_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Author" Relationship="ArticleDBDataModel.WSB_ArticlesAuthor" FromRole="WSB_Articles" ToRole="Author" />
-          <NavigationProperty Name="Terms_Vocabulary" Relationship="ArticleDBDataModel.Terms_VocabularyWSB_Articles" FromRole="WSB_Articles" ToRole="Terms_Vocabulary" />
+          <NavigationProperty Name="AuthorSet" Relationship="Self.PP_ArticlesAuthor" FromRole="PP_ArticlesSet" ToRole="AuthorSet" />
+          <NavigationProperty Name="Terms_Vocabulary" Relationship="Self.Terms_VocabularyPP_Articles" FromRole="PP_ArticlesSet" ToRole="Terms_Vocabulary" />
         </EntityType>
         <EntityType Name="Terms_Vocabulary">
           <Key>
             <PropertyRef Name="terms_Id" />
           </Key>
           <Property Name="terms_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="term_value" Type="String" Nullable="false" />
-          <NavigationProperty Name="WSB_Articles" Relationship="ArticleDBDataModel.Terms_VocabularyWSB_Articles" FromRole="Terms_Vocabulary" ToRole="WSB_Articles" />
-          <NavigationProperty Name="UMK_Articles" Relationship="ArticleDBDataModel.Terms_VocabularyUMK_Articles" FromRole="Terms_Vocabulary" ToRole="UMK_Articles" />
-          <NavigationProperty Name="UG_Articles" Relationship="ArticleDBDataModel.Terms_VocabularyUG_Articles" FromRole="Terms_Vocabulary" ToRole="UG_Articles" />
-          <NavigationProperty Name="PP_Articles" Relationship="ArticleDBDataModel.Terms_VocabularyPP_Articles" FromRole="Terms_Vocabulary" ToRole="PP_Articles" />
-          <NavigationProperty Name="PG_Articles" Relationship="ArticleDBDataModel.Terms_VocabularyPG_Articles" FromRole="Terms_Vocabulary" ToRole="PG_Articles" />
+          <Property Name="term_value" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PG_ArticlesSet" Relationship="Self.Terms_VocabularyPG_Articles" FromRole="Terms_Vocabulary" ToRole="PG_ArticlesSet" />
+          <NavigationProperty Name="PP_ArticlesSet" Relationship="Self.Terms_VocabularyPP_Articles" FromRole="Terms_Vocabulary" ToRole="PP_ArticlesSet" />
+          <NavigationProperty Name="UG_ArticlesSet" Relationship="Self.Terms_VocabularyUG_Articles" FromRole="Terms_Vocabulary" ToRole="UG_ArticlesSet" />
+          <NavigationProperty Name="UMK_ArticlesSet" Relationship="Self.Terms_VocabularyUMK_Articles" FromRole="Terms_Vocabulary" ToRole="UMK_ArticlesSet" />
+          <NavigationProperty Name="WSB_ArticlesSet" Relationship="Self.Terms_VocabularyWSB_Articles" FromRole="Terms_Vocabulary" ToRole="WSB_ArticlesSet" />
+        </EntityType>
+        <EntityType Name="UG_ArticlesSet">
+          <Key>
+            <PropertyRef Name="article_Id" />
+          </Key>
+          <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="article_author_line" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_DOI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Terms_Vocabulary_terms_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Terms_Vocabulary" Relationship="Self.Terms_VocabularyUG_Articles" FromRole="UG_ArticlesSet" ToRole="Terms_Vocabulary" />
+          <NavigationProperty Name="AuthorSet" Relationship="Self.UG_ArticlesAuthor" FromRole="UG_ArticlesSet" ToRole="AuthorSet" />
+        </EntityType>
+        <EntityType Name="UMK_ArticlesSet">
+          <Key>
+            <PropertyRef Name="article_Id" />
+          </Key>
+          <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="article_author_line" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_language" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_Full_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_pl_keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_eng_keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_translated_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_publisher_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_publisher_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Terms_Vocabulary_terms_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Terms_Vocabulary" Relationship="Self.Terms_VocabularyUMK_Articles" FromRole="UMK_ArticlesSet" ToRole="Terms_Vocabulary" />
+          <NavigationProperty Name="AuthorSet" Relationship="Self.UMK_ArticlesAuthor" FromRole="UMK_ArticlesSet" ToRole="AuthorSet" />
+        </EntityType>
+        <EntityType Name="WSB_ArticlesSet">
+          <Key>
+            <PropertyRef Name="article_Id" />
+          </Key>
+          <Property Name="article_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="article_authors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_publisher_adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_common_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_eng_keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_pl_keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_title_other_lang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_DOI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="article_URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Terms_Vocabulary_terms_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Terms_Vocabulary" Relationship="Self.Terms_VocabularyWSB_Articles" FromRole="WSB_ArticlesSet" ToRole="Terms_Vocabulary" />
+          <NavigationProperty Name="AuthorSet" Relationship="Self.WSB_ArticlesAuthor" FromRole="WSB_ArticlesSet" ToRole="AuthorSet" />
         </EntityType>
         <Association Name="PG_ArticlesAuthor">
-          <End Type="ArticleDBDataModel.PG_Articles" Role="PG_Articles" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.Author" Role="Author" Multiplicity="*" />
+          <End Role="AuthorSet" Type="Self.AuthorSet" Multiplicity="*" />
+          <End Role="PG_ArticlesSet" Type="Self.PG_ArticlesSet" Multiplicity="*" />
         </Association>
         <Association Name="PP_ArticlesAuthor">
-          <End Type="ArticleDBDataModel.PP_Articles" Role="PP_Articles" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.Author" Role="Author" Multiplicity="*" />
-        </Association>
-        <Association Name="UG_ArticlesAuthor">
-          <End Type="ArticleDBDataModel.UG_Articles" Role="UG_Articles" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.Author" Role="Author" Multiplicity="*" />
-        </Association>
-        <Association Name="UMK_ArticlesAuthor">
-          <End Type="ArticleDBDataModel.UMK_Articles" Role="UMK_Articles" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.Author" Role="Author" Multiplicity="*" />
-        </Association>
-        <Association Name="WSB_ArticlesAuthor">
-          <End Type="ArticleDBDataModel.WSB_Articles" Role="WSB_Articles" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.Author" Role="Author" Multiplicity="*" />
-        </Association>
-        <Association Name="Terms_VocabularyWSB_Articles">
-          <End Type="ArticleDBDataModel.Terms_Vocabulary" Role="Terms_Vocabulary" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.WSB_Articles" Role="WSB_Articles" Multiplicity="*" />
-        </Association>
-        <Association Name="Terms_VocabularyUMK_Articles">
-          <End Type="ArticleDBDataModel.Terms_Vocabulary" Role="Terms_Vocabulary" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.UMK_Articles" Role="UMK_Articles" Multiplicity="*" />
-        </Association>
-        <Association Name="Terms_VocabularyUG_Articles">
-          <End Type="ArticleDBDataModel.Terms_Vocabulary" Role="Terms_Vocabulary" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.UG_Articles" Role="UG_Articles" Multiplicity="*" />
-        </Association>
-        <Association Name="Terms_VocabularyPP_Articles">
-          <End Type="ArticleDBDataModel.Terms_Vocabulary" Role="Terms_Vocabulary" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.PP_Articles" Role="PP_Articles" Multiplicity="*" />
+          <End Role="AuthorSet" Type="Self.AuthorSet" Multiplicity="*" />
+          <End Role="PP_ArticlesSet" Type="Self.PP_ArticlesSet" Multiplicity="*" />
         </Association>
         <Association Name="Terms_VocabularyPG_Articles">
-          <End Type="ArticleDBDataModel.Terms_Vocabulary" Role="Terms_Vocabulary" Multiplicity="*" />
-          <End Type="ArticleDBDataModel.PG_Articles" Role="PG_Articles" Multiplicity="*" />
+          <End Role="PG_ArticlesSet" Type="Self.PG_ArticlesSet" Multiplicity="*" />
+          <End Role="Terms_Vocabulary" Type="Self.Terms_Vocabulary" Multiplicity="*" />
         </Association>
+        <Association Name="Terms_VocabularyPP_Articles">
+          <End Role="PP_ArticlesSet" Type="Self.PP_ArticlesSet" Multiplicity="*" />
+          <End Role="Terms_Vocabulary" Type="Self.Terms_Vocabulary" Multiplicity="*" />
+        </Association>
+        <Association Name="Terms_VocabularyUG_Articles">
+          <End Role="Terms_Vocabulary" Type="Self.Terms_Vocabulary" Multiplicity="*" />
+          <End Role="UG_ArticlesSet" Type="Self.UG_ArticlesSet" Multiplicity="*" />
+        </Association>
+        <Association Name="Terms_VocabularyUMK_Articles">
+          <End Role="Terms_Vocabulary" Type="Self.Terms_Vocabulary" Multiplicity="*" />
+          <End Role="UMK_ArticlesSet" Type="Self.UMK_ArticlesSet" Multiplicity="*" />
+        </Association>
+        <Association Name="Terms_VocabularyWSB_Articles">
+          <End Role="Terms_Vocabulary" Type="Self.Terms_Vocabulary" Multiplicity="*" />
+          <End Role="WSB_ArticlesSet" Type="Self.WSB_ArticlesSet" Multiplicity="*" />
+        </Association>
+        <Association Name="UG_ArticlesAuthor">
+          <End Role="AuthorSet" Type="Self.AuthorSet" Multiplicity="*" />
+          <End Role="UG_ArticlesSet" Type="Self.UG_ArticlesSet" Multiplicity="*" />
+        </Association>
+        <Association Name="UMK_ArticlesAuthor">
+          <End Role="AuthorSet" Type="Self.AuthorSet" Multiplicity="*" />
+          <End Role="UMK_ArticlesSet" Type="Self.UMK_ArticlesSet" Multiplicity="*" />
+        </Association>
+        <Association Name="WSB_ArticlesAuthor">
+          <End Role="AuthorSet" Type="Self.AuthorSet" Multiplicity="*" />
+          <End Role="WSB_ArticlesSet" Type="Self.WSB_ArticlesSet" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ArticleProjDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AuthorSet" EntityType="Self.AuthorSet" />
+          <EntitySet Name="PG_ArticlesSet" EntityType="Self.PG_ArticlesSet" />
+          <EntitySet Name="PP_ArticlesSet" EntityType="Self.PP_ArticlesSet" />
+          <EntitySet Name="Terms_Vocabulary" EntityType="Self.Terms_Vocabulary" />
+          <EntitySet Name="UG_ArticlesSet" EntityType="Self.UG_ArticlesSet" />
+          <EntitySet Name="UMK_ArticlesSet" EntityType="Self.UMK_ArticlesSet" />
+          <EntitySet Name="WSB_ArticlesSet" EntityType="Self.WSB_ArticlesSet" />
+          <AssociationSet Name="PG_ArticlesAuthor" Association="Self.PG_ArticlesAuthor">
+            <End Role="AuthorSet" EntitySet="AuthorSet" />
+            <End Role="PG_ArticlesSet" EntitySet="PG_ArticlesSet" />
+          </AssociationSet>
+          <AssociationSet Name="PP_ArticlesAuthor" Association="Self.PP_ArticlesAuthor">
+            <End Role="AuthorSet" EntitySet="AuthorSet" />
+            <End Role="PP_ArticlesSet" EntitySet="PP_ArticlesSet" />
+          </AssociationSet>
+          <AssociationSet Name="Terms_VocabularyPG_Articles" Association="Self.Terms_VocabularyPG_Articles">
+            <End Role="PG_ArticlesSet" EntitySet="PG_ArticlesSet" />
+            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="Terms_VocabularyPP_Articles" Association="Self.Terms_VocabularyPP_Articles">
+            <End Role="PP_ArticlesSet" EntitySet="PP_ArticlesSet" />
+            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="Terms_VocabularyUG_Articles" Association="Self.Terms_VocabularyUG_Articles">
+            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+            <End Role="UG_ArticlesSet" EntitySet="UG_ArticlesSet" />
+          </AssociationSet>
+          <AssociationSet Name="Terms_VocabularyUMK_Articles" Association="Self.Terms_VocabularyUMK_Articles">
+            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+            <End Role="UMK_ArticlesSet" EntitySet="UMK_ArticlesSet" />
+          </AssociationSet>
+          <AssociationSet Name="Terms_VocabularyWSB_Articles" Association="Self.Terms_VocabularyWSB_Articles">
+            <End Role="Terms_Vocabulary" EntitySet="Terms_Vocabulary" />
+            <End Role="WSB_ArticlesSet" EntitySet="WSB_ArticlesSet" />
+          </AssociationSet>
+          <AssociationSet Name="UG_ArticlesAuthor" Association="Self.UG_ArticlesAuthor">
+            <End Role="AuthorSet" EntitySet="AuthorSet" />
+            <End Role="UG_ArticlesSet" EntitySet="UG_ArticlesSet" />
+          </AssociationSet>
+          <AssociationSet Name="UMK_ArticlesAuthor" Association="Self.UMK_ArticlesAuthor">
+            <End Role="AuthorSet" EntitySet="AuthorSet" />
+            <End Role="UMK_ArticlesSet" EntitySet="UMK_ArticlesSet" />
+          </AssociationSet>
+          <AssociationSet Name="WSB_ArticlesAuthor" Association="Self.WSB_ArticlesAuthor">
+            <End Role="AuthorSet" EntitySet="AuthorSet" />
+            <End Role="WSB_ArticlesSet" EntitySet="WSB_ArticlesSet" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ArticleDBDataModelStoreContainer" CdmEntityContainer="ArticleDBDataModelContainer">
+  <EntityContainerMapping StorageEntityContainer="ArticleProjDBModelStoreContainer" CdmEntityContainer="ArticleProjDBEntities">
     <EntitySetMapping Name="AuthorSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ArticleDBDataModel.Author)">
+      <EntityTypeMapping TypeName="IsTypeOf(ArticleProjDBModel.AuthorSet)">
         <MappingFragment StoreEntitySet="AuthorSet">
           <ScalarProperty Name="author_Id" ColumnName="author_Id" />
           <ScalarProperty Name="author_name" ColumnName="author_name" />
@@ -731,7 +731,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PG_ArticlesSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ArticleDBDataModel.PG_Articles)">
+      <EntityTypeMapping TypeName="IsTypeOf(ArticleProjDBModel.PG_ArticlesSet)">
         <MappingFragment StoreEntitySet="PG_ArticlesSet">
           <ScalarProperty Name="article_Id" ColumnName="article_Id" />
           <ScalarProperty Name="title" ColumnName="title" />
@@ -747,7 +747,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PP_ArticlesSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ArticleDBDataModel.PP_Articles)">
+      <EntityTypeMapping TypeName="IsTypeOf(ArticleProjDBModel.PP_ArticlesSet)">
         <MappingFragment StoreEntitySet="PP_ArticlesSet">
           <ScalarProperty Name="article_Id" ColumnName="article_Id" />
           <ScalarProperty Name="article_author_line" ColumnName="article_author_line" />
@@ -760,8 +760,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Terms_Vocabulary">
+      <EntityTypeMapping TypeName="IsTypeOf(ArticleProjDBModel.Terms_Vocabulary)">
+        <MappingFragment StoreEntitySet="Terms_Vocabulary">
+          <ScalarProperty Name="terms_Id" ColumnName="terms_Id" />
+          <ScalarProperty Name="term_value" ColumnName="term_value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UG_ArticlesSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ArticleDBDataModel.UG_Articles)">
+      <EntityTypeMapping TypeName="IsTypeOf(ArticleProjDBModel.UG_ArticlesSet)">
         <MappingFragment StoreEntitySet="UG_ArticlesSet">
           <ScalarProperty Name="article_Id" ColumnName="article_Id" />
           <ScalarProperty Name="article_author_line" ColumnName="article_author_line" />
@@ -774,7 +782,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UMK_ArticlesSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ArticleDBDataModel.UMK_Articles)">
+      <EntityTypeMapping TypeName="IsTypeOf(ArticleProjDBModel.UMK_ArticlesSet)">
         <MappingFragment StoreEntitySet="UMK_ArticlesSet">
           <ScalarProperty Name="article_Id" ColumnName="article_Id" />
           <ScalarProperty Name="article_author_line" ColumnName="article_author_line" />
@@ -792,7 +800,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WSB_ArticlesSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ArticleDBDataModel.WSB_Articles)">
+      <EntityTypeMapping TypeName="IsTypeOf(ArticleProjDBModel.WSB_ArticlesSet)">
         <MappingFragment StoreEntitySet="WSB_ArticlesSet">
           <ScalarProperty Name="article_Id" ColumnName="article_Id" />
           <ScalarProperty Name="article_authors" ColumnName="article_authors" />
@@ -809,114 +817,106 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Terms_Vocabulary">
-      <EntityTypeMapping TypeName="IsTypeOf(ArticleDBDataModel.Terms_Vocabulary)">
-        <MappingFragment StoreEntitySet="Terms_Vocabulary">
-          <ScalarProperty Name="terms_Id" ColumnName="terms_Id" />
-          <ScalarProperty Name="term_value" ColumnName="term_value" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="PG_ArticlesAuthor" TypeName="ArticleDBDataModel.PG_ArticlesAuthor" StoreEntitySet="PG_ArticlesAuthor">
-      <EndProperty Name="PG_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="PG_Articles_article_Id" />
+    <AssociationSetMapping Name="PG_ArticlesAuthor" TypeName="ArticleProjDBModel.PG_ArticlesAuthor" StoreEntitySet="PG_ArticlesAuthor">
+      <EndProperty Name="AuthorSet">
+        <ScalarProperty Name="author_Id" ColumnName="AuthorSet_author_Id" />
       </EndProperty>
-      <EndProperty Name="Author">
-        <ScalarProperty Name="author_Id" ColumnName="Author_author_Id" />
+      <EndProperty Name="PG_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="PG_ArticlesSet_article_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="PP_ArticlesAuthor" TypeName="ArticleDBDataModel.PP_ArticlesAuthor" StoreEntitySet="PP_ArticlesAuthor">
-      <EndProperty Name="PP_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="PP_Articles_article_Id" />
+    <AssociationSetMapping Name="PP_ArticlesAuthor" TypeName="ArticleProjDBModel.PP_ArticlesAuthor" StoreEntitySet="PP_ArticlesAuthor">
+      <EndProperty Name="AuthorSet">
+        <ScalarProperty Name="author_Id" ColumnName="AuthorSet_author_Id" />
       </EndProperty>
-      <EndProperty Name="Author">
-        <ScalarProperty Name="author_Id" ColumnName="Author_author_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="UG_ArticlesAuthor" TypeName="ArticleDBDataModel.UG_ArticlesAuthor" StoreEntitySet="UG_ArticlesAuthor">
-      <EndProperty Name="UG_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="UG_Articles_article_Id" />
-      </EndProperty>
-      <EndProperty Name="Author">
-        <ScalarProperty Name="author_Id" ColumnName="Author_author_Id" />
+      <EndProperty Name="PP_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="PP_ArticlesSet_article_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="UMK_ArticlesAuthor" TypeName="ArticleDBDataModel.UMK_ArticlesAuthor" StoreEntitySet="UMK_ArticlesAuthor">
-      <EndProperty Name="UMK_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="UMK_Articles_article_Id" />
+    <AssociationSetMapping Name="Terms_VocabularyPG_Articles" TypeName="ArticleProjDBModel.Terms_VocabularyPG_Articles" StoreEntitySet="Terms_VocabularyPG_Articles">
+      <EndProperty Name="PG_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="PG_ArticlesSet_article_Id" />
       </EndProperty>
-      <EndProperty Name="Author">
-        <ScalarProperty Name="author_Id" ColumnName="Author_author_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="WSB_ArticlesAuthor" TypeName="ArticleDBDataModel.WSB_ArticlesAuthor" StoreEntitySet="WSB_ArticlesAuthor">
-      <EndProperty Name="WSB_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="WSB_Articles_article_Id" />
-      </EndProperty>
-      <EndProperty Name="Author">
-        <ScalarProperty Name="author_Id" ColumnName="Author_author_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="Terms_VocabularyWSB_Articles" TypeName="ArticleDBDataModel.Terms_VocabularyWSB_Articles" StoreEntitySet="Terms_VocabularyWSB_Articles">
       <EndProperty Name="Terms_Vocabulary">
         <ScalarProperty Name="terms_Id" ColumnName="Terms_Vocabulary_terms_Id" />
       </EndProperty>
-      <EndProperty Name="WSB_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="WSB_Articles_article_Id" />
-      </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="Terms_VocabularyUMK_Articles" TypeName="ArticleDBDataModel.Terms_VocabularyUMK_Articles" StoreEntitySet="Terms_VocabularyUMK_Articles">
+    <AssociationSetMapping Name="Terms_VocabularyPP_Articles" TypeName="ArticleProjDBModel.Terms_VocabularyPP_Articles" StoreEntitySet="Terms_VocabularyPP_Articles">
+      <EndProperty Name="PP_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="PP_ArticlesSet_article_Id" />
+      </EndProperty>
       <EndProperty Name="Terms_Vocabulary">
         <ScalarProperty Name="terms_Id" ColumnName="Terms_Vocabulary_terms_Id" />
       </EndProperty>
-      <EndProperty Name="UMK_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="UMK_Articles_article_Id" />
-      </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="Terms_VocabularyUG_Articles" TypeName="ArticleDBDataModel.Terms_VocabularyUG_Articles" StoreEntitySet="Terms_VocabularyUG_Articles">
+    <AssociationSetMapping Name="Terms_VocabularyUG_Articles" TypeName="ArticleProjDBModel.Terms_VocabularyUG_Articles" StoreEntitySet="Terms_VocabularyUG_Articles">
       <EndProperty Name="Terms_Vocabulary">
         <ScalarProperty Name="terms_Id" ColumnName="Terms_Vocabulary_terms_Id" />
       </EndProperty>
-      <EndProperty Name="UG_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="UG_Articles_article_Id" />
+      <EndProperty Name="UG_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="UG_ArticlesSet_article_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="Terms_VocabularyPP_Articles" TypeName="ArticleDBDataModel.Terms_VocabularyPP_Articles" StoreEntitySet="Terms_VocabularyPP_Articles">
+    <AssociationSetMapping Name="Terms_VocabularyUMK_Articles" TypeName="ArticleProjDBModel.Terms_VocabularyUMK_Articles" StoreEntitySet="Terms_VocabularyUMK_Articles">
       <EndProperty Name="Terms_Vocabulary">
         <ScalarProperty Name="terms_Id" ColumnName="Terms_Vocabulary_terms_Id" />
       </EndProperty>
-      <EndProperty Name="PP_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="PP_Articles_article_Id" />
+      <EndProperty Name="UMK_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="UMK_ArticlesSet_article_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="Terms_VocabularyPG_Articles" TypeName="ArticleDBDataModel.Terms_VocabularyPG_Articles" StoreEntitySet="Terms_VocabularyPG_Articles">
+    <AssociationSetMapping Name="Terms_VocabularyWSB_Articles" TypeName="ArticleProjDBModel.Terms_VocabularyWSB_Articles" StoreEntitySet="Terms_VocabularyWSB_Articles">
       <EndProperty Name="Terms_Vocabulary">
         <ScalarProperty Name="terms_Id" ColumnName="Terms_Vocabulary_terms_Id" />
       </EndProperty>
-      <EndProperty Name="PG_Articles">
-        <ScalarProperty Name="article_Id" ColumnName="PG_Articles_article_Id" />
+      <EndProperty Name="WSB_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="WSB_ArticlesSet_article_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UG_ArticlesAuthor" TypeName="ArticleProjDBModel.UG_ArticlesAuthor" StoreEntitySet="UG_ArticlesAuthor">
+      <EndProperty Name="AuthorSet">
+        <ScalarProperty Name="author_Id" ColumnName="AuthorSet_author_Id" />
+      </EndProperty>
+      <EndProperty Name="UG_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="UG_ArticlesSet_article_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UMK_ArticlesAuthor" TypeName="ArticleProjDBModel.UMK_ArticlesAuthor" StoreEntitySet="UMK_ArticlesAuthor">
+      <EndProperty Name="AuthorSet">
+        <ScalarProperty Name="author_Id" ColumnName="AuthorSet_author_Id" />
+      </EndProperty>
+      <EndProperty Name="UMK_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="UMK_ArticlesSet_article_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="WSB_ArticlesAuthor" TypeName="ArticleProjDBModel.WSB_ArticlesAuthor" StoreEntitySet="WSB_ArticlesAuthor">
+      <EndProperty Name="AuthorSet">
+        <ScalarProperty Name="author_Id" ColumnName="AuthorSet_author_Id" />
+      </EndProperty>
+      <EndProperty Name="WSB_ArticlesSet">
+        <ScalarProperty Name="article_Id" ColumnName="WSB_ArticlesSet_article_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <edmx:Connection>
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
       </DesignerInfoPropertySet>
-    </edmx:Connection>
-    <edmx:Options>
+    </Connection>
+    <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
-    </edmx:Options>
+    </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <edmx:Diagrams>
-    </edmx:Diagrams>
-  </edmx:Designer>
+    <Diagrams></Diagrams>
+  </Designer>
 </edmx:Edmx>

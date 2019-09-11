@@ -25,7 +25,7 @@ namespace Wyszukiwarka_publikacji_v0._2.GraphData_and_Visualizations
             string csvContent = string.Empty;
             string jsonContent = "var articles = [";
             csvContent += articleHeaderCSV;
-            using (var PG_dbcontext = new ArticleDBDataModelContainer())
+            using (var PG_dbcontext = new ArticleProjDBEntities())
             {
                 var resul_PG = PG_dbcontext.PG_ArticlesSet.SqlQuery("SELECT * FROM dbo.PG_ArticlesSet").ToList();
                 if (resul_PG != null)
@@ -44,7 +44,7 @@ namespace Wyszukiwarka_publikacji_v0._2.GraphData_and_Visualizations
                     }
                 }
             }
-            using (var PP_dbcontext = new ArticleDBDataModelContainer())
+            using (var PP_dbcontext = new ArticleProjDBEntities())
             {
                 var resul_PP = PP_dbcontext.PP_ArticlesSet.SqlQuery("SELECT * FROM dbo.PP_ArticlesSet").ToList();
                 if (resul_PP != null)
@@ -63,7 +63,7 @@ namespace Wyszukiwarka_publikacji_v0._2.GraphData_and_Visualizations
                     }
                 }
             }
-            using (var UG_dbcontext = new ArticleDBDataModelContainer())
+            using (var UG_dbcontext = new ArticleProjDBEntities())
             {
                 var resul_UG = UG_dbcontext.UG_ArticlesSet.SqlQuery("SELECT * FROM dbo.UG_ArticlesSet").ToList();
                 if (resul_UG != null)
@@ -82,7 +82,7 @@ namespace Wyszukiwarka_publikacji_v0._2.GraphData_and_Visualizations
                     }
                 }
             }
-            using (var UMK_dbcontext = new ArticleDBDataModelContainer())
+            using (var UMK_dbcontext = new ArticleProjDBEntities())
             {
                 var resul_UMK = UMK_dbcontext.UMK_ArticlesSet.SqlQuery("SELECT * FROM dbo.UMK_ArticlesSet").ToList();
                 if (resul_UMK != null)
@@ -101,7 +101,7 @@ namespace Wyszukiwarka_publikacji_v0._2.GraphData_and_Visualizations
                     }
                 }
             }
-            using (var WSB_dbcontext = new ArticleDBDataModelContainer())
+            using (var WSB_dbcontext = new ArticleProjDBEntities())
             {
                 var resul_WSB = WSB_dbcontext.WSB_ArticlesSet.SqlQuery("SELECT * FROM dbo.WSB_ArticlesSet").ToList();
                 if (resul_WSB != null)
@@ -136,7 +136,7 @@ namespace Wyszukiwarka_publikacji_v0._2.GraphData_and_Visualizations
             string authorsContentCSV = string.Empty;
             string jsonContent = "var authors = [";
             authorsContentCSV += authorHeaderCSV;
-            using (var AuthorDBContext = new ArticleDBDataModelContainer())
+            using (var AuthorDBContext = new ArticleProjDBEntities())
             {
                 var authors_Result = AuthorDBContext.AuthorSet.SqlQuery("SELECT * FROM dbo.AuthorSet").ToList();
                 if (authors_Result != null)

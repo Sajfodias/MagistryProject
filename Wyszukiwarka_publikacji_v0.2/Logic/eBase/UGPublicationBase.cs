@@ -55,7 +55,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                     {
                         if (UG_author_line != null && UG_Tytul != null)
                         {
-                            using (var dbContext = new ArticleDBDataModelContainer())
+                            using (var dbContext = new ArticleProjDBEntities())
                             {
                                 var document = new StringBuilder();
                                 var ug_article = dbContext.UG_ArticlesSet.Create();
@@ -90,7 +90,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                     var authors_of_the_article = dbContext.AuthorSet.Create();
                                     authors_of_the_article.author_name = UG_autors[k];
                                     authors_of_the_article.author_surename = UG_autors[k + 1];
-                                    ug_article.Author.Add(authors_of_the_article);
+                                    ug_article.AuthorSet.Add(authors_of_the_article);
                                     k += 2;
                                 }
 

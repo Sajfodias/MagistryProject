@@ -8,6 +8,7 @@ using HtmlAgilityPack;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing;
+using System.Configuration;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
 {
@@ -43,6 +44,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
         {
             string[] WSB_newcontent = new string[hapDoc.DocumentNode.InnerText.Length];
             string[] WSB_separatedContent = new string[hapDoc.DocumentNode.InnerText.Length];
+            var termDictionaryFilePath = ConfigurationManager.AppSettings["CsvFileDirectory"].ToString();
+            var termDictionaryFile = ConfigurationManager.AppSettings["TermDictionaryFiles"].ToString();
+            var termDictionaryFullFilePath = Path.Combine(termDictionaryFilePath, termDictionaryFile);
 
             WSB_articles_Count = 0;
             string[] WSB_articles_Matrix = { String.Empty };
@@ -62,7 +66,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                     {
                         if (WSB_author_line != null & WSB_Tytul_pracy != null)
                         {
-                            using (var dbContext = new ArticleDBDataModelContainer())
+                            using (var dbContext = new ArticleProjDBEntities())
                             {
                                 var document = new StringBuilder();
                                 var wsb_article = dbContext.WSB_ArticlesSet.Create();
@@ -166,16 +170,21 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                     var authors_of_the_article = dbContext.AuthorSet.Create();
                                     authors_of_the_article.author_name = WSB_autors[k];
                                     authors_of_the_article.author_surename = WSB_autors[k + 1];
-                                    wsb_article.Author.Add(authors_of_the_article);
+                                    wsb_article.AuthorSet.Add(authors_of_the_article);
                                     k += 2;
                                 }
-                                dbContext.WSB_ArticlesSet.Add(wsb_article);
 
+                                var WSBArticleExists = dbContext.WSB_ArticlesSet.Any(t => t.article_title == wsb_article.article_title);
+                                if (!WSBArticleExists)
+                                {
+                                    dbContext.WSB_ArticlesSet.Add(wsb_article);
+                                }
+                                
                                 var _document = document.ToString().Split(' ', ';', ':', ',');
                                 for (int k = 0; k <= _document.Length - 1; k++)
                                 {
                                     var terms = dbContext.Terms_Vocabulary.Create();
-                                    string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+                                    string dictionary_text = File.ReadAllText(termDictionaryFullFilePath);
                                     string[] allowed_dictionary = dictionary_text.Split(',', '\n');
 
                                     for (int d = 0; d <= _document.Length - 1; d++)
@@ -193,7 +202,12 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                         terms.term_value = _document[k];
 
                                     }
-                                    wsb_article.Terms_Vocabulary.Add(terms);
+
+                                    var WSBTermsExists = dbContext.Terms_Vocabulary.Any(t => t.term_value == terms.term_value);
+                                    if (!WSBTermsExists)
+                                    {
+                                        wsb_article.Terms_Vocabulary.Add(terms);
+                                    }
                                 }
                                 try
                                 {
@@ -201,7 +215,8 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.eBase
                                 }
                                 catch (Exception ex)
                                 {
-                                    File.WriteAllText(@"F:\\Magistry files\WSB_crawler_Log.txt", ex.ToString());
+                                    throw new Exception(ex.StackTrace.ToString());
+                                    //File.WriteAllText(@"F:\\Magistry files\WSB_crawler_Log.txt", ex.ToString());
                                 }
                             }
                         }

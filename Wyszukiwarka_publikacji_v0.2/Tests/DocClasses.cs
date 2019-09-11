@@ -73,7 +73,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
                 */
             #endregion
 
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 var content = dbContext.PG_ArticlesSet.SqlQuery(@"SELECT * FROM dbo.PG_ArticlesSet WHERE PG_ArticlesSet.abstractText LIKE '%ARCHITEKT%' OR PG_ArticlesSet.keywords LIKE '%ARCHITEKT%' OR PG_ArticlesSet.abstractText LIKE '%ARCHITEKT%';");
                 foreach (var item in content)
@@ -106,7 +106,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
                 */
             #endregion
 
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 var content = dbContext.PG_ArticlesSet.SqlQuery(@"SELECT * FROM dbo.PG_ArticlesSet WHERE (PG_ArticlesSet.abstractText LIKE '%GEODE%' OR PG_ArticlesSet.keywords LIKE '%GEODE%') OR (PG_ArticlesSet.abstractText LIKE '%GEODE%' OR PG_ArticlesSet.keywords LIKE '%GEODE%')");
                 foreach (var item in content)
@@ -122,7 +122,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Tests
         {
             List<string> SurveyAndMeasurementsClass = new List<string>();
 
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 var content = dbContext.PG_ArticlesSet.SqlQuery(@"SELECT * FROM dbo.PG_ArticlesSet WHERE (PG_ArticlesSet.abstractText LIKE '%BADAN%' OR PG_ArticlesSet.keywords LIKE '%BADAN%') OR (PG_ArticlesSet.abstractText LIKE '%POMIAR%' OR PG_ArticlesSet.keywords LIKE '%POMIAR%')");
                 foreach(var item in content)

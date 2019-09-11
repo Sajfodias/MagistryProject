@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
@@ -22,7 +20,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             int counter3 = 0;
 
             var database_processing = Stopwatch.StartNew();
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 dbContext.PG_ArticlesSet.Load();
 
@@ -77,7 +75,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
 
 
             //System.Windows.MessageBox.Show("The database processing time is: " + database_processing.Elapsed.Minutes.ToString() + ":" + database_processing.Elapsed.TotalMilliseconds, "Database processing time" ,System.Windows.MessageBoxButton.OK);
-            string processing_log = @"F:\Magistry files\Processing_log.txt";
+            //string processing_log = @"D:\personal_proj\oldMagistryProj\Logs\Processing_log.txt";
+            string logFileDirectory = ConfigurationManager.AppSettings["LogFileDirectory"].ToString();
+            string processing_log = Path.Combine(logFileDirectory, "Processing_log.txt");
 
             using (StreamWriter sw = File.AppendText(processing_log))
             {
@@ -96,7 +96,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
             int counter3 = 0;
 
             var database_processing = Stopwatch.StartNew();
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 dbContext.PG_ArticlesSet.Load();
 
@@ -166,7 +166,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms.Used_function
 
 
             //System.Windows.MessageBox.Show("The database processing time is: " + database_processing.Elapsed.Minutes.ToString() + ":" + database_processing.Elapsed.TotalMilliseconds, "Database processing time" ,System.Windows.MessageBoxButton.OK);
-            string processing_log = @"F:\Magistry files\Processing_log.txt";
+            //string processing_log = @"D:\personal_proj\oldMagistryProj\Logs\Processing_log.txt";
+            string logFileDirectory = ConfigurationManager.AppSettings["LogFileDirectory"].ToString();
+            string processing_log = Path.Combine(logFileDirectory, "Processing_log.txt");
 
             using (StreamWriter sw = File.AppendText(processing_log))
             {

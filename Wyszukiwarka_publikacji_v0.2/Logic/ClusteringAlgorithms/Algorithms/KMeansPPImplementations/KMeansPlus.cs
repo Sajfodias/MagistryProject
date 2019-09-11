@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -88,7 +89,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             catch(Exception ex)
             {
 
-                string processing_log = @"F:\Magistry files\Initialization_cluser_K-means_pp_log.txt";
+                //string processing_log = @"F:\Magistry files\Initialization_cluser_K-means_pp_log.txt";
+                string logFileDirectory = ConfigurationManager.AppSettings["LogFileDirectory"].ToString();
+                string processing_log = Path.Combine(logFileDirectory, "Initialization_cluser_K-means_pp_log.txt");
 
                 using (StreamWriter sw = File.AppendText(processing_log))
                 {
@@ -152,7 +155,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
                     }
                     catch(Exception ex)
                     {
-                        string processing_log = @"F:\Magistry files\Initialization_cluser_K-means_pp_log.txt";
+                        //string processing_log = @"F:\Magistry files\Initialization_cluser_K-means_pp_log.txt";
+                        string logFileDirectory = ConfigurationManager.AppSettings["LogFileDirectory"].ToString();
+                        string processing_log = Path.Combine(logFileDirectory, "Initialization_cluser_K-means_pp_log.txt");
 
                         using (StreamWriter sw = File.AppendText(processing_log))
                         {

@@ -12,30 +12,28 @@ namespace Wyszukiwarka_publikacji_v0._2
     using System;
     using System.Collections.Generic;
     
-    public partial class UMK_Articles
+    public partial class PG_ArticlesSet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UMK_Articles()
+        public PG_ArticlesSet()
         {
-            this.Author = new HashSet<Author>();
+            this.AuthorSet = new HashSet<AuthorSet>();
             this.Terms_Vocabulary = new HashSet<Terms_Vocabulary>();
         }
     
         public int article_Id { get; set; }
-        public string article_author_line { get; set; }
-        public string article_title { get; set; }
-        public string article_language { get; set; }
-        public string article_Full_title { get; set; }
-        public string article_pl_keywords { get; set; }
-        public string article_eng_keywords { get; set; }
-        public string article_translated_title { get; set; }
-        public string article_url { get; set; }
-        public string article_publisher_desc { get; set; }
-        public string article_publisher_title { get; set; }
+        public string title { get; set; }
+        public string abstractText { get; set; }
+        public string keywords { get; set; }
+        public int year { get; set; }
+        public string country { get; set; }
+        public string authors { get; set; }
+        public string organizations { get; set; }
+        public string url { get; set; }
         public int Terms_Vocabulary_terms_Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Author> Author { get; set; }
+        public virtual ICollection<AuthorSet> AuthorSet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Terms_Vocabulary> Terms_Vocabulary { get; set; }
     }

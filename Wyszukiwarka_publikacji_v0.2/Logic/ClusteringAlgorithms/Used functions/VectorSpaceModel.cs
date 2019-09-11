@@ -8,6 +8,7 @@ using System.Data.Entity;
 using Wyszukiwarka_publikacji_v0._2.Logic;
 using System.Diagnostics;
 using System.IO;
+using System.Configuration;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 {
@@ -48,7 +49,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 
             termHashset = new HashSet<string>();
 
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 dbContext.Terms_Vocabulary.Load();
 
@@ -164,7 +165,10 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             */
             vector_space_model_calculation.Stop();
 
-            string processing_log = @"F:\Magistry files\Processing_log.txt";
+            //string processing_log = @"F:\Magistry files\Processing_log.txt";
+            string logFileDirectory = ConfigurationManager.AppSettings["LogFileDirectory"].ToString();
+            string processingLogFileName = ConfigurationManager.AppSettings["ProcessingLogFile"].ToString();
+            string processing_log = Path.Combine(logFileDirectory, processingLogFileName);
 
             using (StreamWriter sw = File.AppendText(processing_log))
             {
@@ -181,7 +185,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
 
             termHashset = new HashSet<string>();
 
-            using (var dbContext = new ArticleDBDataModelContainer())
+            using (var dbContext = new ArticleProjDBEntities())
             {
                 dbContext.Terms_Vocabulary.Load();
 
@@ -221,7 +225,9 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
             });
             vector_space_model_calculation.Stop();
 
-            string processing_log = @"F:\Magistry files\Processing_log.txt";
+            string logFileDirectory = ConfigurationManager.AppSettings["LogFileDirectory"].ToString();
+            string processingLogFile = ConfigurationManager.AppSettings["ProcessingLogFile"].ToString();
+            string processing_log = Path.Combine(logFileDirectory, processingLogFile);
 
             using (StreamWriter sw = File.AppendText(processing_log))
             {

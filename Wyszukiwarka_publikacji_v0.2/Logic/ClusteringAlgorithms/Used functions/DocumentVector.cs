@@ -9,6 +9,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.ClusteringAlgorithms
     public class DocumentVector
     {
         public int ArticleID { get; set; }
+        public int ArticleIDFromDB { get; set; }
         public string Content { get; set; }
         public float[] VectorSpace { get; set; }
         public float[] OriginalVectorSpace { get; set; }

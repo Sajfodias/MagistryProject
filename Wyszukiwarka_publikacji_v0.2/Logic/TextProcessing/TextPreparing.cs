@@ -13,6 +13,7 @@ using Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
 {
@@ -20,13 +21,18 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
     {
         public static string TermsPrepataions(string _text)
         {
-            ArticleDBDataModelContainer dbContainer = new ArticleDBDataModelContainer();
-            List<string> resultDBList = new List<string>();
-            var TermsDBList = dbContainer.Set<Terms_Vocabulary>();
-            foreach(var element in TermsDBList)
-            {
-                resultDBList.Add(element.term_value);
-            }
+
+            var termDictionaryFilePath = ConfigurationManager.AppSettings["CsvFileDirectory"].ToString();
+            var termDictionaryFile = ConfigurationManager.AppSettings["TermDictionaryFiles"].ToString();
+            var termDictionaryFullFilePath = Path.Combine(termDictionaryFilePath, termDictionaryFile);
+
+            //ArticleProjDBEntities dbContainer = new ArticleProjDBEntities();
+            //List<string> resultDBList = new List<string>();
+            //var TermsDBList = dbContainer.Set<Terms_Vocabulary>();
+            //foreach(var element in TermsDBList)
+            //{
+            //    resultDBList.Add(element.term_value);
+            //}
             //here we will have the list of terms
 
 
@@ -46,15 +52,6 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
             else
                 return "NULL";
             char[] not_allowed_chars = {'1','2','3','4','5','6','7','8','9','0','!','@','#','$','%','^','&','\'','"','[',']','{','}','(',')'};
-            for(int k1=0;  k1<resultDBList.Count; k1++)
-            {
-                foreach (var word in Words.ToList())
-                {
-                    foreach (var not_allow_ch in not_allowed_chars)
-                        if (word.Length < 3 | word.Contains(not_allow_ch) | resultDBList.Contains(word) | resultDBList[k1]==word)
-                            Words.Remove(word);
-                }
-            }
 
             var stemmer = new EnglishStemmer();
             
@@ -68,7 +65,7 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
             
             var splittedTitle1 = Words.ToArray();
 
-            string dictionary_text = File.ReadAllText(@"F:\Magistry files\csv_files\Allowed_term_dictionary.csv");
+            string dictionary_text = File.ReadAllText(termDictionaryFullFilePath);
             string[] allowed_dictionary = dictionary_text.Split(',', '\n');
 
             for(int i=0; i<=splittedTitle1.Length-1; i++)
@@ -83,19 +80,21 @@ namespace Wyszukiwarka_publikacji_v0._2.Logic.TextProcessing
                     {
                         splittedTitle1.ToList().RemoveAt(i);
                     }
-                        
                 }
             }
 
             var stemmingString = string.Join(" ", splittedTitle1.Except(removableWords).Distinct());
-            var stemmingString1 = regular_expression.Replace(stemmingString, String.Empty);
 
             text_preparation.Stop();
 
             //System.Windows.MessageBox.Show("The text processing time is: "+ text_preparation.Elapsed.Minutes.ToString() + ":" + text_preparation.Elapsed.TotalMilliseconds, "Text processing time" ,System.Windows.MessageBoxButton.OK);
            
-            string processing_log = @"F:\Magistry files\Processing_log.txt";
-            using(StreamWriter sw = File.AppendText(processing_log))
+            //string processing_log = @"F:\Magistry files\Processing_log.txt";
+            string logFileDirectory = ConfigurationManager.AppSettings["LogFileDirectory"].ToString();
+            string LogFile = ConfigurationManager.AppSettings["ProcessingLogFile"].ToString();
+            string processing_log = Path.Combine(logFileDirectory, LogFile);
+
+            using (StreamWriter sw = File.AppendText(processing_log))
             {
                 sw.WriteLine(DateTime.Now.ToString() + "The text processing time is: " + text_preparation.Elapsed.Minutes.ToString() + ":" + text_preparation.Elapsed.TotalMilliseconds.ToString());
             }

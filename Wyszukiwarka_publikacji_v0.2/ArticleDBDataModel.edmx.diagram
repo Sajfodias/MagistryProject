@@ -4,24 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4d37034fb20948989e81a8cf7ce7dfef" Name="Diagram1" ZoomLevel="120" >
-        <EntityTypeShape EntityType="ArticleDBDataModel.Author" Width="1.5" PointX="5.25" PointY="10.25" />
-        <EntityTypeShape EntityType="ArticleDBDataModel.PG_Articles" Width="1.5" PointX="3" PointY="1.75" />
-        <EntityTypeShape EntityType="ArticleDBDataModel.PP_Articles" Width="1.5" PointX="3" PointY="5.875" />
-        <EntityTypeShape EntityType="ArticleDBDataModel.UG_Articles" Width="1.5" PointX="3" PointY="9.625" />
-        <EntityTypeShape EntityType="ArticleDBDataModel.UMK_Articles" Width="1.5" PointX="3" PointY="13.125" />
-        <EntityTypeShape EntityType="ArticleDBDataModel.WSB_Articles" Width="1.5" PointX="3" PointY="17.5" />
-        <EntityTypeShape EntityType="ArticleDBDataModel.Terms_Vocabulary" Width="1.5" PointX="0.75" PointY="10.375" />
-        <AssociationConnector Association="ArticleDBDataModel.PG_ArticlesAuthor" />
-        <AssociationConnector Association="ArticleDBDataModel.PP_ArticlesAuthor" />
-        <AssociationConnector Association="ArticleDBDataModel.UG_ArticlesAuthor" />
-        <AssociationConnector Association="ArticleDBDataModel.UMK_ArticlesAuthor" />
-        <AssociationConnector Association="ArticleDBDataModel.WSB_ArticlesAuthor" />
-        <AssociationConnector Association="ArticleDBDataModel.Terms_VocabularyWSB_Articles" />
-        <AssociationConnector Association="ArticleDBDataModel.Terms_VocabularyUMK_Articles" />
-        <AssociationConnector Association="ArticleDBDataModel.Terms_VocabularyUG_Articles" />
-        <AssociationConnector Association="ArticleDBDataModel.Terms_VocabularyPP_Articles" />
-        <AssociationConnector Association="ArticleDBDataModel.Terms_VocabularyPG_Articles" />
+      <Diagram DiagramId="e22a770ab0cb4dacaab14cafadb2ad06" Name="Diagram1">
+        <EntityTypeShape EntityType="ArticleProjDBModel.AuthorSet" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArticleProjDBModel.PG_ArticlesSet" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArticleProjDBModel.PP_ArticlesSet" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArticleProjDBModel.Terms_Vocabulary" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArticleProjDBModel.UG_ArticlesSet" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArticleProjDBModel.UMK_ArticlesSet" Width="1.5" PointX="10.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArticleProjDBModel.WSB_ArticlesSet" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="ArticleProjDBModel.PG_ArticlesAuthor" ManuallyRouted="false" />
+        <AssociationConnector Association="ArticleProjDBModel.PP_ArticlesAuthor" ManuallyRouted="false" />
+        <AssociationConnector Association="ArticleProjDBModel.Terms_VocabularyPG_Articles" ManuallyRouted="false" />
+        <AssociationConnector Association="ArticleProjDBModel.Terms_VocabularyPP_Articles" ManuallyRouted="false" />
+        <AssociationConnector Association="ArticleProjDBModel.Terms_VocabularyUG_Articles" ManuallyRouted="false" />
+        <AssociationConnector Association="ArticleProjDBModel.Terms_VocabularyUMK_Articles" ManuallyRouted="true" >
+          <ConnectorPoint PointX="6" PointY="10.489889322916667" />
+          <ConnectorPoint PointX="6" PointY="10.886495768229166" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="10.886495768229166" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="10.886495768229166" />
+          <ConnectorPoint PointX="10.5" PointY="10.886495768229166" />
+        </AssociationConnector>
+        <AssociationConnector Association="ArticleProjDBModel.Terms_VocabularyWSB_Articles" ManuallyRouted="false" />
+        <AssociationConnector Association="ArticleProjDBModel.UG_ArticlesAuthor" ManuallyRouted="false" />
+        <AssociationConnector Association="ArticleProjDBModel.UMK_ArticlesAuthor" ManuallyRouted="false" />
+        <AssociationConnector Association="ArticleProjDBModel.WSB_ArticlesAuthor" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
