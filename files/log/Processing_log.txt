@@ -1,0 +1,15 @@
+9/11/2019 2:29:46 PM The database processing time is: 0:3359.7811, database context counter: 1, selection counter in one dbContext: 985, method executing counter: 1
+9/11/2019 2:53:37 PM The vector space model calculation time is: 23:1418046.0991
+9/11/2019 4:34:33 PM The database processing time is: 0:144.3366, database context counter: 1, selection counter in one dbContext: 1104, method executing counter: 1
+9/11/2019 4:34:34 PM The database processing time is: 0:117.612, database context counter: 1, selection counter in one dbContext: 985, method executing counter: 1
+9/11/2019 4:53:51 PM The vector space model calculation time is: 19:1145012.7442
+9/11/2019 6:43:34 PM The database processing time is: 0:113.8323, database context counter: 1, selection counter in one dbContext: 985, method executing counter: 1
+9/11/2019 7:00:14 PM The vector space model calculation time is: 16:986169.8535
+9/11/2019 9:01:33 PM The database processing time is: 0:3128.089, database context counter: 1, selection counter in one dbContext: 1104, method executing counter: 1
+9/11/2019 9:01:33 PM The database processing time is: 0:174.8922, database context counter: 1, selection counter in one dbContext: 985, method executing counter: 1
+9/11/2019 9:18:52 PM The vector space model calculation time is: 17:1025915.8478
+9/12/2019 4:40:44 PM The database processing time is: 0:35110.0511, database context counter: 1, selection counter in one dbContext: 985, method executing counter: 1
+9/12/2019 5:03:30 PM The vector space model calculation time is: 22:1349193.5238
+9/12/2019 7:04:48 PM The database processing time is: 0:4040.3853, database context counter: 1, selection counter in one dbContext: 1104, method executing counter: 1
+9/12/2019 7:04:48 PM The database processing time is: 0:156.7639, database context counter: 1, selection counter in one dbContext: 985, method executing counter: 1
+9/12/2019 7:56:16 PM The vector space model calculation time is: 51:3072978.828
